@@ -1,3 +1,3 @@
 module.exports.profile=function(req,res){
-    return res.end('<H1>Profile</H1>');
+    return res.render('../views/user_profile');
 }
