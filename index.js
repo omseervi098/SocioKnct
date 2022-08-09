@@ -1,9 +1,13 @@
 const express = require("express");
 const router = require("./routes/index");
 const expressLayouts = require("express-ejs-layouts");
+const cookieParser = require("cookie-parser");
 const app = express();
 const port = 3000;
 const db=require("./config/mongoose");
+
+app.use(express.urlencoded());
+app.use(cookieParser());
 //Setting up static files
 app.use(express.static("./assets"));
 //extract style and script from subspages into the layout
