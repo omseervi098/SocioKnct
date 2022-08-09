@@ -1,14 +1,15 @@
-<link rel="stylesheet" href="/css/login.css">
+<link rel="stylesheet" href="/css/loginandsignup.css">
 <div class="outer-container">
     <div class="container">
         <div class="left">
-            <div>
+            <div class="logo"><img src="/images/logo.png" alt="logo"></div>
+            <div >
                 <p>New here ?</p>
-                <input type="submit" value="signup" id="signup" />
+                <input type="submit" value="signup" class="white-btn" />
             </div>
         </div>
         <div class="right">
-            <form action="/login" method="post">
+            <form action="/users/create-session" method="post">
                 <div>
                     <label for="email">Email</label>
                     <input type="text" name="email" id="email" placeholder="abc@xyz.com" />
@@ -17,7 +18,7 @@
                     <label for="password">Password</label>
                     <input type="password" name="password" id="password" />
                 </div>
-                <input type="submit" value="Login" id="login" />
+                <input type="submit" value="Login" class="purple-btn" />
             </form>
         </div>
     </div>
