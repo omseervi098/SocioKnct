@@ -34,5 +34,5 @@ module.exports.create=function(req,res){
 }
 //Get login data
 module.exports.createSession=function(req,res){
-    //TODO Later
+    return res.redirect('/');
 }
