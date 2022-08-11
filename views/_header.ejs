@@ -1,17 +1,20 @@
 <header>
-    Page Header
+    <div>
+        <img src="/images/logo_icon.png" alt="logo">
+        <div><p>Codial</p></div>
+    </div>
     <ul>
         <% if(locals.user){ %>
-            <li><a href="/users/profile"><%= user.name %></a></li>
+            <li><button><a href="/users/profile"><%= user.name %></a></button></li>
             <li>
-                <a href="/users/signout">Sign-Out</a>
+                <button><a href="/users/signout">Sign-Out</a></button>
             </li>
         <% }else{%>
             <li>
-                <a href="/users/login">Sign-In</a>
+                <button><a href="/users/login">Sign-In</a></button>
             </li>
             <li>
-                <a href="/users/signup">Sign-Up</a>
+                <button><a href="/users/signup">Sign-Up</a></button>
             </li>
         <%}%>
     </ul>

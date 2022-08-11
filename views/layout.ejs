@@ -1,13 +1,20 @@
 <html>
-    <head>
-        <title>User Profile</title>
-        <link rel="stylesheet" href="/css/layout.css">
-        <%- style %>
-    </head>
-    <body>
-        <%- include('_header') %>
-        <%- body %>
-        <%- include('_footer') %>
-        <%- script %>
-    </body>
+
+<head>
+    <title>User Profile</title>
+    <link rel="stylesheet" href="/css/layout.css">
+    <%- style %>
+    <link rel="stylesheet" href="/css/header.css">
+    <link rel="stylesheet" href="/css/footer.css">
+</head>
+
+<body>
+    <%- include('_header') %>
+        <div id="main">
+            <%- body %>
+        </div>
+    <%- include('_footer') %>
+    <%- script %>
+</body>
+
 </html>
