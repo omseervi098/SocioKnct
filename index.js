@@ -9,6 +9,7 @@ const db=require("./config/mongoose");
 const session=require("express-session");
 const passport=require("passport");
 const passportLocal=require("./config/passport-local-strategy");
+const MongoStore= require('connect-mongodb-session')(session);
 app.use(express.urlencoded());
 app.use(cookieParser());
 //Setting up static files
@@ -29,11 +30,18 @@ app.use(session({
   saveUninitialized:false,
   resave:false,
   cookie:{
-      maxAge:(1000*60*100)
-  }
+      maxAge:(1000*60*100),
+  },
+  //Storing MongoStore to store session cookie in mongodb
+  store:new MongoStore({
+      uri:'mongodb://localhost:27017/codial-development',
+      collection:'db',
+      autoRemove:'disabled'
+  })
 }));
 app.use(passport.initialize());
 app.use(passport.session());
+app.use(passport.setAuthenticatedUser);
 //Use express Router
 app.use("/", require("./routes/index"));
 app.listen(port, (err) => {

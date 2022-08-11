@@ -3,9 +3,15 @@ module.exports.profile=function(req,res){
     return res.render('../views/user_profile');
 }
 module.exports.login=function(req,res){
+    if(req.isAuthenticated()){
+        return res.redirect('/users/profile');
+    }
     return res.render('../views/user_login');
 }
 module.exports.signUp=function(req,res){
+    if(req.isAuthenticated()){
+        return res.redirect('/users/profile');
+    }
     return res.render('../views/user_signup');
 }
 //Get signup data
@@ -36,3 +42,10 @@ module.exports.create=function(req,res){
 module.exports.createSession=function(req,res){
     return res.redirect('/');
 }
+//Sign Out
+module.exports.destroySession=function(req,res){
+    req.logout(function(err){
+        if(err){return next(err); }
+        res.redirect('/');
+    });
+};
