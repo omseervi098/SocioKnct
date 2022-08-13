@@ -1,0 +1,143 @@
+#feed-posts{
+    padding: 0;
+    margin: 0;
+    background-color: #f5f5f5;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    h4{
+        margin: 0;
+        padding: 2;
+        font-size: 1.5rem;
+        font-weight: bold;
+        color: #000;
+    }
+    #new-post-form{
+        display:flex;
+        flex-direction:column;
+        gap:5px;
+        align-items:center;
+        justify-content: center;
+        #content{
+            width:auto;
+            height:auto;
+            border: none;
+            border-radius: 3%;
+            padding: 0;
+            margin: 0;
+            font-size: 1.3rem;
+            font-weight: bold;
+            color: #000;
+            border-bottom: 2px solid black;
+        }
+        #content:focus{
+            outline: none;
+        }
+        #post-submit{
+            background-color: rgb(95, 42, 138);
+            border: none;
+            padding: 5px 10px;
+            width:auto;
+            font-size: 1.07rem;
+            color:white;
+            font-weight: bold;
+            border-radius: 5px;
+            &:hover{
+                background-color: #1cc7dd;
+                color: rgb(255, 255, 255);
+                cursor: pointer;
+            }
+        }
+    }
+    #post-list-container{
+        width:60%;
+        border-top: 2px solid black;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap:10px;
+        padding:10px;
+        div{
+            display: flex;
+            width: 100%;
+            flex-direction: column;
+            justify-content: center;
+            gap:5px;
+            .post{
+                margin-left:5px;
+                .name{
+                    font-size: 1.1rem;
+                    font-weight: bold;
+                    color: #000;
+                }
+                .content{
+                    height: auto;
+                    width: auto;
+                    background-color: white;
+                    border-radius: 3%;
+                    padding: 5px;
+                    font-size: 1.1rem;
+                    border: 1px dashed black;
+                }
+            }
+            .post-comments{
+                margin:0px 20px;
+                width:80%;
+                form{
+                    display: flex;
+                    gap:5px;
+                    justify-content: space-between;
+                    #comment-input{
+                        width:80%;
+                        height:auto;
+                        border: none;
+                        border-radius: 3%;
+                        padding: 0;
+                        margin: 0;
+                        padding:4px 5px;
+                        font-weight: bold;
+                        color: #000;
+                        background-color: inherit;
+                        border-bottom: 2px solid black;
+                        &:focus{
+                            outline: none;
+                        }
+                    }
+                    #add-comment{
+                        background-color: rgb(95, 42, 138);
+                        border: none;
+                        padding:2px 5px;
+                        width:auto;
+                        color:white;
+                        font-weight: bold;
+                        border-radius: 5px;
+                        &:hover{
+                            background-color: #1cc7dd;
+                            color: rgb(255, 255, 255);
+                            cursor: pointer;
+                        }
+                    }
+                }
+                .comment-list{
+                    margin-left:20px;
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: center;
+                    gap:5px;
+                    .comment{
+                        .name{
+                            font-size: 1rem;
+                            font-weight: bold;
+                            color: #000;
+                        }
+                        .content{
+                            margin-left:10px;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
