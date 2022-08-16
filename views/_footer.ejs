@@ -5,7 +5,7 @@
     <div>
         <p><a href="/">Home</a></p>
         <% if(locals.user){ %>
-        <p><a href="/users/profile">Profile</a></p>
+        <p><a href="/users/profile/<%= user.id %>">Profile</a></p>
         <%}%>
         <p>@ made by Omprakash Choudhary</p>
     </div>

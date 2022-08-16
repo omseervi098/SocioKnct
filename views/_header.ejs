@@ -5,7 +5,7 @@
     </div>
     <ul>
         <% if(locals.user){ %>
-            <li><button><a href="/users/profile"><%= user.name %></a></button></li>
+            <li><button><a href="/users/profile/<%= user._id %>"><%= user.name %></a></button></li>
             <li>
                 <button><a href="/users/signout">Sign-Out</a></button>
             </li>
