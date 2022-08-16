@@ -13,9 +13,11 @@ module.exports.create = async function (req, res) {
       });
       post.comments.push(comment);
       post.save();
+      req.flash("success", "Comment created !!!");
       res.redirect("/");
     }
   } catch (err) {
+    req.flash("error", "Error in creating comment");
     console.log(err);
     return;
   }
@@ -29,11 +31,14 @@ module.exports.destroy = async function (req, res) {
       let post = await Post.findByIdAndUpdate(postId, {
         $pull: { comments: req.params.id },
       });
+      req.flash("success", "Comment deleted !!!");
       return res.redirect("/");
     } else {
+      req.flash("error", "You are not authorized to delete this comment");
       return res.redirect("/");
     }
   } catch (err) {
+    req.flash("error", "Error in deleting comment");
     console.log(err);
     return;
   }

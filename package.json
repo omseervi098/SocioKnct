@@ -10,6 +10,7 @@
   "author": "Omprakash Choudhary",
   "license": "ISC",
   "dependencies": {
+    "connect-flash": "^0.1.1",
     "connect-mongo": "^4.6.0",
     "connect-mongodb-session": "^3.1.1",
     "cookie-parser": "^1.4.6",
@@ -19,6 +20,7 @@
     "express-session": "^1.17.3",
     "mongoose": "^6.5.1",
     "node-sass-middleware": "^1.0.1",
+    "noty": "^3.2.0-beta-deprecated",
     "passport": "^0.6.0",
     "passport-local": "^1.0.0"
   }

@@ -54,12 +54,15 @@ module.exports.create=function(req,res){
 }
 //Get login data
 module.exports.createSession=function(req,res){
+    req.flash('success','Logged in successfully');
     return res.redirect('/');
 }
 //Sign Out
 module.exports.destroySession=function(req,res){
+    
     req.logout(function(err){
         if(err){return next(err); }
+        req.flash('success','Logged out successfully');
         res.redirect('/');
     });
 };
