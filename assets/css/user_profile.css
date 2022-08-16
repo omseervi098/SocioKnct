@@ -1,2 +1,11 @@
-body {
-  background-color: lightblue; }
+#profile-container {
+  min-height: 83vh;
+  background-color: #f5f5f5;
+  display: flex;
+  flex-direction: column;
+  gap: 30px; }
+  #profile-container h1 {
+    margin: 0; }
+  #profile-container div {
+    margin: 0;
+    padding: 0; }

@@ -1,5 +1,5 @@
 <link rel="stylesheet" href="/css/home.css">
-<section id="feed-posts">
+<div id="home-container"><section id="feed-posts">
     <h4>Post</h4>
     <% if(locals.user){%>
         <form action="/posts/create" id="new-post-form" method="post">
@@ -39,3 +39,4 @@
         </p>
     <%}%>
 </section>
+</div>
