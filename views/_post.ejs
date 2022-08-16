@@ -1,0 +1,11 @@
+<div class="post">
+    <div class="name">
+        <%= post.user.name %>
+        <% if(locals.user && locals.user.id==post.user.id){ %>
+        <button><a href="/posts/destroy/<%= post.id %>">Delete</a></button>
+        <%}%>
+    </div>
+    <div class="content">
+        <%= post.content %>
+    </div>
+</div>

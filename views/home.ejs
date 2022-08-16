@@ -12,17 +12,7 @@
             <div id="post-list-container">
                 <% for(post of posts) { %>
                     <div>
-                        <div class="post">
-                            <div class="name">
-                                <%= post.user.name %>
-                                <% if(locals.user && locals.user.id==post.user.id){ %>
-                                <button><a href="/posts/destroy/<%= post.id %>">Delete</a></button>
-                                <%}%>
-                            </div>
-                            <div class="content">
-                                <%= post.content %>
-                            </div>
-                        </div>
+                        <%- include('_post')%>
                         <div class="post-comments">
                             <% if (locals.user){ %>
                                 <form action="/comments/create" method="POST">
@@ -33,17 +23,7 @@
                             <% } %>
                             <div class="comment-list">
                                 <% for(comment of post.comments) { %>
-                                    <div class="comment">
-                                        <div class="name">
-                                            <small><%= comment.user.name %></small>
-                                            <% if(locals.user && (locals.user.id==comment.user.id )){ %>
-                                                <button><a href="/comments/destroy/<%= comment.id %>">Delete</a></button>
-                                            <%}%>
-                                        </div>
-                                        <div class="content">
-                                            <%= comment.content %>
-                                        </div>
-                                    </div>
+                                    <%- include('_comment')%>
                                 <% } %> 
                             </div>
                         </div>
