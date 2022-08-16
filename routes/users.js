@@ -3,7 +3,7 @@ const router=express.Router();
 const passport=require('passport');
 const passportLocal=require('../config/passport-local-strategy');
 const userController=require('../controllers/users_controller');
-router.get('/profile',passportLocal.checkAuthenication,userController.profile);
+router.get('/profile/:id',passportLocal.checkAuthenication,userController.profile);
 router.get('/login',userController.login);
 router.get('/signup',userController.signUp);
 router.post('/create',userController.create);
