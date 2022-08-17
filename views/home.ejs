@@ -13,20 +13,6 @@
                 <% for(post of posts) { %>
                     <div>
                         <%- include('_post')%>
-                        <div class="post-comments">
-                            <% if (locals.user){ %>
-                                <form action="/comments/create" method="POST">
-                                    <input required type="text" id="comment-input" name="content" placeholder="Type Here to add comment">
-                                    <input type="hidden" name="post" value="<%= post._id %>">
-                                    <input type="submit" id="add-comment" value="Add Comment">
-                                </form>
-                            <% } %>
-                            <div class="comment-list">
-                                <% for(comment of post.comments) { %>
-                                    <%- include('_comment')%>
-                                <% } %> 
-                            </div>
-                        </div>
                     </div>
                 <%}%>
             </div>
@@ -40,3 +26,5 @@
     <%}%>
 </section>
 </div>
+<script src="/js/home_posts.js">
+</script>

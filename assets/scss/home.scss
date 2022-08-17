@@ -1,9 +1,10 @@
 #home-container {
     width: 100%;
-    height:100%;
+    height: 100%;
     min-height: 83vh;
     display: flex;
     height: max-content;
+
     //justify-content: flex-end;
     #feed-posts {
         width: 80%;
@@ -83,85 +84,91 @@
                 gap: 5px;
 
                 .post {
-                    margin-left: 5px;
-
-                    .name {
-                        font-size: 1.1rem;
-                        font-weight: bold;
-                        color: #000;
-                    }
-
-                    .content {
-                        height: auto;
-                        width: auto;
-                        background-color: white;
-                        border-radius: 3%;
-                        padding: 5px;
-                        font-size: 1.1rem;
-                        border: 1px dashed black;
-                    }
-                }
-
-                .post-comments {
-                    margin: 0px 20px;
-                    width: 80%;
-
-                    form {
-                        display: flex;
-                        gap: 5px;
-                        justify-content: space-between;
-
-                        #comment-input {
-                            width: 80%;
-                            height: auto;
-                            border: none;
-                            border-radius: 3%;
-                            padding: 0;
-                            margin: 0;
-                            padding: 4px 5px;
+                    display: flex;
+                    width: 100%;
+                    flex-direction: column;
+                    justify-content: center;
+                    gap: 5px;
+                    .ithpost {
+                        margin-left: 5px;
+                        .name {
+                            font-size: 1.1rem;
                             font-weight: bold;
                             color: #000;
-                            background-color: inherit;
-                            border-bottom: 2px solid black;
-
-                            &:focus {
-                                outline: none;
-                            }
                         }
 
-                        #add-comment {
-                            background-color: rgb(95, 42, 138);
-                            border: none;
-                            padding: 2px 5px;
+                        .content {
+                            height: auto;
                             width: auto;
-                            color: white;
-                            font-weight: bold;
-                            border-radius: 5px;
-
-                            &:hover {
-                                background-color: #1cc7dd;
-                                color: rgb(255, 255, 255);
-                                cursor: pointer;
-                            }
+                            background-color: white;
+                            border-radius: 3%;
+                            padding: 5px;
+                            font-size: 1.1rem;
+                            border: 1px dashed black;
                         }
                     }
 
-                    .comment-list {
-                        margin-left: 20px;
-                        display: flex;
-                        flex-direction: column;
-                        justify-content: center;
-                        gap: 5px;
+                    .post-comments {
+                        margin: 0px 20px;
+                        width: 80%;
 
-                        .comment {
-                            .name {
-                                font-size: 1rem;
+                        form {
+                            display: flex;
+                            gap: 5px;
+                            justify-content: space-between;
+
+                            #comment-input {
+                                width: 80%;
+                                height: auto;
+                                border: none;
+                                border-radius: 3%;
+                                padding: 0;
+                                margin: 0;
+                                padding: 4px 5px;
                                 font-weight: bold;
                                 color: #000;
+                                background-color: inherit;
+                                border-bottom: 2px solid black;
+
+                                &:focus {
+                                    outline: none;
+                                }
                             }
 
-                            .content {
-                                margin-left: 10px;
+                            #add-comment {
+                                background-color: rgb(95, 42, 138);
+                                border: none;
+                                padding: 2px 5px;
+                                width: auto;
+                                color: white;
+                                font-weight: bold;
+                                border-radius: 5px;
+
+                                &:hover {
+                                    background-color: #1cc7dd;
+                                    color: rgb(255, 255, 255);
+                                    cursor: pointer;
+                                }
+                            }
+                        }
+
+                        .comment-list {
+                            margin-left: 20px;
+                            display: flex;
+                            flex-direction: column;
+                            justify-content: center;
+                            gap: 5px;
+
+                            .comment {
+                                .name {
+                                    font-size: 1rem;
+                                    font-weight: bold;
+                                    color: #000;
+                                }
+
+                                .content {
+                                    margin-left: 10px;
+                                }
                             }
                         }
                     }
@@ -174,18 +181,21 @@
         border-left: 2px solid rgb(54, 54, 54);
         background-color: rgb(95, 42, 138);
         color: #f5f5f5;
-        width:20%;
+        width: 20%;
         display: flex;
         flex-direction: column;
+
         h4 {
             margin-left: 10%;
             font-size: 1.2rem;
             font-weight: bold;
             padding: 0;
         }
+
         p {
             margin: 10px;
             margin-left: 10%;
+
             a,
             a:focus,
             a:hover,

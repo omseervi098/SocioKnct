@@ -67,64 +67,70 @@
         justify-content: center;
         gap: 5px; }
         #home-container #feed-posts #post-list-container div .post {
-          margin-left: 5px; }
-          #home-container #feed-posts #post-list-container div .post .name {
-            font-size: 1.1rem;
-            font-weight: bold;
-            color: #000; }
-          #home-container #feed-posts #post-list-container div .post .content {
-            height: auto;
-            width: auto;
-            background-color: white;
-            border-radius: 3%;
-            padding: 5px;
-            font-size: 1.1rem;
-            border: 1px dashed black; }
-        #home-container #feed-posts #post-list-container div .post-comments {
-          margin: 0px 20px;
-          width: 80%; }
-          #home-container #feed-posts #post-list-container div .post-comments form {
-            display: flex;
-            gap: 5px;
-            justify-content: space-between; }
-            #home-container #feed-posts #post-list-container div .post-comments form #comment-input {
-              width: 80%;
-              height: auto;
-              border: none;
-              border-radius: 3%;
-              padding: 0;
-              margin: 0;
-              padding: 4px 5px;
-              font-weight: bold;
-              color: #000;
-              background-color: inherit;
-              border-bottom: 2px solid black; }
-              #home-container #feed-posts #post-list-container div .post-comments form #comment-input:focus {
-                outline: none; }
-            #home-container #feed-posts #post-list-container div .post-comments form #add-comment {
-              background-color: #5f2a8a;
-              border: none;
-              padding: 2px 5px;
-              width: auto;
-              color: white;
-              font-weight: bold;
-              border-radius: 5px; }
-              #home-container #feed-posts #post-list-container div .post-comments form #add-comment:hover {
-                background-color: #1cc7dd;
-                color: white;
-                cursor: pointer; }
-          #home-container #feed-posts #post-list-container div .post-comments .comment-list {
-            margin-left: 20px;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            gap: 5px; }
-            #home-container #feed-posts #post-list-container div .post-comments .comment-list .comment .name {
-              font-size: 1rem;
+          display: flex;
+          width: 100%;
+          flex-direction: column;
+          justify-content: center;
+          gap: 5px; }
+          #home-container #feed-posts #post-list-container div .post .ithpost {
+            margin-left: 5px; }
+            #home-container #feed-posts #post-list-container div .post .ithpost .name {
+              font-size: 1.1rem;
               font-weight: bold;
               color: #000; }
-            #home-container #feed-posts #post-list-container div .post-comments .comment-list .comment .content {
-              margin-left: 10px; }
+            #home-container #feed-posts #post-list-container div .post .ithpost .content {
+              height: auto;
+              width: auto;
+              background-color: white;
+              border-radius: 3%;
+              padding: 5px;
+              font-size: 1.1rem;
+              border: 1px dashed black; }
+          #home-container #feed-posts #post-list-container div .post .post-comments {
+            margin: 0px 20px;
+            width: 80%; }
+            #home-container #feed-posts #post-list-container div .post .post-comments form {
+              display: flex;
+              gap: 5px;
+              justify-content: space-between; }
+              #home-container #feed-posts #post-list-container div .post .post-comments form #comment-input {
+                width: 80%;
+                height: auto;
+                border: none;
+                border-radius: 3%;
+                padding: 0;
+                margin: 0;
+                padding: 4px 5px;
+                font-weight: bold;
+                color: #000;
+                background-color: inherit;
+                border-bottom: 2px solid black; }
+                #home-container #feed-posts #post-list-container div .post .post-comments form #comment-input:focus {
+                  outline: none; }
+              #home-container #feed-posts #post-list-container div .post .post-comments form #add-comment {
+                background-color: #5f2a8a;
+                border: none;
+                padding: 2px 5px;
+                width: auto;
+                color: white;
+                font-weight: bold;
+                border-radius: 5px; }
+                #home-container #feed-posts #post-list-container div .post .post-comments form #add-comment:hover {
+                  background-color: #1cc7dd;
+                  color: white;
+                  cursor: pointer; }
+            #home-container #feed-posts #post-list-container div .post .post-comments .comment-list {
+              margin-left: 20px;
+              display: flex;
+              flex-direction: column;
+              justify-content: center;
+              gap: 5px; }
+              #home-container #feed-posts #post-list-container div .post .post-comments .comment-list .comment .name {
+                font-size: 1rem;
+                font-weight: bold;
+                color: #000; }
+              #home-container #feed-posts #post-list-container div .post .post-comments .comment-list .comment .content {
+                margin-left: 10px; }
   #home-container #user-friends {
     border-left: 2px solid #363636;
     background-color: #5f2a8a;
