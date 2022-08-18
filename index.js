@@ -24,6 +24,7 @@ app.use(express.urlencoded());
 app.use(cookieParser());
 //Setting up static files
 app.use(express.static("./assets"));
+app.use('/uploads',express.static(__dirname+'/uploads'))
 //extract style and script from subspages into the layout
 app.set('layout extractStyles', true);
 app.set('layout extractScripts', true);

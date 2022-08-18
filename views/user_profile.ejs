@@ -2,11 +2,13 @@
 <div id="profile-container">
 <h1>Codial /Profile in Page </h1>
 <div> 
+    <img src="<%=user.avatar%>" alt="<%=user.name%>" width="100">
     <% if(user.id==profile_user.id){%>
         <!--If user match show update form-->
-        <form action="/users/update/<%= profile_user.id %>" method="post">     
+        <form enctype="multipart/form-data" action="/users/update/<%= profile_user.id %>" method="post">     
             <input type="text" name="name" value="<%=profile_user.name%>" required>
             <input type="text" name="email" value="<%=profile_user.email%>" required>
+            <input type="file" name="avatar" placeholder="Profile Picture">
             <input type="submit" value="Update">
         </form>
     <%}else{%>
