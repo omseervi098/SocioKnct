@@ -7,6 +7,9 @@ module.exports.create = async (req, res) => {
       user: req.user._id,
     });
     if(req.xhr){
+      // if we want to populate just the name of the user (we'll not want to send the password in the API), this is how we do it!
+      post=await post.populate('user', 'name')
+      //post = await post.populate('user', 'name').execPopulate();
       return res.status(200).json({
         data:{
           post:post
@@ -18,6 +21,7 @@ module.exports.create = async (req, res) => {
     return res.redirect("/");
   } catch (err) {
     req.flash("error", "Error in creating post");
+    console.log(err);
     return;
   }
 };

@@ -89,8 +89,10 @@
                     flex-direction: column;
                     justify-content: center;
                     gap: 5px;
+
                     .ithpost {
                         margin-left: 5px;
+
                         .name {
                             font-size: 1.1rem;
                             font-weight: bold;
@@ -152,22 +154,24 @@
                             }
                         }
 
-                        .comment-list {
-                            margin-left: 20px;
-                            display: flex;
-                            flex-direction: column;
-                            justify-content: center;
-                            gap: 5px;
+                        .post-comments-list {
+                            .post-comments-list-container {
+                                margin-left: 20px;
+                                display: flex;
+                                flex-direction: column;
+                                justify-content: center;
+                                gap: 5px;
 
-                            .comment {
-                                .name {
-                                    font-size: 1rem;
-                                    font-weight: bold;
-                                    color: #000;
-                                }
+                                .comment {
+                                    .name {
+                                        font-size: 1rem;
+                                        font-weight: bold;
+                                        color: #000;
+                                    }
 
-                                .content {
-                                    margin-left: 10px;
+                                    .content {
+                                        margin-left: 10px;
+                                    }
                                 }
                             }
                         }

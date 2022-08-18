@@ -119,17 +119,17 @@
                   background-color: #1cc7dd;
                   color: white;
                   cursor: pointer; }
-            #home-container #feed-posts #post-list-container div .post .post-comments .comment-list {
+            #home-container #feed-posts #post-list-container div .post .post-comments .post-comments-list .post-comments-list-container {
               margin-left: 20px;
               display: flex;
               flex-direction: column;
               justify-content: center;
               gap: 5px; }
-              #home-container #feed-posts #post-list-container div .post .post-comments .comment-list .comment .name {
+              #home-container #feed-posts #post-list-container div .post .post-comments .post-comments-list .post-comments-list-container .comment .name {
                 font-size: 1rem;
                 font-weight: bold;
                 color: #000; }
-              #home-container #feed-posts #post-list-container div .post .post-comments .comment-list .comment .content {
+              #home-container #feed-posts #post-list-container div .post .post-comments .post-comments-list .post-comments-list-container .comment .content {
                 margin-left: 10px; }
   #home-container #user-friends {
     border-left: 2px solid #363636;

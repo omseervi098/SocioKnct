@@ -1,8 +1,8 @@
-<div class="comment">
+<div class="comment" id="comment-<%= comment._id %>">
     <div class="name">
         <small><%= comment.user.name %></small>
         <% if(locals.user && (locals.user.id==comment.user.id )){ %>
-            <button><a href="/comments/destroy/<%= comment.id %>">Delete</a></button>
+            <button><a class="delete-comment-button" href="/comments/destroy/<%= comment.id %>">Delete</a></button>
         <%}%>
     </div>
     <div class="content">

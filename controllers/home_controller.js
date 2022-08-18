@@ -11,7 +11,7 @@ module.exports.home = async function (req, res) {
           path: "user",
         },
       });
-
+      
     let users = await User.find({});
     return res.render("home", {
       title: "Home",
