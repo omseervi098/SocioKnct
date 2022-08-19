@@ -28,7 +28,9 @@ module.exports.update = async function (req, res) {
         user.email=req.body.email;
         if(req.file){
             if(user.avatar){
-              fs.unlinkSync(path.join(__dirname,"..",user.avatar));
+              if(fs.existsSync(path.join(__dirname,"..","public",user.avatar))){
+                fs.unlinkSync(path.join(__dirname,"..",user.avatar));
+              }
             }
             //If there is an avatar it will save file name in the database
             user.avatar=User.avatarPath+"/"+req.file.filename;

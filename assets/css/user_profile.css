@@ -3,9 +3,49 @@
   background-color: #f5f5f5;
   display: flex;
   flex-direction: column;
-  gap: 30px; }
+  justify-content: center;
+  align-items: center;
+  gap: 10px; }
   #profile-container h1 {
     margin: 0; }
   #profile-container div {
     margin: 0;
-    padding: 0; }
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 10px; }
+    #profile-container div img {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%; }
+    #profile-container div form {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      font-size: 1.1rem;
+      gap: 10px; }
+      #profile-container div form input {
+        width: 100%;
+        height: 30px;
+        border-radius: 5px;
+        border: 1px solid white;
+        padding: 5px;
+        margin: 5px;
+        border-bottom: 1px solid purple; }
+        #profile-container div form input:focus {
+          outline: none; }
+      #profile-container div form input[type="file"] {
+        background-color: white; }
+      #profile-container div form input[type="submit"] {
+        background-color: #8A2BE2;
+        color: white;
+        font-size: 1.1rem; }
+        #profile-container div form input[type="submit"]:hover {
+          background-color: #b773f7;
+          color: white;
+          cursor: pointer; }
+    #profile-container div h2 {
+      margin: 0; }
