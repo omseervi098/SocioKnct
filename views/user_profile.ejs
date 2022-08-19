@@ -5,13 +5,17 @@
     
     <% if(user.id==profile_user.id){%>
         <!--If user match show update form-->
-        <img src="<%=user.avatar%>" width="100">
-        <form enctype="multipart/form-data" action="/users/update/<%= profile_user.id %>" method="post">     
+        <div>
+        <div id="avatar-form-container">
+        <img id="avatar" src="<%=user.avatar%>" width="100">
+        <form id="upload-form" enctype="multipart/form-data" action="/users/update/<%= profile_user.id %>" method="post">     
             <input type="text" name="name" value="<%=profile_user.name%>" required>
             <input type="text" name="email" value="<%=profile_user.email%>" required>
-            <input type="file" name="avatar" placeholder="Profile Picture">
+            <input id="input-file" type="file" name="avatar" placeholder="Profile Picture">
             <input type="submit" value="Update">
         </form>
+    </div>
+    </div>
     <%}else{%>
         <!--else show profile only-->
         
@@ -21,3 +25,5 @@
         <h2>Email: <%= profile_user.email %></h2>
     <%}%>
 </div></div>
+<script src="/js/home_profile.js">
+</script>

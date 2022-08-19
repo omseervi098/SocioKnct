@@ -1,61 +1,94 @@
-#profile-container{
-    min-height:83vh;
+#profile-container {
+    min-height: 83vh;
     background-color: #f5f5f5;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    gap:10px;
-    h1{
+    gap: 10px;
+
+    h1 {
         margin: 0;
     }
-    div{
+
+    div {
         margin: 0;
         padding: 0;
         display: flex;
         flex-direction: column;
         justify-content: center;
         align-items: center;
-        gap:10px;
-        img{
+        gap: 10px;
+
+        div {
+            display: flex;
+            flex-direction: row;
+            #avatar-form-container {
+                display: flex;
+                flex-direction: column;
+
+                #avatar {
+                    width: 120px;
+                    height: 120px;
+                    border-radius: 50%;
+                }
+
+                form {
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: center;
+                    align-items: center;
+                    font-size: 1.1rem;
+                    gap: 10px;
+
+                    input {
+                        width: 100%;
+                        height: 30px;
+                        border-radius: 5px;
+                        border: 1px solid rgb(255, 255, 255);
+                        padding: 5px;
+                        margin: 5px;
+                        border-bottom: 1px solid purple;
+
+                        &:focus {
+                            outline: none;
+                        }
+                    }
+
+                    input[type="file"] {
+                        background-color: white;
+                    }
+
+                    input[type="submit"] {
+                        background-color: #8A2BE2;
+                        color: white;
+                        font-size: 1.1rem;
+
+                        &:hover {
+                            background-color: #b773f7;
+                            color: white;
+                            cursor: pointer;
+                        }
+                    }
+                }
+            }
+
+            #preview {
+                width: 150px;
+                height: 150px;
+                border-radius: 10%;
+                border: 1px solid #ccc;
+            }
+        }
+
+        img {
             width: 120px;
             height: 120px;
             border-radius: 50%;
         }
-        form{
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            font-size: 1.1rem;
-            gap:10px;
-            input{
-                width: 100%;
-                height: 30px;
-                border-radius: 5px;
-                border: 1px solid rgb(255, 255, 255);
-                padding: 5px;
-                margin: 5px;
-                border-bottom: 1px solid purple;
-                &:focus{
-                    outline: none;
-                }
-            }
-            input[type="file"]{
-                background-color: white;
-            }
-            input[type="submit"]{
-                background-color:#8A2BE2;
-                color:white;
-                font-size: 1.1rem;
-                &:hover{
-                    background-color: #b773f7;
-                    color: white;
-                    cursor: pointer;
-                }
-            }
-        }h2{
-            margin: 0;   
+
+        h2 {
+            margin: 0;
         }
     }
 }

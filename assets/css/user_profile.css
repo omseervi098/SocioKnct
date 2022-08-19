@@ -16,36 +16,51 @@
     justify-content: center;
     align-items: center;
     gap: 10px; }
+    #profile-container div div {
+      display: flex;
+      flex-direction: row; }
+      #profile-container div div #avatar-form-container {
+        display: flex;
+        flex-direction: column; }
+        #profile-container div div #avatar-form-container #avatar {
+          width: 120px;
+          height: 120px;
+          border-radius: 50%; }
+        #profile-container div div #avatar-form-container form {
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
+          font-size: 1.1rem;
+          gap: 10px; }
+          #profile-container div div #avatar-form-container form input {
+            width: 100%;
+            height: 30px;
+            border-radius: 5px;
+            border: 1px solid white;
+            padding: 5px;
+            margin: 5px;
+            border-bottom: 1px solid purple; }
+            #profile-container div div #avatar-form-container form input:focus {
+              outline: none; }
+          #profile-container div div #avatar-form-container form input[type="file"] {
+            background-color: white; }
+          #profile-container div div #avatar-form-container form input[type="submit"] {
+            background-color: #8A2BE2;
+            color: white;
+            font-size: 1.1rem; }
+            #profile-container div div #avatar-form-container form input[type="submit"]:hover {
+              background-color: #b773f7;
+              color: white;
+              cursor: pointer; }
+      #profile-container div div #preview {
+        width: 150px;
+        height: 150px;
+        border-radius: 10%;
+        border: 1px solid #ccc; }
     #profile-container div img {
       width: 120px;
       height: 120px;
       border-radius: 50%; }
-    #profile-container div form {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      font-size: 1.1rem;
-      gap: 10px; }
-      #profile-container div form input {
-        width: 100%;
-        height: 30px;
-        border-radius: 5px;
-        border: 1px solid white;
-        padding: 5px;
-        margin: 5px;
-        border-bottom: 1px solid purple; }
-        #profile-container div form input:focus {
-          outline: none; }
-      #profile-container div form input[type="file"] {
-        background-color: white; }
-      #profile-container div form input[type="submit"] {
-        background-color: #8A2BE2;
-        color: white;
-        font-size: 1.1rem; }
-        #profile-container div form input[type="submit"]:hover {
-          background-color: #b773f7;
-          color: white;
-          cursor: pointer; }
     #profile-container div h2 {
       margin: 0; }
