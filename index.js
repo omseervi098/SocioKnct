@@ -5,6 +5,7 @@ const cookieParser = require("cookie-parser");
 const app = express();
 const port = 3000;
 const db=require("./config/mongoose");
+const passportGoogle=require("./config/passport-google-oauth2-strategy");
 //Used for session cookie
 const session=require("express-session");
 const passport=require("passport");

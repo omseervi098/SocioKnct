@@ -46,8 +46,16 @@
   color:inherit;
   text-decoration: none;
 }
+.white-btn a{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap:10px
+}
 .left .white-btn{
     display: inline-block;
+    justify-content: center;
+    align-items: center;
     background-color: #ffffff;
     border-radius: 10px;
     border: none;
@@ -62,6 +70,11 @@
     transition: all 0.5s;
     cursor: pointer;
     margin-bottom:1rem;
+}
+.white-btn img{
+  width:1.3rem;
+  height:1.3rem;
+  
 }
 .left .white-btn:hover{
     background-color: #d3d3d3;
