@@ -85,7 +85,7 @@ module.exports.create = function (req, res) {
 };
 //Get login data
 module.exports.createSession = function (req, res) {
-  console.log(req);
+  //console.log(req);
   req.flash("success", "Logged in successfully");
   return res.redirect("/");
 };
