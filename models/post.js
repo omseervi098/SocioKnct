@@ -15,10 +15,12 @@ const postSchema= new mongoose.Schema({
         ref:'Comment'
     }],
     //Include array of id of likes
-    likes:[{
-        type:mongoose.Schema.Types.ObjectId,
-        ref:'Like'
-    }]
+    likes: [
+        {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'Like'
+        }
+    ]
 },{
     timestamps:true
 });

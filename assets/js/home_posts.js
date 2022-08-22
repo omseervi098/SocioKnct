@@ -12,8 +12,9 @@
           let newPost = newPostDom(data.data.post);
           $("#post-list-container-div").prepend(newPost);
           deletePost($(".delete-post-button", newPost));
+          // CHANGE :: enable the functionality of the toggle like button on the new post
+          new ToggleLike($(' .toggle-like-button', newPost));
           //Adding noty notification
-      
           new Noty({
             theme: "relax",
             type: "success",
@@ -39,7 +40,13 @@
             <div class="content">
                 ${post.content}
             </div>
-            
+            <small>
+                            
+            <a class="toggle-like-button" data-likes="0" href="/likes/toggle/?id=${post._id}&type=Post">
+                0 Likes
+            </a>
+        
+    </small>
         </div>
         <div class="post-comments">
             <form action="/comments/create" method="POST" id="post-${post._id}-comments-form">
