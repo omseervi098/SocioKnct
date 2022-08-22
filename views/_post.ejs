@@ -20,9 +20,9 @@
         <% } %>
         <div class="post-comments-list">
             <div class="post-comments-list-container" id="post-comments-<%= post._id %>">
-              <% for(comment of post.comments) { %>
-                <%- include('_comment')%>
-              <% } %>
+                <% for(comment of post.comments) { %>
+                    <%- include('_comment')%>
+                <% } %>
             </div>
         </div>
     </div>

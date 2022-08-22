@@ -8,6 +8,7 @@ router.use('/users',require('./users'));
 router.use('/posts',require('./posts'));
 router.use('/comments',require('./comments'));
 router.use('/api',require('./api'));
+
 //For any further routes, acces from here:
 //router.use('/routerName',require('./routerFile'));
 

@@ -30,3 +30,12 @@
 </script>
 <script src="/js/home_posts.js">
 </script>
+<script src="/js/toggle_likes.js"></script>
+<script>
+    console.log(1);
+    $('.toggle-like-button').each(function(){
+        let self=this;
+        let togglelike=new ToggleLike(self);
+        //console.log(togglelike);
+    });
+</script>

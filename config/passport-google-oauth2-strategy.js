@@ -17,10 +17,10 @@ passport.use(
           console.log("error in google strategy-passport", err);
           return;
         }
-        console.log(accessToken, refreshToken);
+        //console.log(accessToken, refreshToken);
         if (user) {
           // if found, set this user as req.user
-          console.log(profile);
+          //console.log(profile);
           return done(null, user);
         } else {
           // if not found, create the user and set it as req.user

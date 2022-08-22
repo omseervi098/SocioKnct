@@ -35,7 +35,6 @@ class PostComments{
                     let newComment = pSelf.newCommentDom(data.data.comment);
                     $(`#post-comments-${postId}`).prepend(newComment);
                     pSelf.deleteComment($(' .delete-comment-button', newComment));
-
                     new Noty({
                         theme: 'relax',
                         text: "Comment published!",
@@ -60,11 +59,12 @@ class PostComments{
         return $(`<div class="comment" id="comment-${ comment._id}">
         <div class="name">
             <small>${ comment.user.name}</small>
-                <button><a class="delete-comment-button" href="/comments/destroy/${ comment._id }">Delete</a></button>
+            <button><a class="delete-comment-button" href="/comments/destroy/${ comment._id }">Delete</a></button>
         </div>
         <div class="content">
             ${ comment.content }
         </div>
+        
         </div>`);
     }
 
