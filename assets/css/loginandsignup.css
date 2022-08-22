@@ -144,6 +144,22 @@
     background-color: #a56ef2;
     color: white;
 }
+#forget-div{
+  width:100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top:1rem;
+
+}
+.forget-btn{
+    border-radius: 10px;
+    color: #eeeeee;
+    padding: 4px 10px;
+    font-size: 1.1rem;
+    margin-top:10px;
+}
 @media screen and (max-width: 900px) {
     .container{
         width: 70%;

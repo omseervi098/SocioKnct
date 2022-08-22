@@ -9,6 +9,10 @@ router.get('/login',userController.login);
 router.get('/signup',userController.signUp);
 router.post('/create',userController.create);
 router.get('/signout',userController.destroySession);
+router.get('/forgot-password',userController.forgotPassword);
+router.post('/forgot-password/create-access-token',userController.createAccessToken);
+router.get('/forgot-password/reset-password/',userController.resetPassword);
+router.post('/reset-pass',userController.updatePassword);
 //Use passport as middleware
 router.post('/create-session',passport.authenticate(
     'local',
