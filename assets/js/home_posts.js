@@ -10,7 +10,7 @@
         data: newPostForm.serialize(),
         success: function (data) {
           let newPost = newPostDom(data.data.post);
-          $("#post-list-container>div").prepend(newPost);
+          $("#post-list-container-div").prepend(newPost);
           deletePost($(".delete-post-button", newPost));
           //Adding noty notification
       
@@ -49,10 +49,10 @@
             </form>
             <div class="post-comments-list" >
                 <div id="post-comments-${post._id}">
-                </div>
             </div>
         </div>
-        </div>
+        
+        
       </div>`);
   };
   //method to delete post from dom

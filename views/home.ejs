@@ -10,11 +10,13 @@
         
     <!--Listing post-->
     <div id="post-list-container">
+        <div id="post-list-container-div">
         <% for(post of posts) { %>
-            <div>
+            
                 <%- include('_post')%>
-            </div>
+            
         <%}%>
+    </div>
     </div>
 </section>
 <section id="user-friends">
@@ -29,13 +31,4 @@
 <script src="/js/home_post_comments.js">
 </script>
 <script src="/js/home_posts.js">
-</script>
-<script src="/js/toggle_likes.js"></script>
-<script>
-    console.log(1);
-    $('.toggle-like-button').each(function(){
-        let self=this;
-        let togglelike=new ToggleLike(self);
-        //console.log(togglelike);
-    });
 </script>
