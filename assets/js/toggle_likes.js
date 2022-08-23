@@ -21,22 +21,17 @@ class ToggleLike {
           if (data.data.deleted == true) {
             likesCount -= 1;
             $(self).attr("data-likes", likesCount);
-            $(self).html(`<button class="like__btn">
-                <span id="icon"><i class="far fa-thumbs-up"></i></span>
-                <span id="count">
-                    ${likesCount}
-                </span> Like
-            </button>`);
+            
           } else {
             likesCount += 1;
             $(self).attr("data-likes", likesCount);
-            $(self).html(`<button class="like__btn">
+          }
+          $(self).html(`<button class="like__btn">
                 <span id="icon"><i class="fas fa-thumbs-up"></i></span>
                 <span id="count">
                     ${likesCount}
                 </span> Like
             </button>`);
-          }
         })
         .fail(function (errData) {
           console.log("error in completing the request");

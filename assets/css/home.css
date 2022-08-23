@@ -65,18 +65,18 @@
         width: 100%;
         flex-direction: column;
         justify-content: center;
-        gap: 5px; }
+        gap: 10px; }
         #home-container #feed-posts #post-list-container #post-list-container-div .post {
           display: flex;
           width: 100%;
           flex-direction: column;
           justify-content: center;
-          gap: 10px; }
+          gap: 2px; }
           #home-container #feed-posts #post-list-container #post-list-container-div .post .ithpost {
             margin-left: 5px;
             display: flex;
             flex-direction: column;
-            gap: 10px; }
+            gap: 3px; }
             #home-container #feed-posts #post-list-container #post-list-container-div .post .ithpost .name {
               display: flex;
               width: 100%;
@@ -96,21 +96,23 @@
                   border-radius: 20%;
                   font-size: 16px;
                   border: none;
-                  cursor: pointer; }
+                  cursor: pointer;
+                  margin-bottom: 2px; }
                 #home-container #feed-posts #post-list-container #post-list-container-div .post .ithpost .name div .dropdown .dropdown-content {
                   display: none;
                   position: absolute;
-                  background-color: #d6d6d6;
+                  background-color: #b866c9;
+                  color: white;
                   min-width: 80px;
                   box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
                   z-index: 1; }
                   #home-container #feed-posts #post-list-container #post-list-container-div .post .ithpost .name div .dropdown .dropdown-content a {
-                    color: black;
+                    color: white;
                     padding: 8px 8px;
                     text-decoration: none;
                     display: block; }
                     #home-container #feed-posts #post-list-container #post-list-container-div .post .ithpost .name div .dropdown .dropdown-content a:hover {
-                      background-color: #6a4b72;
+                      background-color: #840ea1;
                       color: white; }
                 #home-container #feed-posts #post-list-container #post-list-container-div .post .ithpost .name div .dropdown:hover .dropdown-content {
                   display: block; }
@@ -126,7 +128,7 @@
               border: 1px dashed black; }
             #home-container #feed-posts #post-list-container #post-list-container-div .post .ithpost small .like__btn {
               padding: 3px 6px;
-              background: #a64ff8;
+              background: #ff3a3a;
               font-size: 13px;
               font-family: "Open Sans", sans-serif;
               border-radius: 5px;
@@ -134,6 +136,9 @@
               outline: none;
               border: none;
               cursor: pointer; }
+              #home-container #feed-posts #post-list-container #post-list-container-div .post .ithpost small .like__btn:hover {
+                background: #ca1919;
+                color: #e8efff; }
           #home-container #feed-posts #post-list-container #post-list-container-div .post .post-comments {
             margin: 0px 20px;
             width: 80%; }
@@ -173,44 +178,70 @@
               flex-direction: column;
               justify-content: center;
               gap: 5px; }
-              #home-container #feed-posts #post-list-container #post-list-container-div .post .post-comments .post-comments-list .post-comments-list-container .comment .name {
-                font-size: 1rem;
-                font-weight: bold;
-                color: #000;
+              #home-container #feed-posts #post-list-container #post-list-container-div .post .post-comments .post-comments-list .post-comments-list-container .comment {
                 display: flex;
-                justify-content: space-between; }
-                #home-container #feed-posts #post-list-container #post-list-container-div .post .post-comments .post-comments-list .post-comments-list-container .comment .name div .dropdown {
-                  position: relative;
-                  display: inline-block; }
-                  #home-container #feed-posts #post-list-container #post-list-container-div .post .post-comments .post-comments-list .post-comments-list-container .comment .name div .dropdown .dropbtn {
-                    background-color: #712696;
-                    color: white;
-                    padding: 4px;
-                    border-radius: 20%;
-                    font-size: 16px;
-                    border: none;
-                    cursor: pointer; }
-                  #home-container #feed-posts #post-list-container #post-list-container-div .post .post-comments .post-comments-list .post-comments-list-container .comment .name div .dropdown .dropdown-content {
-                    display: none;
-                    position: absolute;
-                    background-color: #d6d6d6;
-                    min-width: 80px;
-                    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
-                    z-index: 1; }
-                    #home-container #feed-posts #post-list-container #post-list-container-div .post .post-comments .post-comments-list .post-comments-list-container .comment .name div .dropdown .dropdown-content a {
-                      color: black;
-                      padding: 8px 8px;
-                      text-decoration: none;
+                flex-direction: column;
+                gap: 2px; }
+                #home-container #feed-posts #post-list-container #post-list-container-div .post .post-comments .post-comments-list .post-comments-list-container .comment .name {
+                  font-size: 1rem;
+                  font-weight: bold;
+                  color: #000;
+                  display: flex;
+                  justify-content: space-between; }
+                  #home-container #feed-posts #post-list-container #post-list-container-div .post .post-comments .post-comments-list .post-comments-list-container .comment .name span {
+                    font-size: 1rem;
+                    font-weight: bold;
+                    color: #000; }
+                  #home-container #feed-posts #post-list-container #post-list-container-div .post .post-comments .post-comments-list .post-comments-list-container .comment .name div .dropdown {
+                    position: relative;
+                    display: inline-block; }
+                    #home-container #feed-posts #post-list-container #post-list-container-div .post .post-comments .post-comments-list .post-comments-list-container .comment .name div .dropdown .dropbtn {
+                      background-color: #712696;
+                      color: white;
+                      padding: 2px;
+                      border-radius: 20%;
+                      font-size: 16px;
+                      border: none;
+                      cursor: pointer;
+                      margin-bottom: 2px; }
+                    #home-container #feed-posts #post-list-container #post-list-container-div .post .post-comments .post-comments-list .post-comments-list-container .comment .name div .dropdown .dropdown-content {
+                      display: none;
+                      position: absolute;
+                      background-color: #b866c9;
+                      min-width: 80px;
+                      box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+                      z-index: 1; }
+                      #home-container #feed-posts #post-list-container #post-list-container-div .post .post-comments .post-comments-list .post-comments-list-container .comment .name div .dropdown .dropdown-content a {
+                        color: white;
+                        padding: 8px 8px;
+                        text-decoration: none;
+                        display: block; }
+                        #home-container #feed-posts #post-list-container #post-list-container-div .post .post-comments .post-comments-list .post-comments-list-container .comment .name div .dropdown .dropdown-content a:hover {
+                          background-color: #840ea1;
+                          color: white; }
+                    #home-container #feed-posts #post-list-container #post-list-container-div .post .post-comments .post-comments-list .post-comments-list-container .comment .name div .dropdown:hover .dropdown-content {
                       display: block; }
-                      #home-container #feed-posts #post-list-container #post-list-container-div .post .post-comments .post-comments-list .post-comments-list-container .comment .name div .dropdown .dropdown-content a:hover {
-                        background-color: #6a4b72;
-                        color: white; }
-                  #home-container #feed-posts #post-list-container #post-list-container-div .post .post-comments .post-comments-list .post-comments-list-container .comment .name div .dropdown:hover .dropdown-content {
-                    display: block; }
-                  #home-container #feed-posts #post-list-container #post-list-container-div .post .post-comments .post-comments-list .post-comments-list-container .comment .name div .dropdown:hover .dropbtn {
-                    background-color: #3e0074; }
-              #home-container #feed-posts #post-list-container #post-list-container-div .post .post-comments .post-comments-list .post-comments-list-container .comment .content {
-                margin-left: 10px; }
+                    #home-container #feed-posts #post-list-container #post-list-container-div .post .post-comments .post-comments-list .post-comments-list-container .comment .name div .dropdown:hover .dropbtn {
+                      background-color: #3e0074; }
+                #home-container #feed-posts #post-list-container #post-list-container-div .post .post-comments .post-comments-list .post-comments-list-container .comment .content {
+                  margin-left: 0px;
+                  background-color: #eeeeeed6;
+                  padding: 1px 3px;
+                  border-radius: 4%;
+                  font-family: sans-serif; }
+                #home-container #feed-posts #post-list-container #post-list-container-div .post .post-comments .post-comments-list .post-comments-list-container .comment small .like__btn {
+                  padding: 3px 6px;
+                  background: #ff3a3a;
+                  font-size: 13px;
+                  font-family: "Open Sans", sans-serif;
+                  border-radius: 5px;
+                  color: #e8efff;
+                  outline: none;
+                  border: none;
+                  cursor: pointer; }
+                  #home-container #feed-posts #post-list-container #post-list-container-div .post .post-comments .post-comments-list .post-comments-list-container .comment small .like__btn:hover {
+                    background: #ca1919;
+                    color: #e8efff; }
   #home-container #user-friends {
     border-left: 2px solid #363636;
     background-color: #5f2a8a;

@@ -20,19 +20,25 @@
         </div>
         <small>
             <% if (locals.user){ %>
-
                 <a class="toggle-like-button " data-likes="<%= post.likes.length %>"
                     href="/likes/toggle/?id=<%=post._id%>&type=Post">
                     <button class="like__btn">
-                        <span id="icon"><i class="far fa-thumbs-up"></i></span>
+                        
+                        <span id="icon"><i class="fas fa-thumbs-up"></i></span>
                         <span id="count">
                             <%= post.likes.length %>
                         </span> Like
+                        
                     </button>
                 </a>
-                <% }else{ %>
-                    <%= post.likes.length %> Likes
-                <% } %>
+            <% }else{ %>
+                <button class="like__btn">
+                    <span id="icon"><i class="far fa-thumbs-up"></i></span>
+                    <span id="count">
+                        <%= post.likes.length %>
+                    </span> Like
+                </button>
+            <% } %>
         </small>
     </div>
     <div class="post-comments">
