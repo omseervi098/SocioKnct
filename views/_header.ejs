@@ -5,16 +5,16 @@
     </div>
     <ul>
         <% if(locals.user){ %>
-            <li><button><a href="/users/profile/<%= user._id %>"><%= user.name %></a></button></li>
+            <li><a href="/users/profile/<%= user._id %>"><button><%= user.name %></button></a></li>
             <li>
-                <button><a href="/users/signout">Sign-Out</a></button>
+                <a href="/users/signout"><button>Sign-Out</button></a>
             </li>
         <% }else{%>
             <li>
-                <button><a href="/users/login">Sign-In</a></button>
+                <a href="/users/login"><button>Sign-In</button></a>
             </li>
             <li>
-                <button><a href="/users/signup">Sign-Up</a></button>
+                <a href="/users/signup"><button>Sign-Up</button></a>
             </li>
         <%}%>
     </ul>
