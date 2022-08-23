@@ -76,7 +76,7 @@
             gap: 10px;
             padding: 10px;
 
-            div {
+            #post-list-container-div {
                 display: flex;
                 width: 100%;
                 flex-direction: column;
@@ -88,15 +88,81 @@
                     width: 100%;
                     flex-direction: column;
                     justify-content: center;
-                    gap: 5px;
+                    gap: 10px;
 
                     .ithpost {
                         margin-left: 5px;
+                        display: flex;
+                        flex-direction: column;
+                        gap: 10px;
 
                         .name {
-                            font-size: 1.1rem;
-                            font-weight: bold;
-                            color: #000;
+                            display: flex;
+                            width: 100%;
+                            justify-content: space-between;
+                            flex-wrap: nowrap;
+
+
+                            //align-items: center;
+                            span {
+                                font-size: 1.1rem;
+                                font-weight: bold;
+                                color: #000;
+                            }
+
+                            div {
+                                .dropdown {
+
+                                    position: relative;
+                                    display: inline-block;
+
+                                    .dropbtn {
+                                        background-color: #712696;
+                                        color: white;
+                                        padding: 4px;
+                                        border-radius: 20%;
+                                        font-size: 16px;
+                                        border: none;
+                                        cursor: pointer;
+
+                                    }
+
+                                    .dropdown-content {
+                                        display: none;
+                                        position: absolute;
+                                        background-color: #d6d6d6;
+                                        min-width: 80px;
+                                        box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+                                        z-index: 1;
+
+                                        a {
+                                            color: black;
+                                            padding: 8px 8px;
+                                            text-decoration: none;
+                                            display: block;
+
+                                            &:hover {
+                                                background-color: #6a4b72;
+                                                color: white;
+                                            }
+                                        }
+
+
+                                    }
+
+                                    &:hover {
+                                        .dropdown-content {
+                                            display: block;
+                                        }
+
+                                        .dropbtn {
+                                            background-color: #3e0074;
+                                            //color: white;
+                                        }
+                                    }
+                                }
+                            }
+
                         }
 
                         .content {
@@ -108,8 +174,21 @@
                             font-size: 1.1rem;
                             border: 1px dashed black;
                         }
-                        .like {
-                           
+
+                        small {
+
+                            .like__btn {
+                                padding: 3px 6px;
+                                background: #a64ff8;
+                                font-size: 13px;
+                                font-family: "Open Sans", sans-serif;
+                                border-radius: 5px;
+                                color: #e8efff;
+                                outline: none;
+                                border: none;
+                                cursor: pointer;
+                            }
+
                         }
                     }
 
@@ -170,6 +249,60 @@
                                         font-size: 1rem;
                                         font-weight: bold;
                                         color: #000;
+                                        display: flex;
+                                        justify-content: space-between;
+                                        div {
+                                            .dropdown {
+
+                                                position: relative;
+                                                display: inline-block;
+
+                                                .dropbtn {
+                                                    background-color: #712696;
+                                                    color: white;
+                                                    padding: 4px;
+                                                    border-radius: 20%;
+                                                    font-size: 16px;
+                                                    border: none;
+                                                    cursor: pointer;
+
+                                                }
+
+                                                .dropdown-content {
+                                                    display: none;
+                                                    position: absolute;
+                                                    background-color: #d6d6d6;
+                                                    min-width: 80px;
+                                                    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+                                                    z-index: 1;
+
+                                                    a {
+                                                        color: black;
+                                                        padding: 8px 8px;
+                                                        text-decoration: none;
+                                                        display: block;
+
+                                                        &:hover {
+                                                            background-color: #6a4b72;
+                                                            color: white;
+                                                        }
+                                                    }
+
+
+                                                }
+
+                                                &:hover {
+                                                    .dropdown-content {
+                                                        display: block;
+                                                    }
+
+                                                    .dropbtn {
+                                                        background-color: #3e0074;
+                                                        //color: white;
+                                                    }
+                                                }
+                                            }
+                                        }
                                     }
 
                                     .content {

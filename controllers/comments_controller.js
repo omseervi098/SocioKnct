@@ -16,8 +16,8 @@ module.exports.create = async function (req, res) {
       post.save();
       comment=await comment.populate('user', 'name email');
       // commentMailer.newComment(comment);
-      emailQueue.add(comment);
-      console.log(comment);
+      //emailQueue.add(comment);
+     //console.log(comment.user.name);
       if(req.xhr){  
         return res.status(200).json({
           data:{
@@ -32,7 +32,7 @@ module.exports.create = async function (req, res) {
   } catch (err) {
     req.flash("error", "Error in creating comment");
     console.log(err);
-    return;
+    return ;
   }
 };
 module.exports.destroy = async function (req, res) {

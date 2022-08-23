@@ -1,24 +1,32 @@
 <div class="comment" id="comment-<%= comment._id %>">
     <div class="name">
-        <small>
+        <span>
             <%= comment.user.name %>
-        </small>
+        </span>
         <% if(locals.user && (locals.user.id==comment.user.id )){ %>
-            <button><a class="delete-comment-button" href="/comments/destroy/<%= comment.id %>">Delete</a></button>
-        <%}%>
+            <div>
+                <div class="dropdown">
+                    <button class="dropbtn"><i class="fa-solid fa-circle-chevron-down"></i></button>
+                    <div class="dropdown-content"><a class="delete-comment-button"
+                            href="/comments/destroy/<%= comment.id %>">Delete</a>
+                    </div>
+                </div>
+            </div>
+            <%}%>
     </div>
     <div class="content">
         <%= comment.content %>
     </div>
     <!-- CHANGE :: display the likes of this comment, if the user is logged in, then show the link to toggle likes, else, just show the count -->
-            <!-- study about the data attribute -->
-            <small>
-                <% if (locals.user){ %>
-                    <a class="toggle-like-button" data-likes="<%= comment.likes.length %>" href="/likes/toggle/?id=<%=comment._id%>&type=Comment">
-                            <%= comment.likes.length %> Likes
-                    </a>
-                <% }else{ %>
-                    <%= comment.likes.length %> Likes
-                <% } %>
-            </small>
+    <!-- study about the data attribute -->
+    <small>
+        <% if (locals.user){ %>
+            <a class="toggle-like-button" data-likes="<%= comment.likes.length %>"
+                href="/likes/toggle/?id=<%=comment._id%>&type=Comment">
+                <%= comment.likes.length %> Likes
+            </a>
+            <% }else{ %>
+                <%= comment.likes.length %> Likes
+                    <% } %>
+    </small>
 </div>

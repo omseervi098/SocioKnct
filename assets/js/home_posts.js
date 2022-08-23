@@ -33,20 +33,31 @@
   let newPostDom = function (post) {
     return $(`<div id="post-${post._id}" class="post">
         <div class="ithpost">
-            <div class="name">
-                ${post.user.name}
-                <button><a class="delete-post-button" href="/posts/destroy/${post._id}">Delete</a></button>
+        <div class="name">
+            <span>${ post.user.name }</span>
+            <div>
+              <div class="dropdown">
+                <button class="dropbtn"><i class="fa-solid fa-circle-chevron-down"></i></button>
+                <div class="dropdown-content">
+                    <a class="delete-post-button" href="/posts/destroy/${ post._id }">Delete</a>
+                </div>
+              </div>  
             </div>
+        </div>
             <div class="content">
                 ${post.content}
             </div>
             <small>
-                            
-            <a class="toggle-like-button" data-likes="0" href="/likes/toggle/?id=${post._id}&type=Post">
-                0 Likes
-            </a>
-        
-    </small>
+                <a class="toggle-like-button " data-likes="0"
+                    href="/likes/toggle/?id=${post._id}&type=Post">
+                    <button class="like__btn">
+                        <span id="icon"><i class="far fa-thumbs-up"></i></span>
+                        <span id="count">
+                            0
+                        </span> Like
+                    </button>
+                </a>
+            </small>
         </div>
         <div class="post-comments">
             <form action="/comments/create" method="POST" id="post-${post._id}-comments-form">

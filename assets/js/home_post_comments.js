@@ -35,8 +35,8 @@ class PostComments{
                     let newComment = pSelf.newCommentDom(data.data.comment);
                     $(`#post-comments-${postId}`).prepend(newComment);
                     pSelf.deleteComment($(' .delete-comment-button', newComment));
-                    // CHANGE :: enable the functionality of the toggle like button on the new comment
-                    new ToggleLike($(' .toggle-like-button', newComment));
+                     // CHANGE :: enable the functionality of the toggle like button on the new comment
+                     new ToggleLike($(' .toggle-like-button', newComment));
 
                     new Noty({
                         theme: 'relax',
