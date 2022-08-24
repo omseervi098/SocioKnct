@@ -29,3 +29,28 @@ module.exports.home = async function (req, res) {
   // Post.find({}).exec()
   //post.then()
 };
+
+module.exports.search = async function (req, res) {
+  try{
+    var regex=new RegExp(req.query["term"],'i');
+    let user=await User.find({name:regex},{'name':1}).sort('-updatedAt').sort('-createdAt').limit(10);
+    
+    var users=[];
+    if(user && user.length>0){
+      user.forEach(data=>{
+        let obj={
+          id:data._id,
+          label:data.name,
+        }
+        users.push(obj);
+      })
+    }
+    //console.log(users);
+    return res.status(200).jsonp(users);
+  }catch(err){
+    console.log(err);
+    return;
+  }
+  
+
+}

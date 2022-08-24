@@ -5,6 +5,7 @@
     </div>
     <ul>
         <% if(locals.user){ %>
+            <li><input type="text" id="search-name" class="search" name="filtername" placeholder="Enter Name"></li>
             <li><a href="/users/profile/<%= user._id %>"><button><%= user.name %></button></a></li>
             <li>
                 <a href="/users/signout"><button>Sign-Out</button></a>
@@ -19,3 +20,27 @@
         <%}%>
     </ul>
 </header>
+<script>
+    $(function(){
+        $('#search-name').autocomplete({
+            source:function(req,res){
+                $.ajax({
+                    url:'/search',
+                    dataType:'jsonp',
+                    type:'GET',
+                    data:req,
+                    success:function(data){
+                        res(data);
+                    },error:function(err){
+                        console.log(err);
+                    }
+                })
+            },
+            minLength:1,
+            select:function(event,ui){
+                window.location.href='/users/profile/'+ui.item.id;
+            }
+        });
+    });
+    
+</script>
