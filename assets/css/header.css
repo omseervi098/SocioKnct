@@ -46,6 +46,8 @@ header {
       border-radius: 5px; }
       header ul li input:focus {
         outline: none; }
+    header ul li .ui-menu-item {
+      color: red; }
     header ul li button {
       background-color: #dedede;
       border: none;

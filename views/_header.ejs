@@ -6,8 +6,9 @@
     <ul>
         <% if(locals.user){ %>
             <li><input type="text" id="search-name" class="search" name="filtername" placeholder="Enter Name">
+                
             </li>
-            <li><a href="/users/profile/<%= user._id %>"><button><%= user.name %></button></a></li>
+            <li><a href="/users/profile/<%= user._id %>"><button><%= user.name.split(' ')[0] %></button></a></li>
             <li>
                 <a href="/users/signout"><button>Sign-Out</button></a>
             </li>

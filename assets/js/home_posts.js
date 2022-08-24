@@ -11,6 +11,7 @@
         success: function (data) {
           let newPost = newPostDom(data.data.post);
           $("#post-list-container-div").prepend(newPost);
+          $('#new-post-form')[0].reset();
           deletePost($(".delete-post-button", newPost));
           // CHANGE :: enable the functionality of the toggle like button on the new post
           new ToggleLike($(' .toggle-like-button', newPost));
