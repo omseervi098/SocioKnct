@@ -7,20 +7,23 @@ header {
   flex-direction: row;
   align-items: center;
   padding: 2px 0px; }
-  header div {
+  header div a {
     display: flex;
     justify-content: flex-start;
     align-content: center;
     gap: 2px; }
-    header div img {
+    header div a, header div a:hover, header div a:focus, header div a:active {
+      color: inherit;
+      text-decoration: none; }
+    header div a img {
       width: 50px;
       height: 50px; }
-    header div div {
+    header div a div {
       display: flex;
       flex-direction: column;
       justify-content: center;
       align-items: center; }
-      header div div p {
+      header div a div p {
         margin: 0px;
         font-size: 1.4rem;
         color: white;
@@ -31,6 +34,18 @@ header {
     align-content: center;
     list-style-type: none;
     gap: 5px; }
+    header ul li input {
+      background-color: #ededed;
+      border: none;
+      padding: 4px;
+      width: auto;
+      margin-right: 10px;
+      font-size: 1.07rem;
+      color: #5f2a8a;
+      font-weight: bold;
+      border-radius: 5px; }
+      header ul li input:focus {
+        outline: none; }
     header ul li button {
       background-color: #dedede;
       border: none;
@@ -45,6 +60,8 @@ header {
         background-color: #1cc7dd;
         color: white;
         cursor: pointer; }
-      header ul li button a:hover, header ul li button a:visited, header ul li button a:link {
+      header ul li button a:hover,
+      header ul li button a:visited,
+      header ul li button a:link {
         color: inherit;
         text-decoration: none; }

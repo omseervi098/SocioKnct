@@ -1,11 +1,12 @@
 <header>
     <div>
-        <img src="/images/logo_icon.png" alt="logo">
-        <div><p>Codial</p></div>
+        <a href="/"><img src="/images/logo_icon.png" alt="logo">
+        <div><p>Codial</p></div></a>
     </div>
     <ul>
         <% if(locals.user){ %>
-            <li><input type="text" id="search-name" class="search" name="filtername" placeholder="Enter Name"></li>
+            <li><input type="text" id="search-name" class="search" name="filtername" placeholder="Enter Name">
+            </li>
             <li><a href="/users/profile/<%= user._id %>"><button><%= user.name %></button></a></li>
             <li>
                 <a href="/users/signout"><button>Sign-Out</button></a>
