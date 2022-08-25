@@ -5,6 +5,7 @@
     display: flex;
     height: max-content;
     justify-content: space-between;
+    position: relative;
     //justify-content: flex-end;
     #feed-posts {
         width: 100%;
@@ -373,6 +374,7 @@
 
         #friend-list {
            margin-left: 10%;
+           margin-right: 10%;
             font-size: 1rem;
             .ithfriend {
                 .friend-container {
@@ -408,6 +410,17 @@
                     }
                 }
             }
+        }
+
+    }
+    #chatbot{
+        height: 200px;
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        #chatbot-container{
+            height: 100%;
+            
         }
     }
 }

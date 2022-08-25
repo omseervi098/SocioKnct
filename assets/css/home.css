@@ -4,7 +4,8 @@
   min-height: 83vh;
   display: flex;
   height: max-content;
-  justify-content: space-between; }
+  justify-content: space-between;
+  position: relative; }
   #home-container #feed-posts {
     width: 100%;
     padding: 0;
@@ -256,6 +257,7 @@
       padding: 0; }
     #home-container #user-friends #friend-list {
       margin-left: 10%;
+      margin-right: 10%;
       font-size: 1rem; }
       #home-container #user-friends #friend-list .ithfriend .friend-container {
         display: flex;
@@ -278,3 +280,10 @@
           text-decoration: none; }
         #home-container #user-friends #friend-list .ithfriend .friend-container .friend-name h2 {
           font-size: 1rem; }
+  #home-container #chatbot {
+    height: 200px;
+    position: absolute;
+    bottom: 0;
+    right: 0; }
+    #home-container #chatbot #chatbot-container {
+      height: 100%; }
