@@ -1,0 +1,18 @@
+<!--Display Friends-->
+<div id="ithfriend-<%=u._id%>" class="ithfriend">
+    <div class="friend-container">
+        <div class="friend-avatar">
+            
+            <%if(u.avatar){%>
+                <img src="<%=u.avatar%>" alt="<%=u.name%>" class="friend-avatar-img">
+            <%}else {%>
+                <img src="/images/default-avatar.png" alt="<%=u.name%>" class="friend-avatar-img">
+            <%}%>
+        </div>
+        <div class="friend-name">
+            <a href="/users/profile/<%=u.id%>">
+            <h2><%=u.name%></h2>
+        </a>
+        </div>
+    </div>
+</div>

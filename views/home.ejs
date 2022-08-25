@@ -13,22 +13,21 @@
                 <div id="post-list-container">
                     <div id="post-list-container-div">
                         <% for(post of posts) { %>
-
                             <%- include('_post')%>
-
-                         <%}%>
+                        <%}%>
                     </div>
                 </div>
     </section>
     <section id="user-friends">
         <h4>Friends</h4>
-        <% for(u of all_users){%>
-            <p>
-                <a href="/users/profile/<%=u.id%>">
-                    <%= u.name %>
-                </a>
-            </p>
-            <%}%>
+        <% if (locals.user && friends.length>0){%>
+            <div id="friend-list">
+                <% for(u of friends){%>
+                    <%- include('_friend')%>        
+                <%}%>
+            </div>
+        <%}%>
+        
     </section>
 </div>
 <script src="/js/home_post_comments.js">
@@ -37,10 +36,10 @@
 </script>
 <!-- CHANGE :: import the script file for toggle likes, also run it over for the already present posts and comments on the page -->
 <script src="js/toggle_likes.js"></script>
+
 <script>
     $('.toggle-like-button').each(function () {
         let self = this;
         let toggleLike = new ToggleLike(self);
     });
-   
 </script>

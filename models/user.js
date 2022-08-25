@@ -2,6 +2,7 @@ const mongoose = require("mongoose");
 const multer = require("multer");
 const path = require("path");
 const AVATAR_PATH = path.join("/uploads/users/avatars");
+const Friend = require("../models/friend");
 const userSchema = new mongoose.Schema(
   {
     email: {
@@ -15,11 +16,17 @@ const userSchema = new mongoose.Schema(
     },
     name: {
       type: String,
+      lowercase: true,
+      capitalize: true,
       required: true,
     },
     avatar: {
       type: String,
     },
+    friends:[{
+      type:mongoose.Schema.Types.ObjectId,
+      ref:'Friend'
+    }]
   },
   { timestamps: true }
 );

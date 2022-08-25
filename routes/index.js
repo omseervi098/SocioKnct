@@ -10,6 +10,8 @@ router.use('/comments',require('./comments'));
 router.use('/api',require('./api'));
 router.use('/likes',require('./likes'));
 router.get('/search',homeController.search);
+router.post('/connect',homeController.connect)
+
 //For any further routes, acces from here:
 //router.use('/routerName',require('./routerFile'));
 

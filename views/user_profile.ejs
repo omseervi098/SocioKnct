@@ -1,29 +1,45 @@
 <link rel="stylesheet" href="/css/user_profile.css">
 <div id="profile-container">
-<h1>Profile</h1>
-<div> 
-    
-    <% if(user.id==profile_user.id){%>
-        <!--If user match show update form-->
-        <div>
-        <div id="avatar-form-container">
-        <img id="avatar" src="<%=user.avatar%>" width="100">
-        <form id="upload-form" enctype="multipart/form-data" action="/users/update/<%= profile_user.id %>" method="post">     
-            <input type="text" name="name" value="<%=profile_user.name%>" required>
-            <input type="text" name="email" value="<%=profile_user.email%>" required>
-            <input id="input-file" type="file" name="avatar" placeholder="Profile Picture">
-            <input type="submit" value="Update">
-        </form>
+    <h1>Profile</h1>
+    <div>
+
+        <% if(user.id==profile_user.id){%>
+            <!--If user match show update form-->
+            <div>
+                <div id="avatar-form-container">
+                    <img id="avatar" src="<%=user.avatar%>" width="100">
+                    <form id="upload-form" enctype="multipart/form-data" action="/users/update/<%= profile_user.id %>"
+                        method="post">
+                        <input type="text" name="name" value="<%=profile_user.name%>" required>
+                        <input type="text" name="email" value="<%=profile_user.email%>" required>
+                        <input id="input-file" type="file" name="avatar" placeholder="Profile Picture">
+                        <input type="submit" value="Update">
+                    </form>
+                </div>
+            </div>
+        <%}else{%>
+                <!--else show profile only-->
+
+                <img src="<%=profile_user.avatar%>" alt="<%=profile_user.name %>" width="100">
+                <h2>Name: <%= profile_user.name %>
+                </h2>
+                <h2>Email: <%= profile_user.email %>
+                </h2>
+                <div class="form-for-adding-friend">
+                    
+                    <form action="/connect" id="connect-form" method="POST">
+                        <input type="hidden" name="to_user" value="<%=profile_user.id%>">
+                        <input type="hidden" name="from_user" value="<%=locals.user.id%>">
+                        <%if(!isFriend){%>
+                        <input type="submit" id="connect-btn" value="Connect" name="connect">
+                        <%}else{%>
+                        <input type="submit" id="connect-btn" value="Disconnect" name="connect">
+                        <%}%>
+                    </form>
+                    
+                </div>
+        <%}%>
     </div>
-    </div>
-    <%}else{%>
-        <!--else show profile only-->
-        
-        <img src="<%=profile_user.avatar%>" alt="<%=profile_user.name %>" width="100">
-        
-        <h2>Name: <%= profile_user.name %></h2>
-        <h2>Email: <%= profile_user.email %></h2>
-    <%}%>
-</div></div>
+</div>
 <script src="/js/home_profile.js">
 </script>

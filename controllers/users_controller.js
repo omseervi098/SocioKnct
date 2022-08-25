@@ -4,12 +4,27 @@ const fs = require("fs");
 const path = require("path");
 const forgotpassMailer=require('../mailers/forgotpass_mailer');
 const crypto = require("crypto");
+const Friend=require("../models/friend");
 module.exports.profile = async function (req, res) {
   try {
     let user = await User.findById(req.params.id);
+    //Find whether the user is friend or not
+    let friend=await Friend.findOne({
+      $or:[
+        {
+          from_user:req.user.id,
+          to_user:req.params.id,
+        },
+        {
+          from_user:req.params.id,
+          to_user:req.user.id,
+        }
+      ]});
+   // console.log(friend);
     return res.render("user_profile", {
       title: "User Profile",
       profile_user: user,
+      isFriend:friend,
     });
   } catch (err) {
     console.log("Error in finding user in profile");
