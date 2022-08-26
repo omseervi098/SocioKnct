@@ -5,12 +5,47 @@
     </div>
     <ul>
         <% if(locals.user){ %>
-            <li><input type="text" id="search-name" class="search" name="filtername" placeholder="Enter Name">
-                
+            <li><input type="hidden" id="currentuser" value="<%=locals.user.username%>"></li>
+            <li><input type="text" id="search-name" class="search" name="filtername" placeholder="Enter Name">      
             </li>
-            <li><a href="/users/profile/<%= user._id %>"><button><%= user.name.split(' ')[0] %></button></a></li>
             <li>
-                <a href="/users/signout"><button>Sign-Out</button></a>
+                <div class="dropdown">
+                <button class="dropbtn" onclick="openDropdown()"><i class="fa fa-user-plus"></i>
+                </button>
+                  <div  id ="myDropdown" class="dropdown-content" style=" height: 350px; overflow-y: scroll;">
+                    <%if(user.request) {%>
+                    <% for(i of newfriend){%>
+                    <div style="border-bottom: 1px solid lightgray">
+                      <a href="#">
+                          <div>
+                            <h4><%=i.username%></h4>
+                          </div>
+                          <div>
+                              
+                              <div style="">
+                                <input type="hidden" name="senderId" id="senderId" value="<%=i.userId%>">
+                                <input type="hidden" name="senderName" id="senderName" value="<%=i.username%>">
+                                <button type="submit" id="accept_friend" class="btn " style="width: 8em">Accept</button>
+                              </div>
+                              <div style="">
+                                 <input type="hidden" name="user_Id" id="user_Id" value="<%=i.userId%>">
+                                <button type="submit" id="cancel_friend" class="btn" style="width: 8em">Cancel</button>
+                              </div>
+                          </div>    
+                      </a>
+                    </div>
+                    <%}%>
+                    <%}else{%>
+                    <div>
+                      <h4 style="text-align:center">No requests</h4>
+                    </div>
+                    <%}%>
+                </div>
+                </div>
+              </li>
+            <li><a href="/users/profile/<%= user._id %>"><button><span><%= user.name.split(' ')[0] %></span><i style="display: none;" class="fa-solid fa-user"></i></button></a></li>
+            <li>
+                <a href="/users/signout"><button><span>Sign-Out</span><i style="display:none;"class="fa-solid fa-arrow-right-from-bracket"></i></button></a>
             </li>
         <% }else{%>
             <li>
@@ -27,7 +62,7 @@
         $('#search-name').autocomplete({
             source:function(req,res){
                 $.ajax({
-                    url:'/search',
+                    url:'/autocomplete',
                     dataType:'jsonp',
                     type:'GET',
                     data:req,
@@ -43,6 +78,34 @@
                 window.location.href='/users/profile/'+ui.item.id;
             }
         });
+        $('#search-name').keyup(function(e){
+            if(e.keyCode==13){
+                //Making ajax to req to render it to search page
+                if($('#search-name').val()==''){
+                    //don't do anything
+                }else{
+                    window.location.href='/search/'+$('#search-name').val();
+                }
+            }
+        });
+        //$('.dropdown-content').hide();
+        
     });
+    function openDropdown(){
+            document.getElementById("myDropdown").classList.toggle("show")
+    }
+    window.onclick = function(event) {
+      if (!event.target.matches('.dropbtn')&&!event.target.matches('.dropbtn>i') && !event.target.matches('.dropbtn>.dropdown-content')) {
+        var dropdowns = document.getElementsByClassName("dropdown-content");
+            var i;
+            for (i = 0; i < dropdowns.length; i++) {
+                var opendropdown = dropdowns[i];
+                if (opendropdown.classList.contains('show')) {
+                    opendropdown.classList.remove('show');
+                }
+           }
+        }
+    }
     
+
 </script>

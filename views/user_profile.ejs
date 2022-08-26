@@ -7,7 +7,11 @@
             <!--If user match show update form-->
             <div>
                 <div id="avatar-form-container">
+                    <% if(user.avatar) {%>
                     <img id="avatar" src="<%=user.avatar%>" width="100">
+                    <%} else {%>
+                    <img id="avatar" src="/images/default-avatar.png" width="100">
+                    <%}%>
                     <form id="upload-form" enctype="multipart/form-data" action="/users/update/<%= profile_user.id %>"
                         method="post">
                         <input type="text" name="name" value="<%=profile_user.name%>" required>

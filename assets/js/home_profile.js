@@ -37,25 +37,7 @@
                 }
             })
         });
-    }
-    let removefriend=function(){
-        let remove=$('#remove-form');
-        remove.submit((e)=>{
-            e.preventDefault();
-            //console.log(e);
-            $.ajax({
-                type:'POST',
-                url:'/remove-friend',
-                data:remove.serialize(),
-                success:function(data){
-                    console.log(data);
-                    console.log('Removed as Friend');
-                },error:function(err){
-                    console.log(err);
-                }
-            })
-        })
-    }
+    } 
     addFriend();
     
 }

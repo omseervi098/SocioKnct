@@ -29,6 +29,7 @@ passport.use(
               name: profile.displayName,
               email: profile.emails[0].value,
               password: crypto.randomBytes(20).toString("hex"),
+              username: profile.emails[0].value,
             },
             function (err, user) {
               if (err) {

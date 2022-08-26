@@ -1,10 +1,13 @@
+
 <link rel="stylesheet" href="/css/home.css">
 <link rel="stylesheet" href="/css/chatbot.css">
-<div id="home-container">
+
+
+<div id="home-containe">
     <section id="feed-posts">
         <h4>Post</h4>
         <% if(locals.user){%>
-            <form action="/posts/create" id="new-post-form" method="post">
+            <form action="/posts/create" id="new-post-form" class="form-for-post" method="post">
                 <textarea required name="content" id="content" cols="25" rows="3" placeholder="Type Here.."></textarea>
                 <input type="submit" value="Post" id="post-submit">
             </form>
@@ -30,13 +33,9 @@
         <%}%>
         
     </section>
-    <% if(locals.user){%>
-    <section id="chatbot">
-    <%- include('_chatbot')%>
-    </section>
-    <%}%>
+    
 </div>
-<script src="/js/chatbot.js"></script>
+
 <script src="/js/home_post_comments.js">
 </script>
 <script src="/js/home_posts.js">
@@ -50,3 +49,6 @@
         let toggleLike = new ToggleLike(self);
     });
 </script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.5.1/socket.io.js" integrity="sha512-9mpsATI0KClwt+xVZfbcf2lJ8IFBAwsubJ6mI3rtULwyM3fBmQFzj0It4tGqxLOGQwGfJdk/G+fANnxfq9/cew==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+

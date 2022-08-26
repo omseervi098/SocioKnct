@@ -2,25 +2,34 @@
 
 <head>
     <title>User Profile</title>
+   
     <link href="https://cdnout.com/noty/noty.min.css" rel="stylesheet" media="all">
     <script src="https://cdnout.com/noty/noty.js"></script>
     <link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
     <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
     <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
     <script src="https://kit.fontawesome.com/4499aac38f.js" crossorigin="anonymous"></script>
-    <!-- <meta http-equiv="Content-Security-Policy" content="default-src 'none'; connect-src 'self';font-src 'self'; img-src 'self' data: https:; style-src 'self' 'unsafe-inline' ; script-src 'self'"> -->
+    <!-- <link rel="stylesheet" href="/css/bootstrap.css"> -->
+    <link rel="stylesheet" href="/css/search.css">
+    <!-- <meta http-equiv="Content-Security-Policy" content="default-src 'none'; connect-src 'self';font-src 'self'; img-src 'self' data: https:; style-src 'self' 'unsafe-inline' ; script-src 'self'">  -->
     <link rel="stylesheet" href="/css/layout.css">
     <%- style %>
     <link rel="stylesheet" href="/css/header.css">
     <link rel="stylesheet" href="/css/footer.css">
+    
 </head>
-<body>
+<body id="body-conta">
     <%- include('_header') %>
-    <div id="main">
+    
+    <div id="main-containe">
         <%- body %>
     </div>
     <%- include('_footer') %>
+
+    <!-- <script src="/js/bootstrap.bundle.js"></script> -->
+    <script src="/js/sendFriendReq.js"></script>
     <%- script %>
+    
     <script>
         <% if(flash.success && flash.success.length>0){ %>
             new Noty({
@@ -41,6 +50,9 @@
             }).show();
         <% } %>
     </script>
+    
+    
+
 </body>
 
 </html>

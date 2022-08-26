@@ -25,6 +25,7 @@ module.exports.profile = async function (req, res) {
       title: "User Profile",
       profile_user: user,
       isFriend:friend,
+      newfriend:req.user.request
     });
   } catch (err) {
     console.log("Error in finding user in profile");
@@ -91,7 +92,12 @@ module.exports.create = function (req, res) {
       return;
     }
     if (!user) {
-      User.create(req.body, (err, user) => {
+      User.create({
+        name: req.body.name,
+        email: req.body.email,
+        password: req.body.password,
+        username:req.body.email
+      }, (err, user) => {
         if (err) {
           console.log("Error in creating user while signing up");
           return;

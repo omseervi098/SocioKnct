@@ -15,6 +15,7 @@ const sassMiddleware = require("node-sass-middleware");
 const flash= require('connect-flash');
 const customMware=require('./config/middleware');
 const passportJWT=require('./config/passport-jwt-strategy');
+
 app.use(sassMiddleware({
   src:'./assets/scss',
   dest:'./assets/css',
@@ -37,6 +38,7 @@ app.set('layout extractScripts', true);
 
 app.use(expressLayouts);
 //Setting up the view engine
+
 app.set('view engine', 'ejs');
 app.set('views','./views');
 //Middleware for session

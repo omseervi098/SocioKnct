@@ -1,0 +1,32 @@
+<link rel="stylesheet" href="/css/search.css">
+<% if(locals.user){%>
+<section id="search-section">
+<div id="search-container">
+    <%for(i of users){ %>
+        <% if(i.id==locals.user.id){%>
+
+            <%}else{%>
+                <div class="usercard">
+                    <% if(i.avatar){%>
+                        <img class="usercard-image" src="<%=i.avatar%>">
+                    <%}else{%>
+                        <img class="usercard-image" src="/images/default-avatar.png">
+                    <%}%>
+                    <h4 class="usercard-name">
+                        <%=i.name%>
+                    </h4>
+                    <p class="usercard-username">
+                        <%=i.username%>
+                    </p>
+                    <form action="" method="get" class="add_friend">
+                        <input type="hidden" name="receiverName" class="receiverName" value="<%=i.username%>">
+                        <input type="hidden" name="sender-name" class="sender-name" value="<%=locals.user.username%>">
+                        
+                        <button type="submit" id="" onclick="addFriend('<%=i.username%>')"
+                                        class=" accept friend-add"><i class="fa fa-user"></i> Add Friend</button>
+                    </form>
+                </div>
+        <%}}%>
+</div>
+</section>
+<%}%>

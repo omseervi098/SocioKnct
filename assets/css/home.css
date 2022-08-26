@@ -1,12 +1,11 @@
-#home-container {
+#home-containe {
   width: 100%;
   height: 100%;
-  min-height: 83vh;
+  min-height: 90vh;
   display: flex;
   height: max-content;
-  justify-content: space-between;
-  position: relative; }
-  #home-container #feed-posts {
+  justify-content: space-between; }
+  #home-containe #feed-posts {
     width: 100%;
     padding: 0;
     margin: 0;
@@ -15,19 +14,19 @@
     flex-direction: column;
     align-items: center;
     justify-content: center; }
-    #home-container #feed-posts h4 {
+    #home-containe #feed-posts h4 {
       margin: 0;
       padding: 2;
       font-size: 1.5rem;
       font-weight: bold;
       color: #000; }
-    #home-container #feed-posts #new-post-form {
+    #home-containe #feed-posts .form-for-post {
       display: flex;
       flex-direction: column;
       gap: 5px;
       align-items: center;
       justify-content: center; }
-      #home-container #feed-posts #new-post-form #content {
+      #home-containe #feed-posts .form-for-post #content {
         width: auto;
         height: auto;
         border: none;
@@ -38,9 +37,9 @@
         font-weight: bold;
         color: #000;
         border-bottom: 2px solid black; }
-      #home-container #feed-posts #new-post-form #content:focus {
+      #home-containe #feed-posts .form-for-post #content:focus {
         outline: none; }
-      #home-container #feed-posts #new-post-form #post-submit {
+      #home-containe #feed-posts .form-for-post #post-submit {
         background-color: #5f2a8a;
         border: none;
         padding: 5px 10px;
@@ -49,11 +48,11 @@
         color: white;
         font-weight: bold;
         border-radius: 5px; }
-        #home-container #feed-posts #new-post-form #post-submit:hover {
+        #home-containe #feed-posts .form-for-post #post-submit:hover {
           background-color: #1cc7dd;
           color: white;
           cursor: pointer; }
-    #home-container #feed-posts #post-list-container {
+    #home-containe #feed-posts #post-list-container {
       width: 60%;
       border-top: 2px solid black;
       display: flex;
@@ -62,36 +61,36 @@
       justify-content: center;
       gap: 10px;
       padding: 10px; }
-      #home-container #feed-posts #post-list-container #post-list-container-div {
+      #home-containe #feed-posts #post-list-container #post-list-container-div {
         display: flex;
         width: 100%;
         flex-direction: column;
         justify-content: center;
         gap: 10px; }
-        #home-container #feed-posts #post-list-container #post-list-container-div .post {
+        #home-containe #feed-posts #post-list-container #post-list-container-div .post {
           display: flex;
           width: 100%;
           flex-direction: column;
           justify-content: center;
           gap: 2px; }
-          #home-container #feed-posts #post-list-container #post-list-container-div .post .ithpost {
+          #home-containe #feed-posts #post-list-container #post-list-container-div .post .ithpost {
             margin-left: 5px;
             display: flex;
             flex-direction: column;
             gap: 3px; }
-            #home-container #feed-posts #post-list-container #post-list-container-div .post .ithpost .name {
+            #home-containe #feed-posts #post-list-container #post-list-container-div .post .ithpost .name {
               display: flex;
               width: 100%;
               justify-content: space-between;
               flex-wrap: nowrap; }
-              #home-container #feed-posts #post-list-container #post-list-container-div .post .ithpost .name span {
+              #home-containe #feed-posts #post-list-container #post-list-container-div .post .ithpost .name span {
                 font-size: 1.1rem;
                 font-weight: bold;
                 color: #000; }
-              #home-container #feed-posts #post-list-container #post-list-container-div .post .ithpost .name div .dropdown {
+              #home-containe #feed-posts #post-list-container #post-list-container-div .post .ithpost .name div .dropdown {
                 position: relative;
                 display: inline-block; }
-                #home-container #feed-posts #post-list-container #post-list-container-div .post .ithpost .name div .dropdown .dropbtn {
+                #home-containe #feed-posts #post-list-container #post-list-container-div .post .ithpost .name div .dropdown .dropbtn {
                   background-color: #712696;
                   color: white;
                   padding: 4px;
@@ -100,7 +99,7 @@
                   border: none;
                   cursor: pointer;
                   margin-bottom: 2px; }
-                #home-container #feed-posts #post-list-container #post-list-container-div .post .ithpost .name div .dropdown .dropdown-content {
+                #home-containe #feed-posts #post-list-container #post-list-container-div .post .ithpost .name div .dropdown .dropdown-content {
                   display: none;
                   position: absolute;
                   background-color: #b866c9;
@@ -108,19 +107,19 @@
                   min-width: 80px;
                   box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
                   z-index: 1; }
-                  #home-container #feed-posts #post-list-container #post-list-container-div .post .ithpost .name div .dropdown .dropdown-content a {
+                  #home-containe #feed-posts #post-list-container #post-list-container-div .post .ithpost .name div .dropdown .dropdown-content a {
                     color: white;
                     padding: 8px 8px;
                     text-decoration: none;
                     display: block; }
-                    #home-container #feed-posts #post-list-container #post-list-container-div .post .ithpost .name div .dropdown .dropdown-content a:hover {
+                    #home-containe #feed-posts #post-list-container #post-list-container-div .post .ithpost .name div .dropdown .dropdown-content a:hover {
                       background-color: #840ea1;
                       color: white; }
-                #home-container #feed-posts #post-list-container #post-list-container-div .post .ithpost .name div .dropdown:hover .dropdown-content {
+                #home-containe #feed-posts #post-list-container #post-list-container-div .post .ithpost .name div .dropdown:hover .dropdown-content {
                   display: block; }
-                #home-container #feed-posts #post-list-container #post-list-container-div .post .ithpost .name div .dropdown:hover .dropbtn {
+                #home-containe #feed-posts #post-list-container #post-list-container-div .post .ithpost .name div .dropdown:hover .dropbtn {
                   background-color: #3e0074; }
-            #home-container #feed-posts #post-list-container #post-list-container-div .post .ithpost .content {
+            #home-containe #feed-posts #post-list-container #post-list-container-div .post .ithpost .content {
               height: auto;
               width: auto;
               background-color: white;
@@ -128,7 +127,7 @@
               padding: 5px;
               font-size: 1.1rem;
               border: 1px dashed black; }
-            #home-container #feed-posts #post-list-container #post-list-container-div .post .ithpost small .like__btn {
+            #home-containe #feed-posts #post-list-container #post-list-container-div .post .ithpost small .like__btn {
               padding: 3px 6px;
               background: #ff3a3a;
               font-size: 13px;
@@ -138,17 +137,17 @@
               outline: none;
               border: none;
               cursor: pointer; }
-              #home-container #feed-posts #post-list-container #post-list-container-div .post .ithpost small .like__btn:hover {
+              #home-containe #feed-posts #post-list-container #post-list-container-div .post .ithpost small .like__btn:hover {
                 background: #ca1919;
                 color: #e8efff; }
-          #home-container #feed-posts #post-list-container #post-list-container-div .post .post-comments {
+          #home-containe #feed-posts #post-list-container #post-list-container-div .post .post-comments {
             margin: 0px 20px;
             width: 80%; }
-            #home-container #feed-posts #post-list-container #post-list-container-div .post .post-comments form {
+            #home-containe #feed-posts #post-list-container #post-list-container-div .post .post-comments form {
               display: flex;
               gap: 5px;
               justify-content: space-between; }
-              #home-container #feed-posts #post-list-container #post-list-container-div .post .post-comments form #comment-input {
+              #home-containe #feed-posts #post-list-container #post-list-container-div .post .post-comments form #comment-input {
                 width: 80%;
                 height: auto;
                 border: none;
@@ -160,9 +159,9 @@
                 color: #000;
                 background-color: inherit;
                 border-bottom: 2px solid black; }
-                #home-container #feed-posts #post-list-container #post-list-container-div .post .post-comments form #comment-input:focus {
+                #home-containe #feed-posts #post-list-container #post-list-container-div .post .post-comments form #comment-input:focus {
                   outline: none; }
-              #home-container #feed-posts #post-list-container #post-list-container-div .post .post-comments form #add-comment {
+              #home-containe #feed-posts #post-list-container #post-list-container-div .post .post-comments form #add-comment {
                 background-color: #5f2a8a;
                 border: none;
                 padding: 2px 5px;
@@ -170,34 +169,34 @@
                 color: white;
                 font-weight: bold;
                 border-radius: 5px; }
-                #home-container #feed-posts #post-list-container #post-list-container-div .post .post-comments form #add-comment:hover {
+                #home-containe #feed-posts #post-list-container #post-list-container-div .post .post-comments form #add-comment:hover {
                   background-color: #1cc7dd;
                   color: white;
                   cursor: pointer; }
-            #home-container #feed-posts #post-list-container #post-list-container-div .post .post-comments .post-comments-list .post-comments-list-container {
+            #home-containe #feed-posts #post-list-container #post-list-container-div .post .post-comments .post-comments-list .post-comments-list-container {
               margin-left: 20px;
               display: flex;
               flex-direction: column;
               justify-content: center;
               gap: 5px; }
-              #home-container #feed-posts #post-list-container #post-list-container-div .post .post-comments .post-comments-list .post-comments-list-container .comment {
+              #home-containe #feed-posts #post-list-container #post-list-container-div .post .post-comments .post-comments-list .post-comments-list-container .comment {
                 display: flex;
                 flex-direction: column;
                 gap: 2px; }
-                #home-container #feed-posts #post-list-container #post-list-container-div .post .post-comments .post-comments-list .post-comments-list-container .comment .name {
+                #home-containe #feed-posts #post-list-container #post-list-container-div .post .post-comments .post-comments-list .post-comments-list-container .comment .name {
                   font-size: 1rem;
                   font-weight: bold;
                   color: #000;
                   display: flex;
                   justify-content: space-between; }
-                  #home-container #feed-posts #post-list-container #post-list-container-div .post .post-comments .post-comments-list .post-comments-list-container .comment .name span {
+                  #home-containe #feed-posts #post-list-container #post-list-container-div .post .post-comments .post-comments-list .post-comments-list-container .comment .name span {
                     font-size: 1rem;
                     font-weight: bold;
                     color: #000; }
-                  #home-container #feed-posts #post-list-container #post-list-container-div .post .post-comments .post-comments-list .post-comments-list-container .comment .name div .dropdown {
+                  #home-containe #feed-posts #post-list-container #post-list-container-div .post .post-comments .post-comments-list .post-comments-list-container .comment .name div .dropdown {
                     position: relative;
                     display: inline-block; }
-                    #home-container #feed-posts #post-list-container #post-list-container-div .post .post-comments .post-comments-list .post-comments-list-container .comment .name div .dropdown .dropbtn {
+                    #home-containe #feed-posts #post-list-container #post-list-container-div .post .post-comments .post-comments-list .post-comments-list-container .comment .name div .dropdown .dropbtn {
                       background-color: #712696;
                       color: white;
                       padding: 2px;
@@ -206,32 +205,32 @@
                       border: none;
                       cursor: pointer;
                       margin-bottom: 2px; }
-                    #home-container #feed-posts #post-list-container #post-list-container-div .post .post-comments .post-comments-list .post-comments-list-container .comment .name div .dropdown .dropdown-content {
+                    #home-containe #feed-posts #post-list-container #post-list-container-div .post .post-comments .post-comments-list .post-comments-list-container .comment .name div .dropdown .dropdown-content {
                       display: none;
                       position: absolute;
                       background-color: #b866c9;
                       min-width: 80px;
                       box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
                       z-index: 1; }
-                      #home-container #feed-posts #post-list-container #post-list-container-div .post .post-comments .post-comments-list .post-comments-list-container .comment .name div .dropdown .dropdown-content a {
+                      #home-containe #feed-posts #post-list-container #post-list-container-div .post .post-comments .post-comments-list .post-comments-list-container .comment .name div .dropdown .dropdown-content a {
                         color: white;
                         padding: 8px 8px;
                         text-decoration: none;
                         display: block; }
-                        #home-container #feed-posts #post-list-container #post-list-container-div .post .post-comments .post-comments-list .post-comments-list-container .comment .name div .dropdown .dropdown-content a:hover {
+                        #home-containe #feed-posts #post-list-container #post-list-container-div .post .post-comments .post-comments-list .post-comments-list-container .comment .name div .dropdown .dropdown-content a:hover {
                           background-color: #840ea1;
                           color: white; }
-                    #home-container #feed-posts #post-list-container #post-list-container-div .post .post-comments .post-comments-list .post-comments-list-container .comment .name div .dropdown:hover .dropdown-content {
+                    #home-containe #feed-posts #post-list-container #post-list-container-div .post .post-comments .post-comments-list .post-comments-list-container .comment .name div .dropdown:hover .dropdown-content {
                       display: block; }
-                    #home-container #feed-posts #post-list-container #post-list-container-div .post .post-comments .post-comments-list .post-comments-list-container .comment .name div .dropdown:hover .dropbtn {
+                    #home-containe #feed-posts #post-list-container #post-list-container-div .post .post-comments .post-comments-list .post-comments-list-container .comment .name div .dropdown:hover .dropbtn {
                       background-color: #3e0074; }
-                #home-container #feed-posts #post-list-container #post-list-container-div .post .post-comments .post-comments-list .post-comments-list-container .comment .content {
+                #home-containe #feed-posts #post-list-container #post-list-container-div .post .post-comments .post-comments-list .post-comments-list-container .comment .content {
                   margin-left: 0px;
                   background-color: #eeeeeed6;
                   padding: 1px 3px;
                   border-radius: 4%;
                   font-family: sans-serif; }
-                #home-container #feed-posts #post-list-container #post-list-container-div .post .post-comments .post-comments-list .post-comments-list-container .comment small .like__btn {
+                #home-containe #feed-posts #post-list-container #post-list-container-div .post .post-comments .post-comments-list .post-comments-list-container .comment small .like__btn {
                   padding: 3px 6px;
                   background: #ff3a3a;
                   font-size: 13px;
@@ -241,49 +240,42 @@
                   outline: none;
                   border: none;
                   cursor: pointer; }
-                  #home-container #feed-posts #post-list-container #post-list-container-div .post .post-comments .post-comments-list .post-comments-list-container .comment small .like__btn:hover {
+                  #home-containe #feed-posts #post-list-container #post-list-container-div .post .post-comments .post-comments-list .post-comments-list-container .comment small .like__btn:hover {
                     background: #ca1919;
                     color: #e8efff; }
-  #home-container #user-friends {
+  #home-containe #user-friends {
     border-left: 2px solid #363636;
     background-color: #5f2a8a;
     color: #f5f5f5;
     display: flex;
     flex-direction: column;
     align-items: center; }
-    #home-container #user-friends h4 {
-      font-size: 1.2rem;
+    #home-containe #user-friends h4 {
+      font-size: 1.3rem;
       font-weight: bold;
-      padding: 0; }
-    #home-container #user-friends #friend-list {
-      margin-left: 10%;
-      margin-right: 10%;
+      padding: 5px 0px; }
+    #home-containe #user-friends #friend-list {
+      margin-left: 10px;
+      margin-right: 10px;
       font-size: 1rem; }
-      #home-container #user-friends #friend-list .ithfriend .friend-container {
+      #home-containe #user-friends #friend-list .ithfriend .friend-container {
         display: flex;
         flex-direction: row;
         gap: 5px; }
-        #home-container #user-friends #friend-list .ithfriend .friend-container .friend-avatar {
+        #home-containe #user-friends #friend-list .ithfriend .friend-container .friend-avatar {
           display: flex;
           justify-content: center;
           align-items: center; }
-          #home-container #user-friends #friend-list .ithfriend .friend-container .friend-avatar img {
+          #home-containe #user-friends #friend-list .ithfriend .friend-container .friend-avatar img {
             background-position: center;
             width: 40px;
             height: 40px;
             border-radius: 50%; }
-        #home-container #user-friends #friend-list .ithfriend .friend-container .friend-name a,
-        #home-container #user-friends #friend-list .ithfriend .friend-container .friend-name a:focus,
-        #home-container #user-friends #friend-list .ithfriend .friend-container .friend-name a:hover,
-        #home-container #user-friends #friend-list .ithfriend .friend-container .friend-name a:visited {
+        #home-containe #user-friends #friend-list .ithfriend .friend-container .friend-name a,
+        #home-containe #user-friends #friend-list .ithfriend .friend-container .friend-name a:focus,
+        #home-containe #user-friends #friend-list .ithfriend .friend-container .friend-name a:hover,
+        #home-containe #user-friends #friend-list .ithfriend .friend-container .friend-name a:visited {
           color: inherit;
           text-decoration: none; }
-        #home-container #user-friends #friend-list .ithfriend .friend-container .friend-name h2 {
-          font-size: 1rem; }
-  #home-container #chatbot {
-    height: 200px;
-    position: absolute;
-    bottom: 0;
-    right: 0; }
-    #home-container #chatbot #chatbot-container {
-      height: 100%; }
+        #home-containe #user-friends #friend-list .ithfriend .friend-container .friend-name h2 {
+          font-size: 1.1rem; }
