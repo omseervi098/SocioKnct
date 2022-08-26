@@ -10,7 +10,7 @@ router.use('/comments',require('./comments'));
 router.use('/api',require('./api'));
 router.use('/likes',require('./likes'));
 router.get('/autocomplete',homeController.autoComplete);
-router.post('/connect',homeController.connect)
+router.post('/remove',homeController.removeFriend)
 router.get('/search/:query',homeController.search);
 router.post('/add-friend',homeController.acceptFriend);
 router.get('/add-friend',homeController.addFriend);

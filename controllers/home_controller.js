@@ -232,63 +232,38 @@ module.exports.search = async function (req, res) {
 }
 
 
- module.exports.connect=async function(req,res){
-//   try{
-//     //Search for user in friend schema if present removing it or adding it
-//     let from_user=req.body.from_user;
-//     let to_user=req.body.to_user;
-//     let friend=await Friend.findOne({
-//       $or:[
-//         {
-//           from_user:from_user,to_user:to_user
-//         },{
-//           from_user:to_user,to_user:from_user
-//         }
-//       ]
-//       });
-//     //console.log(friend)
-//     if(friend){
-//       await Friend.findByIdAndDelete(friend._id);
-//       //Find both users and remove reference to each other
-//       let user1=await User.findByIdAndUpdate(from_user,{
-//         $pull:{friends:friend._id},
-//       });
-//       let user2=await User.findByIdAndUpdate(to_user,{
-//         $pull:{friends:friend._id},
-//       });
-//       return res.status(200).json({
-//         message:'Removed as Friend',
-//         data:{
-//           to_user:to_user,
-//           from_user:from_user,
-//           delete:true
-//         }
-//       })
-//     }else{
-//       let newFriend=new Friend({
-//         from_user:from_user,
-//         to_user:to_user
-//       });
-//       await newFriend.save();
-//       //Find both users and add to each other's friends list
-//       let user1=await User.findByIdAndUpdate(from_user,{
-//         $push:{friends:newFriend._id},
-//       });
-//       let user2=await User.findByIdAndUpdate(to_user,{
-//         $push:{friends:newFriend._id},
-//       });
-//       return res.status(200).json({
-//         message:'Added as Friend',
-//         data:{
-//           to_user:to_user,
-//           from_user:from_user,
-//           delete:false
-//         }
-//       })
-//     }
-//   }catch(err){
-//     console.log(err);
-//     return;
-//   }
+ module.exports.removeFriend=async function(req,res){
+  try{
+    //this will be used to remove two users from each other's friend list
+    let user=await User.findByIdAndUpdate({
+      '_id':req.body.from_user,
+      'friendsList.friendId':{$eq:req.body.to_user}
+    }
+    ,{
+      $pull:{friendsList:{
+        friendId:req.body.to_user
+      }}
+    })
+    let user1=await User.findByIdAndUpdate({
+      '_id':req.body.to_user,
+      'friendsList.friendId':{$eq:req.body.from_user}
+    },{
+      $pull:{friendsList:{
+        friendId:req.body.from_user
+      }}
+    })
+    //console.log(user.friendsList)
+    //console.log(user1.friendsList)
+    return res.status(200).json({
+      message:'success',
+      data:{
+        to_user:req.body.to_user,
+        from_user:req.body.from_user
+      }
+    })
+   }catch(err){
+       console.log(err);
+       return;
+   }
  }
 
