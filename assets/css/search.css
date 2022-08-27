@@ -5,7 +5,8 @@
   justify-content: center;
   width: 100%;
   background-color: #F5F5F5;
-  min-height: 85vh; }
+  min-height: 85vh;
+  margin-top: 0; }
   #search-section #search-container {
     background-color: #984bc5;
     height: auto;
@@ -14,7 +15,8 @@
     display: flex;
     flex-wrap: wrap;
     align-items: center;
-    justify-content: center; }
+    justify-content: center;
+    padding: 40px 0px; }
     #search-section #search-container .usercard {
       display: flex;
       flex-direction: column;
@@ -61,12 +63,36 @@
           background-color: red;
           color: white;
           align-self: center; }
+        #search-section #search-container .usercard .add_friend .requestpen {
+          background-color: green;
+          color: white;
+          padding: 8px 10px;
+          border-radius: 5px;
+          border: none;
+          cursor: pointer;
+          align-self: center;
+          background-color: red;
+          color: white;
+          align-self: center; }
+        #search-section #search-container .usercard .add_friend .already-friend {
+          background-color: #bbbbbb;
+          color: white;
+          padding: 8px 10px;
+          border-radius: 5px;
+          border: none;
+          cursor: pointer;
+          align-self: center;
+          background-color: #40a4f0;
+          color: white;
+          align-self: center; }
 
 @media screen and (max-width: 768px) {
   #search-section {
     width: 100%; }
     #search-section #search-container {
-      width: 95%; } }
+      width: 90%;
+      margin-top: 10%;
+      margin-bottom: 10%; } }
 
 @media screen and (max-width: 576px) {
   #search-section {

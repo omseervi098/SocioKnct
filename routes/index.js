@@ -13,7 +13,7 @@ router.get('/autocomplete',homeController.autoComplete);
 router.post('/remove',homeController.removeFriend)
 router.get('/search/:query',homeController.search);
 router.post('/add-friend',homeController.acceptFriend);
-router.get('/add-friend',homeController.addFriend);
+
 //For any further routes, acces from here:
 //router.use('/routerName',require('./routerFile'));
 

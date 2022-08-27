@@ -1,5 +1,6 @@
 //var socket = io();
 var sender = $('#currentuser').val();
+
 var receiverName;
 
 function addFriend(name) {
@@ -12,8 +13,8 @@ function addFriend(name) {
           receiverName: name        
         },
         success: function(data) {
-			//console.log(data);
-            console.log('Added as Friend');
+			
+            console.log('Request sent');
         },
 		error: function(err) {
 			console.log(err);
@@ -24,9 +25,10 @@ function addFriend(name) {
 $(document).ready(function(){
 		$('.friend-add').on('click', function(e){
 			e.preventDefault();
+			
 		});
-		$('#accept_friend').on('click', function(e){
-			e.preventDefault();
+		$('#accept_friend').on('click', function(){
+			//e.preventDefault();
 			var senderId= $('#senderId').val();
 			var senderName= $('#senderName').val();
 			
@@ -38,33 +40,43 @@ $(document).ready(function(){
 					senderName: senderName
 				},
 				success: function(data) {
-					console.log(data);
-					$(this).parent().eq(1).remove();
+					if(typeof data == 'object'){
+						console.log(data)
+					}
+				
+					//When successfull reload the page
+					window.location.reload();
+					console.log('Request approved');
 				},
 				error: function(err) {
 					console.log(err);
 				}
 			});
-		$('#reload').load(location.href + ' #reload');		
+			$('#friends-reload').load(location.href + ' #friends-reload');
+		    $('#reload').load(location.href + ' #reload');		
 		});
 		$('#cancel_friend').on('click', function(e){
 			e.preventDefault();
+			
 			var user_Id= $('#user_Id').val();
-			//console.log(user_Id);
-			// console.log(user_Id);	
+				
 			$.ajax({
-				url: '/add-friend',
+				url: '/add-friend/',
 				type: 'POST',
 				data: {
 					user_Id: user_Id
 				},
 				success: function(data) {
-					console.log(data);
-					$(this).parent().eq(1).remove();
+					if(typeof data == 'object'){
+						console.log(data)
+					}
+					console.log('Request cancelled');
+					//When successfull reload the page
+					//window.location.reload();
 				},error: function(err) {
 					console.log(err);
 				}
 			});
-		$('#reload').load(location.href + ' #reload');		
+		    $('#reload').load(location.href + ' #reload');
 		});
 });

@@ -35,9 +35,7 @@
                     <form action="" method="get" class="add_friend">
                         <input type="hidden" name="receiverName" class="receiverName" value="<%=profile_user.username%>">
                         <input type="hidden" name="sender-name" class="sender-name" value="<%=locals.user.username%>">
-                        
-                        <button type="submit" id="" onclick="addFriend('<%=profile_user.username%>')"
-                                        class=" accept friend-add"><i class="fa fa-user"></i> Add Friend</button>
+                        <button type="submit" id="" onclick="addFriend('<%=profile_user.username%>')" class=" accept friend-add"><i class="fa fa-user"></i> Add Friend</button>
                     </form>
                 
                     <%}else{%>
@@ -49,7 +47,7 @@
                             </form>
                     <%}%>
                         </div>
-                        <%}%>
+                <%}%>
     </div>
 </div>
 <script src="/js/home_profile.js">

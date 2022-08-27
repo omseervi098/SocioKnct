@@ -1,4 +1,3 @@
-
 <link rel="stylesheet" href="/css/home.css">
 <link rel="stylesheet" href="/css/chatbot.css">
 
@@ -18,22 +17,24 @@
                     <div id="post-list-container-div">
                         <% for(post of posts) { %>
                             <%- include('_post')%>
-                        <%}%>
+                                <%}%>
                     </div>
                 </div>
     </section>
     <section id="user-friends">
         <h4>Friends</h4>
-        <% if (locals.user && friends.length>0){%>
-            <div id="friend-list">
-                <% for(u of friends){%>
-                    <%- include('_friend')%>        
-                <%}%>
-            </div>
-        <%}%>
-        
+        <div id="friends-reload">
+            <% if (locals.user && friends.length>0){%>
+                <div id="friend-list">
+                    <% for(u of friends){%>
+                        <%- include('_friend')%>
+                    <%}%>
+                </div>
+            <%}%>
+        </div>
+
     </section>
-    
+
 </div>
 
 <script src="/js/home_post_comments.js">
@@ -49,6 +50,6 @@
         let toggleLike = new ToggleLike(self);
     });
 </script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.5.1/socket.io.js" integrity="sha512-9mpsATI0KClwt+xVZfbcf2lJ8IFBAwsubJ6mI3rtULwyM3fBmQFzj0It4tGqxLOGQwGfJdk/G+fANnxfq9/cew==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-
-
+<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.5.1/socket.io.js"
+    integrity="sha512-9mpsATI0KClwt+xVZfbcf2lJ8IFBAwsubJ6mI3rtULwyM3fBmQFzj0It4tGqxLOGQwGfJdk/G+fANnxfq9/cew=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>

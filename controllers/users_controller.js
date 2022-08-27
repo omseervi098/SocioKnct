@@ -89,6 +89,14 @@ module.exports.create = function (req, res) {
   if (req.body.password != req.body.confirm_password) {
     return res.redirect("back");
   }
+  //takeout username from mail
+  let username="";
+  for(let i=0;i<req.body.email.length;i++){
+    if(req.body.email[i]=="@"){
+      break;
+    }
+    username+=req.body.email[i];
+  }
   User.findOne({ email: req.body.email }, (err, user) => {
     if (err) {
       console.log("Error in finding user in signing up");
@@ -100,7 +108,7 @@ module.exports.create = function (req, res) {
           name: req.body.name,
           email: req.body.email,
           password: req.body.password,
-          username: req.body.email,
+          username: username,
         },
         (err, user) => {
           if (err) {
