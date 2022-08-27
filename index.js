@@ -1,11 +1,13 @@
 const express = require("express");
 const router = require("./routes/index");
 const expressLayouts = require("express-ejs-layouts");
+
 const cookieParser = require("cookie-parser");
 const app = express();
 const port = 3000;
 const db=require("./config/mongoose");
 const passportGoogle=require("./config/passport-google-oauth2-strategy");
+
 //Used for session cookie
 const session=require("express-session");
 const passport=require("passport");
@@ -15,7 +17,10 @@ const sassMiddleware = require("node-sass-middleware");
 const flash= require('connect-flash');
 const customMware=require('./config/middleware');
 const passportJWT=require('./config/passport-jwt-strategy');
-
+const chatServer=require('http').Server(app);
+const chatSockets=require('./config/chat_socket').chatSockets(chatServer);
+chatServer.listen(5000);
+console.log('chat server is running on port 5000');
 app.use(sassMiddleware({
   src:'./assets/scss',
   dest:'./assets/css',

@@ -1,0 +1,43 @@
+<link rel="stylesheet" href="/css/chat.css">
+<div id="chat-flex">
+  <div class="chat-flex-child" id="chat-room-name">
+    <div class="chat-room-users">
+      <h2>Chat Room</h2>
+    </div>
+    <div id="roomlist">
+      <%for(friend of friends){%>
+      <div
+        class="chat-list"
+        id="friend-<%=friend._id%>"
+        data-friendId="<%=friend._id%>"
+      >
+        <div class="friend-wrapper">
+          <div class="friend-avatar">
+            <%if(friend.avatar){%>
+            <img src="<%=friend.avatar%>" />
+            <%}else{%>
+            <img
+              src="/images/codeial-default-avatar2.png"
+              alt="image"
+            />
+            <%}%>
+          </div>
+          <div class="friend-name"><%=friend.name%></div>
+        </div>
+      </div>
+      <%}%> <%if(friends.length===0){%>
+      <div class="no-friend">
+        <h2>You don't have any friends to show...</h2>
+      </div>
+      <%}%>
+    </div>
+  </div>
+
+  <div class="chat-flex-child chat-room-display"></div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.0/socket.io.js"></script>
+<script>
+    console.log(io())
+</script>
+<script src="/js/chat_engine.js"></script>
