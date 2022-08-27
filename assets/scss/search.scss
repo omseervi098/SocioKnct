@@ -37,10 +37,11 @@
 
             .usercard-image {
                 align-self: center;
-                width: 100px;
-                height: 100px;
+                width: 120px;
+                height: 120px;
                 border-radius: 50%;
                 //margin-left: 15%;
+                background-color: #ebebeb;
                 object-fit: contain;
             }
 
@@ -55,10 +56,14 @@
             }
 
             .usercard-username {
+                //width: 70%;
                 align-self: center;
                 font-size: 15px;
                 margin: 0;
                 color: #2E2E2E;
+                
+                overflow-x: hidden;
+
                 //margin-top: 10px;
             }
 

@@ -32,9 +32,10 @@
       overflow: visible; }
       #search-section #search-container .usercard .usercard-image {
         align-self: center;
-        width: 100px;
-        height: 100px;
+        width: 120px;
+        height: 120px;
         border-radius: 50%;
+        background-color: #ebebeb;
         object-fit: contain; }
       #search-section #search-container .usercard .usercard-name {
         text-align: center;
@@ -48,7 +49,8 @@
         align-self: center;
         font-size: 15px;
         margin: 0;
-        color: #2E2E2E; }
+        color: #2E2E2E;
+        overflow-x: hidden; }
       #search-section #search-container .usercard .add_friend {
         align-self: center; }
         #search-section #search-container .usercard .add_friend .accept {
