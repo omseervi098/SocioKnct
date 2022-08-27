@@ -12,11 +12,10 @@
                         <%} else {%>
                             <img id="avatar" src="/images/default-avatar.png" width="100">
                             <%}%>
-                               <h4><%=profile_user.email%></h4>
                                 <form id="upload-form" enctype="multipart/form-data"
                                     action="/users/update/<%= profile_user.id %>" method="post">
                                     <input type="text" name="name" value="<%=profile_user.name%>" required>
-                                    <input type="text" name="username" value="<%=profile_user.username%>" required>
+                                    <input type="text" name="email" value="<%=profile_user.email%>" required>
                                     <input id="input-file" type="file" name="avatar" placeholder="Profile Picture">
                                     <input type="submit" value="Update">
                                 </form>

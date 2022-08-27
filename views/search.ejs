@@ -2,7 +2,7 @@
 <% if(locals.user){%>
     <section id="search-section">
         <div id="search-container">
-            <%if(users.length>=1){%>
+            <%if(users.length>1){%>
         <%for(i of users){ %>
             <% if(i.id!=locals.user.id){%>
                 <div class="usercard">

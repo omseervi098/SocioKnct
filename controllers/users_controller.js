@@ -47,7 +47,7 @@ module.exports.update = async function (req, res) {
           return;
         }
         user.name = req.body.name;
-        user.username= req.body.username;
+        user.email = req.body.email;
         if (req.file) {
           if (user.avatar) {
             if (
