@@ -15,7 +15,13 @@ const sassMiddleware = require("node-sass-middleware");
 const flash= require('connect-flash');
 const customMware=require('./config/middleware');
 const passportJWT=require('./config/passport-jwt-strategy');
-
+const chatServer=require('http').Server(app);
+const chatSockets=require('./config/chat_sockets').chatSockets(chatServer);
+chatServer.listen(5000);
+console.log("chat server is running on port 5000");
+chatServer.prependListener('request', function(req, res) {
+  res.setHeader("Access-Control-Allow-Origin", "*");
+})
 app.use(sassMiddleware({
   src:'./assets/scss',
   dest:'./assets/css',
