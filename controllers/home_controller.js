@@ -236,7 +236,11 @@ module.exports.acceptFriend = function (req, res) {
 };
 module.exports.autoComplete = async function (req, res) {
   try {
+    //Check if query is valid regex
     var regex = new RegExp(req.query["term"], "i");
+    if(!regex){
+      return res.status(200).jsonp([]);
+    }
     let user = await User.find({ name: regex }, { name: 1 })
       .sort("-updatedAt")
       .sort("-createdAt")

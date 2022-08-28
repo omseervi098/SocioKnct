@@ -5,6 +5,9 @@ const path = require("path");
 const forgotpassMailer = require("../mailers/forgotpass_mailer");
 const crypto = require("crypto");
 const Friend = require("../models/friend");
+const Post=require("../models/post");
+const Comment = require("../models/comment");
+const Like=require("../models/like");
 module.exports.profile = async function (req, res) {
   try {
     let user = await User.findById(req.params.id);
@@ -16,6 +19,15 @@ module.exports.profile = async function (req, res) {
     console.log(curruser.friendsList);
     let isFriend = false;
     // console.log(friend);
+    //Find all post of the user
+    let posts = await Post.find({ user: req.params.id }).populate("user").populate({
+      path: "comments",
+      populate: { path: "content user" },
+
+    });
+    //Find all comments of the user
+
+    
     if(curruser.friendsList.length > 0){
       curruser.friendsList.forEach(friend => {
         if(friend.friendId.id == user.id){
@@ -29,6 +41,7 @@ module.exports.profile = async function (req, res) {
       profile_user: user,
       isFriend: isFriend,
       newfriend: req.user.request,
+      posts: posts,
     });
   } catch (err) {
     console.log("Error in finding user in profile");
@@ -47,7 +60,15 @@ module.exports.update = async function (req, res) {
           return;
         }
         user.name = req.body.name;
-        user.email = req.body.email;
+        //Check if username matches with current user username
+        if (user.username != req.body.username) {
+        let check= User.findOne({ username: req.body.username })
+        if(check){
+          req.flash("error", "Username already exists");
+          return res.redirect("back");
+        }
+        user.username=req.body.username;
+        }
         if (req.file) {
           if (user.avatar) {
             if (

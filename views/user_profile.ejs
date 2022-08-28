@@ -1,8 +1,7 @@
 <link rel="stylesheet" href="/css/user_profile.css">
 <div id="profile-container">
-    <h1>Profile</h1>
-    <div>
-
+    <div id="profile-part">
+        <h1>Profile</h1>
         <% if(user.id==profile_user.id){%>
             <!--If user match show update form-->
             <div>
@@ -12,42 +11,127 @@
                         <%} else {%>
                             <img id="avatar" src="/images/default-avatar.png" width="100">
                             <%}%>
-                                <form id="upload-form" enctype="multipart/form-data"
-                                    action="/users/update/<%= profile_user.id %>" method="post">
-                                    <input type="text" name="name" value="<%=profile_user.name%>" required>
-                                    <input type="text" name="email" value="<%=profile_user.email%>" required>
-                                    <input id="input-file" type="file" name="avatar" placeholder="Profile Picture">
-                                    <input type="submit" value="Update">
-                                </form>
+                                <%= profile_user.email%>
+                                    <form id="upload-form" enctype="multipart/form-data"
+                                        action="/users/update/<%= profile_user.id %>" method="post">
+                                        <input type="text" name="name" value="<%=profile_user.name%>" required>
+                                        <input type="text" name="username" value="<%=profile_user.username%>" required>
+                                        <input id="input-file" type="file" name="avatar" placeholder="Profile Picture">
+                                        <input type="submit" value="Update">
+                                    </form>
+                </div>
+                <div style="position:relative;padding: 10px;">
+
                 </div>
             </div>
             <%}else{%>
-                <!--else show profile only-->
-
-                <img src="<%=profile_user.avatar%>" alt="<%=profile_user.name %>" width="100">
-                <h2>Name: <%= profile_user.name %>
-                </h2>
-                <h2>Email: <%= profile_user.email %>
-                </h2>
-                <div class="form-for-adding-friend">
-                <%if(!isFriend){%>
-                    
-                    <form action="" method="get" class="add_friend">
-                        <input type="hidden" name="receiverName" class="receiverName" value="<%=profile_user.username%>">
-                        <input type="hidden" name="sender-name" class="sender-name" value="<%=locals.user.username%>">
-                        <button type="submit" id="" onclick="addFriend('<%=profile_user.username%>')" class=" accept friend-add"><i class="fa fa-user"></i> Add Friend</button>
-                    </form>
-                
-                    <%}else{%>
-                        
-                            <form action="/remove" id="connect-form" method="POST">
-                                <input type="hidden" name="to_user" value="<%=profile_user.id%>">
-                                <input type="hidden" name="from_user" value="<%=locals.user.id%>">
-                                <input type="submit" id="connect-btn" value="Disconnect" name="connect">
-                            </form>
-                    <%}%>
+                <div id="other-users">
+                    <div class="container">
+                        <div class="cover-photo">
+                            <% if(profile_user.avatar) {%>
+                                <img class="profile" src="<%=profile_user.avatar%>" alt="<%=profile_user.name %>"
+                                    width="100">
+                                <%} else {%>
+                                    <img class="profile" src="/images/default-avatar.png" alt="<%=profile_user.name %>"
+                                        width="100">
+                                    <%}%>
                         </div>
+                        <div class="profile-name">
+                            <!-- If full name display half -->
+                            <%= profile_user.name.split(' ')[0] %>
+                        </div>
+                        <div class="profile-username">(@<%= profile_user.username %>)</div>
+                        <p class="about">
+                            <%= profile_user.email %>
+                        </p>
+                        <button class="msg-btn">Message</button>
+                        <div>
+                            <div class="form-for-adding-friend">
+                                <%if(!isFriend){%>
+                                    <form action="" method="get" class="add_friend">
+                                        <input type="hidden" name="receiverName" class="receiverName"
+                                            value="<%=profile_user.username%>">
+                                        <input type="hidden" name="sender-name" class="sender-name"
+                                            value="<%=locals.user.username%>">
+                                        <button type="submit" id="" onclick="addFriend('<%=profile_user.username%>')"
+                                            class="accept friend-add follow-btn"><i class="fa fa-user"></i> Add
+                                            Friend</button>
+                                    </form>
+                                    <%}else{%>
+                                        <form action="/remove" id="connect-form" method="POST">
+                                            <input type="hidden" name="to_user" value="<%=profile_user.id%>">
+                                            <input type="hidden" name="from_user" value="<%=locals.user.id%>">
+                                            <input type="submit" id="connect-btn" class="follow-btn" value="Disconnect"
+                                                name="connect">
+                                        </form>
+                                        <%}%>
+                            </div>
+                        </div>
+                        <div id="social-links">
+                            <i class="fab fa-facebook-f"></i>
+                            <i class="fab fa-instagram"></i>
+                            <i class="fab fa-youtube"></i>
+                            <i class="fab fa-twitter"></i>
+                        </div>
+                    </div>
+                </div>
                 <%}%>
+    </div>
+    <!-- Time Line -->
+    <div id="timeline-container">
+        <h1>Time Line</h1>
+        <% for(post of posts){%>
+            <div class="post-container">
+                <div id="post" class="post">
+                    <div class="ithpost">
+                        <div class="name">
+                            <span>
+                                <%= post.user.name %>
+                            </span>
+                        </div>
+                        <div class="content">
+                            <%= post.content %>
+                        </div>
+                        <small>
+                            <% if (locals.user){ %>
+                                <button class="like__btn">
+                                    <span id="icon"><i class="fas fa-thumbs-up"></i></span>
+                                    <span id="count">
+                                        <%= post.likes.length %>
+                                    </span> Like
+                                </button>
+                                <% } %>
+                        </small>
+                    </div>
+                    <div class="post-comments">
+                        <div class="post-comments-list">
+                            <div class="post-comments-list-container" id="post-comments">
+                                <% for(comment of post.comments) { %>
+                                    <div class="comment" id="comment-<%= comment._id %>">
+                                        <div class="name">
+                                            <span>
+                                                <%= comment.user.name %>
+                                            </span>
+                                        </div>
+                                        <div class="content">
+                                            <%= comment.content %>
+                                        </div>
+                                        <small>
+                                            <button class="like__btn">
+                                                <span id="icon"><i class="far fa-thumbs-up"></i></span>
+                                                <span id="count">
+                                                    <%= comment.likes.length %>
+                                                </span>
+                                            </button>
+                                        </small>
+                                    </div>
+                                    <% } %>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <%}%>
     </div>
 </div>
 <script src="/js/home_profile.js">
