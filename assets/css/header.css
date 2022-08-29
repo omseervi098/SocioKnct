@@ -159,6 +159,9 @@ header {
     display: none; } }
 
 @media screen and (max-width: 600px) {
+  .dropdown .dropdown-content {
+    position: absolute;
+    left: 0px; }
   header {
     width: 100.5%; }
   .topnav .friend-dropdown-li, .topnav .profile-li, .topnav .signout-li {
@@ -166,7 +169,11 @@ header {
   .topnav a.icon {
     float: right;
     display: block;
-    padding: 14px 14px; }
+    padding: 14px 14px;
+    background-color: #d086f5;
+    color: white;
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px; }
   .topnav .icon:hover {
     background-color: #ddd;
     color: black;

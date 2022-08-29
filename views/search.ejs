@@ -27,10 +27,10 @@
                         <%}else if(friend.includes(i.username)){%>
                             <button type="submit" id=""  class="already-friend friend-add"><i class="fa fa-user"></i> Already Friends</button>
                         <%}else{%>
-                            <button type="submit" id="" onclick="addFriend('<%=i.username%>')" class=" accept friend-add"><i class="fa fa-user"></i> Add Friend</button>
+                            <button type="submit" id="<%=i.username%>" onclick="addFriend('<%=i.username%>')" class=" accept friend-add"><i class="fa fa-user"></i> Add Friend</button>
                         <%}%>
                         <%}else{%>
-                            <button type="submit" id="" onclick="addFriend('<%=i.username%>')" class=" accept friend-add"><i class="fa fa-user"></i> Add Friend</button>
+                            <button type="submit" id="<%=i.username%>" onclick="addFriend('<%=i.username%>')" class=" accept friend-add"><i class="fa fa-user"></i> Add Friend</button>
                         <%}%>
                     </form>
                 </div>

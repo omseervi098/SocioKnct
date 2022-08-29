@@ -13,7 +13,7 @@ function addFriend(name) {
           receiverName: name        
         },
         success: function(data) {
-			$('.accept').toggleClass('requestpen');
+			$('#'+name).toggleClass('requestpen');
 			$('.requestpen').html('<i class="fa-solid fa-clock"></i> Request Pending')
         },
 		error: function(err) {

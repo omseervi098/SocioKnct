@@ -262,6 +262,10 @@ header {
 }
 
 @media screen and (max-width: 600px) {
+    .dropdown .dropdown-content{
+        position: absolute;
+        left: 0px;
+    }
     header{
         width: 100.5%;
     }
@@ -270,6 +274,10 @@ header {
       float: right;
       display: block;
       padding: 14px 14px;
+      background-color: rgb(208, 134, 245);
+        color: white;
+        border-top-left-radius: 10px;
+        border-bottom-left-radius: 10px;
     }
     .icon:hover {
         background-color: #ddd;

@@ -1,30 +1,6 @@
 const User = require("../models/user");
 const Chatroom = require("../models/chatroom");
 
-module.exports.userChats = async function (req, res) {
-  try {
-    let signInUserFriends;
-    let signinfriend=[];
-    if (req.user) {
-      signInUserFriends = await User.findById(req.user._id).populate(
-        "friendsList.friendId",
-        "name email avatar"
-      );
-      signInUserFriends.friendsList.forEach((friend) => {
-        signinfriend.push(friend.friendId);
-      })
-    }
-
-    return res.render("chats", {
-      title: "chats",
-      friends: signinfriend,
-    });
-  } catch (err) {
-    console.log("ERROR", err);
-    return;
-  }
-};
-
 module.exports.chatRoom = async function (req, res) {
   try {
     if (req.xhr) {
