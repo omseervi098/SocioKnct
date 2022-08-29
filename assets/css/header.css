@@ -8,6 +8,8 @@ header {
     justify-content: space-between;
     align-items: center;
     width: 100%; }
+    header nav .icon {
+      display: none; }
     header nav div a {
       display: flex;
       justify-content: flex-start;
@@ -46,6 +48,8 @@ header {
           font-size: 16px;
           border: none;
           cursor: pointer; }
+          header nav ul li .dropdown .dropbtn span {
+            display: none; }
         header nav ul li .dropdown .dropdown-content {
           left: -100px;
           top: 30px;
@@ -61,45 +65,40 @@ header {
             display: none; }
           header nav ul li .dropdown .dropdown-content div {
             list-style: none;
+            margin: 0;
+            justify-content: center;
+            width: 100%;
+            padding: 4px 4px;
             display: flex;
             flex-direction: row;
-            margin: 0;
-            align-items: center;
-            justify-content: center;
-            padding: 2px; }
-            header nav ul li .dropdown .dropdown-content div a {
-              width: 100%;
-              padding: 8px 4px;
+            justify-content: space-around;
+            align-items: center; }
+            header nav ul li .dropdown .dropdown-content div div {
+              display: block; }
+              header nav ul li .dropdown .dropdown-content div div h4 {
+                font-size: 1.2rem;
+                padding: 0;
+                margin: 0; }
+            header nav ul li .dropdown .dropdown-content div div {
               display: flex;
+              justify-content: center;
+              align-items: center;
               flex-direction: row;
-              justify-content: space-around;
-              align-items: center; }
-              header nav ul li .dropdown .dropdown-content div a div {
-                display: block; }
-                header nav ul li .dropdown .dropdown-content div a div h4 {
-                  font-size: 1.2rem;
-                  padding: 0;
-                  margin: 0; }
-              header nav ul li .dropdown .dropdown-content div a div {
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                flex-direction: row;
-                gap: 2px; }
-                header nav ul li .dropdown .dropdown-content div a div div button {
-                  background-color: #3f045f;
-                  color: white;
-                  padding: 6px;
-                  width: 100%;
-                  height: 100%;
-                  font-size: 16px;
-                  border-radius: 10%;
-                  border: none;
-                  cursor: pointer; }
-        header nav ul li .dropdown .dropdown-content a {
+              gap: 2px; }
+              header nav ul li .dropdown .dropdown-content div div div button {
+                background-color: #3f045f;
+                color: white;
+                padding: 6px;
+                width: 100%;
+                height: 100%;
+                font-size: 16px;
+                border-radius: 10%;
+                border: none;
+                cursor: pointer; }
+        header nav ul li .dropdown .dropdown-content > div {
           color: black;
           text-decoration: none; }
-          header nav ul li .dropdown .dropdown-content a:hover {
+          header nav ul li .dropdown .dropdown-content > div:hover {
             background-color: #f1f1f1; }
         header nav ul li .dropdown .show {
           display: block;
@@ -109,14 +108,14 @@ header {
       header nav ul li input {
         background-color: #ededed;
         border: none;
-        padding: 0px 4px;
+        padding: 2px 4px;
         height: 100%;
         width: auto;
         margin-right: 10px;
         font-size: 1.07rem;
         color: #5f2a8a;
         font-weight: bold;
-        border-radius: 10px; }
+        border-radius: 3px; }
         header nav ul li input:focus {
           outline: none; }
       header nav ul li button {
@@ -158,3 +157,71 @@ header {
     display: block !important; }
   header nav ul li a button span {
     display: none; } }
+
+@media screen and (max-width: 600px) {
+  header {
+    width: 100.5%; }
+  .topnav .friend-dropdown-li, .topnav .profile-li, .topnav .signout-li {
+    display: none; }
+  .topnav a.icon {
+    float: right;
+    display: block;
+    padding: 14px 14px; }
+  .topnav .icon:hover {
+    background-color: #ddd;
+    color: black;
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px; } }
+
+@media screen and (max-width: 600px) {
+  .responsive {
+    position: relative; }
+  .responsive ul {
+    display: flex;
+    flex-direction: column;
+    justify-content: center; }
+  .responsive .search-li {
+    align-self: flex-start; }
+  .responsive .friend-dropdown-li .dropdown .dropbtn {
+    display: flex;
+    justify-content: space-evenly;
+    width: 45vw;
+    padding: 5px 15px; }
+    .responsive .friend-dropdown-li .dropdown .dropbtn span {
+      display: block; }
+  .responsive a {
+    text-decoration: none; }
+  .responsive .profile-li, .responsive .signout-li {
+    text-align: start; }
+    .responsive .profile-li button, .responsive .signout-li button {
+      display: flex;
+      justify-content: space-evenly;
+      width: 45vw;
+      padding: 5px 15px; }
+      .responsive .profile-li button span, .responsive .signout-li button span {
+        display: block; }
+  .responsive a.icon {
+    align-self: flex-start;
+    margin-top: 6px; }
+  .responsive .friend-dropdown-li, .responsive .profile-li, .responsive .signout-li {
+    float: none;
+    display: flex; } }
+
+@media screen and (max-width: 420px) {
+  .topnav .search-li {
+    display: none; }
+  .responsive .search-li {
+    float: none;
+    display: flex; }
+    .responsive .search-li input {
+      width: 30vw; }
+  .responsive .search-li {
+    align-self: flex-start; }
+  .responsive .friend-dropdown-li .dropdown .dropbtn {
+    width: 30vw; }
+    .responsive .friend-dropdown-li .dropdown .dropbtn span {
+      display: none; }
+  .responsive .profile-li button, .responsive .signout-li button {
+    width: 30vw; }
+    .responsive .profile-li button span, .responsive .signout-li button span {
+      display: none; } }

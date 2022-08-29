@@ -1,41 +1,43 @@
-<header>
-    <nav id="reload">
-        <div>
+<header id="mynavbar" class="topnav">
+    <nav id="reload" >
+        <div class="active">
             <a href="/"><img src="/images/logo_icon.png" alt="logo">
                 <div>
                     <p id="website-name">Codeial</p>
                 </div>
             </a>
         </div>
+        
         <ul>
             <% if(locals.user){ %>
                 <li><input type="hidden" id="currentuser" value="<%=locals.user.username%>"></li>
-                <li><input type="text" id="search-name" class="search" name="filtername" placeholder="Enter Name"></li>
-                <li>
+                <li class="search-li"><input type="text" id="search-name" class="search" name="filtername" placeholder="Enter Name"></li>
+                
+                <li class="friend-dropdown-li">
                     <div class="dropdown">
-                        <button class="dropbtn" onclick="openDropdown()"><i class="fa fa-user-plus"></i></button>
+                        <button class="dropbtn" onclick="openDropdown()"><span>Friend Request</span><i class="fa fa-user-plus"></i></button>
                         <div id="myDropdown" class="dropdown-content" style=" height: 350px; overflow-y: scroll;">
                         <%if(user.request && user.request.length!=0) {%>
                             <% for(i of newfriend){%>
                                 <div >
-                                    <a href="#">
+                                    
                                         <div>
                                             <h4>
                                                 <%=i.username%>
                                             </h4>
                                         </div>
                                         <div>
-                                            <div style="">
+                                            <div >
                                                 <input type="hidden" name="senderId" id="senderId" value="<%=i.userId%>">
                                                 <input type="hidden" name="senderName" id="senderName" value="<%=i.username%>">
-                                                <button type="submit" id="accept_friend" class="btn" style=""><i class="fa-solid fa-check"></i></button>
+                                                <button type="submit" id="accept_friend" class="btn" ><i class="fa-solid fa-check"></i></button>
                                             </div>
-                                            <div style="">
+                                            <div >
                                                 <input type="hidden" name="user_Id" id="user_Id" value="<%=i.userId%>">
-                                                <button type="submit" id="cancel_friend" class="btn" style=""><i class="fa-solid fa-xmark"></i></button>
+                                                <button type="submit" id="cancel_friend" class="btn" ><i class="fa-solid fa-xmark"></i></button>
                                             </div>
                                         </div>
-                                    </a>
+                                    
                                 </div>
                             <%}%>
                         <%}else{%>
@@ -46,9 +48,11 @@
                         </div>
                     </div>
                 </li>
-                <li><a href="/users/profile/<%= user._id %>"><button><span><%= user.name.split(' ')[0] %></span><i style="display: none;" class="fa-solid fa-user"></i></button></a></li>
-            <li>
+
+                <li class="profile-li"><a href="/users/profile/<%= user._id %>"><button><span><%= user.name.split(' ')[0] %></span><i style="display: none;" class="fa-solid fa-user"></i></button></a></li>
+            <li class="signout-li">
                 <a href="/users/signout"><button><span>Sign-Out</span><i style="display:none;"class="fa-solid fa-arrow-right-from-bracket"></i></button></a>
+            
             </li>
         <% }else{%>
             <li>
@@ -59,10 +63,17 @@
             </li>
         <%}%>
     </ul>
+    <%if(locals.user){%>
+    <a href="javascript:void(0);" class="icon" onclick="opennav()">
+        <i class="fa fa-bars"></i>
+      </a>
+    <%}%>
     </nav>
 </header>
 <script>
+    
     $(function () {
+
         $('#search-name').autocomplete({
             source: function (req, res) {
                 $.ajax({
@@ -97,4 +108,13 @@
             }
         }
     }
+    function opennav() {
+      var x = document.getElementById('mynavbar')
+      console.log(x,x.className)
+      if (x.className === "topnav") {
+         x.className += " responsive";
+      } else {
+         x.className = "topnav";
+      }
+    } 
 </script>

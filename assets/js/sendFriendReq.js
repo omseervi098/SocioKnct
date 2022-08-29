@@ -13,8 +13,8 @@ function addFriend(name) {
           receiverName: name        
         },
         success: function(data) {
-			
-            console.log('Request sent');
+			$('.accept').toggleClass('requestpen');
+			$('.requestpen').html('<i class="fa-solid fa-clock"></i> Request Pending')
         },
 		error: function(err) {
 			console.log(err);
@@ -52,6 +52,7 @@ $(document).ready(function(){
 					console.log(err);
 				}
 			});
+			
 			$('#friends-reload').load(location.href + ' #friends-reload');
 		    $('#reload').load(location.href + ' #reload');		
 		});

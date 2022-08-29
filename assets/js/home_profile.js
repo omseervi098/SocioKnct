@@ -29,6 +29,7 @@
                     console.log(err)
                 }
             })
+            $('#friends-reload').load(location.href + ' #friends-reload');
         });
     } 
     addfriend();

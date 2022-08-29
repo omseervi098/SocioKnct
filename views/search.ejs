@@ -2,7 +2,7 @@
 <% if(locals.user){%>
     <section id="search-section">
         <div id="search-container">
-            <%if(users.length>1){%>
+            <%if(users.length>=1){%>
         <%for(i of users){ %>
             <% if(i.id!=locals.user.id){%>
                 <div class="usercard">
@@ -23,9 +23,9 @@
                         
                         <% if(friend){%>
                         <% if(sent && sent.includes(i.username)){%>
-                            <button type="submit" id="" onclick="addFriend('<%=i.username%>')" class="requestpen friend-add"><i class="fa-solid fa-clock"></i> Request Pending</button>
+                            <button type="submit" id=""  class="requestpen friend-add"><i class="fa-solid fa-clock"></i> Request Pending</button>
                         <%}else if(friend.includes(i.username)){%>
-                            <button type="submit" id="" onclick="" class="already-friend friend-add"><i class="fa fa-user"></i> Already Friends</button>
+                            <button type="submit" id=""  class="already-friend friend-add"><i class="fa fa-user"></i> Already Friends</button>
                         <%}else{%>
                             <button type="submit" id="" onclick="addFriend('<%=i.username%>')" class=" accept friend-add"><i class="fa fa-user"></i> Add Friend</button>
                         <%}%>

@@ -1,7 +1,5 @@
 <link rel="stylesheet" href="/css/home.css">
-
-
-
+<link rel="stylesheet" href="/css/chatbox.css">
 <div id="home-containe">
     <section id="feed-posts">
         <h4>Post</h4>
@@ -21,6 +19,7 @@
                     </div>
                 </div>
     </section>
+    <% if(locals.users){%>
     <section id="user-friends">
         <h4>Friends</h4>
         <div id="friends-reload">
@@ -28,25 +27,34 @@
                 <div id="friend-list">
                     <% for(u of friends){%>
                         <%- include('_friend')%>
-                    <%}%>
+                            <%}%>
                 </div>
-            <%}%>
+                <%}%>
         </div>
-
     </section>
-
+    <%}%>
+    <section id="chatbox">
+        
+    </section>
 </div>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.5.1/socket.io.js"
+    integrity="sha512-9mpsATI0KClwt+xVZfbcf2lJ8IFBAwsubJ6mI3rtULwyM3fBmQFzj0It4tGqxLOGQwGfJdk/G+fANnxfq9/cew=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script src="/js/home_post_comments.js">
 </script>
 <script src="/js/home_posts.js">
 </script>
 <!-- CHANGE :: import the script file for toggle likes, also run it over for the already present posts and comments on the page -->
 <script src="js/toggle_likes.js"></script>
+<script src="/js/chat_engine.js"></script>
 
 <script>
     $('.toggle-like-button').each(function () {
         let self = this;
         let toggleLike = new ToggleLike(self);
     });
+    
+   
+
 </script>

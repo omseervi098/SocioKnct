@@ -1,8 +1,7 @@
 <!--Display Friends-->
 <div id="ithfriend-<%=u._id%>" class="ithfriend">
     <div class="friend-container">
-        <div class="friend-avatar">
-            
+        <div class="friend-avatar">       
             <%if(u.avatar){%>
                 <img src="<%=u.avatar%>" alt="<%=u.name%>" class="friend-avatar-img">
             <%}else {%>
@@ -14,5 +13,6 @@
             <h2 style="margin: 0;"><%=u.name%></h2>
         </a>
         </div>
+        <div class="message-contiainer"><button class="message-btn" data-friendId="<%=u.id%>" type="button"><i class="fa-solid fa-message"></i></button></div>
     </div>
 </div>

@@ -1,6 +1,8 @@
 #profile-container {
     width: 100%;
     padding: 10px;
+    padding-right: 0px;
+    padding-left: 0px;
     padding-bottom: 20px;
     min-height: 90vh;
     background-color: #f5f5f5;
@@ -222,7 +224,7 @@
            // width: 100%;
             flex-direction: column;
             justify-content: center;
-            
+            align-self: flex-start;
             gap: 10px;
 
             .post {
@@ -259,6 +261,7 @@
                         background-color: white;
                         border-radius: 3%;
                         padding: 5px;
+                        flex-wrap: wrap;
                         font-size: 1.1rem;
                         border: 1px dashed black;
                     }
@@ -368,6 +371,9 @@
             #preview{
                 display: none;
             }
+        }
+        #timeline-container{
+            margin-left:1rem;
         }
     }   
 }

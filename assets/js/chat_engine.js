@@ -1,4 +1,4 @@
-let chatArea = $(".chat-room-display");
+let chatArea=$('#chatbox')
 let selfUser;
 let userMail;
 let otherUser;
@@ -24,7 +24,8 @@ function joinRoom() {
 
 var sendMessage = () => {
   function activateMessageSending() {
-    let inputBox = $(".chat-message-input");
+
+    let inputBox = $(".chat-input");
     let msg = inputBox.val();
 
     if (msg != "") {
@@ -34,14 +35,16 @@ var sendMessage = () => {
         user_email: userMail,
         chatroom: currentChatRoom,
       });
-
+      //reload chat
+      
       inputBox.val("");
     }
+    
   }
 
-  $("#send-message").click(activateMessageSending); // click action
+  $(".message-send").submit(activateMessageSending); // click action
 
-  $("input").keydown(function (e) {
+  $(".chat-input").keydown(function (e) {
     if (e.key === "Enter" && !e.shiftKey) {
       activateMessageSending();
     }
@@ -59,133 +62,123 @@ function connectRoom() {
 }
 
 socket.on("receive_message", function (data) {
+  console.log("Message Received", data);
   let messageList = $(`#chat-messages-list-${currentChatRoom}`);
-  let messageType = "other";
-
+  console.log(messageList)
   if (data.user_email === userMail) {
-    messageType = "self";
-  }
-
-  if (messageType === "self") {
+    console.log('self user')
     messageList.append(
-      ` <div class="self-message">
-          <div class="self-user">
-            <div class="message-content-self">${data.message}</div>
+        `
+        <div class="message-box-holder">
+          <div class="message-box">
+             ${data.message}
           </div>
         </div>
-      `
+        `
     );
   } else {
+   
     messageList.append(`
-     <div class="other-message">
-          <div class="other-user">
-            <div class="other-user-image">
-              ${
-                otherUser.avatar
-                  ? `<img
-            src="${otherUser.avatar}"
-            alt="image"
-          />`
-                  : `<img
-            src="/images/codeial-default-avatar2.png"
-            alt="image"
-          />`
-              }
-            </div>
-            <div class="message-content-other">${data.message}</div>
-          </div>
+    <div class="message-box-holder">
+        <div class="message-sender">
+            ${otherUser.name}
         </div>
+        <div class="message-box message-partner">
+            ${data.message}
+        </div>
+    </div>
     `);
   }
   scrollBottom();
 });
 
 function createArea(chatRoom, friend, user) {
-  return `
-  <div class="user-chat-box">
-      <div class="chat-header">
-      <div class="back-button"><i class="far fa-arrow-alt-circle-left"></i></div>
-        <div class="header-avatar">
-        ${
-          friend.avatar
-            ? `<img
-            src="${friend.avatar}"
-            alt="image"
-          />`
-            : `<img
-            src="/images/codeial-default-avatar2.png"
-            alt="image"
-          />`
-        }
-        </div>
-        <div class="header-name">${friend.name}</div>
-      </div>
-      <div class="chat-messages-list-style" id="chat-messages-list-${
-        chatRoom._id
-      }">
-      ${chatRoom.messages
-        .map((chat) => {
-          return `${
-            chat.user === user._id
-              ? `<div class="self-message">
-          <div class="self-user">
-            <div class="message-content-self">${chat.message}</div>
-          </div>
-        </div>`
-              : `<div class="other-message">
-          <div class="other-user">
-            <div class="other-user-image">
-              ${
-                friend.avatar
-                  ? `<img
-            src="${friend.avatar}"
-            alt="image"
-          />`
-                  : `<img
-            src="/images/codeial-default-avatar2.png"
-            alt="image"
-          />`
-              }
+    return `<div class="chatbox-holder">
+    <div class="chatbox">
+        <div class="chatbox-top">
+            <div class="chatbox-avatar">
+                <a >
+                ${friend.avatar?
+                  `<img src="${friend.avatar}" />`
+                  :`<img src="/images/default-avatar.png" />`
+                }
+                </a>
             </div>
-            <div class="message-content-other">${chat.message}</div>
-          </div>
-        </div>`
-          }`;
-        })
-        .join("")}
-      </div>
-      <div class="chat-message-input-container">
-        <input class="chat-message-input" placeholder="Type message here" required/>
-        <button id="send-message">
-          <i class="fas fa-paper-plane"></i>
-        </button>
-      </div>
+            <div class="chat-partner-name">
+                <span class="status online"></span>
+                <a>${friend.name}</a>
+            </div>
+            
+            <div class="chatbox-icons">
+                <i onclick="minimize()" class="fa fa-minus"></i>
+                <i onclick="hide()" class="fa fa-close"></i>
+            </div>
+            </div>
+            <div class="chat-messages" id="chat-messages-list-${chatRoom._id}">
+            ${chatRoom.messages
+               .map((chat) => {
+                  return `${
+                    chat.user === user._id
+                    ? `<div class="message-box-holder">
+                       <div class="message-box">
+                           ${chat.message}
+                        </div>
+                        </div>`
+                    :`
+                    <div class="message-box-holder">
+                        <div class="message-sender">
+                            ${friend.name}
+                        </div>
+                        <div class="message-box message-partner">
+                            ${chat.message}
+                        </div>
+                    </div>`
+                    }`;
+              }).join("")
+            }
+        </div>
+        <div class="chat-input-holder">
+            <input type="text" class="chat-input" placeholder="Type Here..."></input>
+            <input type="submit" value="Send" class="message-send" />
+        </div>
+    
     </div>`;
 }
+function minimize() {
+  console.log("clicked")
+  
+  $('.chatbox').toggleClass('chatbox-min');
+};
+function hide() {
+  $("#chatbox").css("display", "none");
 
-$(".chat-list").each(function () {
+  $('.chatbox').hide();
+};
+$(".message-btn").each(function () {
+  
+    console.log('#message-btn');
   $(this).click(function () {
+    $("#chatbox").css("display", "flex");
+   console.log($(this),"clicked")
     const friendId = $(this).attr("data-friendId");
     $.ajax({
       type: "GET",
       url: `/messages/chatroom?friend=${friendId}`,
-
       success: function (data) {
         let { chatRoom, friend, user } = data.data;
         let room = createArea(chatRoom, friend, user);
         chatArea.empty();
-        chatArea.append(room);
+        $('#chatbox').append(room);
         scrollBottom();
-
         selfUser = user;
         otherUser = friend;
         currentChatRoom = chatRoom._id;
         userMail = user.email;
 
         connectRoom();
-        changeScreen();
-        arrow();
-        tempClass(friendId);
+        //changeScreen();
+        //arrow();
+        //tempClass(friendId);
       },
       error: function (error) {
         console.log(error.responseText);
@@ -196,20 +189,22 @@ $(".chat-list").each(function () {
 
 function arrow() {
   $(".back-button").click(() => {
-    $(".chat-room-display").css("display", "none");
-    $("#chat-room-name").css({ display: "block", width: "100%" });
+    $("#chatbox").css("display", "none");
+    $("#chatbox").css({ display: "block", width: "100%" });
   });
 }
 
 function changeScreen() {
   if (window.innerWidth <= 430) {
-    $(".chat-room-display").css({ display: "block", width: "100%" });
-    $("#chat-room-name").css("display", "none");
+    $("#chatbox").css({ display: "block", width: "100%" });
+    $("#chatbox").css("display", "none");
   }
 }
 
 function scrollBottom() {
-  let list = document.getElementsByClassName("chat-messages-list-style")[0];
+  let list = document.getElementsByClassName("chat-messages")[0];
+  console.log(list)
+  //Scroll to the bottom of the messages div
   list.scrollTop = list.scrollHeight;
 }
 

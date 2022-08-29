@@ -5,6 +5,8 @@ const newFriendRequest=require('../workers/friend_email_worker');
 const friendMailer=require('../mailers/friends_mailer');
 const async = require("async");
 const { query } = require("express");
+const Chat = require("../models/chat");
+const ChatRoom = require("../models/chatroom");
 module.exports.home = async function (req, res) {
   try {
     let posts = await Post.find({})
@@ -324,6 +326,7 @@ module.exports.removeFriend = async function (req, res) {
         },
       }
     );
+    let temp=req.body.from_user;
     let from_user=user.username;
     let user1 = await User.findByIdAndUpdate(
       {
@@ -338,7 +341,30 @@ module.exports.removeFriend = async function (req, res) {
         },
       }
     );
+    
+    //Find All Chats between two users and delete them
+    let chat = await Chat.deleteMany({
+      'user':req.body.from_user
+    });
+    let chat1= await Chat.deleteMany({
+      'user':req.body.to_user,
+    });
+    //Delete chat room between two users
+    let chatroom = await ChatRoom.deleteMany({
+      $or:[
+        {
+          'user1':req.body.from_user,
+          'user2':req.body.to_user
+        },
+        {
+          'user1':req.body.to_user,
+          'user2':req.body.from_user
+        }
+      ]
+    })
     let to_user=user1.username;
+    console.log("chat  and chatroom removed");
+    
     //console.log(user.friendsList)
     //console.log(user1.friendsList)
     return res.status(200).json({
