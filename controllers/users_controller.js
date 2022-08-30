@@ -5,9 +5,11 @@ const path = require("path");
 const forgotpassMailer = require("../mailers/forgotpass_mailer");
 const crypto = require("crypto");
 const Friend = require("../models/friend");
-const Post=require("../models/post");
+const Post = require("../models/post");
 const Comment = require("../models/comment");
-const Like=require("../models/like");
+const Like = require("../models/like");
+const verifyEmail=require("../models/verifyemail");
+const verifyEmailMailer=require("../mailers/verifyemail_mailer");
 module.exports.profile = async function (req, res) {
   try {
     let user = await User.findById(req.params.id);
@@ -20,21 +22,20 @@ module.exports.profile = async function (req, res) {
     let isFriend = false;
     // console.log(friend);
     //Find all post of the user
-    let posts = await Post.find({ user: req.params.id }).populate("user").populate({
-      path: "comments",
-      populate: { path: "content user" },
-
-    });
+    let posts = await Post.find({ user: req.params.id })
+      .populate("user")
+      .populate({
+        path: "comments",
+        populate: { path: "content user" },
+      });
     //Find all comments of the user
 
-    
-    if(curruser.friendsList.length > 0){
-      curruser.friendsList.forEach(friend => {
-        if(friend.friendId.id == user.id){
+    if (curruser.friendsList.length > 0) {
+      curruser.friendsList.forEach((friend) => {
+        if (friend.friendId.id == user.id) {
           isFriend = true;
         }
-      }
-      );
+      });
     }
     return res.render("user_profile", {
       title: "User Profile",
@@ -48,6 +49,7 @@ module.exports.profile = async function (req, res) {
     return;
   }
 };
+
 module.exports.update = async function (req, res) {
   if (req.user.id == req.params.id) {
     try {
@@ -61,22 +63,22 @@ module.exports.update = async function (req, res) {
         }
         user.name = req.body.name;
         //Check if email exists in the database
-        if(user.email!=req.body.email){
-        let checkemail= User.findOne({ email: req.body.email })
-        if(checkemail){
-          req.flash("error", "Email already exists");
-          return res.redirect("back");
-        } 
-        user.email = req.body.email;
-       }
+        if (user.email != req.body.email) {
+          let checkemail = User.findOne({ email: req.body.email });
+          if (checkemail) {
+            req.flash("error", "Email already exists");
+            return res.redirect("back");
+          }
+          user.email = req.body.email;
+        }
         //Check if username matches with current user username
         if (user.username != req.body.username) {
-        let check= User.findOne({ username: req.body.username })
-        if(check){
-          req.flash("error", "Username already exists");
-          return res.redirect("back");
-        }
-        user.username=req.body.username;
+          let check = User.findOne({ username: req.body.username });
+          if (check) {
+            req.flash("error", "Username already exists");
+            return res.redirect("back");
+          }
+          user.username = req.body.username;
         }
         if (req.file) {
           if (user.avatar) {
@@ -114,33 +116,77 @@ module.exports.signUp = function (req, res) {
   }
   return res.render("../views/user_signup");
 };
-//Get signup data
-module.exports.create = function (req, res) {
-  //check ipassword strength
-  if (req.body.password.length < 8) {
-    req.flash("error", "Password should be atleast 6 characters long");
-    return res.redirect("back");
-  }
-  //Check if password contains digits and characters and special characters
-  if (!req.body.password.match(/^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,}$/)) {
-    req.flash("error", "Password should contain atleast one digit and one special character");
-    return res.redirect("back");
-  }
 
-  if (req.body.password != req.body.confirm_password) {
-    req.flash('error', 'Passwords do not match');
+module.exports.verifyEmail = async (req, res) => {
+  try {
+    if (req.body.password.length < 8) {
+      req.flash("error", "Password should be atleast 6 characters long");
+      return res.redirect("back");
+    }
+    //Check if password contains digits and characters and special characters
+    if (!req.body.password.match(/^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,}$/)) {
+      req.flash(
+        "error",
+        "Password should contain atleast one digit and one special character"
+      );
+      return res.redirect("back");
+    }
+
+    if (req.body.password != req.body.confirm_password) {
+      req.flash("error", "Passwords do not match");
+      return res.redirect("back");
+    }
+    //takeout username from mail
+     let username = "";
+     for (let i = 0; i < req.body.email.length; i++) {
+       if (req.body.email[i] == "@") {
+        break;
+      }
+      username += req.body.email[i];
+    }
+  
+    //Check if email and username exists in the database
+    let check = await User.findOne({ email: req.body.email });
+    if(check){
+      req.flash("error", "Email alredy exist");
+      return res.redirect("back");
+    }
+    check = await User.findOne({ username: username });
+    if(check){
+      req.flash("error", "Username alredy exist");
+      return res.redirect("back");
+    }
+    //generate random token
+    let token = crypto.randomBytes(20).toString("hex");
+    
+    //save token in the database
+    let verifyemails=await verifyEmail.create({
+      username:username,
+      password:req.body.password,
+      name:req.body.name,
+      email:req.body.email,
+      token:token
+    })
+    console.log(verifyemails);
+    //send mail to the user
+    verifyEmailMailer.verifyEmailMail(req.body.email, token);
+    req.flash("success", "Verification mail sent");
+    return res.redirect("back");
+  } catch (err) {
+    console.log(err);
+  }
+};
+//Get signup data
+module.exports.create =async function (req, res) {
+  let verifyemail=await verifyEmail.findOne({
+    token:req.query.accessToken,
+    isUsed:false
+  })
+  if(!verifyemail){
+    req.flash("error","Invalid Token");
     return res.redirect("back");
   }
-  //
-  //takeout username from mail
-  let username="";
-  for(let i=0;i<req.body.email.length;i++){
-    if(req.body.email[i]=="@"){
-      break;
-    }
-    username+=req.body.email[i];
-  }
-  User.findOne({ email: req.body.email }, (err, user) => {
+  User.findOne({ email: verifyemail.email }, (err, user) => {
     if (err) {
       console.log("Error in finding user in signing up");
       return;
@@ -148,16 +194,20 @@ module.exports.create = function (req, res) {
     if (!user) {
       User.create(
         {
-          name: req.body.name,
-          email: req.body.email,
-          password: req.body.password,
-          username: username,
+          name: verifyemail.name,
+          email: verifyemail.email,
+          password: verifyemail.password,
+          username:verifyemail.username,
         },
         (err, user) => {
+          //Mark as used the token
+          verifyemail.isUsed=true;
+          verifyemail.save();
           if (err) {
             console.log("Error in creating user while signing up");
             return;
           }
+          req.flash("success","Your account has been created");
           return res.redirect("/users/login");
         }
       );
