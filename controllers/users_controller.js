@@ -60,6 +60,15 @@ module.exports.update = async function (req, res) {
           return;
         }
         user.name = req.body.name;
+        //Check if email exists in the database
+        if(user.email!=req.body.email){
+        let checkemail= User.findOne({ email: req.body.email })
+        if(checkemail){
+          req.flash("error", "Email already exists");
+          return res.redirect("back");
+        } 
+        user.email = req.body.email;
+       }
         //Check if username matches with current user username
         if (user.username != req.body.username) {
         let check= User.findOne({ username: req.body.username })
@@ -107,9 +116,22 @@ module.exports.signUp = function (req, res) {
 };
 //Get signup data
 module.exports.create = function (req, res) {
-  if (req.body.password != req.body.confirm_password) {
+  //check ipassword strength
+  if (req.body.password.length < 8) {
+    req.flash("error", "Password should be atleast 6 characters long");
     return res.redirect("back");
   }
+  //Check if password contains digits and characters and special characters
+  if (!req.body.password.match(/^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,}$/)) {
+    req.flash("error", "Password should contain atleast one digit and one special character");
+    return res.redirect("back");
+  }
+
+  if (req.body.password != req.body.confirm_password) {
+    req.flash('error', 'Passwords do not match');
+    return res.redirect("back");
+  }
+  //
   //takeout username from mail
   let username="";
   for(let i=0;i<req.body.email.length;i++){
