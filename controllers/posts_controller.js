@@ -1,15 +1,18 @@
 const Post = require("../models/post");
 const Comment = require("../models/comment");
 const Like=require("../models/like");
+const fs = require("fs");
+const path = require("path");
 module.exports.create = async (req, res) => {
   try {
-    let post = await Post.create({
-      content: req.body.content,
-      user: req.user._id,
-    });
     if(req.xhr){
+      let post = await Post.create({
+        content: req.body.content,
+        user: req.user._id,
+      });  
+    
       // if we want to populate just the name of the user (we'll not want to send the password in the API), this is how we do it!
-      post=await post.populate('user', 'name')
+      post=await post.populate('user', 'name avatar')
       //post = await post.populate('user', 'name').execPopulate();
       return res.status(200).json({
         data:{
@@ -18,6 +21,21 @@ module.exports.create = async (req, res) => {
         message:"Post created !!!"
       })
     }
+    Post.uploadedImage(req, res, async (err) => {
+      if (err) {
+        console.log(err);
+        req.flash("error", err);
+        return res.redirect("back");
+      }
+      //console.log(req.file);
+      let temp =Post.imagePath+'/'+req.file.filename;
+      console.log(temp)
+      await Post.create({
+        content: req.body.content,
+        user: req.user._id,
+        image: temp,
+      });
+    })
     req.flash("success", "Post created !!!");
     return res.redirect("/");
   } catch (err) {

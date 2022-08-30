@@ -62,7 +62,13 @@ class PostComments{
         // I've added a class 'delete-comment-button' to the delete comment link and also id to the comment's li
         return $(`<div class="comment" id="comment-${ comment._id}">
         <div class="name">
-            <span>${ comment.user.name}</span>
+            <span>
+            ${comment.user.avatar?
+                `<img src="${comment.user.avatar}" alt="${comment.user.name}" >`
+                :
+                `<img src="/images/default-avatar.png" alt="${comment.user.name}" >`
+            }
+            ${ comment.user.name}</span>
             <div>
             <div class="dropdown">
                 <button class="dropbtn"><i class="fa-solid fa-circle-chevron-down"></i></button>

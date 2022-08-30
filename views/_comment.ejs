@@ -1,6 +1,11 @@
 <div class="comment" id="comment-<%= comment._id %>">
     <div class="name">
         <span>
+            <% if(post.user.avatar){ %>
+                <img src="<%= post.user.avatar %>" alt="<%= post.user.name %>" />
+            <% } else { %>
+                <img src="/images/default-avatar.png" alt="<%= post.user.name %>" />
+            <% } %>
             <%= comment.user.name %>
         </span>
         <% if(locals.user && (locals.user.id==comment.user.id )){ %>

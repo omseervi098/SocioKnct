@@ -86,7 +86,15 @@
               #home-containe #feed-posts #post-list-container #post-list-container-div .post .ithpost .name span {
                 font-size: 1.1rem;
                 font-weight: bold;
-                color: #000; }
+                color: #000;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                gap: 5px; }
+                #home-containe #feed-posts #post-list-container #post-list-container-div .post .ithpost .name span img {
+                  width: 35px;
+                  height: 35px;
+                  border-radius: 50%; }
               #home-containe #feed-posts #post-list-container #post-list-container-div .post .ithpost .name div .dropdown {
                 position: relative;
                 display: inline-block; }
@@ -126,7 +134,11 @@
               border-radius: 3%;
               padding: 5px;
               font-size: 1.1rem;
-              border: 1px dashed black; }
+              border: 1px dashed black;
+              display: flex;
+              flex-direction: column; }
+              #home-containe #feed-posts #post-list-container #post-list-container-div .post .ithpost .content img {
+                width: 100%; }
             #home-containe #feed-posts #post-list-container #post-list-container-div .post .ithpost small .like__btn {
               padding: 3px 6px;
               background: #ff3a3a;
@@ -190,9 +202,17 @@
                   display: flex;
                   justify-content: space-between; }
                   #home-containe #feed-posts #post-list-container #post-list-container-div .post .post-comments .post-comments-list .post-comments-list-container .comment .name span {
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    gap: 5px;
                     font-size: 1rem;
                     font-weight: bold;
                     color: #000; }
+                    #home-containe #feed-posts #post-list-container #post-list-container-div .post .post-comments .post-comments-list .post-comments-list-container .comment .name span img {
+                      width: 35px;
+                      height: 35px;
+                      border-radius: 50%; }
                   #home-containe #feed-posts #post-list-container #post-list-container-div .post .post-comments .post-comments-list .post-comments-list-container .comment .name div .dropdown {
                     position: relative;
                     display: inline-block; }

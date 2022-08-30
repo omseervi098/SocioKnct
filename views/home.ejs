@@ -4,12 +4,12 @@
     <section id="feed-posts">
         <h4>Post</h4>
         <% if(locals.user){%>
-            <form action="/posts/create" id="new-post-form" class="form-for-post" method="post">
-                <textarea required name="content" id="content" cols="25" rows="3" placeholder="Type Here.."></textarea>
+            <form action="/posts/create" enctype="multipart/form-data" id="new-post-form" class="form-for-post" method="post">
+                <textarea  name="content" id="content" cols="25" rows="3" placeholder="Type Here.."></textarea>
+                <input type="file" name="image" id="image" accept="image/*" >  
                 <input type="submit" value="Post" id="post-submit">
             </form>
             <%}%>
-
                 <!--Listing post-->
                 <div id="post-list-container">
                     <div id="post-list-container-div">
@@ -43,6 +43,7 @@
     crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script src="/js/home_post_comments.js">
 </script>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 <script src="/js/home_posts.js">
 </script>
 <!-- CHANGE :: import the script file for toggle likes, also run it over for the already present posts and comments on the page -->
@@ -54,7 +55,5 @@
         let self = this;
         let toggleLike = new ToggleLike(self);
     });
-    
    
-
 </script>

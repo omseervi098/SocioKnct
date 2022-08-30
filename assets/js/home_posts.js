@@ -3,31 +3,33 @@
   let createPost = function () {
     let newPostForm = $("#new-post-form");
     newPostForm.submit((e) => {
-      e.preventDefault();
-      $.ajax({
-        type: "post",
-        url: "/posts/create",
-        data: newPostForm.serialize(),
-        success: function (data) {
-          let newPost = newPostDom(data.data.post);
-          $("#post-list-container-div").prepend(newPost);
-          $('#new-post-form')[0].reset();
-          deletePost($(".delete-post-button", newPost));
-          // CHANGE :: enable the functionality of the toggle like button on the new post
-          new ToggleLike($(' .toggle-like-button', newPost));
-          //Adding noty notification
-          new Noty({
-            theme: "relax",
-            type: "success",
-            layout: "topRight",
-            text: "Post Created !!!",
-            timeout: 1500,
-          }).show();
-        },
-        error: function (err) {
-          console.log(err.responseText);
-        },
-      });
+      if ($("#image").val() == "") {
+        e.preventDefault();
+        $.ajax({
+          url: "/posts/create",
+          type: "POST",
+          data: newPostForm.serialize(),
+          success: function (data) {
+            let newPost = newPostDom(data.data.post);
+            $("#post-list-container-div").prepend(newPost);
+            $("#new-post-form")[0].reset();
+            deletePost($(".delete-post-button", newPost));
+            // CHANGE :: enable the functionality of the toggle like button on the new post
+            new ToggleLike($(" .toggle-like-button", newPost));
+            //Adding noty notification
+            new Noty({
+              theme: "relax",
+              type: "success",
+              layout: "topRight",
+              text: "Post Created !!!",
+              timeout: 1500,
+            }).show();
+          },
+          error: function (err) {
+            console.log(err);
+          },
+        });
+      }
     });
   };
   //method create a post in DOM
@@ -35,12 +37,16 @@
     return $(`<div id="post-${post._id}" class="post">
         <div class="ithpost">
         <div class="name">
-            <span>${ post.user.name }</span>
+            <span>
+            ${post.user.avatar?
+              `<img src="${post.user.avatar}" >`:
+              `<img src="/images/default-avatar.png">`}
+            ${post.user.name}</span>
             <div>
               <div class="dropdown">
                 <button class="dropbtn"><i class="fa-solid fa-circle-chevron-down"></i></button>
                 <div class="dropdown-content">
-                    <a class="delete-post-button" href="/posts/destroy/${ post._id }">Delete</a>
+                    <a class="delete-post-button" href="/posts/destroy/${post._id}">Delete</a>
                 </div>
               </div>  
             </div>
