@@ -33,7 +33,12 @@
             gap: 5px;
             align-items: center;
             justify-content: center;
-
+            #post-image-preview{
+                img{
+                    width: 200px;
+                    height: 200px;
+                }
+            }
             #content {
                 width: auto;
                 height: auto;
@@ -392,7 +397,7 @@
         flex-direction: column;
 
         align-items: center;
-        min-width: 20%;
+        min-width: 30%;
         div {    
             //min-width:0%;
             h4 {

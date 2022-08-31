@@ -255,15 +255,25 @@
                     }
 
                     .content {
+                        
                         align-self: flex-start;
                         height: auto;
-                        width: auto;
+                        width: 80%;
                         background-color: white;
                         border-radius: 3%;
                         padding: 5px;
                         flex-wrap: wrap;
                         font-size: 1.1rem;
                         border: 1px dashed black;
+                        display: flex;
+                        flex-direction: column;
+                        justify-content: center;
+                        
+                        img{
+                            width:99%;
+                            margin:0 auto;
+                            height: auto;
+                        }
                     }
 
                     small {

@@ -179,20 +179,13 @@
           #profile-container #timeline-container .post-container .post .ithpost .content {
             align-self: flex-start;
             height: auto;
-            width: 80%;
+            width: auto;
             background-color: white;
             border-radius: 3%;
             padding: 5px;
             flex-wrap: wrap;
             font-size: 1.1rem;
-            border: 1px dashed black;
-            display: flex;
-            flex-direction: column;
-            justify-content: center; }
-            #profile-container #timeline-container .post-container .post .ithpost .content img {
-              width: 99%;
-              margin: 0 auto;
-              height: auto; }
+            border: 1px dashed black; }
           #profile-container #timeline-container .post-container .post .ithpost small {
             align-self: flex-start; }
             #profile-container #timeline-container .post-container .post .ithpost small .like__btn {

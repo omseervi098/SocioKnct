@@ -6,6 +6,7 @@
         <% if(locals.user){%>
             <form action="/posts/create" enctype="multipart/form-data" id="new-post-form" class="form-for-post" method="post">
                 <textarea  name="content" id="content" cols="25" rows="3" placeholder="Type Here.."></textarea>
+                <div id="post-image-preview"></div>
                 <input type="file" name="image" id="image" accept="image/*" >  
                 <input type="submit" value="Post" id="post-submit">
             </form>
@@ -55,5 +56,19 @@
         let self = this;
         let toggleLike = new ToggleLike(self);
     });
-   
+    function filePreview(input){
+        console.log(input.files);
+        if(input.files && input.files[0]){
+            var reader = new FileReader();
+            reader.onload = function(e){
+                $('#post-image-preview >img').remove();
+                $('#post-image-preview').append('<img id="preview" src="'+e.target.result.toString()+'" width="100" height="100" />');
+            }
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+    $("#image").change(function(){
+        console.log(this);
+        filePreview(this);
+    })
 </script>

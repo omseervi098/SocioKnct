@@ -92,6 +92,9 @@
                         </div>
                         <div class="content">
                             <%= post.content %>
+                            <% if(post.image){%>
+                                <img src="<%= post.image %>" width="100">
+                            <%}%>
                         </div>
                         <small>
                             <% if (locals.user){ %>
