@@ -1,2 +1,2 @@
-# Codial
+# SocioKnct
  Social Media Website
