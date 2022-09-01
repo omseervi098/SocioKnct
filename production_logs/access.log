@@ -1805,3 +1805,16 @@
 ::ffff:127.0.0.1 - - [01/Sep/2022:15:08:19 +0000] "POST /posts/create HTTP/1.1" 302 46 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:104.0) Gecko/20100101 Firefox/104.0"
 ::ffff:127.0.0.1 - - [01/Sep/2022:15:08:20 +0000] "GET / HTTP/1.1" 200 10442 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:104.0) Gecko/20100101 Firefox/104.0"
 ::ffff:127.0.0.1 - - [01/Sep/2022:15:08:28 +0000] "GET /posts/destroy/6310cae48d343a83fc40514e HTTP/1.1" 200 76 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:104.0) Gecko/20100101 Firefox/104.0"
+[0mGET / [32m200[0m 42.461 ms - 5821[0m
+[0mGET /users/login [32m200[0m 8.297 ms - 5178[0m
+[0mGET /users/auth/google [36m302[0m 5.115 ms - 0[0m
+[0mGET /users/auth/google/callback?code=4%2F0AdQt8qgk5fZyFcRNZxSqSFhK-8RZyqvfKa4zWM16_ai1XYwjK_6JTj7jw8gG8VbQ-oqghA&scope=email+profile+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.profile+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.email+openid&authuser=2&prompt=consent [36m302[0m 454.850 ms - 46[0m
+[0mGET / [32m200[0m 43.864 ms - 8844[0m
+[0mPOST /posts/create [36m302[0m 7.540 ms - 46[0m
+[0mGET / [32m200[0m 36.987 ms - 11194[0m
+[0mGET /uploads/users/avatars/avatar-1661840189050-525913362 [33m404[0m 8.263 ms - 191[0m
+[0mGET /uploads/users/avatars/avatar-1661840189050-525913362 [33m404[0m 10.406 ms - 191[0m
+[0mGET /users/signout [36m302[0m 8.542 ms - 46[0m
+[0mGET / [32m200[0m 22.619 ms - 7302[0m
+[0mGET /uploads/users/avatars/avatar-1661840189050-525913362 [33m404[0m 3.760 ms - 191[0m
+[0mGET /uploads/users/avatars/avatar-1661840189050-525913362 [33m404[0m 4.514 ms - 191[0m
