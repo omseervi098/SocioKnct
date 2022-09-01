@@ -201,11 +201,15 @@
             border: 1px dashed black;
             display: flex;
             flex-direction: column;
-            justify-content: center; }
+            justify-content: center;
+            align-items: flex-start;
+         }
             #profile-container #timeline-container .post-container .post .ithpost .content img {
               width: 99%;
               margin: 0 auto;
-              height: auto; }
+              height: auto; 
+              align-self: flex-start;
+            }
           #profile-container #timeline-container .post-container .post .ithpost small {
             align-self: flex-start; }
             #profile-container #timeline-container .post-container .post .ithpost small .like__btn {
@@ -253,11 +257,15 @@
                   gap: 5px;
                   font-size: 1rem;
                   font-weight: bold;
-                  color: #000; }
+                  color: #000; 
+                  align-self: flex-start;
+                }
                   #profile-container #timeline-container .post-container .post .post-comments .post-comments-list .post-comments-list-container .comment .name span img {
                     width: 35px;
                     height: 35px;
-                    border-radius: 50%; }
+                    border-radius: 50%; 
+                    align-self: flex-start;
+                }
               #profile-container #timeline-container .post-container .post .post-comments .post-comments-list .post-comments-list-container .comment .content {
                 align-self: flex-start;
                 margin-left: 0px;
