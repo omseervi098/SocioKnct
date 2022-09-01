@@ -27,9 +27,9 @@ module.exports.create = async (req, res) => {
         req.flash("error", err);
         return res.redirect("back");
       }
-      //console.log(req.file);
+      console.log(req.file);
       let temp =Post.imagePath+'/'+req.file.filename;
-      
+      console.log(temp);
       await Post.create({
         content: req.body.content,
         user: req.user._id,
