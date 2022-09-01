@@ -119,8 +119,8 @@
                                     <div class="comment" id="comment-<%= comment._id %>">
                                         <div class="name">
                                             <span>
-                                                <% if(post.user.avatar){ %>
-                                                    <img src="<%= post.user.avatar %>" alt="<%= post.user.name %>" />
+                                                <% if(comment.user.avatar){ %>
+                                                    <img src="<%= comment.user.avatar %>" alt="<%= comment.user.name %>" />
                                                 <% } else { %>
                                                     <img src="<%=assetPath('images/default-avatar.png')%>" alt="<%= post.user.name %>" />
                                                 <% } %>
