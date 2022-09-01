@@ -254,7 +254,7 @@
                     .name {
 
                         flex-wrap: nowrap;
-
+                        align-self: flex-start;
                         //align-items: center;
                         span {
                             align-self: flex-start;
@@ -263,7 +263,7 @@
                             color: #000;
                             display: flex;
                             justify-content: center;
-                            align-items: center;
+                           // align-items: flex-start;
                             gap: 5px;
                             font-size: 1rem;
                             font-weight: bold;
@@ -273,6 +273,7 @@
                                 width: 35px;
                                 height: 35px;
                                 border-radius: 50%;
+                                align-self: flex-start;
                             }
                         }
                     }
