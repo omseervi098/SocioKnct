@@ -1830,3 +1830,22 @@
 ::ffff:127.0.0.1 - - [01/Sep/2022:17:36:00 +0000] "GET / HTTP/1.1" 200 10064 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:104.0) Gecko/20100101 Firefox/104.0"
 ::ffff:127.0.0.1 - - [01/Sep/2022:17:36:14 +0000] "GET /users/auth/google/callback?code=4%2F0AdQt8qi_CdXzv6pU6LW9MUbHIx57EVB7EoxfUHvW13yEOxgcRS6f_ve8EKaJnfEscLfzww&scope=email+profile+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.profile+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.email+openid&authuser=0&prompt=consent HTTP/1.1" 302 46 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:104.0) Gecko/20100101 Firefox/104.0"
 ::ffff:127.0.0.1 - - [01/Sep/2022:17:36:14 +0000] "GET / HTTP/1.1" 304 - "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:104.0) Gecko/20100101 Firefox/104.0"
+[0mGET / [32m200[0m 45.403 ms - 7139[0m
+[0mGET /uploads/users/avatars/avatar-1661840189050-525913362 [33m404[0m 14.914 ms - 191[0m
+[0mGET /users/login [32m200[0m 5.031 ms - 5258[0m
+[0mGET /users/auth/google [36m302[0m 4.050 ms - 0[0m
+[0mGET /users/auth/google/callback?code=4%2F0AdQt8qgsPZifwWdQ91Y60zUEIvUqHAwx4Vd_LuverANDiVPpi8Yrym7xXm6_J7PONRxjfA&scope=email+profile+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.profile+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.email+openid&authuser=2&prompt=consent [36m302[0m 474.208 ms - 46[0m
+[0mGET / [32m200[0m 27.292 ms - 11280[0m
+[0mGET /uploads/users/avatars/avatar-1661840189050-525913362 [33m404[0m 8.173 ms - 191[0m
+[0mGET /uploads/users/avatars/avatar-1661840189050-525913362 [33m404[0m 5.225 ms - 191[0m
+[0mGET /favicon.ico [0m-[0m - ms - -[0m
+[0mGET /posts/destroy/6310db4cc9df4429d6c8f762 [32m200[0m 27.363 ms - 76[0m
+[0mGET /users/profile/630d9f86160a298b705e87c3 [32m200[0m 19.955 ms - 6881[0m
+[0mGET /uploads/users/avatars/avatar-1661840189050-525913362 [33m404[0m 13.422 ms - 191[0m
+[0mGET /uploads/users/avatars/avatar-1661840189050-525913362 [33m404[0m 7.304 ms - 191[0m
+[0mGET / [32m200[0m 33.932 ms - 8682[0m
+[0mGET /users/profile/630d9f86160a298b705e87c3 [36m304[0m 18.331 ms - -[0m
+[0mGET /uploads/users/avatars/avatar-1661840189050-525913362 [33m404[0m 4.522 ms - 191[0m
+[0mGET /uploads/users/avatars/avatar-1661840189050-525913362 [33m404[0m 3.790 ms - 191[0m
+[0mGET /users/signout [36m302[0m 8.970 ms - 46[0m
+[0mGET / [32m200[0m 12.583 ms - 6144[0m

@@ -11,7 +11,7 @@
     align-items: center;
     gap: 10px;
 
-    #profile-part{
+    #profile-part {
         width: 100%;
         margin: 0;
         padding: 0;
@@ -20,11 +20,14 @@
         align-items: center;
         justify-content: center;
         border-right: 2px solid grey;
+
         h1 {
             margin: 0;
         }
+
         #other-users {
-            margin-left:4px;
+            margin-left: 4px;
+
             .container {
                 -webkit-user-select: none;
                 user-select: none;
@@ -88,21 +91,21 @@
             .follow-btn {
                 background: #03bfbc;
                 border: 1px solid #03bfbc;
-                padding: 10px 25px ;
+                padding: 10px 25px;
                 //margin: 0;
                 color: #231e39;
                 border-radius: 3px;
                 font-family: Montserrat, sans-serif;
                 cursor: pointer;
-                
+
             }
 
             .follow-btn {
-               
+
                 margin-left: 115px;
                 background: transparent;
                 color: #d3f9fd;
-            
+
 
             }
 
@@ -123,9 +126,10 @@
             .container i:hover {
                 color: #03bfbc;
             }
-            .follow-btn i{
-                padding:0;
-                margin:0;
+
+            .follow-btn i {
+                padding: 0;
+                margin: 0;
                 font-size: 15px;
             }
 
@@ -139,6 +143,7 @@
                 display: flex;
                 flex-direction: column;
                 align-items: center;
+
                 #avatar {
                     width: 140px;
                     height: 140px;
@@ -214,15 +219,18 @@
         flex-direction: column;
         align-items: center;
         justify-content: flex-start;
-        h2{
+
+        h2 {
             margin: 0;
-            
+
         }
+
         //align-items: flex-start;
         gap: 10px;
+
         .post-container {
             display: flex;
-           // width: 100%;
+            // width: 100%;
             flex-direction: column;
             justify-content: center;
             align-self: flex-start;
@@ -233,7 +241,7 @@
                 //width: 100%;
                 flex-direction: column;
                 justify-content: center;
-                
+
                 gap: 2px;
 
                 .ithpost {
@@ -242,21 +250,35 @@
                     flex-direction: column;
                     gap: 3px;
                     align-self: flex-start;
+
                     .name {
-                        
+
                         flex-wrap: nowrap;
-                        
+
                         //align-items: center;
                         span {
                             align-self: flex-start;
                             font-size: 1.1rem;
                             font-weight: bold;
                             color: #000;
+                            display: flex;
+                            justify-content: center;
+                            align-items: center;
+                            gap: 5px;
+                            font-size: 1rem;
+                            font-weight: bold;
+                            color: #000;
+
+                            img {
+                                width: 35px;
+                                height: 35px;
+                                border-radius: 50%;
+                            }
                         }
                     }
 
                     .content {
-                        
+
                         align-self: flex-start;
                         height: auto;
                         width: 80%;
@@ -269,16 +291,17 @@
                         display: flex;
                         flex-direction: column;
                         justify-content: center;
-                        
-                        img{
-                            width:99%;
-                            margin:0 auto;
+
+                        img {
+                            width: 99%;
+                            margin: 0 auto;
                             height: auto;
                         }
                     }
 
                     small {
                         align-self: flex-start;
+
                         .like__btn {
                             padding: 3px 6px;
                             background: #ff3a3a;
@@ -303,6 +326,7 @@
                     margin: 0px 20px;
                     width: 80%;
                     align-self: flex-start;
+
                     .post-comments-list {
                         .post-comments-list-container {
                             margin-left: 20px;
@@ -315,18 +339,32 @@
                                 display: flex;
                                 flex-direction: column;
                                 gap: 2px;
-                                align-self:flex-start ;
+                                align-self: flex-start;
+
                                 .name {
                                     font-size: 1rem;
                                     font-weight: bold;
                                     color: #000;
                                     display: flex;
                                     justify-content: space-between;
+
                                     span {
                                         font-size: 1rem;
                                         align-self: flex-start;
                                         font-weight: bold;
                                         color: #000;
+                                        display: flex;
+                                            justify-content: center;
+                                            align-items: center;
+                                            gap:5px;
+                                            font-size: 1rem;
+                                            font-weight: bold;
+                                            color: #000;
+                                            img{
+                                                width: 35px;
+                                                height: 35px;
+                                                border-radius: 50%;
+                                            }
                                     }
                                 }
 
@@ -341,6 +379,7 @@
 
                                 small {
                                     align-self: flex-start;
+
                                     .like__btn {
                                         padding: 3px 6px;
                                         background: #ff3a3a;
@@ -367,24 +406,28 @@
     }
 }
 
-@media screen and (max-width: 768px){
+@media screen and (max-width: 768px) {
     #profile-container {
-        #profile-part{
+        #profile-part {
             border: none;
         }
-    }   
+    }
 }
-@media screen and (max-width: 576px){
+
+@media screen and (max-width: 576px) {
     #profile-container {
         flex-direction: column;
-        #profile-part{
+
+        #profile-part {
             border: none;
-            #preview{
+
+            #preview {
                 display: none;
             }
         }
-        #timeline-container{
-            margin-left:1rem;
+
+        #timeline-container {
+            margin-left: 1rem;
         }
-    }   
+    }
 }

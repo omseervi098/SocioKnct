@@ -87,6 +87,11 @@
                     <div class="ithpost">
                         <div class="name">
                             <span>
+                                <% if(post.user.avatar){ %>
+                                    <img src="<%= post.user.avatar %>" alt="<%= post.user.name %>" />
+                                <% } else { %>
+                                    <img src="<%=assetPath('images/default-avatar.png')%>" alt="<%= post.user.name %>" />
+                                <% } %>
                                 <%= post.user.name %>
                             </span>
                         </div>
@@ -114,6 +119,11 @@
                                     <div class="comment" id="comment-<%= comment._id %>">
                                         <div class="name">
                                             <span>
+                                                <% if(post.user.avatar){ %>
+                                                    <img src="<%= post.user.avatar %>" alt="<%= post.user.name %>" />
+                                                <% } else { %>
+                                                    <img src="<%=assetPath('images/default-avatar.png')%>" alt="<%= post.user.name %>" />
+                                                <% } %>
                                                 <%= comment.user.name %>
                                             </span>
                                         </div>
