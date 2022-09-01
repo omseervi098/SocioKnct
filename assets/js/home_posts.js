@@ -3,7 +3,7 @@
   let createPost = function () {
     let newPostForm = $("#new-post-form");
     newPostForm.submit((e) => {
-      console.log($('#image').val());
+      
       if ($("#image").val() == "") {
         e.preventDefault();
         $.ajax({
