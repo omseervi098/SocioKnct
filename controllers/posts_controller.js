@@ -55,6 +55,10 @@ module.exports.destroy = async (req, res) => {
       await Like.deleteMany({_id: {$in: post.comments}});
       post.remove();
       await Comment.deleteMany({ post: req.params.id });
+      if(post.image){
+        console.log(post.image)
+        fs.unlinkSync(path.join(__dirname,"..",post.image));
+      }
       if(req.xhr){
         return res.status(200).json({
           data:{
