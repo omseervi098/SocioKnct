@@ -5,7 +5,7 @@ let otherUser;
 let currentChatRoom;
 let roomList = [];
 
-var socket = io.connect("http://localhost:5000");
+var socket = io.connect("http://184.72.80.220:5000");
 
 socket.on("connect", function () {
   console.log("connection established using sockets...!");
