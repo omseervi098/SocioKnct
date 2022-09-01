@@ -66,7 +66,7 @@ class PostComments{
             ${comment.user.avatar?
                 `<img src="${comment.user.avatar}" alt="${comment.user.name}" >`
                 :
-                `<img src="/images/default-avatar.png" alt="${comment.user.name}" >`
+                `<img src="${assetPath('images/default-avatar.png')}" alt="${comment.user.name}" >`
             }
             ${ comment.user.name}</span>
             <div>

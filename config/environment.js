@@ -9,7 +9,7 @@ const accessLogStream=rfs.createStream('access.log',{
 });
 const development = {
   name: "development",
-  asset_path:process.env.CODEIAL_ASSET_PATH,
+  asset_path:'./assets',
   session_cookie_key: "blahsomething",
   db: "codial_development",
   smtp: {

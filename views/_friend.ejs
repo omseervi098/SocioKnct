@@ -5,7 +5,7 @@
             <%if(u.avatar){%>
                 <img src="<%=u.avatar%>" alt="<%=u.name%>" class="friend-avatar-img">
             <%}else {%>
-                <img src="/images/default-avatar.png" alt="<%=u.name%>" class="friend-avatar-img">
+                <img src="<%=assetPath('images/default-avatar.png')%>" alt="<%=u.name%>" class="friend-avatar-img">
             <%}%>
         </div>
         <div class="friend-name">

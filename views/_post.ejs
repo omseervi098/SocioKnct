@@ -5,7 +5,7 @@
                 <% if(post.user.avatar){ %>
                     <img src="<%= post.user.avatar %>" alt="<%= post.user.name %>" />
                 <% } else { %>
-                    <img src="/images/default-avatar.png" alt="<%= post.user.name %>" />
+                    <img src="<%=assetPath('images/default-avatar.png')%>" alt="<%= post.user.name %>" />
                 <% } %>
                 <%= post.user.name %>
             </span>

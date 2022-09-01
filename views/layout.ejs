@@ -7,10 +7,10 @@
     <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
     <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
     <script src="https://kit.fontawesome.com/4499aac38f.js" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="/css/layout.css">
-    <link rel="stylesheet" href="/css/header.css">
-    <link rel="stylesheet" href="/css/footer.css">
-    <link rel="stylesheet" href="/css/search.css">
+    <link rel="stylesheet" href="<%=assetPath('css/layout.css')%>">
+    <link rel="stylesheet" href="<%=assetPath('css/header.css')%>">
+    <link rel="stylesheet" href="<%=assetPath('css/footer.css')%>">
+    <link rel="stylesheet" href="<%=assetPath('css/search.css')%>">
     <!-- <meta http-equiv="Content-Security-Policy" content="default-src 'none'; connect-src 'self';font-src 'self'; img-src 'self' data: https:; style-src 'self' 'unsafe-inline' ; script-src 'self'">  -->
     <%- style %>
 </head>
@@ -24,7 +24,7 @@
     <%- include('_footer') %>
 
     <!-- <script src="/js/bootstrap.bundle.js"></script> -->
-    <script src="/js/sendFriendReq.js"></script>
+    <script src="<%=assetPath('js/sendFriendReq.js')%>"></script>
     <%- script %>
     <script>
         <% if(flash.success && flash.success.length>0){ %>

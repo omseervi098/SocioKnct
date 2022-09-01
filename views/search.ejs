@@ -1,4 +1,4 @@
-<link rel="stylesheet" href="/css/search.css">
+<link rel="stylesheet" href="<%=assetPath('css/search.css')%>">
 <% if(locals.user){%>
     <section id="search-section">
         <div id="search-container">
@@ -9,7 +9,7 @@
                 <% if(i.avatar){%>
                     <img class="usercard-image" src="<%=i.avatar%>">
                 <%}else{%>
-                    <img class="usercard-image" src="/images/default-avatar.png">
+                    <img class="usercard-image" src="<%=assetPath('images/default-avatar.png')%>">
                 <%}%>
                     <h4 class="usercard-name">
                         <a href="/users/profile/<%=i.id%>"><%=i.name%></a>

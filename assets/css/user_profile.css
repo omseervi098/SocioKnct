@@ -37,7 +37,7 @@
         flex-direction: row;
         justify-content: center; }
     #profile-container #profile-part #other-users .cover-photo {
-      background: url("../images/default-cover.jpg");
+      background: url("https://images.pexels.com/photos/1535907/pexels-photo-1535907.jpeg?cs=srgb&dl=pexels-karyme-fran%C3%A7a-1535907.jpg&fm=jpg");
       height: 160px;
       width: 100%;
       border-radius: 5px 5px 0 0; }

@@ -40,7 +40,7 @@
             <span>
             ${post.user.avatar?
               `<img src="${post.user.avatar}" >`:
-              `<img src="/images/default-avatar.png">`}
+              `<img src="${assetPath('images/default-avatar.png')}">`}
             ${post.user.name}</span>
             <div>
               <div class="dropdown">

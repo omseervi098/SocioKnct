@@ -1,4 +1,4 @@
-<link rel="stylesheet" href="/css/user_profile.css">
+<link rel="stylesheet" href="<%=assetPath('css/user_profile.css')%>">
 <div id="profile-container">
     <div id="profile-part">
         <h1>Profile</h1>
@@ -9,7 +9,7 @@
                     <% if(user.avatar) {%>
                         <img id="avatar" src="<%=user.avatar%>" width="100">
                         <%} else {%>
-                            <img id="avatar" src="/images/default-avatar.png" width="100">
+                            <img id="avatar" src="<%=assetPath('images/default-avatar.png')%>" width="100">
                             <%}%>
                                 
                                     <form id="upload-form" enctype="multipart/form-data"
@@ -33,7 +33,7 @@
                                 <img class="profile" src="<%=profile_user.avatar%>" alt="<%=profile_user.name %>"
                                     width="100">
                                 <%} else {%>
-                                    <img class="profile" src="/images/default-avatar.png" alt="<%=profile_user.name %>"
+                                    <img class="profile" src="<%=assetPath('images/default-avatar.png')%>" alt="<%=profile_user.name %>"
                                         width="100">
                                     <%}%>
                         </div>
@@ -138,5 +138,5 @@
             <%}%>
     </div>
 </div>
-<script src="/js/home_profile.js">
+<script src="<%=assetPath('js/home_profile.js')%>">
 </script>
