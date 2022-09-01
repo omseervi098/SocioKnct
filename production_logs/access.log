@@ -1818,3 +1818,11 @@
 [0mGET / [32m200[0m 22.619 ms - 7302[0m
 [0mGET /uploads/users/avatars/avatar-1661840189050-525913362 [33m404[0m 3.760 ms - 191[0m
 [0mGET /uploads/users/avatars/avatar-1661840189050-525913362 [33m404[0m 4.514 ms - 191[0m
+::ffff:127.0.0.1 - - [01/Sep/2022:16:56:09 +0000] "GET / HTTP/1.1" 200 5964 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:104.0) Gecko/20100101 Firefox/104.0"
+::ffff:127.0.0.1 - - [01/Sep/2022:16:56:11 +0000] "GET /users/login HTTP/1.1" 200 5288 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:104.0) Gecko/20100101 Firefox/104.0"
+::ffff:127.0.0.1 - - [01/Sep/2022:16:56:16 +0000] "GET /users/auth/google HTTP/1.1" 302 0 "http://localhost:3000/users/login" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:104.0) Gecko/20100101 Firefox/104.0"
+::ffff:127.0.0.1 - - [01/Sep/2022:16:56:19 +0000] "GET /users/auth/google/callback?code=4%2F0AdQt8qjaH_O4Xz_paYRKBX3iORZQ3Ysxy4XBrHDsdy-xKyzJ3FJhNsVepLCCgFjwhWARMg&scope=email+profile+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.profile+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.email+openid&authuser=2&prompt=consent HTTP/1.1" 302 46 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:104.0) Gecko/20100101 Firefox/104.0"
+::ffff:127.0.0.1 - - [01/Sep/2022:16:56:19 +0000] "GET / HTTP/1.1" 200 8132 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:104.0) Gecko/20100101 Firefox/104.0"
+::ffff:127.0.0.1 - - [01/Sep/2022:16:56:25 +0000] "POST /posts/create HTTP/1.1" 302 46 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:104.0) Gecko/20100101 Firefox/104.0"
+::ffff:127.0.0.1 - - [01/Sep/2022:16:56:25 +0000] "GET / HTTP/1.1" 200 10466 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:104.0) Gecko/20100101 Firefox/104.0"
+::ffff:127.0.0.1 - - [01/Sep/2022:17:02:25 +0000] "GET / HTTP/1.1" 200 10271 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:104.0) Gecko/20100101 Firefox/104.0"
