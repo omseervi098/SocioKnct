@@ -1,6 +1,6 @@
 <div id="post-<%= post._id %>" class="post">
     <div class="ithpost">
-        <%= post.user.avatar %>
+        
         <div class="name">
             <span>
                 <% if(post.user.avatar){ %>
@@ -23,6 +23,7 @@
         </div>
         <div class="content">
             <%= post.content %>
+            
             <% if(post.image){ %>
             <img src="<%= post.image %>" alt="">
             <% } %>
