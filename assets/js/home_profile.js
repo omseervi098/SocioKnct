@@ -1,6 +1,6 @@
 {
     function filePreview(input){
-        console.log(input.files);
+        
         if(input.files && input.files[0]){
             var reader = new FileReader();
             reader.onload = function(e){
@@ -11,7 +11,7 @@
         }
     }
     $("#input-file").change(function(){
-        console.log(this);
+       
         filePreview(this);
     })
     let addfriend=function(){
@@ -23,7 +23,7 @@
                 url:"/remove",
                 data:connect.serialize(),
                 success:function(data){
-                    console.log(data);
+                    
                     window.location.reload();
                 },error:function(err){
                     console.log(err)

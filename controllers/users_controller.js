@@ -18,7 +18,7 @@ module.exports.profile = async function (req, res) {
       path: "friendsList",
       populate: { path: "friendId" },
     });
-    console.log(curruser.friendsList);
+    
     let isFriend = false;
     // console.log(friend);
     //Find all post of the user
@@ -53,7 +53,7 @@ module.exports.profile = async function (req, res) {
 module.exports.update = async function (req, res) {
   if (req.user.id == req.params.id) {
     try {
-      let user = await User.findByIdAndUpdate(req.params.id);
+      let user = await User.findByIdAndUpdate(req.params.id).select("-password");
       //Accessing static function of the model
       User.uploadedAvatar(req, res, (err) => {
         if (err) {
@@ -87,7 +87,7 @@ module.exports.update = async function (req, res) {
             ) {
               fs.unlinkSync(path.join(__dirname, "..", user.avatar));
             }
-          }console.log(req.file.filename)
+          }
           //If there is an avatar it will save file name in the database
           user.avatar = User.avatarPath + "/" + req.file.filename;
         }
@@ -167,7 +167,7 @@ module.exports.verifyEmail = async (req, res) => {
       email:req.body.email,
       token:token
     })
-    console.log(verifyemails);
+    
     //send mail to the user
     verifyEmailMailer.verifyEmailMail(req.body.email, token);
     req.flash("success", "Verification mail sent");

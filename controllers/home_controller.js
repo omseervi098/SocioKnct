@@ -11,7 +11,7 @@ module.exports.home = async function (req, res) {
   try {
     let posts = await Post.find({})
       .sort("-createdAt")
-      .populate("user")
+      .populate("user", "name avatar email")
       .populate({
         path: "comments",
         populate: {
@@ -19,7 +19,7 @@ module.exports.home = async function (req, res) {
         },
       });
     //console.log(posts.comments);
-    let users = await User.find({});
+    let users = await User.find({}).select("-password");
     //Find all friends of the current user
 
     if (req.user) {
@@ -59,7 +59,7 @@ module.exports.home = async function (req, res) {
 
 module.exports.acceptFriend = function (req, res) {
   //console.log(req.user)
-  console.log(req.body.receiverName,req.body.senderName,req.body.senderId);
+  
   async.parallel(
     [
       function (callback) {
@@ -104,7 +104,7 @@ module.exports.acceptFriend = function (req, res) {
             },
             (err, count) => {
               let user = User.findOne({username:req.body.receiverName},(err,user)=>{
-                console.log(user.email);
+                
                 newFriendRequest.add({
                 email:user.email,
                 curruser:{
@@ -151,7 +151,7 @@ module.exports.acceptFriend = function (req, res) {
               $inc: { totalRequest: -1 },
             },
             (err, count) => {
-              console.log(3);
+              
               callback(err, count);
             }
           );
@@ -181,7 +181,7 @@ module.exports.acceptFriend = function (req, res) {
             (err, count) => {
               //Send email to user when friend request is accepted
              
-              console.log(4);
+            
               callback(err, count);
             }
           );
@@ -203,7 +203,7 @@ module.exports.acceptFriend = function (req, res) {
               $inc: { totalRequest: -1 },
             },
             (err, count) => {
-              console.log(5);
+              
               callback(err, count);
             }
           );
@@ -224,7 +224,7 @@ module.exports.acceptFriend = function (req, res) {
               },
             },
             (err, count) => {
-              console.log(6);
+              
               callback(err, count);
             }
           );
@@ -246,6 +246,7 @@ module.exports.autoComplete = async function (req, res) {
     let user = await User.find({ name: regex }, { name: 1 })
       .sort("-updatedAt")
       .sort("-createdAt")
+      .select("-password")
       .limit(10);
 
     var users = [];
@@ -285,6 +286,7 @@ module.exports.search = async function (req, res) {
   let user = await User.find({ name: new RegExp(query, "i") })
     .sort("-updatedAt")
     .sort("-createdAt")
+    .select("-password")
     .limit(10);
   
   return res.render("search", {
@@ -363,8 +365,7 @@ module.exports.removeFriend = async function (req, res) {
       ]
     })
     let to_user=user1.username;
-    console.log("chat  and chatroom removed");
-    
+   
     //console.log(user.friendsList)
     //console.log(user1.friendsList)
     return res.status(200).json({

@@ -29,7 +29,7 @@ module.exports.create = async (req, res) => {
       }
       //console.log(req.file);
       let temp =Post.imagePath+'/'+req.file.filename;
-      console.log(temp)
+      
       await Post.create({
         content: req.body.content,
         user: req.user._id,

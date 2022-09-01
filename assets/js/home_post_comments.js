@@ -103,7 +103,7 @@ class PostComments{
                 url: $(deleteLink).prop('href'),
                 success: function(data){
                     $(`#comment-${data.data.comment_id}`).remove();
-                    console.log(`#comment-${data.data.comment_id}`);
+                    //console.log(`#comment-${data.data.comment_id}`);
                     new Noty({
                         theme: 'relax',
                         text: "Comment Deleted !!",

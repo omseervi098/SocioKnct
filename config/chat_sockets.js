@@ -17,7 +17,7 @@ module.exports.chatSockets = function(socketServer){
 
         
         socket.on('join_room', async function(data){
-            console.log('joining request rec.', data);
+          
             room =await Chatroom.findById(data.chatroom);
             socket.join(data.chatroom);
             io.in(data.chatroom).emit('user_joined', data);

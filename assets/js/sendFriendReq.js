@@ -4,7 +4,7 @@ var sender = $('#currentuser').val();
 var receiverName;
 
 function addFriend(name) {
-	console.log(name);
+	
 	
       $.ajax({
         url: '/add-friend',
@@ -40,9 +40,6 @@ $(document).ready(function(){
 					senderName: senderName
 				},
 				success: function(data) {
-					if(typeof data == 'object'){
-						console.log(data)
-					}
 				
 					//When successfull reload the page
 					window.location.reload();
@@ -68,9 +65,7 @@ $(document).ready(function(){
 					user_Id: user_Id
 				},
 				success: function(data) {
-					if(typeof data == 'object'){
-						console.log(data)
-					}
+					
 					console.log('Request cancelled');
 					//When successfull reload the page
 					//window.location.reload();
