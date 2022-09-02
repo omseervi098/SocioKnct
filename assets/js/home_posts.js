@@ -3,7 +3,6 @@
   let createPost = function () {
     let newPostForm = $("#new-post-form");
     newPostForm.submit((e) => {
-      console.log($('#image').val());
       if ($("#image").val() == "") {
         e.preventDefault();
         $.ajax({
@@ -30,6 +29,21 @@
             console.log(err);
           },
         });
+      }else{
+        //check file type
+        let file = $("#image")[0].files[0];
+        let fileType = file.type;
+        if (fileType != "image/jpeg" && fileType != "image/png" && fileType!="image/jpeg" && fileType!="image/gif") {
+          new Noty({
+            theme: "relax",
+            type: "error",
+            layout: "topRight",
+            text: "Invalid File Type Only PNG,JPG,JPEG,GIF Allowed",
+            timeout: 1500,
+          }).show();
+          e.preventDefault();
+        }
+
       }
     });
   };
