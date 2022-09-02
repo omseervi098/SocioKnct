@@ -2475,3 +2475,22 @@
 ::ffff:127.0.0.1 - - [02/Sep/2022:06:07:08 +0000] "GET /favicon.ico HTTP/1.1" 404 150 "http://socioknct.tk/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:104.0) Gecko/20100101 Firefox/104.0"
 ::ffff:127.0.0.1 - - [02/Sep/2022:06:07:27 +0000] "GET /users/login HTTP/1.1" 304 - "http://socioknct.tk/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:104.0) Gecko/20100101 Firefox/104.0"
 ::ffff:127.0.0.1 - - [02/Sep/2022:06:07:28 +0000] "GET /favicon.ico HTTP/1.1" 404 150 "http://socioknct.tk/users/login" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:104.0) Gecko/20100101 Firefox/104.0"
+[0mGET / [32m200[0m 48.320 ms - 8684[0m
+[0mGET /users/profile/630d9f86160a298b705e87c3 [32m200[0m 17.313 ms - 6883[0m
+[0mGET /uploads/users/avatars/avatar-1661840189050-525913362 [33m404[0m 8.693 ms - 191[0m
+[0mGET / [32m200[0m 17.389 ms - 8684[0m
+[0mGET / [36m304[0m 39.621 ms - -[0m
+[0mGET / [32m200[0m 39.629 ms - 9152[0m
+[0mPOST /posts/create [36m302[0m 8.130 ms - 46[0m
+[0mGET / [32m200[0m 27.854 ms - 11276[0m
+[0mGET /uploads/users/avatars/avatar-1661840189050-525913362 [33m404[0m 8.569 ms - 191[0m
+[0mGET /posts/destroy/6311a46e245c025fdb64bfd9 [32m200[0m 25.258 ms - 76[0m
+[0mGET / [32m200[0m 15.622 ms - 8684[0m
+[0mGET /users/signout [36m302[0m 20.399 ms - 46[0m
+[0mGET / [32m200[0m 17.407 ms - 6146[0m
+[0mGET /users/login [32m200[0m 6.486 ms - 5260[0m
+[0mGET /users/auth/google [36m302[0m 3.319 ms - 0[0m
+[0mGET /users/auth/google/callback?code=4%2F0AdQt8qgSRCQpYUzKlVcH5-vGw7JWq8tBMwLIuA6nEQt9oN4LI4U58MOvXhxV_JCZAEMIEw&scope=email+profile+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.profile+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.email+openid&authuser=2&prompt=consent [36m302[0m 734.841 ms - 46[0m
+[0mGET / [32m200[0m 23.807 ms - 8926[0m
+[0mGET /users/signout [36m302[0m 7.868 ms - 46[0m
+[0mGET / [32m200[0m 9.650 ms - 6146[0m
