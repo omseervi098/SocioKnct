@@ -24,7 +24,7 @@ A Social Medial Application where user can post,comment and like other post.
 Clone the project
 
 ```bash
-  git clone https://link-to-project
+  git clone https://github.com/omseervi098/SocioKnct
 ```
 
 Go to the project directory
