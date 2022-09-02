@@ -2588,3 +2588,10 @@
 [0mGET /users/signout [36m302[0m 7.868 ms - 46[0m
 [0mGET / [32m200[0m 9.650 ms - 6146[0m
 >>>>>>> 7371cabe0dd7948c69ac1b8d50d19a1a1bc1ad79
+[0mGET / [32m200[0m 79.088 ms - 5903[0m
+[0mGET /favicon.ico [33m404[0m 8.538 ms - 150[0m
+[0mGET /users/login [32m200[0m 12.302 ms - 5260[0m
+[0mGET /users/auth/google [36m302[0m 11.677 ms - 0[0m
+[0mGET /users/auth/google/callback?code=4%2F0AdQt8qgwBQwB9aG6ADWSVx1bM3YvKptAIYExyG9nqeeZrT3gmnn4ADXwCfJOs6MG_P-PzQ&scope=email+profile+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.profile+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.email+openid&authuser=2&prompt=consent [36m302[0m 658.465 ms - 46[0m
+[0mGET / [32m200[0m 81.184 ms - 8926[0m
+[0mGET /favicon.ico [0m-[0m - ms - -[0m
