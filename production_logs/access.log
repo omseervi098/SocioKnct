@@ -2595,3 +2595,483 @@
 [0mGET /users/auth/google/callback?code=4%2F0AdQt8qgwBQwB9aG6ADWSVx1bM3YvKptAIYExyG9nqeeZrT3gmnn4ADXwCfJOs6MG_P-PzQ&scope=email+profile+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.profile+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.email+openid&authuser=2&prompt=consent [36m302[0m 658.465 ms - 46[0m
 [0mGET / [32m200[0m 81.184 ms - 8926[0m
 [0mGET /favicon.ico [0m-[0m - ms - -[0m
+::ffff:127.0.0.1 - - [08/Oct/2022:16:47:36 +0000] "GET / HTTP/1.1" 200 7268 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:105.0) Gecko/20100101 Firefox/105.0"
+::ffff:127.0.0.1 - - [08/Oct/2022:16:47:38 +0000] "GET /favicon.ico HTTP/1.1" 404 150 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:105.0) Gecko/20100101 Firefox/105.0"
+::ffff:127.0.0.1 - - [08/Oct/2022:16:47:42 +0000] "GET /users/login HTTP/1.1" 200 5370 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:105.0) Gecko/20100101 Firefox/105.0"
+::ffff:127.0.0.1 - - [08/Oct/2022:16:47:45 +0000] "GET /users/auth/google HTTP/1.1" 302 0 "http://localhost:3000/users/login" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:105.0) Gecko/20100101 Firefox/105.0"
+::ffff:127.0.0.1 - - [09/Oct/2022:02:53:02 +0000] "GET / HTTP/1.1" 200 7268 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:105.0) Gecko/20100101 Firefox/105.0"
+::ffff:127.0.0.1 - - [09/Oct/2022:02:53:04 +0000] "GET /favicon.ico HTTP/1.1" 404 150 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:105.0) Gecko/20100101 Firefox/105.0"
+::ffff:127.0.0.1 - - [09/Oct/2022:02:53:06 +0000] "GET /users/login HTTP/1.1" 200 5370 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:105.0) Gecko/20100101 Firefox/105.0"
+::ffff:127.0.0.1 - - [09/Oct/2022:02:53:11 +0000] "GET /users/auth/google HTTP/1.1" 302 0 "http://localhost:3000/users/login" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:105.0) Gecko/20100101 Firefox/105.0"
+::ffff:127.0.0.1 - - [09/Oct/2022:02:53:14 +0000] "GET /users/auth/google/callback?code=4%2F0ARtbsJrKU3sXVHYDGcu3Rrl7r91cTY73Y_LQOPpP3QX5Fbh242vl6ltinVkcP82CGeoxIQ&scope=email+profile+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.profile+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.email+openid&authuser=2&prompt=consent HTTP/1.1" 500 973 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:105.0) Gecko/20100101 Firefox/105.0"
+::ffff:127.0.0.1 - - [09/Oct/2022:02:53:26 +0000] "GET /users/auth/google/callback?code=4%2F0ARtbsJpM9B1kS4jo8BSjtMDnijM9D-QVnbtp1TlwqG6Ww8H41pYanZJk2eczkk88FVYsxg&scope=email+profile+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.profile+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.email+openid&authuser=2&prompt=consent HTTP/1.1" 500 973 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:105.0) Gecko/20100101 Firefox/105.0"
+::ffff:127.0.0.1 - - [09/Oct/2022:02:54:07 +0000] "POST /users/create-session HTTP/1.1" 302 68 "http://localhost:3000/users/login" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:105.0) Gecko/20100101 Firefox/105.0"
+::ffff:127.0.0.1 - - [09/Oct/2022:02:54:07 +0000] "GET /users/login HTTP/1.1" 200 5612 "http://localhost:3000/users/login" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:105.0) Gecko/20100101 Firefox/105.0"
+::ffff:127.0.0.1 - - [09/Oct/2022:02:54:11 +0000] "GET /users/forgot-password HTTP/1.1" 200 4822 "http://localhost:3000/users/login" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:105.0) Gecko/20100101 Firefox/105.0"
+::ffff:127.0.0.1 - - [09/Oct/2022:02:54:11 +0000] "GET /favicon.ico HTTP/1.1" - - "http://localhost:3000/users/forgot-password" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:105.0) Gecko/20100101 Firefox/105.0"
+::ffff:127.0.0.1 - - [09/Oct/2022:02:54:15 +0000] "POST /users/forgot-password/create-access-token HTTP/1.1" 302 130 "http://localhost:3000/users/forgot-password" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:105.0) Gecko/20100101 Firefox/105.0"
+::ffff:127.0.0.1 - - [09/Oct/2022:02:54:15 +0000] "GET /users/forgot-password HTTP/1.1" 200 5064 "http://localhost:3000/users/forgot-password" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:105.0) Gecko/20100101 Firefox/105.0"
+::ffff:127.0.0.1 - - [09/Oct/2022:02:54:45 +0000] "GET /users/forgot-password/reset-password/?accessToken=692f6087296cb462b5454fe3d05b98166ee3a8a4 HTTP/1.1" 200 5099 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:105.0) Gecko/20100101 Firefox/105.0"
+::ffff:127.0.0.1 - - [09/Oct/2022:02:54:58 +0000] "POST /users/reset-pass?accessToken=692f6087296cb462b5454fe3d05b98166ee3a8a4&email=omseervi098@gmail.com HTTP/1.1" 302 68 "http://localhost:3000/users/forgot-password/reset-password/?accessToken=692f6087296cb462b5454fe3d05b98166ee3a8a4" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:105.0) Gecko/20100101 Firefox/105.0"
+::ffff:127.0.0.1 - - [09/Oct/2022:02:54:58 +0000] "GET /users/login HTTP/1.1" 200 5619 "http://localhost:3000/users/forgot-password/reset-password/?accessToken=692f6087296cb462b5454fe3d05b98166ee3a8a4" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:105.0) Gecko/20100101 Firefox/105.0"
+::ffff:127.0.0.1 - - [09/Oct/2022:02:55:13 +0000] "POST /users/create-session HTTP/1.1" 302 68 "http://localhost:3000/users/login" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:105.0) Gecko/20100101 Firefox/105.0"
+::ffff:127.0.0.1 - - [09/Oct/2022:02:55:13 +0000] "GET /users/login HTTP/1.1" 200 5612 "http://localhost:3000/users/login" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:105.0) Gecko/20100101 Firefox/105.0"
+::ffff:127.0.0.1 - - [09/Oct/2022:02:55:25 +0000] "POST /users/create-session HTTP/1.1" 302 46 "http://localhost:3000/users/login" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:105.0) Gecko/20100101 Firefox/105.0"
+::ffff:127.0.0.1 - - [09/Oct/2022:02:55:25 +0000] "GET / HTTP/1.1" 200 10554 "http://localhost:3000/users/login" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:105.0) Gecko/20100101 Firefox/105.0"
+::ffff:127.0.0.1 - - [09/Oct/2022:02:55:31 +0000] "GET /posts/destroy/6310e439ca55c02d0e291a92 HTTP/1.1" 200 76 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:105.0) Gecko/20100101 Firefox/105.0"
+::ffff:127.0.0.1 - - [09/Oct/2022:02:56:38 +0000] "GET / HTTP/1.1" 200 8440 "http://localhost:3000/users/login" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:105.0) Gecko/20100101 Firefox/105.0"
+::ffff:127.0.0.1 - - [09/Oct/2022:02:56:38 +0000] "GET /favicon.ico HTTP/1.1" - - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:105.0) Gecko/20100101 Firefox/105.0"
+::ffff:127.0.0.1 - - [09/Oct/2022:02:56:53 +0000] "POST /posts/create HTTP/1.1" 302 46 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:105.0) Gecko/20100101 Firefox/105.0"
+::ffff:127.0.0.1 - - [09/Oct/2022:02:56:53 +0000] "GET / HTTP/1.1" 200 10570 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:105.0) Gecko/20100101 Firefox/105.0"
+::ffff:127.0.0.1 - - [09/Oct/2022:02:56:53 +0000] "GET /favicon.ico HTTP/1.1" - - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:105.0) Gecko/20100101 Firefox/105.0"
+::ffff:127.0.0.1 - - [09/Oct/2022:02:57:02 +0000] "GET /users/profile/6310cadd8d343a83fc405147 HTTP/1.1" 200 8671 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:105.0) Gecko/20100101 Firefox/105.0"
+- - - [09/Oct/2022:02:57:02 +0000] "GET /favicon.ico HTTP/1.1" - - "http://localhost:3000/users/profile/6310cadd8d343a83fc405147" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:105.0) Gecko/20100101 Firefox/105.0"
+::ffff:127.0.0.1 - - [09/Oct/2022:02:57:04 +0000] "GET /autocomplete?callback=jQuery360043524792732622053_1665284222297&term=om&_=1665284222298 HTTP/1.1" 200 245 "http://localhost:3000/users/profile/6310cadd8d343a83fc405147" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:105.0) Gecko/20100101 Firefox/105.0"
+::ffff:127.0.0.1 - - [09/Oct/2022:02:57:04 +0000] "GET /search/om HTTP/1.1" 200 6763 "http://localhost:3000/users/profile/6310cadd8d343a83fc405147" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:105.0) Gecko/20100101 Firefox/105.0"
+::ffff:127.0.0.1 - - [09/Oct/2022:02:57:04 +0000] "GET /favicon.ico HTTP/1.1" - - "http://localhost:3000/search/om" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:105.0) Gecko/20100101 Firefox/105.0"
+::ffff:127.0.0.1 - - [09/Oct/2022:02:57:07 +0000] "POST /add-friend HTTP/1.1" 302 53 "http://localhost:3000/search/om" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:105.0) Gecko/20100101 Firefox/105.0"
+::ffff:127.0.0.1 - - [09/Oct/2022:02:57:07 +0000] "GET /search/om HTTP/1.1" 200 6735 "http://localhost:3000/search/om" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:105.0) Gecko/20100101 Firefox/105.0"
+::ffff:127.0.0.1 - - [09/Oct/2022:02:57:08 +0000] "GET /users/profile/6310ed8027db7bd3a6b34081 HTTP/1.1" 200 7954 "http://localhost:3000/search/om" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:105.0) Gecko/20100101 Firefox/105.0"
+::ffff:127.0.0.1 - - [09/Oct/2022:02:57:10 +0000] "GET /users/profile/6310cadd8d343a83fc405147 HTTP/1.1" 304 - "http://localhost:3000/users/profile/6310ed8027db7bd3a6b34081" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:105.0) Gecko/20100101 Firefox/105.0"
+::ffff:127.0.0.1 - - [09/Oct/2022:02:57:12 +0000] "GET /users/signout HTTP/1.1" 302 46 "http://localhost:3000/users/profile/6310cadd8d343a83fc405147" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:105.0) Gecko/20100101 Firefox/105.0"
+::ffff:127.0.0.1 - - [09/Oct/2022:02:57:12 +0000] "GET / HTTP/1.1" 200 7533 "http://localhost:3000/users/profile/6310cadd8d343a83fc405147" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:105.0) Gecko/20100101 Firefox/105.0"
+::ffff:127.0.0.1 - - [09/Oct/2022:02:57:14 +0000] "GET /users/login HTTP/1.1" 200 5370 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:105.0) Gecko/20100101 Firefox/105.0"
+::ffff:127.0.0.1 - - [09/Oct/2022:02:57:14 +0000] "GET /favicon.ico HTTP/1.1" - - "http://localhost:3000/users/login" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:105.0) Gecko/20100101 Firefox/105.0"
+::ffff:127.0.0.1 - - [09/Oct/2022:02:57:26 +0000] "POST /users/create-session HTTP/1.1" 302 68 "http://localhost:3000/users/login" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:105.0) Gecko/20100101 Firefox/105.0"
+::ffff:127.0.0.1 - - [09/Oct/2022:02:57:26 +0000] "GET /users/login HTTP/1.1" 200 5612 "http://localhost:3000/users/login" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:105.0) Gecko/20100101 Firefox/105.0"
+::ffff:127.0.0.1 - - [09/Oct/2022:02:57:29 +0000] "POST /users/create-session HTTP/1.1" 302 68 "http://localhost:3000/users/login" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:105.0) Gecko/20100101 Firefox/105.0"
+::ffff:127.0.0.1 - - [09/Oct/2022:02:57:29 +0000] "GET /users/login HTTP/1.1" 200 5370 "http://localhost:3000/users/login" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:105.0) Gecko/20100101 Firefox/105.0"
+- - - [09/Oct/2022:02:57:29 +0000] "GET /favicon.ico HTTP/1.1" - - "http://localhost:3000/users/login" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:105.0) Gecko/20100101 Firefox/105.0"
+::ffff:127.0.0.1 - - [09/Oct/2022:02:57:32 +0000] "GET /users/forgot-password HTTP/1.1" 200 4822 "http://localhost:3000/users/login" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:105.0) Gecko/20100101 Firefox/105.0"
+::ffff:127.0.0.1 - - [09/Oct/2022:02:57:32 +0000] "GET /favicon.ico HTTP/1.1" - - "http://localhost:3000/users/forgot-password" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:105.0) Gecko/20100101 Firefox/105.0"
+::ffff:127.0.0.1 - - [09/Oct/2022:02:57:42 +0000] "POST /users/forgot-password/create-access-token HTTP/1.1" 302 130 "http://localhost:3000/users/forgot-password" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:105.0) Gecko/20100101 Firefox/105.0"
+::ffff:127.0.0.1 - - [09/Oct/2022:02:57:42 +0000] "GET /users/forgot-password HTTP/1.1" 200 5064 "http://localhost:3000/users/forgot-password" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:105.0) Gecko/20100101 Firefox/105.0"
+- - - [09/Oct/2022:02:57:42 +0000] "GET /favicon.ico HTTP/1.1" - - "http://localhost:3000/users/forgot-password" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:105.0) Gecko/20100101 Firefox/105.0"
+::ffff:127.0.0.1 - - [09/Oct/2022:02:58:06 +0000] "GET /users/forgot-password/reset-password/?accessToken=3f119867a4ac10ee9458be8b21c20d6e4af4d72b HTTP/1.1" 200 5098 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:105.0) Gecko/20100101 Firefox/105.0"
+::ffff:127.0.0.1 - - [09/Oct/2022:02:58:06 +0000] "GET /favicon.ico HTTP/1.1" - - "http://localhost:3000/users/forgot-password/reset-password/?accessToken=3f119867a4ac10ee9458be8b21c20d6e4af4d72b" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:105.0) Gecko/20100101 Firefox/105.0"
+::ffff:127.0.0.1 - - [09/Oct/2022:02:58:13 +0000] "POST /users/reset-pass?accessToken=3f119867a4ac10ee9458be8b21c20d6e4af4d72b&email=om78900987@gmail.com HTTP/1.1" 302 68 "http://localhost:3000/users/forgot-password/reset-password/?accessToken=3f119867a4ac10ee9458be8b21c20d6e4af4d72b" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:105.0) Gecko/20100101 Firefox/105.0"
+::ffff:127.0.0.1 - - [09/Oct/2022:02:58:13 +0000] "GET /users/login HTTP/1.1" 200 5619 "http://localhost:3000/users/forgot-password/reset-password/?accessToken=3f119867a4ac10ee9458be8b21c20d6e4af4d72b" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:105.0) Gecko/20100101 Firefox/105.0"
+::ffff:127.0.0.1 - - [09/Oct/2022:02:58:13 +0000] "GET /favicon.ico HTTP/1.1" - - "http://localhost:3000/users/login" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:105.0) Gecko/20100101 Firefox/105.0"
+::ffff:127.0.0.1 - - [09/Oct/2022:02:58:30 +0000] "GET /users/forgot-password HTTP/1.1" 200 4822 "http://localhost:3000/users/login" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:105.0) Gecko/20100101 Firefox/105.0"
+- - - [09/Oct/2022:02:58:31 +0000] "GET /favicon.ico HTTP/1.1" - - "http://localhost:3000/users/forgot-password" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:105.0) Gecko/20100101 Firefox/105.0"
+::ffff:127.0.0.1 - - [09/Oct/2022:02:58:32 +0000] "GET /users/login HTTP/1.1" - - "http://localhost:3000/users/forgot-password/reset-password/?accessToken=3f119867a4ac10ee9458be8b21c20d6e4af4d72b" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:105.0) Gecko/20100101 Firefox/105.0"
+::ffff:127.0.0.1 - - [09/Oct/2022:02:58:38 +0000] "POST /users/create-session HTTP/1.1" 302 46 "http://localhost:3000/users/login" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:105.0) Gecko/20100101 Firefox/105.0"
+::ffff:127.0.0.1 - - [09/Oct/2022:02:58:38 +0000] "GET / HTTP/1.1" 200 11435 "http://localhost:3000/users/login" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:105.0) Gecko/20100101 Firefox/105.0"
+::ffff:127.0.0.1 - - [09/Oct/2022:02:58:46 +0000] "GET / HTTP/1.1" 200 12060 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:105.0) Gecko/20100101 Firefox/105.0"
+::ffff:127.0.0.1 - - [09/Oct/2022:02:58:46 +0000] "GET / HTTP/1.1" 200 10752 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:105.0) Gecko/20100101 Firefox/105.0"
+::ffff:127.0.0.1 - - [09/Oct/2022:02:58:47 +0000] "POST /add-friend/ HTTP/1.1" - - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:105.0) Gecko/20100101 Firefox/105.0"
+::ffff:127.0.0.1 - - [09/Oct/2022:02:58:47 +0000] "GET / HTTP/1.1" 200 10752 "http://localhost:3000/users/login" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:105.0) Gecko/20100101 Firefox/105.0"
+::ffff:127.0.0.1 - - [09/Oct/2022:02:58:47 +0000] "GET /favicon.ico HTTP/1.1" - - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:105.0) Gecko/20100101 Firefox/105.0"
+::ffff:127.0.0.1 - - [09/Oct/2022:02:58:49 +0000] "GET /messages/chatroom?friend=6310cadd8d343a83fc405147 HTTP/1.1" 200 375 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:105.0) Gecko/20100101 Firefox/105.0"
+::ffff:127.0.0.1 - - [09/Oct/2022:02:58:49 +0000] "GET /images/default-avatar.png HTTP/1.1" 404 164 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:105.0) Gecko/20100101 Firefox/105.0"
+::ffff:127.0.0.1 - - [09/Oct/2022:02:58:53 +0000] "POST /likes/toggle/?id=6342387536354e25b292a7af&type=Post HTTP/1.1" 200 36 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:105.0) Gecko/20100101 Firefox/105.0"
+::ffff:127.0.0.1 - - [09/Oct/2022:02:58:58 +0000] "POST /comments/create HTTP/1.1" 200 338 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:105.0) Gecko/20100101 Firefox/105.0"
+::ffff:127.0.0.1 - - [09/Oct/2022:02:59:00 +0000] "POST /comments/create HTTP/1.1" 200 338 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:105.0) Gecko/20100101 Firefox/105.0"
+::ffff:127.0.0.1 - - [09/Oct/2022:02:59:04 +0000] "GET / HTTP/1.1" 200 13706 "http://localhost:3000/users/login" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:105.0) Gecko/20100101 Firefox/105.0"
+- - - [09/Oct/2022:02:59:04 +0000] "GET /favicon.ico HTTP/1.1" - - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:105.0) Gecko/20100101 Firefox/105.0"
+::ffff:127.0.0.1 - - [09/Oct/2022:02:59:07 +0000] "GET /comments/destroy/634238f436354e25b292a817 HTTP/1.1" 200 82 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:105.0) Gecko/20100101 Firefox/105.0"
+::ffff:127.0.0.1 - - [09/Oct/2022:02:59:09 +0000] "GET /messages/chatroom?friend=6310cadd8d343a83fc405147 HTTP/1.1" 200 375 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:105.0) Gecko/20100101 Firefox/105.0"
+::ffff:127.0.0.1 - - [09/Oct/2022:02:59:09 +0000] "GET /images/default-avatar.png HTTP/1.1" 404 164 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:105.0) Gecko/20100101 Firefox/105.0"
+::ffff:127.0.0.1 - - [09/Oct/2022:02:59:25 +0000] "GET / HTTP/1.1" 200 12229 "http://localhost:3000/users/login" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:105.0) Gecko/20100101 Firefox/105.0"
+::ffff:127.0.0.1 - - [09/Oct/2022:02:59:25 +0000] "GET /favicon.ico HTTP/1.1" - - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:105.0) Gecko/20100101 Firefox/105.0"
+::ffff:127.0.0.1 - - [09/Oct/2022:02:59:27 +0000] "GET /messages/chatroom?friend=6310cadd8d343a83fc405147 HTTP/1.1" 200 375 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:105.0) Gecko/20100101 Firefox/105.0"
+::ffff:127.0.0.1 - - [09/Oct/2022:02:59:27 +0000] "GET /images/default-avatar.png HTTP/1.1" 404 164 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:105.0) Gecko/20100101 Firefox/105.0"
+::ffff:127.0.0.1 - - [09/Oct/2022:02:59:40 +0000] "GET /users/signout HTTP/1.1" 302 46 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:105.0) Gecko/20100101 Firefox/105.0"
+::ffff:127.0.0.1 - - [09/Oct/2022:02:59:40 +0000] "GET / HTTP/1.1" 200 8404 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:105.0) Gecko/20100101 Firefox/105.0"
+::ffff:127.0.0.1 - - [09/Oct/2022:02:59:40 +0000] "GET /favicon.ico HTTP/1.1" 404 150 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:105.0) Gecko/20100101 Firefox/105.0"
+::ffff:127.0.0.1 - - [09/Oct/2022:02:59:42 +0000] "GET /users/login HTTP/1.1" 200 5370 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:105.0) Gecko/20100101 Firefox/105.0"
+::ffff:127.0.0.1 - - [09/Oct/2022:02:59:42 +0000] "GET /favicon.ico HTTP/1.1" - - "http://localhost:3000/users/login" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:105.0) Gecko/20100101 Firefox/105.0"
+::ffff:127.0.0.1 - - [04/Nov/2022:14:35:03 +0000] "GET / HTTP/1.1" 200 8161 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:106.0) Gecko/20100101 Firefox/106.0"
+::ffff:127.0.0.1 - - [04/Nov/2022:14:35:05 +0000] "GET /favicon.ico HTTP/1.1" 404 150 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:106.0) Gecko/20100101 Firefox/106.0"
+::ffff:127.0.0.1 - - [04/Nov/2022:14:35:06 +0000] "GET /users/login HTTP/1.1" 200 5370 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:106.0) Gecko/20100101 Firefox/106.0"
+::ffff:127.0.0.1 - - [04/Nov/2022:14:35:10 +0000] "GET /users/auth/google HTTP/1.1" 302 0 "http://localhost:3000/users/login" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:106.0) Gecko/20100101 Firefox/106.0"
+::ffff:127.0.0.1 - - [04/Nov/2022:14:35:13 +0000] "GET /users/auth/google/callback?code=4%2F0ARtbsJp4VMnws6ybwI9obQgJgVsb2G2zxxL-_GTC3Ii-85u9nz_nwOQKBNtW1ulw2J7H_Q&scope=email+profile+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.profile+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.email+openid&authuser=2&prompt=consent HTTP/1.1" 500 973 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:106.0) Gecko/20100101 Firefox/106.0"
+::ffff:127.0.0.1 - - [04/Nov/2022:14:35:49 +0000] "POST /users/create-session HTTP/1.1" 302 46 "http://localhost:3000/users/login" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:106.0) Gecko/20100101 Firefox/106.0"
+::ffff:127.0.0.1 - - [04/Nov/2022:14:35:49 +0000] "GET / HTTP/1.1" 200 12499 "http://localhost:3000/users/login" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:106.0) Gecko/20100101 Firefox/106.0"
+::ffff:127.0.0.1 - - [04/Nov/2022:14:35:51 +0000] "GET /messages/chatroom?friend=6310ed8027db7bd3a6b34081 HTTP/1.1" 200 375 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:106.0) Gecko/20100101 Firefox/106.0"
+::ffff:127.0.0.1 - - [04/Nov/2022:14:35:51 +0000] "GET /images/default-avatar.png HTTP/1.1" 404 164 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:106.0) Gecko/20100101 Firefox/106.0"
+::ffff:127.0.0.1 - - [04/Nov/2022:14:36:00 +0000] "GET / HTTP/1.1" 200 8161 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:106.0) Gecko/20100101 Firefox/106.0"
+::ffff:127.0.0.1 - - [04/Nov/2022:14:36:27 +0000] "GET / HTTP/1.1" 200 12257 "http://localhost:3000/users/login" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:106.0) Gecko/20100101 Firefox/106.0"
+::ffff:127.0.0.1 - - [04/Nov/2022:14:36:28 +0000] "GET /favicon.ico HTTP/1.1" 404 150 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:106.0) Gecko/20100101 Firefox/106.0"
+::ffff:127.0.0.1 - - [04/Nov/2022:14:36:29 +0000] "GET /messages/chatroom?friend=6310ed8027db7bd3a6b34081 HTTP/1.1" 200 375 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:106.0) Gecko/20100101 Firefox/106.0"
+::ffff:127.0.0.1 - - [04/Nov/2022:14:36:29 +0000] "GET /images/default-avatar.png HTTP/1.1" 404 164 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:106.0) Gecko/20100101 Firefox/106.0"
+::ffff:127.0.0.1 - - [04/Nov/2022:14:36:44 +0000] "GET /posts/destroy/6342387536354e25b292a7af HTTP/1.1" 200 76 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:106.0) Gecko/20100101 Firefox/106.0"
+::ffff:127.0.0.1 - - [04/Nov/2022:14:36:47 +0000] "GET /users/profile/6310cadd8d343a83fc405147 HTTP/1.1" 200 6974 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:106.0) Gecko/20100101 Firefox/106.0"
+::ffff:127.0.0.1 - - [04/Nov/2022:14:36:48 +0000] "GET /favicon.ico HTTP/1.1" 404 150 "http://localhost:3000/users/profile/6310cadd8d343a83fc405147" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:106.0) Gecko/20100101 Firefox/106.0"
+::ffff:127.0.0.1 - - [04/Nov/2022:14:36:50 +0000] "GET / HTTP/1.1" 200 8839 "http://localhost:3000/users/profile/6310cadd8d343a83fc405147" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:106.0) Gecko/20100101 Firefox/106.0"
+::ffff:127.0.0.1 - - [04/Nov/2022:14:36:51 +0000] "GET /favicon.ico HTTP/1.1" 404 150 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:106.0) Gecko/20100101 Firefox/106.0"
+::ffff:127.0.0.1 - - [04/Nov/2022:14:36:54 +0000] "GET /messages/chatroom?friend=6310ed8027db7bd3a6b34081 HTTP/1.1" 200 375 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:106.0) Gecko/20100101 Firefox/106.0"
+::ffff:127.0.0.1 - - [04/Nov/2022:14:36:54 +0000] "GET /images/default-avatar.png HTTP/1.1" 404 164 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:106.0) Gecko/20100101 Firefox/106.0"
+::ffff:127.0.0.1 - - [04/Nov/2022:14:37:11 +0000] "GET /messages/chatroom?friend=6310ed8027db7bd3a6b34081 HTTP/1.1" 200 375 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:106.0) Gecko/20100101 Firefox/106.0"
+::ffff:127.0.0.1 - - [04/Nov/2022:14:37:11 +0000] "GET /images/default-avatar.png HTTP/1.1" 404 164 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:106.0) Gecko/20100101 Firefox/106.0"
+::ffff:127.0.0.1 - - [04/Nov/2022:14:38:28 +0000] "GET / HTTP/1.1" 200 8839 "http://localhost:3000/users/profile/6310cadd8d343a83fc405147" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:106.0) Gecko/20100101 Firefox/106.0"
+::ffff:127.0.0.1 - - [04/Nov/2022:14:38:30 +0000] "GET /favicon.ico HTTP/1.1" 404 150 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:106.0) Gecko/20100101 Firefox/106.0"
+::ffff:127.0.0.1 - - [04/Nov/2022:14:38:31 +0000] "GET /messages/chatroom?friend=6310ed8027db7bd3a6b34081 HTTP/1.1" 200 375 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:106.0) Gecko/20100101 Firefox/106.0"
+::ffff:127.0.0.1 - - [04/Nov/2022:14:38:31 +0000] "GET /images/default-avatar.png HTTP/1.1" 404 164 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:106.0) Gecko/20100101 Firefox/106.0"
+[0mGET / [32m200[0m 64.322 ms - 5903[0m
+[0mGET /favicon.ico [33m404[0m 4.200 ms - 150[0m
+[0mGET /users/login [32m200[0m 4.794 ms - 5260[0m
+[0mGET /favicon.ico [33m404[0m 2.529 ms - 150[0m
+[0mGET /users/auth/google [36m302[0m 2.783 ms - 0[0m
+[0mGET /users/auth/google/callback?code=4%2F0ARtbsJrIuD4FqVLLEoZVYPX8DnZG4G4CyXJDuhAe9gHUTdOw3MnhxJuTpu4Vc1xMTPhVVg&scope=email+profile+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.profile+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.email+openid&authuser=2&prompt=consent [31m500[0m 228.710 ms - 973[0m
+[0mGET /users/login [32m200[0m 7.504 ms - 5260[0m
+[0mGET /favicon.ico [33m404[0m 2.108 ms - 150[0m
+[0mPOST /users/create-session [36m302[0m 9.077 ms - 68[0m
+[0mGET /users/login [32m200[0m 4.928 ms - 5502[0m
+[0mGET /favicon.ico [33m404[0m 2.772 ms - 150[0m
+[0mGET /users/forgot-password [32m200[0m 8.150 ms - 4723[0m
+[0mGET /favicon.ico [33m404[0m 2.837 ms - 150[0m
+[0mPOST /users/forgot-password/create-access-token [36m302[0m 30.962 ms - 130[0m
+[0mGET /users/forgot-password [32m200[0m 5.386 ms - 4965[0m
+[0mGET /favicon.ico [33m404[0m 2.225 ms - 150[0m
+[0mGET /users/forgot-password/reset-password/?accessToken=4ee9caf73dd7d52aea76e4e7f0ebb9145294adfd [32m200[0m 23.222 ms - 5000[0m
+[0mPOST /users/reset-pass?accessToken=4ee9caf73dd7d52aea76e4e7f0ebb9145294adfd&email=omseervi098@gmail.com [36m302[0m 15.828 ms - 68[0m
+[0mGET /users/login [32m200[0m 6.584 ms - 5509[0m
+[0mGET /users/login [32m200[0m 4.896 ms - 5260[0m
+[0mPOST /users/create-session [36m302[0m 8.660 ms - 46[0m
+[0mGET / [32m200[0m 18.536 ms - 8926[0m
+[0mGET /messages/chatroom?friend=630d9e7f1335ca5390dcd1bc [32m200[0m 24.865 ms - 666[0m
+[0mGET /messages/chatroom?friend=630d9e7f1335ca5390dcd1bc [36m304[0m 12.514 ms - -[0m
+[0mGET / [32m200[0m 12.007 ms - 5903[0m
+[0mGET / [32m200[0m 16.266 ms - 8684[0m
+[0mGET /favicon.ico [33m404[0m 6.496 ms - 150[0m
+[0mGET /messages/chatroom?friend=630d9e7f1335ca5390dcd1bc [32m200[0m 13.741 ms - 666[0m
+[0mGET /messages/chatroom?friend=630d9e7f1335ca5390dcd1bc [32m200[0m 11.543 ms - 666[0m
+[0mGET / [32m200[0m 15.435 ms - 8684[0m
+[0mGET /favicon.ico [33m404[0m 4.107 ms - 150[0m
+[0mGET /messages/chatroom?friend=630d9e7f1335ca5390dcd1bc [32m200[0m 17.582 ms - 666[0m
+[0mGET / [32m200[0m 12.738 ms - 5903[0m
+[0mGET /favicon.ico [33m404[0m 2.134 ms - 150[0m
+[0mGET /users/login [32m200[0m 5.563 ms - 5260[0m
+[0mGET /users/auth/google [36m302[0m 3.119 ms - 0[0m
+[0mGET /users/auth/google/callback?code=4%2F0ARtbsJpHOVMbalKi5WRps16oNbpsGJXzRWIZJ2G4gdROlij3lrQVgBb_NRRZyHkIP_m9hw&scope=email+profile+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.profile+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.email+openid&authuser=0&prompt=consent [31m500[0m 320.445 ms - 973[0m
+[0mGET /users/auth/google/callback?code=4%2F0ARtbsJrYl7tWyw12eKmGYRD2NcG6KLFyefPirdGHNcet5ycV3VhHBanO4h0aqa_4G72_1A&scope=email+profile+openid+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.profile+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.email&authuser=0&prompt=none [31m500[0m 241.830 ms - 973[0m
+[0mPOST /users/create-session [36m302[0m 7.506 ms - 68[0m
+[0mGET /users/login [32m200[0m 5.147 ms - 5502[0m
+[0mPOST /users/create-session [36m302[0m 7.725 ms - 46[0m
+[0mGET / [32m200[0m 15.611 ms - 8926[0m
+[0mGET /messages/chatroom?friend=630d9e7f1335ca5390dcd1bc [32m200[0m 16.845 ms - 666[0m
+[0mGET /messages/chatroom?friend=630d9e7f1335ca5390dcd1bc [36m304[0m 15.579 ms - -[0m
+[0mPOST /posts/create [36m302[0m 7.150 ms - 46[0m
+[0mGET / [32m200[0m 42.483 ms - 8684[0m
+[0mGET /favicon.ico [33m404[0m 9.407 ms - 150[0m
+[0mGET /messages/chatroom?friend=630d9e7f1335ca5390dcd1bc [32m200[0m 15.438 ms - 666[0m
+[0mGET /users/profile/630d9e7f1335ca5390dcd1bc [32m200[0m 16.331 ms - 7667[0m
+[0mGET /favicon.ico [33m404[0m 6.207 ms - 150[0m
+[0mPOST /users/create-session [36m302[0m 10.653 ms - 68[0m
+[0mGET /users/login [36m302[0m 5.919 ms - 72[0m
+[0mGET /users/profile [33m404[0m 4.647 ms - 152[0m
+[0mPOST /users/create-session [36m302[0m 10.180 ms - 68[0m
+[0mGET /users/login [36m302[0m 3.452 ms - 72[0m
+[0mGET /users/profile [33m404[0m 4.425 ms - 152[0m
+[0mPOST /users/create-session [36m302[0m 15.899 ms - 46[0m
+[0mGET / [32m200[0m 16.902 ms - 8960[0m
+[0mGET /uploads/users/avatars/avatar-1661840189050-525913362 [33m404[0m 5.340 ms - 191[0m
+[0mGET /messages/chatroom?friend=630d9f86160a298b705e87c3 [32m200[0m 17.227 ms - 666[0m
+[0mGET /uploads/users/avatars/avatar-1661840189050-525913362 [33m404[0m 4.486 ms - 191[0m
+[0mGET / [32m200[0m 11.543 ms - 8684[0m
+[0mGET /favicon.ico [33m404[0m 5.643 ms - 150[0m
+[0mGET /messages/chatroom?friend=630d9e7f1335ca5390dcd1bc [32m200[0m 9.993 ms - 666[0m
+[0mGET /users/profile/630d9e7f1335ca5390dcd1bc [32m200[0m 13.288 ms - 7667[0m
+[0mGET /favicon.ico [33m404[0m 4.356 ms - 150[0m
+[0mPOST /remove [32m200[0m 16.861 ms - 79[0m
+[0mGET /users/profile/630d9e7f1335ca5390dcd1bc [32m200[0m 12.448 ms - 7842[0m
+[0mGET /favicon.ico [33m404[0m 3.486 ms - 150[0m
+[0mGET / [32m200[0m 10.740 ms - 7827[0m
+[0mPOST /add-friend [36m302[0m 12.941 ms - 82[0m
+[0mGET /users/profile/630d9e7f1335ca5390dcd1bc [32m200[0m 10.039 ms - 7842[0m
+[0mGET / [32m200[0m 10.765 ms - 9135[0m
+[0mGET /users/profile/630d9e7f1335ca5390dcd1bc [32m200[0m 15.364 ms - 8167[0m
+[0mGET / [36m304[0m 10.951 ms - -[0m
+[0mGET / [32m200[0m 11.936 ms - 8718[0m
+[0mGET / [36m304[0m 16.287 ms - -[0m
+[0mGET /uploads/users/avatars/avatar-1661840189050-525913362 [33m404[0m 11.263 ms - 191[0m
+[0mGET / [36m304[0m 12.549 ms - -[0m
+[0mPOST /add-friend/ [0m-[0m - ms - -[0m
+[0mGET /uploads/users/avatars/avatar-1661840189050-525913362 [33m404[0m 10.140 ms - 191[0m
+[0mGET / [32m200[0m 10.609 ms - 8684[0m
+[0mGET /favicon.ico [33m404[0m 3.829 ms - 150[0m
+[0mGET /messages/chatroom?friend=630d9f86160a298b705e87c3 [32m200[0m 14.716 ms - 442[0m
+[0mGET /uploads/users/avatars/avatar-1661840189050-525913362 [33m404[0m 2.936 ms - 191[0m
+[0mGET /messages/chatroom?friend=630d9e7f1335ca5390dcd1bc [32m200[0m 9.106 ms - 442[0m
+[0mGET / [32m200[0m 12.151 ms - 8684[0m
+[0mGET /favicon.ico [33m404[0m 3.714 ms - 150[0m
+[0mGET /messages/chatroom?friend=630d9e7f1335ca5390dcd1bc [32m200[0m 7.277 ms - 442[0m
+[0mPOST /posts/create [36m302[0m 5.249 ms - 46[0m
+[0mGET / [32m200[0m 38.478 ms - 8920[0m
+[0mGET /favicon.ico [33m404[0m 8.216 ms - 150[0m
+[0mPOST /posts/create [36m302[0m 9.958 ms - 46[0m
+[0mGET / [32m200[0m 22.802 ms - 11276[0m
+[0mGET /uploads/users/avatars/avatar-1661840189050-525913362 [33m404[0m 6.989 ms - 191[0m
+[0mGET /uploads/users/avatars/avatar-1661840189050-525913362 [33m404[0m 7.023 ms - 191[0m
+[0mGET /favicon.ico [33m404[0m 3.297 ms - 150[0m
+[0mGET / [32m200[0m 29.280 ms - 10626[0m
+[0mGET /uploads/users/avatars/avatar-1661840189050-525913362 [33m404[0m 5.392 ms - 191[0m
+[0mGET /uploads/users/avatars/avatar-1661840189050-525913362 [33m404[0m 3.195 ms - 191[0m
+[0mPOST /likes/toggle/?id=636526988cda8128aa463c34&type=Post [32m200[0m 11.582 ms - 36[0m
+[0mGET / [32m200[0m 19.076 ms - 11040[0m
+[0mGET /uploads/users/avatars/avatar-1661840189050-525913362 [33m404[0m 8.547 ms - 191[0m
+[0mGET /uploads/users/avatars/avatar-1661840189050-525913362 [33m404[0m 9.475 ms - 191[0m
+[0mGET /favicon.ico [33m404[0m 5.514 ms - 150[0m
+[0mPOST /comments/create [32m200[0m 13.077 ms - 334[0m
+[0mPOST /comments/create [32m200[0m 11.314 ms - 334[0m
+[0mPOST /comments/create [32m200[0m 13.651 ms - 334[0m
+[0mGET / [32m200[0m 31.433 ms - 15012[0m
+[0mGET /uploads/users/avatars/avatar-1661840189050-525913362 [33m404[0m 4.843 ms - 191[0m
+[0mGET / [32m200[0m 23.786 ms - 14163[0m
+[0mGET /uploads/users/avatars/avatar-1661840189050-525913362 [33m404[0m 4.701 ms - 191[0m
+[0mGET /uploads/users/avatars/avatar-1661840189050-525913362 [33m404[0m 5.302 ms - 191[0m
+[0mGET /favicon.ico [33m404[0m 5.940 ms - 150[0m
+[0mGET /comments/destroy/636526b58cda8128aa463c60 [32m200[0m 20.886 ms - 82[0m
+[0mGET /comments/destroy/636526b78cda8128aa463c66 [32m200[0m 10.661 ms - 82[0m
+[0mGET / [32m200[0m 23.183 ms - 12081[0m
+[0mGET /uploads/users/avatars/avatar-1661840189050-525913362 [33m404[0m 7.461 ms - 191[0m
+[0mGET /uploads/users/avatars/avatar-1661840189050-525913362 [33m404[0m 7.131 ms - 191[0m
+[0mGET /favicon.ico [33m404[0m 6.498 ms - 150[0m
+[0mPOST /likes/toggle/?id=636526b18cda8128aa463c59&type=Comment [32m200[0m 9.526 ms - 36[0m
+[0mPOST /comments/create [32m200[0m 8.365 ms - 404[0m
+[0mGET /uploads/users/avatars/avatar-1661840189050-525913362 [33m404[0m 4.427 ms - 191[0m
+[0mGET / [32m200[0m 30.056 ms - 13157[0m
+[0mGET /uploads/users/avatars/avatar-1661840189050-525913362 [33m404[0m 7.596 ms - 191[0m
+[0mGET /messages/chatroom?friend=630d9f86160a298b705e87c3 [32m200[0m 11.499 ms - 442[0m
+[0mGET /uploads/users/avatars/avatar-1661840189050-525913362 [33m404[0m 5.677 ms - 191[0m
+[0mGET / [32m200[0m 20.945 ms - 13571[0m
+[0mGET /uploads/users/avatars/avatar-1661840189050-525913362 [33m404[0m 5.317 ms - 191[0m
+[0mGET /uploads/users/avatars/avatar-1661840189050-525913362 [33m404[0m 7.657 ms - 191[0m
+[0mGET /favicon.ico [33m404[0m 2.779 ms - 150[0m
+[0mGET /users/profile/630d9f86160a298b705e87c3 [32m200[0m 22.760 ms - 11300[0m
+[0mGET /uploads/users/avatars/avatar-1661840189050-525913362 [33m404[0m 9.288 ms - 191[0m
+[0mGET /uploads/users/avatars/avatar-1661840189050-525913362 [33m404[0m 4.501 ms - 191[0m
+[0mGET /favicon.ico [33m404[0m 6.286 ms - 150[0m
+[0mGET /users/profile/630d9e7f1335ca5390dcd1bc [32m200[0m 17.534 ms - 6859[0m
+[0mGET / [36m304[0m 22.063 ms - -[0m
+[0mGET /uploads/users/avatars/avatar-1661840189050-525913362 [33m404[0m 7.889 ms - 191[0m
+[0mGET /messages/chatroom?friend=630d9f86160a298b705e87c3 [36m304[0m 15.119 ms - -[0m
+[0mGET /uploads/users/avatars/avatar-1661840189050-525913362 [33m404[0m 4.152 ms - 191[0m
+[0mGET / [32m200[0m 26.878 ms - 13571[0m
+[0mGET /uploads/users/avatars/avatar-1661840189050-525913362 [33m404[0m 4.859 ms - 191[0m
+[0mGET /uploads/users/avatars/avatar-1661840189050-525913362 [33m404[0m 5.608 ms - 191[0m
+[0mGET /favicon.ico [33m404[0m 6.183 ms - 150[0m
+[0mGET / [32m200[0m 25.309 ms - 13571[0m
+[0mGET /uploads/users/avatars/avatar-1661840189050-525913362 [33m404[0m 7.694 ms - 191[0m
+[0mGET /uploads/users/avatars/avatar-1661840189050-525913362 [33m404[0m 4.550 ms - 191[0m
+[0mGET /favicon.ico [33m404[0m 4.452 ms - 150[0m
+[0mGET / [32m200[0m 29.768 ms - 13571[0m
+[0mGET /uploads/users/avatars/avatar-1661840189050-525913362 [33m404[0m 4.172 ms - 191[0m
+[0mGET /uploads/users/avatars/avatar-1661840189050-525913362 [33m404[0m 5.616 ms - 191[0m
+[0mGET /favicon.ico [33m404[0m 3.280 ms - 150[0m
+[0mGET /messages/chatroom?friend=630d9e7f1335ca5390dcd1bc [32m200[0m 9.391 ms - 442[0m
+[0mPOST /posts/create [0m-[0m - ms - -[0m
+[0mGET / [32m200[0m 22.090 ms - 13571[0m
+[0mGET /uploads/users/avatars/avatar-1661840189050-525913362 [33m404[0m 3.958 ms - 191[0m
+[0mGET /uploads/users/avatars/avatar-1661840189050-525913362 [33m404[0m 5.103 ms - 191[0m
+[0mGET /favicon.ico [33m404[0m 7.760 ms - 150[0m
+[0mGET / [32m200[0m 81.103 ms - 8881[0m
+[0mGET /uploads/users/avatars/avatar-1661840189050-525913362 [33m404[0m 7.899 ms - 191[0m
+[0mGET /favicon.ico [0m-[0m - ms - -[0m
+[0mGET /users/login [32m200[0m 8.054 ms - 5260[0m
+[0mGET /favicon.ico [0m-[0m - ms - -[0m
+[0mGET /users/auth/google [36m302[0m 3.113 ms - 0[0m
+[0mGET /users/auth/google/callback?code=4%2F0AWgavddlm6lep0duA3zrYImwUHfkuthGbLEHdByayO1_tGWQg_PetP2n5EhM7SArrDh7HA&scope=email+profile+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.profile+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.email+openid&authuser=2&prompt=consent [31m500[0m 496.947 ms - 1147[0m
+[0mGET / [36m304[0m 61.960 ms - -[0m
+[0mGET /uploads/users/avatars/avatar-1661840189050-525913362 [33m404[0m 12.134 ms - 191[0m
+[0mGET / [36m304[0m 29.922 ms - -[0m
+[0mGET /uploads/users/avatars/avatar-1661840189050-525913362 [33m404[0m 3.952 ms - 191[0m
+[0mGET /users/login [32m200[0m 6.139 ms - 5260[0m
+[0mGET / [32m200[0m 23.302 ms - 8881[0m
+[0mGET /uploads/users/avatars/avatar-1661840189050-525913362 [33m404[0m 1.904 ms - 191[0m
+[0mGET /uploads/users/avatars/avatar-1661840189050-525913362 [33m404[0m 2.588 ms - 191[0m
+[0mGET /users/login [36m304[0m 5.279 ms - -[0m
+[0mGET /users/auth/google [36m302[0m 2.889 ms - 0[0m
+[0mGET /users/auth/google/callback?code=4%2F0AWgavdfPCFsf6aRcZtqEYY9dCL6tSzrjTyhXIyj6-tRbdBe7LFfcgMlkIaYs4iNgE0z8eQ&scope=email+profile+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.profile+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.email+openid&authuser=2&prompt=consent [31m500[0m 295.408 ms - 1147[0m
+[0mGET /users/login [32m200[0m 4.163 ms - 5260[0m
+::ffff:127.0.0.1 - - [25/Dec/2022:11:58:19 +0000] "GET /users/login HTTP/1.1" 200 5370 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:108.0) Gecko/20100101 Firefox/108.0"
+::ffff:127.0.0.1 - - [25/Dec/2022:11:58:24 +0000] "GET /users/auth/google HTTP/1.1" 302 0 "http://localhost:3000/users/login" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:108.0) Gecko/20100101 Firefox/108.0"
+::ffff:127.0.0.1 - - [25/Dec/2022:11:58:27 +0000] "GET /users/auth/google/callback?code=4%2F0AWgavdcQHbCguRo6xuv-NjUcspMfC9Xg4WYR9gsIU2irDIyZdqAHmhL63Aw7Z6bZ4RxB-g&scope=email+profile+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.profile+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.email+openid&authuser=2&prompt=consent HTTP/1.1" 500 1147 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:108.0) Gecko/20100101 Firefox/108.0"
+[0mPOST /users/create-session [36m302[0m 12.496 ms - 68[0m
+[0mGET /users/login [32m200[0m 10.118 ms - 5502[0m
+[0mGET /users/login [32m200[0m 10.463 ms - 5260[0m
+[0mGET /users/login [32m200[0m 5.944 ms - 5260[0m
+[0mPOST /users/create-session [36m302[0m 7.889 ms - 68[0m
+[0mGET /users/login [32m200[0m 5.060 ms - 5502[0m
+[0mGET /users/login [32m200[0m 8.091 ms - 5260[0m
+[0mGET /users/signup [32m200[0m 7.028 ms - 5495[0m
+[0mPOST /users/verify-email [36m302[0m 2.253 ms - 112[0m
+[0mGET /users/signup [32m200[0m 4.205 ms - 5756[0m
+[0mPOST /users/verify-email [36m302[0m 25.229 ms - 112[0m
+[0mGET /users/signup [32m200[0m 4.376 ms - 5737[0m
+[0mGET /users/create?accessToken=7adcc29c1b123866d730f1934e0a0d1085fd2aa4 [36m302[0m 19.406 ms - 68[0m
+[0mGET /users/login [32m200[0m 5.960 ms - 5509[0m
+[0mPOST /users/create-session [36m302[0m 8.560 ms - 46[0m
+[0mGET / [32m200[0m 48.544 ms - 13813[0m
+[0mGET /uploads/users/avatars/avatar-1661840189050-525913362 [33m404[0m 9.393 ms - 191[0m
+[0mGET /uploads/users/avatars/avatar-1661840189050-525913362 [33m404[0m 7.207 ms - 191[0m
+[0mGET / [32m200[0m 29.104 ms - 8881[0m
+[0mGET /messages/chatroom?friend=630d9e7f1335ca5390dcd1bc [32m200[0m 18.089 ms - 442[0m
+[0mGET /posts/destroy/636526988cda8128aa463c34 [32m200[0m 25.328 ms - 76[0m
+[0mGET / [32m200[0m 19.041 ms - 8684[0m
+[0mGET /favicon.ico [33m404[0m 4.406 ms - 150[0m
+[0mGET /users/profile/630d9f86160a298b705e87c3 [32m200[0m 20.891 ms - 6883[0m
+[0mGET /uploads/users/avatars/avatar-1661840189050-525913362 [33m404[0m 8.916 ms - 191[0m
+[0mGET /uploads/users/avatars/avatar-1661840189050-525913362 [33m404[0m 7.690 ms - 191[0m
+[0mGET /favicon.ico [33m404[0m 5.656 ms - 150[0m
+[0mPOST /users/update/630d9f86160a298b705e87c3 [36m302[0m 24.986 ms - 164[0m
+[0mGET /users/profile/630d9f86160a298b705e87c3 [32m200[0m 20.188 ms - 6883[0m
+[0mGET /favicon.ico [33m404[0m 4.520 ms - 150[0m
+[0mGET / [32m200[0m 15.428 ms - 8684[0m
+[0mGET /favicon.ico [33m404[0m 7.931 ms - 150[0m
+[0mGET /users/profile/630d9f86160a298b705e87c3 [32m200[0m 22.932 ms - 6883[0m
+[0mGET /favicon.ico [33m404[0m 8.340 ms - 150[0m
+[0mGET / [32m200[0m 19.334 ms - 8684[0m
+[0mGET /favicon.ico [33m404[0m 7.734 ms - 150[0m
+[0mGET /messages/chatroom?friend=630d9e7f1335ca5390dcd1bc [32m200[0m 11.067 ms - 442[0m
+[0mGET /users/signout [36m302[0m 8.175 ms - 46[0m
+[0mGET / [32m200[0m 11.873 ms - 6146[0m
+[0mGET /favicon.ico [33m404[0m 2.584 ms - 150[0m
+[0mGET /users/login [32m200[0m 4.223 ms - 5260[0m
+[0mGET /favicon.ico [33m404[0m 3.166 ms - 150[0m
+[0mPOST /users/create-session [36m302[0m 5.824 ms - 46[0m
+[0mGET / [32m200[0m 14.183 ms - 8960[0m
+[0mGET /favicon.ico [33m404[0m 3.767 ms - 150[0m
+[0mGET /users/profile/630d9e7f1335ca5390dcd1bc [32m200[0m 15.726 ms - 6859[0m
+[0mGET /favicon.ico [33m404[0m 5.126 ms - 150[0m
+[0mPOST /users/update/630d9e7f1335ca5390dcd1bc [36m302[0m 21.438 ms - 164[0m
+[0mGET /users/profile/630d9e7f1335ca5390dcd1bc [32m200[0m 17.930 ms - 6878[0m
+[0mGET /favicon.ico [33m404[0m 3.968 ms - 150[0m
+[0mGET / [32m200[0m 20.953 ms - 8718[0m
+[0mGET /favicon.ico [33m404[0m 7.423 ms - 150[0m
+[0mGET /messages/chatroom?friend=630d9f86160a298b705e87c3 [32m200[0m 22.042 ms - 510[0m
+[0mGET /messages/chatroom?friend=630d9f86160a298b705e87c3 [32m200[0m 13.072 ms - 510[0m
+[0mGET /users/profile/630d9f86160a298b705e87c3 [32m200[0m 19.520 ms - 7684[0m
+[0mGET /users/profile/630d9e7f1335ca5390dcd1bc [32m200[0m 17.317 ms - 6878[0m
+[0mGET /favicon.ico [33m404[0m 5.809 ms - 150[0m
+[0mGET /users/profile/630d9e7f1335ca5390dcd1bc [32m200[0m 21.319 ms - 6878[0m
+[0mGET /favicon.ico [33m404[0m 6.885 ms - 150[0m
+[0mGET / [32m200[0m 15.244 ms - 8718[0m
+[0mGET /favicon.ico [33m404[0m 4.109 ms - 150[0m
+[0mGET /users/profile/630d9f86160a298b705e87c3 [32m200[0m 21.332 ms - 7684[0m
+[0mGET /favicon.ico [33m404[0m 4.109 ms - 150[0m
+[0mGET /users/profile/630d9e7f1335ca5390dcd1bc [32m200[0m 22.736 ms - 6878[0m
+[0mGET /favicon.ico [33m404[0m 4.056 ms - 150[0m
+[0mGET /autocomplete?callback=jQuery360034758063650153526_1671970522369&term=kira&_=1671970522370 [32m200[0m 21.318 ms - 177[0m
+[0mGET /autocomplete?callback=jQuery360034758063650153526_1671970522369&term=kiran&_=1671970522371 [32m200[0m 8.055 ms - 177[0m
+[0mGET /search/kiran [32m200[0m 14.224 ms - 6685[0m
+[0mGET /favicon.ico [33m404[0m 4.654 ms - 150[0m
+[0mPOST /add-friend [36m302[0m 20.287 ms - 56[0m
+[0mGET /search/kiran [32m200[0m 11.983 ms - 6631[0m
+[0mGET / [32m200[0m 12.793 ms - 8718[0m
+[0mGET /favicon.ico [33m404[0m 3.326 ms - 150[0m
+[0mGET /users/profile/630d9f86160a298b705e87c3 [32m200[0m 17.730 ms - 7684[0m
+[0mGET /favicon.ico [33m404[0m 5.032 ms - 150[0m
+[0mPOST /remove [32m200[0m 23.402 ms - 79[0m
+[0mGET /users/profile/630d9f86160a298b705e87c3 [32m200[0m 9.899 ms - 7860[0m
+[0mGET /favicon.ico [33m404[0m 4.776 ms - 150[0m
+[0mGET / [32m200[0m 13.421 ms - 7827[0m
+[0mGET /favicon.ico [33m404[0m 6.164 ms - 150[0m
+[0mGET /users/profile/630d9e7f1335ca5390dcd1bc [32m200[0m 10.872 ms - 6878[0m
+[0mGET /favicon.ico [33m404[0m 4.835 ms - 150[0m
+[0mPOST /users/update/630d9e7f1335ca5390dcd1bc [36m302[0m 7.021 ms - 164[0m
+[0mGET /users/profile/630d9e7f1335ca5390dcd1bc [32m200[0m 15.983 ms - 7118[0m
+[0mGET /favicon.ico [33m404[0m 5.467 ms - 150[0m
+[0mPOST /users/update/630d9e7f1335ca5390dcd1bc [36m302[0m 8.221 ms - 164[0m
+[0mGET /users/profile/630d9e7f1335ca5390dcd1bc [32m200[0m 20.851 ms - 7118[0m
+[0mGET /favicon.ico [33m404[0m 3.795 ms - 150[0m
+[0mGET /users/profile/630d9e7f1335ca5390dcd1bc [32m200[0m 11.011 ms - 6878[0m
+[0mGET /favicon.ico [33m404[0m 7.371 ms - 150[0m
+[0mGET /users/profile/630d9e7f1335ca5390dcd1bc [32m200[0m 13.514 ms - 6878[0m
+[0mGET /favicon.ico [33m404[0m 4.756 ms - 150[0m
+[0mGET /users/signout [36m302[0m 6.468 ms - 46[0m
+[0mGET / [32m200[0m 8.845 ms - 6146[0m
+[0mGET /favicon.ico [33m404[0m 2.666 ms - 150[0m
+[0mGET / [32m200[0m 38.304 ms - 5903[0m
+[0mGET /favicon.ico [33m404[0m 3.681 ms - 150[0m
+[0mGET /users/login [32m200[0m 6.710 ms - 5260[0m
+[0mGET /favicon.ico [33m404[0m 3.182 ms - 150[0m
+[0mPOST /users/create-session [36m302[0m 14.501 ms - 46[0m
+[0mGET / [32m200[0m 21.612 ms - 8069[0m
+[0mGET /favicon.ico [33m404[0m 7.985 ms - 150[0m
+[0mGET /users/signout [36m302[0m 11.665 ms - 46[0m
+[0mGET / [32m200[0m 9.547 ms - 6146[0m
+[0mGET /favicon.ico [33m404[0m 4.205 ms - 150[0m
+[0mGET /users/login [32m200[0m 5.666 ms - 5260[0m
+[0mGET /favicon.ico [33m404[0m 3.095 ms - 150[0m
+[0mPOST /users/create-session [36m302[0m 8.483 ms - 46[0m
+[0mGET / [32m200[0m 13.862 ms - 8069[0m
+[0mGET /favicon.ico [33m404[0m 11.062 ms - 150[0m
+[0mPOST /posts/create [32m200[0m 20.136 ms - 345[0m
+[0mGET /users/profile/630d9e7f1335ca5390dcd1bc [32m200[0m 21.578 ms - 8438[0m
+[0mGET /favicon.ico [33m404[0m 6.086 ms - 150[0m
+[0mGET /autocomplete?callback=jQuery3600819692791063665_1671971678664&term=ki&_=1671971678665 [32m200[0m 9.814 ms - 173[0m
+[0mGET /search/ki [32m200[0m 10.105 ms - 6631[0m
+[0mGET /favicon.ico [33m404[0m 6.244 ms - 150[0m
+[0mGET /autocomplete?callback=jQuery3600597719250336519_1671971684979&term=o&_=1671971684980 [32m200[0m 10.181 ms - 300[0m
+[0mGET /autocomplete?callback=jQuery3600597719250336519_1671971684979&term=om&_=1671971684981 [32m200[0m 13.499 ms - 177[0m
+[0mGET /search/om [32m200[0m 9.578 ms - 6668[0m
+[0mGET /favicon.ico [33m404[0m 6.594 ms - 150[0m
+[0mPOST /add-friend [36m302[0m 12.380 ms - 53[0m
+[0mGET /search/om [32m200[0m 9.559 ms - 6638[0m
+[0mGET /users/signout [36m302[0m 5.852 ms - 46[0m
+[0mGET / [32m200[0m 12.060 ms - 7294[0m
+[0mGET /favicon.ico [33m404[0m 2.535 ms - 150[0m
+[0mGET /users/login [32m200[0m 7.438 ms - 5260[0m
+[0mGET /favicon.ico [33m404[0m 2.784 ms - 150[0m
+[0mPOST /users/create-session [36m302[0m 10.606 ms - 46[0m
+[0mGET / [32m200[0m 16.876 ms - 11195[0m
+[0mGET /favicon.ico [33m404[0m 7.324 ms - 150[0m
+[0mPOST /likes/toggle/?id=63a8435485fa11f81870f914&type=Post [32m200[0m 21.360 ms - 36[0m
+[0mGET / [32m200[0m 22.204 ms - 10536[0m
+[0mGET / [32m200[0m 32.754 ms - 10536[0m
+[0mPOST /add-friend/ [0m-[0m - ms - -[0m
+[0mGET / [32m200[0m 19.107 ms - 10536[0m
+[0mGET /favicon.ico [33m404[0m 7.238 ms - 150[0m
+[0mGET /messages/chatroom?friend=630d9e7f1335ca5390dcd1bc [32m200[0m 16.259 ms - 510[0m
+[0mGET /messages/chatroom?friend=630d9e7f1335ca5390dcd1bc [32m200[0m 11.167 ms - 510[0m
+[0mGET / [32m200[0m 20.595 ms - 10536[0m
+[0mGET /favicon.ico [33m404[0m 8.130 ms - 150[0m
+[0mPOST /posts/create [36m302[0m 6.429 ms - 46[0m
+[0mGET / [32m200[0m 51.350 ms - 10772[0m
+[0mGET /favicon.ico [33m404[0m 9.914 ms - 150[0m
+[0mGET / [32m200[0m 24.368 ms - 10536[0m
+[0mGET /favicon.ico [33m404[0m 6.103 ms - 150[0m
+[0mPOST /comments/create [32m200[0m 20.181 ms - 404[0m
+[0mGET /users/signup [36m302[0m 10.106 ms - 72[0m
+[0mGET /users/profile [33m404[0m 6.839 ms - 152[0m
+[0mGET / [32m200[0m 31.921 ms - 12026[0m
+[0mGET / [36m304[0m 112.152 ms - -[0m
+[0mGET /users/profile/630d9f86160a298b705e87c3 [32m200[0m 60.894 ms - 6883[0m
+[0mGET / [32m200[0m 63.003 ms - 12026[0m
+[0mGET / [32m200[0m 96.794 ms - 7935[0m
+[0mGET /users/login [36m304[0m 12.969 ms - -[0m
+[0mGET /users/auth/google [36m302[0m 7.594 ms - 0[0m
+[0mGET /users/auth/google [36m302[0m 5.392 ms - 0[0m
+[0mGET /users/auth/google/callback?code=4%2F0AWgavdd8t3DNO4S22GT7QYUOpOcfxmIW7kiAsfUYqEQ0HQvZwYD_JuKcSpmxYSUnDscNZA&scope=email+profile+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.profile+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.email+openid&authuser=2&prompt=consent [31m500[0m 477.470 ms - 1147[0m
+[0mGET /users/auth/google [36m302[0m 13.368 ms - 0[0m
+[0mGET /users/auth/google/callback?code=4%2F0AWgavdeY-7gYO3553teOLxLxD1sWsjdP4vSghSqEGUn4RrmEV_N0s949-G7q9nPcC_7yDA&scope=email+profile+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.profile+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.email+openid&authuser=2&prompt=consent [31m500[0m 293.755 ms - 1147[0m
+[0mGET /users/auth/google/callback?code=4%2F0AWgavdfwh6sqvkgMe879pnTYGtvwgK1hCQlWROcgZcIMLTBGS-wXMxFy98S8cjmHJwhFQA&scope=email+profile+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.profile+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.email+openid&authuser=2&prompt=consent [31m500[0m 361.731 ms - 1147[0m
+[0mGET /users/auth/google/callback?code=4%2F0AWgavdfUu0XxI6nHGKrusqikyA0-GEnHnLaNUFHyFe_YCKkW9k-dvHgD7hwOWLsGtvFq2w&scope=email+profile+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.profile+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.email+openid&authuser=2&prompt=consent [31m500[0m 225.860 ms - 1147[0m
+[0mGET /users/auth/google [36m302[0m 4.543 ms - 0[0m
+[0mGET /users/auth/google/callback?code=4%2F0AWgavddN3LK_4QZY4vtHVB_8FDorlpEWvSE4wmrTtvbeNtCLEM7HnrBi1PKTagwUEHOmEQ&scope=email+profile+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.profile+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.email+openid&authuser=2&prompt=consent [31m500[0m 189.600 ms - 1147[0m
+[0mGET /users/auth/google/callback?code=4%2F0AWgavddN3LK_4QZY4vtHVB_8FDorlpEWvSE4wmrTtvbeNtCLEM7HnrBi1PKTagwUEHOmEQ&scope=email+profile+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.profile+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.email+openid&authuser=2&prompt=consent [31m500[0m 371.588 ms - 1147[0m
+[0mGET /users/login [0m-[0m - ms - -[0m
+[0mGET /users/auth/google [36m302[0m 8.851 ms - 0[0m
+[0mGET /users/auth/google/callback?code=4%2F0AWgavdcbuNgVqMs2m-AUuAmSeoAtbsKfi1dPlNFkvMWMkmQHllHBKJQNx1xD7xB4xD56Dw&scope=email+profile+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.profile+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.email+openid&authuser=0&prompt=consent [31m500[0m 275.239 ms - 1147[0m
+[0mGET / [36m304[0m 121.667 ms - -[0m
+[0mGET /users/login [36m304[0m 14.285 ms - -[0m
+[0mGET /users/auth/google [36m302[0m 7.395 ms - 0[0m
+[0mGET /users/auth/google/callback?code=4%2F0AWgavde9L2bXIC2LRwSv2fgKFXG8Ty8AgLFfy8-mRZmQ5zW0lPD2WC4qAVpB3yDk_3Mazw&scope=email+profile+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.profile+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.email+openid&authuser=3&prompt=consent [31m500[0m 388.398 ms - 1147[0m
+[0mGET / [36m304[0m 143.091 ms - -[0m
+[0mGET /users/login [36m304[0m 14.208 ms - -[0m
+[0mGET /users/auth/google [36m302[0m 12.505 ms - 0[0m
+[0mGET /users/auth/google/callback?code=4%2F0AWgavdc9oFK9jn_ritXbSjK1k2_mjyQZL6RKp8jalpp67A4dLuDvx7Pp2ULJlZ2468jlAw&scope=email+profile+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.profile+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.email+openid&authuser=2&prompt=consent [36m302[0m 673.558 ms - 46[0m
+[0mGET / [32m200[0m 84.819 ms - 12268[0m
+[0mGET /users/signout [36m302[0m 25.089 ms - 46[0m
+[0mGET / [32m200[0m 45.142 ms - 8178[0m
+[0mGET /favicon.ico [0m-[0m - ms - -[0m
+::ffff:127.0.0.1 - - [27/Dec/2022:10:26:34 +0000] "GET /users/login HTTP/1.1" 200 5370 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:108.0) Gecko/20100101 Firefox/108.0"
+::ffff:127.0.0.1 - - [27/Dec/2022:10:26:34 +0000] "GET /favicon.ico HTTP/1.1" - - "http://localhost:3000/users/login" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:108.0) Gecko/20100101 Firefox/108.0"
+::ffff:127.0.0.1 - - [27/Dec/2022:10:26:36 +0000] "GET /users/auth/google HTTP/1.1" 302 0 "http://localhost:3000/users/login" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:108.0) Gecko/20100101 Firefox/108.0"
+::ffff:127.0.0.1 - - [27/Dec/2022:10:26:40 +0000] "GET /users/auth/google/callback?code=4%2F0AWgavdepSOcLyJoI0B0-oqaIycDvR1Q8b7HNaXkzotRZDELAcbKMLrRwGu2QwsOnyp4uAg&scope=email+profile+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.profile+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.email+openid&authuser=2&prompt=consent HTTP/1.1" 302 46 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:108.0) Gecko/20100101 Firefox/108.0"
+::ffff:127.0.0.1 - - [27/Dec/2022:10:26:40 +0000] "GET / HTTP/1.1" 200 9081 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:108.0) Gecko/20100101 Firefox/108.0"
+::ffff:127.0.0.1 - - [27/Dec/2022:10:26:45 +0000] "GET /users/profile/6310cadd8d343a83fc405147 HTTP/1.1" 200 6974 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:108.0) Gecko/20100101 Firefox/108.0"
+::ffff:127.0.0.1 - - [27/Dec/2022:10:26:46 +0000] "GET /users/signout HTTP/1.1" 302 46 "http://localhost:3000/users/profile/6310cadd8d343a83fc405147" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:108.0) Gecko/20100101 Firefox/108.0"
+::ffff:127.0.0.1 - - [27/Dec/2022:10:26:47 +0000] "GET / HTTP/1.1" 200 6289 "http://localhost:3000/users/profile/6310cadd8d343a83fc405147" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:108.0) Gecko/20100101 Firefox/108.0"
