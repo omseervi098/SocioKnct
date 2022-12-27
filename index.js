@@ -56,7 +56,7 @@ app.use(expressLayouts);
 //Setting up the view engine
 
 app.set("view engine", "ejs");
-app.set("views", "./views");
+app.set("views", path.join(__dirname, "views"));
 //Middleware for session
 app.use(
   session({
