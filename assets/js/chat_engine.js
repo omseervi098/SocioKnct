@@ -1,12 +1,13 @@
-let chatArea=$('#chatbox')
+let chatArea = $("#chatbox");
 let selfUser;
 let userMail;
 let otherUser;
 let currentChatRoom;
 let roomList = [];
 
-var socket = io.connect("http://184.72.80.220:5000");
-
+var socket = io.connect("http://localhost:5000", {
+  transports: ["websocket"],
+});
 socket.on("connect", function () {
   console.log("connection established using sockets...!");
 });
@@ -24,7 +25,6 @@ function joinRoom() {
 
 var sendMessage = () => {
   function activateMessageSending() {
-
     let inputBox = $(".chat-input");
     let msg = inputBox.val();
 
@@ -36,10 +36,9 @@ var sendMessage = () => {
         chatroom: currentChatRoom,
       });
       //reload chat
-      
+
       inputBox.val("");
     }
-    
   }
 
   $(".message-send").submit(activateMessageSending); // click action
@@ -52,7 +51,6 @@ var sendMessage = () => {
 };
 
 function connectRoom() {
-  
   if (!roomList.includes(currentChatRoom)) {
     joinRoom();
     roomList.push(currentChatRoom);
@@ -62,13 +60,11 @@ function connectRoom() {
 }
 
 socket.on("receive_message", function (data) {
-  
   let messageList = $(`#chat-messages-list-${currentChatRoom}`);
 
   if (data.user_email === userMail) {
-   
     messageList.append(
-        `
+      `
         <div class="message-box-holder">
           <div class="message-box">
              ${data.message}
@@ -77,7 +73,6 @@ socket.on("receive_message", function (data) {
         `
     );
   } else {
-   
     messageList.append(`
     <div class="message-box-holder">
         <div class="message-sender">
@@ -93,14 +88,15 @@ socket.on("receive_message", function (data) {
 });
 
 function createArea(chatRoom, friend, user) {
-    return `<div class="chatbox-holder">
+  return `<div class="chatbox-holder">
     <div class="chatbox">
         <div class="chatbox-top">
             <div class="chatbox-avatar">
                 <a >
-                ${friend.avatar?
-                  `<img src="${friend.avatar}" />`
-                  :`<img src="/images/default-avatar.png" />`
+                ${
+                  friend.avatar
+                    ? `<img src="${friend.avatar}" />`
+                    : `<img src="/images/default-avatar.png" />`
                 }
                 </a>
             </div>
@@ -116,15 +112,15 @@ function createArea(chatRoom, friend, user) {
             </div>
             <div class="chat-messages" id="chat-messages-list-${chatRoom._id}">
             ${chatRoom.messages
-               .map((chat) => {
-                  return `${
-                    chat.user === user._id
+              .map((chat) => {
+                return `${
+                  chat.user === user._id
                     ? `<div class="message-box-holder">
                        <div class="message-box">
                            ${chat.message}
                         </div>
                         </div>`
-                    :`
+                    : `
                     <div class="message-box-holder">
                         <div class="message-sender">
                             ${friend.name}
@@ -133,9 +129,9 @@ function createArea(chatRoom, friend, user) {
                             ${chat.message}
                         </div>
                     </div>`
-                    }`;
-              }).join("")
-            }
+                }`;
+              })
+              .join("")}
         </div>
         <div class="chat-input-holder">
             <input type="text" class="chat-input" placeholder="Type Here..."></input>
@@ -145,21 +141,16 @@ function createArea(chatRoom, friend, user) {
     </div>`;
 }
 function minimize() {
-  
-  
-  $('.chatbox').toggleClass('chatbox-min');
-};
+  $(".chatbox").toggleClass("chatbox-min");
+}
 function hide() {
   $("#chatbox").css("display", "none");
 
-  $('.chatbox').hide();
-};
+  $(".chatbox").hide();
+}
 $(".message-btn").each(function () {
-  
-    
   $(this).click(function () {
     $("#chatbox").css("display", "flex");
-  
 
     const friendId = $(this).attr("data-friendId");
     $.ajax({
@@ -169,7 +160,7 @@ $(".message-btn").each(function () {
         let { chatRoom, friend, user } = data.data;
         let room = createArea(chatRoom, friend, user);
         chatArea.empty();
-        $('#chatbox').append(room);
+        $("#chatbox").append(room);
         scrollBottom();
         selfUser = user;
         otherUser = friend;
@@ -204,7 +195,7 @@ function changeScreen() {
 
 function scrollBottom() {
   let list = document.getElementsByClassName("chat-messages")[0];
-  
+
   //Scroll to the bottom of the messages div
   list.scrollTop = list.scrollHeight;
 }

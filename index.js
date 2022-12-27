@@ -47,7 +47,7 @@ app.use(cookieParser());
 //Setting up static files
 app.use(express.static(env.asset_path));
 app.use("/uploads", express.static(__dirname + "/uploads"));
-//app.use(logger(env.morgan.mode, env.morgan.options));
+app.use(logger(env.morgan.mode, env.morgan.options));
 //extract style and script from subspages into the layout
 app.set("layout extractStyles", true);
 app.set("layout extractScripts", true);

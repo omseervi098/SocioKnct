@@ -29,21 +29,6 @@
             console.log(err);
           },
         });
-      }else{
-        //check file type
-        let file = $("#image")[0].files[0];
-        let fileType = file.type;
-        if (fileType != "image/jpeg" && fileType != "image/png" && fileType!="image/jpeg" && fileType!="image/gif") {
-          new Noty({
-            theme: "relax",
-            type: "error",
-            layout: "topRight",
-            text: "Invalid File Type Only PNG,JPG,JPEG,GIF Allowed",
-            timeout: 1500,
-          }).show();
-          e.preventDefault();
-        }
-
       }
     });
   };
@@ -53,15 +38,19 @@
         <div class="ithpost">
         <div class="name">
             <span>
-            ${post.user.avatar?
-              `<img src="${post.user.avatar}" >`:
-              `<img src="${assetPath('images/default-avatar.png')}">`}
+            ${
+              post.user.avatar
+                ? `<img src="${post.user.avatar}" >`
+                : `<img src="${assetPath("images/default-avatar.png")}">`
+            }
             ${post.user.name}</span>
             <div>
               <div class="dropdown">
                 <button class="dropbtn"><i class="fa-solid fa-circle-chevron-down"></i></button>
                 <div class="dropdown-content">
-                    <a class="delete-post-button" href="/posts/destroy/${post._id}">Delete</a>
+                    <a class="delete-post-button" href="/posts/destroy/${
+                      post._id
+                    }">Delete</a>
                 </div>
               </div>  
             </div>
@@ -82,7 +71,9 @@
             </small>
         </div>
         <div class="post-comments">
-            <form action="/comments/create" method="POST" id="post-${post._id}-comments-form">
+            <form action="/comments/create" method="POST" id="post-${
+              post._id
+            }-comments-form">
                 <input required type="text" id="comment-input" name="content" placeholder="Type Here to add comment">
                 <input type="hidden" name="post" value="${post._id}">
                 <input type="submit" id="add-comment" value="Add Comment">
