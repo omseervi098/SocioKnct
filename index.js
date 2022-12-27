@@ -70,7 +70,7 @@ app.use(
     },
     //Storing MongoStore to store session cookie in mongodb
     store: new MongoStore({
-      uri: "mongodb://localhost:27017/codial-development",
+      uri: process.env.CODEIAL_MONGODB_URL,
       collection: "db",
       autoRemove: "disabled",
     }),

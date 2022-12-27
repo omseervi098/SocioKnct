@@ -1,7 +1,11 @@
 const mongoose = require("mongoose");
 const env = require("./environment");
 //check if database exists
-mongoose.connect(`mongodb://localhost:27017`);
+
+mongoose.connect(process.env.CODEIAL_MONGODB_URL, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+});
 //now check if the database exists
 
 const db = mongoose.connection;
