@@ -38,13 +38,16 @@ const production = {
   session_cookie_key: process.env.CODEIAL_SESSION_COOKIE_KEY,
   db: process.env.CODEIAL_DB_NAME,
   smtp: {
-    service: "gmail",
-    host: "smtp.gmail.com",
+    pool: true,
+    host: "smtp.socioknct.tech",
     port: 587,
-    secure: true,
+    secure: false,
     auth: {
       user: process.env.CODEIAL_MAILER_USERNAME,
       pass: process.env.CODEIAL_MAILER_PASSWORD,
+    },
+    tls: {
+      rejectUnauthorized: false,
     },
   },
   google_clientID: process.env.CODEIAL_GOOGLE_CLIENTID,
