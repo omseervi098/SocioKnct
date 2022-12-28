@@ -5,7 +5,7 @@ let otherUser;
 let currentChatRoom;
 let roomList = [];
 
-var socket = io.connect("http://localhost:5000", {
+var socket = io.connect("http://44.201.126.22:5000", {
   transports: ["websocket"],
 });
 socket.on("connect", function () {
