@@ -1,8 +1,8 @@
 const Comment = require("../models/comment");
 const Post = require("../models/post");
 const Like = require("../models/like");
-const commentMailer=require('../mailers/comments_mailer');
-const emailQueue=require('../workers/comment_email_worker');
+const commentMailer = require("../mailers/comments_mailer");
+const emailQueue = require("../workers/comment_email_worker");
 module.exports.create = async function (req, res) {
   try {
     let post = await Post.findById(req.body.post);
@@ -14,17 +14,22 @@ module.exports.create = async function (req, res) {
       });
       post.comments.push(comment);
       post.save();
-      comment=await comment.populate('user', 'name email avatar');
-      // commentMailer.newComment(comment);
-      emailQueue.add(comment);
-     //console.log(comment.user.name);
-      if(req.xhr){  
+      comment = await comment.populate("user", "name email avatar");
+      //populate user of post
+      post = await post.populate("user", "email");
+      let data = {
+        comment: comment,
+        post: post,
+      };
+      emailQueue.add(data);
+      //console.log(comment.user.name);
+      if (req.xhr) {
         return res.status(200).json({
-          data:{
-            comment:comment
+          data: {
+            comment: comment,
           },
-          message:"Comment created !!!"
-        })
+          message: "Comment created !!!",
+        });
       }
       req.flash("success", "Comment created !!!");
       res.redirect("/");
@@ -32,7 +37,7 @@ module.exports.create = async function (req, res) {
   } catch (err) {
     req.flash("error", "Error in creating comment");
     console.log(err);
-    return ;
+    return;
   }
 };
 module.exports.destroy = async function (req, res) {
@@ -45,14 +50,14 @@ module.exports.destroy = async function (req, res) {
         $pull: { comments: req.params.id },
       });
       // CHANGE :: destroy the associated likes for this comment
-      await Like.deleteMany({likeable: comment._id, onModel: 'Comment'});
+      await Like.deleteMany({ likeable: comment._id, onModel: "Comment" });
       // send the comment id which was deleted back to the views
-      if(req.xhr){
+      if (req.xhr) {
         return res.status(200).json({
-          data:{
-            comment_id:req.params.id
+          data: {
+            comment_id: req.params.id,
           },
-          message:"Comment deleted !!!"
+          message: "Comment deleted !!!",
         });
       }
       req.flash("success", "Comment deleted !!!");

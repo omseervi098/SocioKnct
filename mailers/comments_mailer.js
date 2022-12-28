@@ -3,7 +3,7 @@ const nodemailer = require("../config/nodemailer");
 exports.newComment = (comment) => {
   let htmlString = nodemailer.renderTemplate(
     {
-      comment: comment,
+      comment: comment.comment,
     },
     "/comments/new_comment.ejs"
   );
@@ -11,7 +11,7 @@ exports.newComment = (comment) => {
   nodemailer.transporter.sendMail(
     {
       from: "admin@socioknct.tech",
-      to: comment.user.email,
+      to: comment.post.user.email,
       subject: "Socioknct | Updates ",
       html: htmlString,
     },
