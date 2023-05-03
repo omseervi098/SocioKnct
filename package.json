@@ -43,6 +43,7 @@
     "passport-jwt": "^4.0.0",
     "passport-local": "^1.0.0",
     "pug": "^3.0.2",
+    "redis": "^4.6.6",
     "rotating-file-stream": "^3.0.4",
     "sass-graph": "^4.0.1",
     "scss-tokenizer": "^0.4.3",
