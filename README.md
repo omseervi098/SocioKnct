@@ -87,7 +87,25 @@ Start the server
 **Server:** Node, Express, MongoDB, Redis
 
 
+
+
+
 ## Demo
 
-- Preview: http://socioknct.tech/
+### Home page of SocioKnct with chat application
+![App Screenshot](https://raw.githubusercontent.com/omseervi098/SocioKnct/master/ss/chat-home.png)
 
+### Login/signup/forget password
+![App Screenshot](https://raw.githubusercontent.com/omseervi098/SocioKnct/master/ss/loginpage.png)
+
+### Edit profile page
+![App Screenshot](https://raw.githubusercontent.com/omseervi098/SocioKnct/master/ss/edit-profile.png)
+
+### View Others profile with their timeline page 
+![App Screenshot](https://raw.githubusercontent.com/omseervi098/SocioKnct/master/ss/timeline-profile.png)
+
+### Search user on SocioKnct and send friend request to chat with them
+![App Screenshot](https://raw.githubusercontent.com/omseervi098/SocioKnct/master/ss/search.png)
+
+### Also have mailing options for forget password and notifying new comment on user post via email
+![App Screenshot](https://raw.githubusercontent.com/omseervi098/SocioKnct/master/ss/mailer.jpg)
