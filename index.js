@@ -7,7 +7,7 @@ const expressLayouts = require("express-ejs-layouts");
 const cookieParser = require("cookie-parser");
 const app = express();
 require("./config/view-helpers")(app);
-const port = 3000;
+const port = $PORT;
 const db = require("./config/mongoose");
 const passportGoogle = require("./config/passport-google-oauth2-strategy");
 //Used for session cookie
