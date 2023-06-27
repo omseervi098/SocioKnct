@@ -1,4 +1,5 @@
 const nodemailer = require("../config/nodemailer");
+const env = require("../config/environment");
 //Another way of export method
 exports.newpass = (forgotpass) => {
   let htmlString = nodemailer.renderTemplate(
@@ -10,7 +11,7 @@ exports.newpass = (forgotpass) => {
   //console.log('Inside new forgetpass mailer');
   nodemailer.transporter.sendMail(
     {
-      from: "admin@socioknct.tech",
+      from: env.smtp.auth.user,
       to: forgotpass.user.email,
       subject: "Socioknct | Forgot Password",
       html: htmlString,

@@ -48,9 +48,7 @@ const production = {
       user: process.env.CODEIAL_MAILER_USERNAME,
       pass: process.env.CODEIAL_MAILER_PASSWORD,
     },
-    tls: {
-      rejectUnauthorized: false,
-    },
+   
   },
   google_clientID: process.env.CODEIAL_GOOGLE_CLIENTID,
   google_clientSecret: process.env.CODEIAL_GOOGLE_CLIENTSECRET,

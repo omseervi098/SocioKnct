@@ -1,5 +1,6 @@
 const nodemailer = require("../config/nodemailer");
 //Another way of export method
+const env = require("../config/environment");
 exports.newFriendRequest = (friendemail, curruser) => {
   let htmlString = nodemailer.renderTemplate(
     {
@@ -10,7 +11,7 @@ exports.newFriendRequest = (friendemail, curruser) => {
 
   nodemailer.transporter.sendMail(
     {
-      from: "admin@socioknct.tech",
+      from: env.smtp.auth.user,
       to: friendemail,
       subject: "Socioknct | New Friend Request",
       html: htmlString,

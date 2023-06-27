@@ -1,5 +1,6 @@
 const nodemailer = require("../config/nodemailer");
 //Another way of export method
+const env = require("../config/environment");
 exports.newComment = (comment) => {
   let htmlString = nodemailer.renderTemplate(
     {
@@ -10,7 +11,7 @@ exports.newComment = (comment) => {
   //console.log('Inside new comment mailer');
   nodemailer.transporter.sendMail(
     {
-      from: "admin@socioknct.tech",
+      from: env.smtp.auth.user,
       to: comment.post.user.email,
       subject: "Socioknct | Updates ",
       html: htmlString,
