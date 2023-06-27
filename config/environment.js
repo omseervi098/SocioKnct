@@ -38,7 +38,7 @@ const production = {
   session_cookie_key: process.env.CODEIAL_SESSION_COOKIE_KEY,
   db: process.env.CODEIAL_DB_NAME,
   port:process.env.PORT,
-  socketport:process.env.SOCKETPORT,
+  socketport:process.env.SOCKET_PORT,
   smtp: {
     pool: true,
     host: "us2.smtp.mailhostbox.com",
