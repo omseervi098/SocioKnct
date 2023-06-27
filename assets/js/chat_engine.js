@@ -5,7 +5,7 @@ let otherUser;
 let currentChatRoom;
 let roomList = [];
 
-var socket = io.connect("http://localhost:5000", {
+var socket = io.connect("https://socioknct.tech:5000", {
   transports: ["websocket"],
 });
 socket.on("connect", function () {
