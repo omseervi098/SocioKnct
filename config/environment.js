@@ -42,12 +42,15 @@ const production = {
   smtp: {
     pool: true,
     host: "smtp.socioknct.tech",
-    port: 587,
+    port: 25,
     secure: false,
     auth: {
       user: process.env.CODEIAL_MAILER_USERNAME,
       pass: process.env.CODEIAL_MAILER_PASSWORD,
-    },
+    } ,
+    tls: {
+      rejectUnauthorized: false
+    }
    
   },
   google_clientID: process.env.CODEIAL_GOOGLE_CLIENTID,
