@@ -41,17 +41,18 @@ const production = {
   socketport:process.env.SOCKETPORT,
   smtp: {
     pool: true,
-    host: "smtp.socioknct.tech",
+    host: "us2.smtp.mailhostbox.com",
     port: 25,
     secure: false,
     auth: {
       user: process.env.CODEIAL_MAILER_USERNAME,
       pass: process.env.CODEIAL_MAILER_PASSWORD,
-    } ,
+    }
+    ,
     tls: {
       rejectUnauthorized: false
     }
-   
+  
   },
   google_clientID: process.env.CODEIAL_GOOGLE_CLIENTID,
   google_clientSecret: process.env.CODEIAL_GOOGLE_CLIENTSECRET,
