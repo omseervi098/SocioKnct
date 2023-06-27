@@ -23,7 +23,7 @@ const passportJWT = require("./config/passport-jwt-strategy");
 const chatServer = require("http").Server(app);
 const chatSockets = require("./config/chat_sockets").chatSockets(chatServer);
 chatServer.listen(env.socketport);
-console.log("chat server is running on port 5000");
+console.log(`chat server is running on port ${env.socketport}`);
 chatServer.prependListener("request", function (req, res) {
   res.setHeader("Access-Control-Allow-Origin", "*");
 });
