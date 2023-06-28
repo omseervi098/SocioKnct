@@ -7,7 +7,7 @@ const expressLayouts = require("express-ejs-layouts");
 const cookieParser = require("cookie-parser");
 const app = express();
 require("./config/view-helpers")(app);
-const port =env.port;
+const port = env.port;
 const db = require("./config/mongoose");
 const passportGoogle = require("./config/passport-google-oauth2-strategy");
 //Used for session cookie
@@ -20,13 +20,21 @@ const sassMiddleware = require("node-sass-middleware");
 const flash = require("connect-flash");
 const customMware = require("./config/middleware");
 const passportJWT = require("./config/passport-jwt-strategy");
+const httpProxy = require("http-proxy");
 const chatServer = require("http").Server(app);
 const chatSockets = require("./config/chat_sockets").chatSockets(chatServer);
-chatServer.listen(env.socketport);
-console.log(`chat server is running on port ${env.socketport}`);
-chatServer.prependListener("request", function (req, res) {
-  res.setHeader("Access-Control-Allow-Origin", "*");
-});
+// chatServer.listen(env.socketport);
+// console.log(`chat server is running on port ${env.socketport}`);
+// // chatServer.prependListener("request", function (req, res) {
+// //   res.setHeader("Access-Control-Allow-Origin", "*");
+// // });
+// httpProxy
+//   .createServer({
+//     target: "http://localhost:8000",
+//     ws: true,
+//   })
+//   .listen(80);
+
 if (env.name == "development") {
   app.use(
     sassMiddleware({
@@ -83,10 +91,22 @@ app.use(flash());
 app.use(customMware.setFlash);
 //Use express Router
 app.use("/", require("./routes/index"));
-app.listen(port, (err) => {
+// app.listen(port, (err) => {
+//   if (err) {
+//     console.log(`Error : ${err}`);
+//     return;
+//   }
+//   console.log(`Server is running on port ${port}`);
+// });
+chatServer.listen(port, function (err) {
   if (err) {
     console.log(`Error : ${err}`);
     return;
   }
   console.log(`Server is running on port ${port}`);
+});
+// chatServer.listen(env.socketport);
+// // console.log(`chat server is running on port ${env.socketport}`);
+chatServer.prependListener("request", function (req, res) {
+  res.setHeader("Access-Control-Allow-Origin", "*");
 });
