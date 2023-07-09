@@ -1,0 +1,40 @@
+<div class="dropdown">
+    <button class="dropbtn" onclick="openDropdown()"><span>Friend Request</span><i
+            class="fa fa-user-plus"></i></button>
+    <div id="myDropdown" class="dropdown-content"
+        style=" height: 350px; overflow-y: scroll;">
+        <%if(user.request && user.request.length!=0) {%>
+            <% for(i of newfriend){%>
+                <div>
+
+                    <div>
+                        <h4>
+                            <%=i.username%>
+                        </h4>
+                    </div>
+                    <div>
+                        <div>
+                            <input type="hidden" name="senderId" id="senderId"
+                                value="<%=i.userId%>">
+                            <input type="hidden" name="senderName" id="senderName"
+                                value="<%=i.username%>">
+                            <button type="submit" id="accept_friend" class="btn"><i
+                                    class="fa-solid fa-check"></i></button>
+                        </div>
+                        <div>
+                            <input type="hidden" name="user_Id" id="user_Id"
+                                value="<%=i.userId%>">
+                            <button type="submit" id="cancel_friend" class="btn"><i
+                                    class="fa-solid fa-xmark"></i></button>
+                        </div>
+                    </div>
+
+                </div>
+                <%}%>
+                    <%}else{%>
+                        <div>
+                            <h4 style="text-align:center">No requests</h4>
+                        </div>
+                        <%}%>
+    </div>
+</div>

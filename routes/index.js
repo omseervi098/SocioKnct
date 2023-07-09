@@ -9,6 +9,7 @@ router.use('/comments',require('./comments'));
 router.use('/api',require('./api'));
 router.use('/likes',require('./likes'));
 router.use('/messages',require('./messages'));
+router.use('/friends',require('./friends'));
 router.get('/autocomplete',passportLocal.checkAuthenication,homeController.autoComplete);
 router.post('/remove',passportLocal.checkAuthenication,homeController.removeFriend)
 router.get('/search/:query',passportLocal.checkAuthenication,homeController.search);
