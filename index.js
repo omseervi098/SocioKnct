@@ -20,20 +20,14 @@ const sassMiddleware = require("node-sass-middleware");
 const flash = require("connect-flash");
 const customMware = require("./config/middleware");
 const passportJWT = require("./config/passport-jwt-strategy");
-const httpProxy = require("http-proxy");
 const chatServer = require("http").Server(app);
 const chatSockets = require("./config/chat_sockets").chatSockets(chatServer);
+
 // chatServer.listen(env.socketport);
 // console.log(`chat server is running on port ${env.socketport}`);
 // // chatServer.prependListener("request", function (req, res) {
 // //   res.setHeader("Access-Control-Allow-Origin", "*");
 // // });
-// httpProxy
-//   .createServer({
-//     target: "http://localhost:8000",
-//     ws: true,
-//   })
-//   .listen(80);
 
 if (env.name == "development") {
   app.use(

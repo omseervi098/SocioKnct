@@ -4,8 +4,9 @@ let userMail;
 let otherUser;
 let currentChatRoom;
 let roomList = [];
-
-var socket = io.connect("https://socioknct.tech", {
+// For development use http://localhost:3001
+// For production use https://socioknct.tech
+var socket = io.connect("http://localhost:3001", {
   transports: ["websocket"],
 });
 socket.on("connect", function () {

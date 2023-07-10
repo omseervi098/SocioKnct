@@ -12,20 +12,28 @@ const development = {
   name: "development",
   asset_path: "./assets",
   session_cookie_key: process.env.CODEIAL_SESSION_COOKIE_KEY,
-  db: "codial_development",
+  db: process.env.CODEIAL_DB_NAME,
+  port:process.env.PORT,
+  socketport:process.env.SOCKET_PORT,
   smtp: {
-    service: "gmail",
-    host: "smtp.gmail.com",
-    port: 587,
-    secure: true,
+    pool: true,
+    host: "us2.smtp.mailhostbox.com",
+    port: 25,
+    secure: false,
     auth: {
       user: process.env.CODEIAL_MAILER_USERNAME,
       pass: process.env.CODEIAL_MAILER_PASSWORD,
-    },
+    }
+    ,
+    tls: {
+      rejectUnauthorized: false
+    }
+  
   },
   google_clientID: process.env.CODEIAL_GOOGLE_CLIENTID,
   google_clientSecret: process.env.CODEIAL_GOOGLE_CLIENTSECRET,
   google_callbackURL: process.env.CODEIAL_GOOGLE_CALLBACKURL,
+  redis_password: process.env.CODEIAL_REDIS_PASSWORD,
   jwt_secret_key: process.env.CODEIAL_JWT_SECRET_KEY,
   morgan: {
     mode: "dev",
@@ -65,4 +73,4 @@ const production = {
   },
 };
 
-module.exports = production;
+module.exports = development;

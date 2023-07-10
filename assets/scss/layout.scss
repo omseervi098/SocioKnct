@@ -1,11 +1,15 @@
-body{
-    margin:0 !important;
+//Import Montserrat font
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap');
+
+body {
+    margin: 0 !important;
     /* text-align: center; */
-    font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
-    font-size:1.07rem;
+    font-family: 'Montserrat', sans-serif !important;
+    font-size: 1.07rem;
     line-height: none;
-    #main-containe{
+
+    #main-containe {
         height: auto;
-        width: 100%;  
+        width: 100%;
     }
 }

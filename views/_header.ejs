@@ -1,73 +1,76 @@
 <header id="mynavbar" class="topnav">
-    <nav id="reload" >
-        <div class="active">
-            <a href="/"><img src="<%=assetPath('images/logo_icon.png')%>" alt="logo">
-                <div>
-                    <p id="website-name">SocioKnct</p>
-                </div>
-            </a>
-        </div>
-        
-        <ul>
-            <% if(locals.user){ %>
-                <li><input type="hidden" id="currentuser" value="<%=locals.user.username%>"></li>
-                <li class="search-li"><input type="text" id="search-name" class="search" name="filtername" placeholder="Enter Name"></li>
-                
-                <li class="friend-dropdown-li">
-                    <div class="dropdown">
-                        <button class="dropbtn" onclick="openDropdown()"><span>Friend Request</span><i class="fa fa-user-plus"></i></button>
-                        <div id="myDropdown" class="dropdown-content" style=" height: 350px; overflow-y: scroll;">
-                        <%if(user.request && user.request.length!=0) {%>
-                            <% for(i of newfriend){%>
-                                <div >
-                                    
-                                        <div>
-                                            <h4>
-                                                <%=i.username%>
-                                            </h4>
-                                        </div>
-                                        <div>
-                                            <div >
-                                                <input type="hidden" name="senderId" id="senderId" value="<%=i.userId%>">
-                                                <input type="hidden" name="senderName" id="senderName" value="<%=i.username%>">
-                                                <button type="submit" id="accept_friend" class="btn" ><i class="fa-solid fa-check"></i></button>
-                                            </div>
-                                            <div >
-                                                <input type="hidden" name="user_Id" id="user_Id" value="<%=i.userId%>">
-                                                <button type="submit" id="cancel_friend" class="btn" ><i class="fa-solid fa-xmark"></i></button>
-                                            </div>
-                                        </div>
-                                    
-                                </div>
-                            <%}%>
-                        <%}else{%>
-                            <div>
-                                <h4 style="text-align:center">No requests</h4>
-                            </div>
-                        <%}%>
-                        </div>
-                    </div>
-                </li>
+  <nav id="reload" class="navbar <%=locals.user?" navbar-expand-md":"navbar-expand-sm"%>">
+    <div class="container-fluid">
+      <div class="navbar-brand logo-container">
+        <a href="/">
+          <img src="<%=assetPath('images/logo.png')%>" alt="logo" class="img-fluid">
+          <div>
+            <h2 id="website-name">&nbsp;SocioKnct</h2>
+          </div>
+        </a>
+      </div>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
 
-                <li class="profile-li"><a href="/users/profile/<%= user._id %>"><button><span><%= user.name.split(' ')[0] %></span><i style="display: none;" class="fa-solid fa-user"></i></button></a></li>
-            <li class="signout-li">
-                <a href="/users/signout"><button><span>Sign-Out</span><i style="display:none;"class="fa-solid fa-arrow-right-from-bracket"></i></button></a>
-            
-            </li>
+      <div class="collapse navbar-collapse " id="navbarSupportedContent">
+
+        <% if(locals.user){ %>
+
+        <ul class="navbar-nav navmenucont ms-auto mb-2 mb-lg-0 gap-2 ">
+          <li class="search-li nav-item">
+            <div class="form">
+              <i class="fa fa-search"></i>
+              <input type="text" class="form-control form-input " placeholder="Search Users" id="search-name" class="search" name="filtername">
+            </div>
+          </li>
+          <li class="nav-item">
+            <input type="hidden" id="currentuser" value="<%=locals.user.username%>">
+          </li>
+          <li class="nav-item align-self-center">
+            <button class="nav-btn p-2">
+              <i class="fa fa-bell"></i>
+            </button>
+          </li>
+          <li class="nav-item align-self-center">
+            <button class="nav-btn p-2">
+              <i class="fa-brands fa-rocketchat"></i>
+            </button>
+          </li>
+          <li class="profile-li nav-item">
+            <a href="/users/profile/<%= user._id %>">
+              <button class="nav-btn prof-btn py-0 px-0 pe-lg-2 ps-0"><% if (user.avatar) { %> <img src="<%= user.avatar %>" alt="profile" class=" prof-icon rounded-circle">
+                <% } else { %>
+                <i class="fa-solid fa-user"></i>
+                <% } %>
+                <span class="d-none d-lg-inline"><%= user.name.split(' ')[0] %></span></button></a>
+          </li>
+          <li class="signout-li nav-item align-self-center  ">
+            <a href="/users/signout">
+              <button class="nav-btn py-2 py-lg-1">
+                <span class="d-none d-lg-inline">Logout&nbsp;</span>
+                <i class="fa-solid fa-arrow-right-from-bracket"></i></button></a>
+
+          </li>
+        </ul>
         <% }else{%>
-            <li>
-                <a href="/users/login"><button>Sign-In</button></a>
-            </li>
-            <li>
-                <a href="/users/signup"><button>Sign-Up</button></a>
-            </li>
+        <ul class="navbar-nav ms-auto mb-2 mb-lg-0 gap-2">
+          <li class="nav-item text-center">
+            <a href=" /users/login"><button class="nav-btn">Login</button></a>
+          </li>
+          <li class="nav-item text-center">
+            <a href="/users/signup"><button class="nav-btn">Register</button></a>
+          </li>
+        </ul>
         <%}%>
-    </ul>
-    <%if(locals.user){%>
-    <a href="javascript:void(0);" class="icon" onclick="opennav()">
-        <i class="fa fa-bars"></i>
-      </a>
-    <%}%>
+    
+    </div>
+    <!-- <%if(locals.user){%>
+        <a href="javascript:void(0);" class="icon" onclick="opennav()">
+          <i class="fa fa-bars"></i>
+        </a>
+        <%}%> -->
+    </div>
     </nav>
 </header>
 <script>

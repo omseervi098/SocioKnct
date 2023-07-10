@@ -1,53 +1,61 @@
 <html>
+
 <head>
-    <title>SocioKnct</title>  
-    
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <link href="https://cdnout.com/noty/noty.min.css" rel="stylesheet" media="all">
-    <script src="https://cdnout.com/noty/noty.js"></script>
-    <link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
-    <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
-    <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
-    <script src="https://kit.fontawesome.com/4499aac38f.js" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="<%=assetPath('css/layout.css')%>">
-    <link rel="stylesheet" href="<%=assetPath('css/header.css')%>">
-    <link rel="stylesheet" href="<%=assetPath('css/footer.css')%>">
-    <link rel="stylesheet" href="<%=assetPath('css/search.css')%>">
-    <!-- <meta http-equiv="Content-Security-Policy" content="default-src 'none'; connect-src 'self';font-src 'self'; img-src 'self' data: https:; style-src 'self' 'unsafe-inline' ; script-src 'self'">  -->
-    <%- style %>
+  <title>SocioKnct</title>
+  <!-- Favicon -->
+  <link rel="icon" href="<%=assetPath('images/logo.png')%>" type="image/x-icon">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Noty JS Notification -->
+  <link href="https://cdnout.com/noty/noty.min.css" rel="stylesheet" media="all">
+  <script src="https://cdnout.com/noty/noty.js"></script>
+  <!-- JQuery  -->
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+  <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+  <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+  <!-- Font Awesome -->
+  <script src="https://kit.fontawesome.com/4499aac38f.js" crossorigin="anonymous"></script>
+  <!-- Bootstrap 5.3-->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
+  <!-- Own CSS -->
+  <link rel="stylesheet" href="<%=assetPath('css/layout.css')%>">
+  <link rel="stylesheet" href="<%=assetPath('css/header.css')%>">
+  <link rel="stylesheet" href="<%=assetPath('css/footer.css')%>">
+  <link rel="stylesheet" href="<%=assetPath('css/search.css')%>">
+  <!-- <meta http-equiv="Content-Security-Policy" content="default-src 'none'; connect-src 'self';font-src 'self'; img-src 'self' data: https:; style-src 'self' 'unsafe-inline' ; script-src 'self'">  -->
+  <%- style %>
 </head>
-<body >
-    
-    <%- include('_header') %>
-    
-    <div id="main-containe">
-        <%- body %>
-    </div>
-    <%- include('_footer') %>
 
-    <!-- <script src="/js/bootstrap.bundle.js"></script> -->
-    <script src="<%=assetPath('js/sendFriendReq.js')%>"></script>
-    <%- script %>
-    <script>
-        <% if(flash.success && flash.success.length>0){ %>
-            new Noty({
-                theme: 'relax',
-                text: "<%=flash.success%>",
-                type: 'success',
-                layout: 'topRight',
-                timeout: 3000
-            }).show();
-        <% } %>
-        <% if(flash.error && flash.error.length>0) {%>
-            new Noty({
-                theme: 'relax',
-                text: "<%=flash.error%>",
-                type:'error',
-                layout: 'topRight',
-                timeout: 3000
-            }).show();
-        <% } %>
-    </script>
+<body>
+
+  <%- include('_header') %>
+
+  <div id="main-containe">
+    <%- body %>
+  </div>
+  <%- include('_footer') %>
+  <script src="<%=assetPath('js/sendFriendReq.js')%>"></script>
+  <%- script %>
+  <script>
+    <% if(flash.success && flash.success.length>0){ %>
+    new Noty({
+      theme: 'relax',
+      text: "<%=flash.success%>",
+      type: 'success',
+      layout: 'topRight',
+      timeout: 3000
+    }).show();
+    <% } %>
+    <% if(flash.error && flash.error.length>0) {%>
+    new Noty({
+      theme: 'relax',
+      text: "<%=flash.error%>",
+      type: 'error',
+      layout: 'topRight',
+      timeout: 3000
+    }).show();
+    <% } %>
+  </script>
 </body>
+
 </html>

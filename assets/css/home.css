@@ -1,1 +1,407 @@
-#home-containe{width:100%;height:100%;min-height:85vh;display:flex;height:max-content;justify-content:space-between}#home-containe #feed-posts{width:100%;padding:0;margin:0;background-color:#f5f5f5;display:flex;flex-direction:column;align-items:center;justify-content:center}#home-containe #feed-posts h4{margin:0;padding:2;font-size:1.5rem;font-weight:700;color:#000}#home-containe #feed-posts .form-for-post{display:flex;flex-direction:column;gap:5px;align-items:center;justify-content:center}#home-containe #feed-posts .form-for-post #post-image-preview img{width:200px;height:200px}#home-containe #feed-posts .form-for-post #content{width:auto;height:auto;border:none;border-radius:3%;padding:0;margin:0;font-size:1.3rem;font-weight:700;color:#000;border-bottom:2px solid #000}#home-containe #feed-posts .form-for-post #content:focus{outline:none}#home-containe #feed-posts .form-for-post #post-submit{background-color:#5f2a8a;border:none;padding:5px 10px;width:auto;font-size:1.07rem;color:#fff;font-weight:700;border-radius:5px}#home-containe #feed-posts .form-for-post #post-submit:hover{background-color:#1cc7dd;color:#fff;cursor:pointer}#home-containe #feed-posts #post-list-container{width:60%;border-top:2px solid #000;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;padding:10px}#home-containe #feed-posts #post-list-container #post-list-container-div{display:flex;width:100%;flex-direction:column;justify-content:center;gap:10px}#home-containe #feed-posts #post-list-container #post-list-container-div .post{display:flex;width:100%;flex-direction:column;justify-content:center;gap:2px}#home-containe #feed-posts #post-list-container #post-list-container-div .post .ithpost{margin-left:5px;display:flex;flex-direction:column;gap:3px}#home-containe #feed-posts #post-list-container #post-list-container-div .post .ithpost .name{display:flex;width:100%;justify-content:space-between;flex-wrap:nowrap}#home-containe #feed-posts #post-list-container #post-list-container-div .post .ithpost .name span{font-size:1.1rem;font-weight:700;color:#000;display:flex;justify-content:center;align-items:center;gap:5px}#home-containe #feed-posts #post-list-container #post-list-container-div .post .ithpost .name span img{width:35px;height:35px;border-radius:50%}#home-containe #feed-posts #post-list-container #post-list-container-div .post .ithpost .name div .dropdown{position:relative;display:inline-block}#home-containe #feed-posts #post-list-container #post-list-container-div .post .ithpost .name div .dropdown .dropbtn{background-color:#712696;color:#fff;padding:4px;border-radius:20%;font-size:16px;border:none;cursor:pointer;margin-bottom:2px}#home-containe #feed-posts #post-list-container #post-list-container-div .post .ithpost .name div .dropdown .dropdown-content{display:none;position:absolute;background-color:#b866c9;color:#fff;min-width:80px;box-shadow:0 8px 16px 0 rgba(0,0,0,.2);z-index:1}#home-containe #feed-posts #post-list-container #post-list-container-div .post .ithpost .name div .dropdown .dropdown-content a{color:#fff;padding:8px;text-decoration:none;display:block}#home-containe #feed-posts #post-list-container #post-list-container-div .post .ithpost .name div .dropdown .dropdown-content a:hover{background-color:#840ea1;color:#fff}#home-containe #feed-posts #post-list-container #post-list-container-div .post .ithpost .name div .dropdown:hover .dropdown-content{display:block}#home-containe #feed-posts #post-list-container #post-list-container-div .post .ithpost .name div .dropdown:hover .dropbtn{background-color:#3e0074}#home-containe #feed-posts #post-list-container #post-list-container-div .post .ithpost .content{height:auto;width:auto;background-color:#fff;border-radius:3%;padding:5px;font-size:1.1rem;border:1px dashed #000;display:flex;flex-direction:column}#home-containe #feed-posts #post-list-container #post-list-container-div .post .ithpost .content img{width:100%}#home-containe #feed-posts #post-list-container #post-list-container-div .post .ithpost small .like__btn{padding:3px 6px;background:#ff3a3a;font-size:13px;font-family:Open Sans,sans-serif;border-radius:5px;color:#e8efff;outline:none;border:none;cursor:pointer}#home-containe #feed-posts #post-list-container #post-list-container-div .post .ithpost small .like__btn:hover{background:#ca1919;color:#e8efff}#home-containe #feed-posts #post-list-container #post-list-container-div .post .post-comments{margin:0 20px;width:80%}#home-containe #feed-posts #post-list-container #post-list-container-div .post .post-comments form{display:flex;gap:5px;justify-content:space-between}#home-containe #feed-posts #post-list-container #post-list-container-div .post .post-comments form #comment-input{width:80%;height:auto;border:none;border-radius:3%;padding:0;margin:0;padding:4px 5px;font-weight:700;color:#000;background-color:inherit;border-bottom:2px solid #000}#home-containe #feed-posts #post-list-container #post-list-container-div .post .post-comments form #comment-input:focus{outline:none}#home-containe #feed-posts #post-list-container #post-list-container-div .post .post-comments form #add-comment{background-color:#5f2a8a;border:none;padding:2px 5px;width:auto;color:#fff;font-weight:700;border-radius:5px}#home-containe #feed-posts #post-list-container #post-list-container-div .post .post-comments form #add-comment:hover{background-color:#1cc7dd;color:#fff;cursor:pointer}#home-containe #feed-posts #post-list-container #post-list-container-div .post .post-comments .post-comments-list .post-comments-list-container{margin-left:20px;display:flex;flex-direction:column;justify-content:center;gap:5px}#home-containe #feed-posts #post-list-container #post-list-container-div .post .post-comments .post-comments-list .post-comments-list-container .comment{display:flex;flex-direction:column;gap:2px}#home-containe #feed-posts #post-list-container #post-list-container-div .post .post-comments .post-comments-list .post-comments-list-container .comment .name{font-size:1rem;font-weight:700;color:#000;display:flex;justify-content:space-between}#home-containe #feed-posts #post-list-container #post-list-container-div .post .post-comments .post-comments-list .post-comments-list-container .comment .name span{display:flex;justify-content:center;align-items:center;gap:5px;font-size:1rem;font-weight:700;color:#000}#home-containe #feed-posts #post-list-container #post-list-container-div .post .post-comments .post-comments-list .post-comments-list-container .comment .name span img{width:35px;height:35px;border-radius:50%}#home-containe #feed-posts #post-list-container #post-list-container-div .post .post-comments .post-comments-list .post-comments-list-container .comment .name div .dropdown{position:relative;display:inline-block}#home-containe #feed-posts #post-list-container #post-list-container-div .post .post-comments .post-comments-list .post-comments-list-container .comment .name div .dropdown .dropbtn{background-color:#712696;color:#fff;padding:2px;border-radius:20%;font-size:16px;border:none;cursor:pointer;margin-bottom:2px}#home-containe #feed-posts #post-list-container #post-list-container-div .post .post-comments .post-comments-list .post-comments-list-container .comment .name div .dropdown .dropdown-content{display:none;position:absolute;background-color:#b866c9;min-width:80px;box-shadow:0 8px 16px 0 rgba(0,0,0,.2);z-index:1}#home-containe #feed-posts #post-list-container #post-list-container-div .post .post-comments .post-comments-list .post-comments-list-container .comment .name div .dropdown .dropdown-content a{color:#fff;padding:8px;text-decoration:none;display:block}#home-containe #feed-posts #post-list-container #post-list-container-div .post .post-comments .post-comments-list .post-comments-list-container .comment .name div .dropdown .dropdown-content a:hover{background-color:#840ea1;color:#fff}#home-containe #feed-posts #post-list-container #post-list-container-div .post .post-comments .post-comments-list .post-comments-list-container .comment .name div .dropdown:hover .dropdown-content{display:block}#home-containe #feed-posts #post-list-container #post-list-container-div .post .post-comments .post-comments-list .post-comments-list-container .comment .name div .dropdown:hover .dropbtn{background-color:#3e0074}#home-containe #feed-posts #post-list-container #post-list-container-div .post .post-comments .post-comments-list .post-comments-list-container .comment .content{margin-left:0;background-color:#eeeeeed6;padding:1px 3px;border-radius:4%;font-family:sans-serif}#home-containe #feed-posts #post-list-container #post-list-container-div .post .post-comments .post-comments-list .post-comments-list-container .comment small .like__btn{padding:3px 6px;background:#ff3a3a;font-size:13px;font-family:Open Sans,sans-serif;border-radius:5px;color:#e8efff;outline:none;border:none;cursor:pointer}#home-containe #feed-posts #post-list-container #post-list-container-div .post .post-comments .post-comments-list .post-comments-list-container .comment small .like__btn:hover{background:#ca1919;color:#e8efff}#home-containe #user-friends{border-left:2px solid #363636;background-color:#5f2a8a;color:#f5f5f5;display:flex;flex-direction:column;align-items:center;min-width:30%}#home-containe #user-friends div h4{font-size:1.3rem;font-weight:700;padding:5px 0;margin:10px 0}#home-containe #user-friends div #friend-list{margin-left:10px;margin-right:10px;font-size:1rem}#home-containe #user-friends div #friend-list .ithfriend{margin-bottom:4px}#home-containe #user-friends div #friend-list .ithfriend .friend-container{display:flex;flex-direction:row;gap:10px}#home-containe #user-friends div #friend-list .ithfriend .friend-container .friend-avatar{display:flex;justify-content:center;align-items:center}#home-containe #user-friends div #friend-list .ithfriend .friend-container .friend-avatar img{background-position:50%;width:40px;height:40px;border-radius:50%}#home-containe #user-friends div #friend-list .ithfriend .friend-container .message-contiainer{display:flex;flex-direction:column;justify-content:center}#home-containe #user-friends div #friend-list .ithfriend .friend-container .message-contiainer button{background-color:#a951d5;color:orange;padding:5px;border-radius:20%;font-size:20px;border:none;cursor:pointer;margin-bottom:2px}#home-containe #user-friends div #friend-list .ithfriend .friend-container .message-contiainer button:hover{background-color:#f3f3f3;border-radius:20%;color:#b83fb4}#home-containe #user-friends div #friend-list .ithfriend .friend-container .friend-name a,#home-containe #user-friends div #friend-list .ithfriend .friend-container .friend-name a:focus,#home-containe #user-friends div #friend-list .ithfriend .friend-container .friend-name a:hover,#home-containe #user-friends div #friend-list .ithfriend .friend-container .friend-name a:visited{color:inherit;text-decoration:none}#home-containe #user-friends div #friend-list .ithfriend .friend-container .friend-name h2{font-size:1.1rem;margin:5px 0!important}@media screen and (max-width:768px){#user-friends{min-width:40%;width:40%}}@media screen and (max-width:576px){#user-friends{width:100%}#user-friends div{margin-bottom:20px}#home-containe{height:max-content;background-color:#f5f5f5;flex-direction:column}#home-containe #feed-posts{padding:0}#home-containe #chatbox{display:none}}
+#home-containe {
+  background-color: #F3F2EF; }
+  #home-containe #news-card {
+    border: 2px solid #000;
+    border-radius: 10px; }
+    #home-containe #news-card .card {
+      width: 400px;
+      background-color: #efefef;
+      border: none;
+      cursor: pointer;
+      transition: all 0.5s; }
+      #home-containe #news-card .card .headline {
+        display: flex;
+        justify-content: space-between;
+        align-items: center; }
+      #home-containe #news-card .card ul {
+        list-style-type: circle;
+        padding-left: 10px;
+        margin: 0; }
+        #home-containe #news-card .card ul li {
+          font-size: 13px;
+          font-weight: 600;
+          color: #000;
+          margin: 0;
+          padding: 0; }
+          #home-containe #news-card .card ul li a {
+            color: #000;
+            text-decoration: none; }
+            #home-containe #news-card .card ul li a:hover {
+              color: purple; }
+  #home-containe #info-card {
+    border: 2px solid #000;
+    border-radius: 10px; }
+    #home-containe #info-card .card {
+      width: 400px;
+      background-color: #efefef;
+      border: none;
+      cursor: pointer;
+      transition: all 0.5s; }
+    #home-containe #info-card .image img {
+      transition: all 0.5s;
+      border-radius: 50px; }
+    #home-containe #info-card .card:hover .image img {
+      transform: scale(1.5);
+      border-radius: 50px; }
+    #home-containe #info-card .btn {
+      height: 140px;
+      width: 140px;
+      border-radius: 50%; }
+    #home-containe #info-card .name {
+      font-size: 22px;
+      font-weight: bold; }
+    #home-containe #info-card .idd {
+      font-size: 14px;
+      font-weight: 600; }
+    #home-containe #info-card .idd1 {
+      font-size: 12px; }
+    #home-containe #info-card .number {
+      font-size: 22px;
+      font-weight: bold; }
+    #home-containe #info-card .follow {
+      font-size: 12px;
+      font-weight: 500;
+      color: #444444; }
+    #home-containe #info-card .btn1 {
+      height: 40px;
+      width: 150px;
+      border: none;
+      background-color: #000;
+      color: #aeaeae;
+      font-size: 15px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-decoration: none; }
+    #home-containe #info-card .text span {
+      font-size: 13px;
+      color: #545454;
+      font-weight: 500; }
+    #home-containe #info-card .icons i {
+      font-size: 19px; }
+    #home-containe #info-card hr .new1 {
+      border: 1px solid; }
+    #home-containe #info-card .join {
+      font-size: 14px;
+      color: #a0a0a0;
+      font-weight: bold; }
+    #home-containe #info-card .date {
+      background-color: #ccc; }
+  #home-containe #feed-posts {
+    width: 100%;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center; }
+    #home-containe #feed-posts h4 {
+      margin: 0;
+      padding: 2;
+      font-size: 1.5rem;
+      font-weight: bold;
+      color: #000; }
+    #home-containe #feed-posts .form-for-post {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      align-items: center;
+      justify-content: center; }
+      #home-containe #feed-posts .form-for-post #post-image-preview img {
+        width: 200px;
+        height: 200px; }
+      #home-containe #feed-posts .form-for-post #content {
+        width: auto;
+        height: auto;
+        border: none;
+        border-radius: 3%;
+        padding: 0;
+        margin: 0;
+        font-size: 1.3rem;
+        font-weight: bold;
+        color: #000;
+        border-bottom: 2px solid black; }
+      #home-containe #feed-posts .form-for-post #content:focus {
+        outline: none; }
+      #home-containe #feed-posts .form-for-post #post-submit {
+        background-color: #5f2a8a;
+        border: none;
+        padding: 5px 10px;
+        width: auto;
+        font-size: 1.07rem;
+        color: white;
+        font-weight: bold;
+        border-radius: 5px; }
+        #home-containe #feed-posts .form-for-post #post-submit:hover {
+          background-color: #1cc7dd;
+          color: white;
+          cursor: pointer; }
+    #home-containe #feed-posts #post-list-container {
+      width: 60%;
+      border-top: 2px solid black;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      padding: 10px; }
+      #home-containe #feed-posts #post-list-container #post-list-container-div {
+        display: flex;
+        width: 100%;
+        flex-direction: column;
+        justify-content: center;
+        gap: 10px; }
+        #home-containe #feed-posts #post-list-container #post-list-container-div .post {
+          display: flex;
+          width: 100%;
+          flex-direction: column;
+          justify-content: center;
+          gap: 2px; }
+          #home-containe #feed-posts #post-list-container #post-list-container-div .post .ithpost {
+            margin-left: 5px;
+            display: flex;
+            flex-direction: column;
+            gap: 3px; }
+            #home-containe #feed-posts #post-list-container #post-list-container-div .post .ithpost .name {
+              display: flex;
+              width: 100%;
+              justify-content: space-between;
+              flex-wrap: nowrap; }
+              #home-containe #feed-posts #post-list-container #post-list-container-div .post .ithpost .name span {
+                font-size: 1.1rem;
+                font-weight: bold;
+                color: #000;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                gap: 5px; }
+                #home-containe #feed-posts #post-list-container #post-list-container-div .post .ithpost .name span img {
+                  width: 35px;
+                  height: 35px;
+                  border-radius: 50%; }
+              #home-containe #feed-posts #post-list-container #post-list-container-div .post .ithpost .name div .dropdown {
+                position: relative;
+                display: inline-block; }
+                #home-containe #feed-posts #post-list-container #post-list-container-div .post .ithpost .name div .dropdown .dropbtn {
+                  background-color: #712696;
+                  color: white;
+                  padding: 4px;
+                  border-radius: 20%;
+                  font-size: 16px;
+                  border: none;
+                  cursor: pointer;
+                  margin-bottom: 2px; }
+                #home-containe #feed-posts #post-list-container #post-list-container-div .post .ithpost .name div .dropdown .dropdown-content {
+                  display: none;
+                  position: absolute;
+                  background-color: #b866c9;
+                  color: white;
+                  min-width: 80px;
+                  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+                  z-index: 1; }
+                  #home-containe #feed-posts #post-list-container #post-list-container-div .post .ithpost .name div .dropdown .dropdown-content a {
+                    color: white;
+                    padding: 8px 8px;
+                    text-decoration: none;
+                    display: block; }
+                    #home-containe #feed-posts #post-list-container #post-list-container-div .post .ithpost .name div .dropdown .dropdown-content a:hover {
+                      background-color: #840ea1;
+                      color: white; }
+                #home-containe #feed-posts #post-list-container #post-list-container-div .post .ithpost .name div .dropdown:hover .dropdown-content {
+                  display: block; }
+                #home-containe #feed-posts #post-list-container #post-list-container-div .post .ithpost .name div .dropdown:hover .dropbtn {
+                  background-color: #3e0074; }
+            #home-containe #feed-posts #post-list-container #post-list-container-div .post .ithpost .content {
+              height: auto;
+              width: auto;
+              background-color: white;
+              border-radius: 3%;
+              padding: 5px;
+              font-size: 1.1rem;
+              border: 1px dashed black;
+              display: flex;
+              flex-direction: column; }
+              #home-containe #feed-posts #post-list-container #post-list-container-div .post .ithpost .content img {
+                width: 100%; }
+            #home-containe #feed-posts #post-list-container #post-list-container-div .post .ithpost small .like__btn {
+              padding: 3px 6px;
+              background: #ff3a3a;
+              font-size: 13px;
+              font-family: "Open Sans", sans-serif;
+              border-radius: 5px;
+              color: #e8efff;
+              outline: none;
+              border: none;
+              cursor: pointer; }
+              #home-containe #feed-posts #post-list-container #post-list-container-div .post .ithpost small .like__btn:hover {
+                background: #ca1919;
+                color: #e8efff; }
+          #home-containe #feed-posts #post-list-container #post-list-container-div .post .post-comments {
+            margin: 0px 20px;
+            width: 80%; }
+            #home-containe #feed-posts #post-list-container #post-list-container-div .post .post-comments form {
+              display: flex;
+              gap: 5px;
+              justify-content: space-between; }
+              #home-containe #feed-posts #post-list-container #post-list-container-div .post .post-comments form #comment-input {
+                width: 80%;
+                height: auto;
+                border: none;
+                border-radius: 3%;
+                padding: 0;
+                margin: 0;
+                padding: 4px 5px;
+                font-weight: bold;
+                color: #000;
+                background-color: inherit;
+                border-bottom: 2px solid black; }
+                #home-containe #feed-posts #post-list-container #post-list-container-div .post .post-comments form #comment-input:focus {
+                  outline: none; }
+              #home-containe #feed-posts #post-list-container #post-list-container-div .post .post-comments form #add-comment {
+                background-color: #5f2a8a;
+                border: none;
+                padding: 2px 5px;
+                width: auto;
+                color: white;
+                font-weight: bold;
+                border-radius: 5px; }
+                #home-containe #feed-posts #post-list-container #post-list-container-div .post .post-comments form #add-comment:hover {
+                  background-color: #1cc7dd;
+                  color: white;
+                  cursor: pointer; }
+            #home-containe #feed-posts #post-list-container #post-list-container-div .post .post-comments .post-comments-list .post-comments-list-container {
+              margin-left: 20px;
+              display: flex;
+              flex-direction: column;
+              justify-content: center;
+              gap: 5px; }
+              #home-containe #feed-posts #post-list-container #post-list-container-div .post .post-comments .post-comments-list .post-comments-list-container .comment {
+                display: flex;
+                flex-direction: column;
+                gap: 2px; }
+                #home-containe #feed-posts #post-list-container #post-list-container-div .post .post-comments .post-comments-list .post-comments-list-container .comment .name {
+                  font-size: 1rem;
+                  font-weight: bold;
+                  color: #000;
+                  display: flex;
+                  justify-content: space-between; }
+                  #home-containe #feed-posts #post-list-container #post-list-container-div .post .post-comments .post-comments-list .post-comments-list-container .comment .name span {
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    gap: 5px;
+                    font-size: 1rem;
+                    font-weight: bold;
+                    color: #000; }
+                    #home-containe #feed-posts #post-list-container #post-list-container-div .post .post-comments .post-comments-list .post-comments-list-container .comment .name span img {
+                      width: 35px;
+                      height: 35px;
+                      border-radius: 50%; }
+                  #home-containe #feed-posts #post-list-container #post-list-container-div .post .post-comments .post-comments-list .post-comments-list-container .comment .name div .dropdown {
+                    position: relative;
+                    display: inline-block; }
+                    #home-containe #feed-posts #post-list-container #post-list-container-div .post .post-comments .post-comments-list .post-comments-list-container .comment .name div .dropdown .dropbtn {
+                      background-color: #712696;
+                      color: white;
+                      padding: 2px;
+                      border-radius: 20%;
+                      font-size: 16px;
+                      border: none;
+                      cursor: pointer;
+                      margin-bottom: 2px; }
+                    #home-containe #feed-posts #post-list-container #post-list-container-div .post .post-comments .post-comments-list .post-comments-list-container .comment .name div .dropdown .dropdown-content {
+                      display: none;
+                      position: absolute;
+                      background-color: #b866c9;
+                      min-width: 80px;
+                      box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+                      z-index: 1; }
+                      #home-containe #feed-posts #post-list-container #post-list-container-div .post .post-comments .post-comments-list .post-comments-list-container .comment .name div .dropdown .dropdown-content a {
+                        color: white;
+                        padding: 8px 8px;
+                        text-decoration: none;
+                        display: block; }
+                        #home-containe #feed-posts #post-list-container #post-list-container-div .post .post-comments .post-comments-list .post-comments-list-container .comment .name div .dropdown .dropdown-content a:hover {
+                          background-color: #840ea1;
+                          color: white; }
+                    #home-containe #feed-posts #post-list-container #post-list-container-div .post .post-comments .post-comments-list .post-comments-list-container .comment .name div .dropdown:hover .dropdown-content {
+                      display: block; }
+                    #home-containe #feed-posts #post-list-container #post-list-container-div .post .post-comments .post-comments-list .post-comments-list-container .comment .name div .dropdown:hover .dropbtn {
+                      background-color: #3e0074; }
+                #home-containe #feed-posts #post-list-container #post-list-container-div .post .post-comments .post-comments-list .post-comments-list-container .comment .content {
+                  margin-left: 0px;
+                  background-color: #eeeeeed6;
+                  padding: 1px 3px;
+                  border-radius: 4%;
+                  font-family: sans-serif; }
+                #home-containe #feed-posts #post-list-container #post-list-container-div .post .post-comments .post-comments-list .post-comments-list-container .comment small .like__btn {
+                  padding: 3px 6px;
+                  background: #ff3a3a;
+                  font-size: 13px;
+                  font-family: "Open Sans", sans-serif;
+                  border-radius: 5px;
+                  color: #e8efff;
+                  outline: none;
+                  border: none;
+                  cursor: pointer; }
+                  #home-containe #feed-posts #post-list-container #post-list-container-div .post .post-comments .post-comments-list .post-comments-list-container .comment small .like__btn:hover {
+                    background: #ca1919;
+                    color: #e8efff; }
+  #home-containe #weather-card {
+    border: 2px solid #000;
+    border-radius: 10px; }
+    #home-containe #weather-card .card {
+      width: 400px !important; }
+      #home-containe #weather-card .card input {
+        padding: 1rem;
+        border-radius: 25px;
+        border: none;
+        background-color: #fff;
+        font-family: inherit;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        font-size: 1rem;
+        width: 100%; }
+      #home-containe #weather-card .card input:focus {
+        outline: none; }
+      #home-containe #weather-card .card .weather {
+        text-align: center;
+        font-size: 2rem; }
+      #home-containe #weather-card .card .weather h2 {
+        margin-bottom: 0;
+        display: flex;
+        align-items: center; }
+  #home-containe #user-friends {
+    border: 2px solid #000;
+    border-radius: 10px; }
+    #home-containe #user-friends .outercard {
+      width: 400px !important; }
+      #home-containe #user-friends .outercard .ithcard {
+        width: 100%;
+        background-color: #ebebeb;
+        border: none;
+        cursor: pointer;
+        transition: all 0.5s;
+        font-size: 14px;
+        border-radius: 40px;
+        margin-bottom: 20px; }
+        #home-containe #user-friends .outercard .ithcard img {
+          height: 50px;
+          width: 50px;
+          border-radius: 20px; }
+        #home-containe #user-friends .outercard .ithcard p {
+          font-size: 20px !important;
+          font-weight: 500;
+          color: #444444; }
+        #home-containe #user-friends .outercard .ithcard .friend-name a {
+          font-weight: bold;
+          color: #000;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          gap: 5px;
+          text-decoration: none; }
+          #home-containe #user-friends .outercard .ithcard .friend-name a h5 {
+            font-size: 15px;
+            font-weight: bold;
+            color: #000;
+            gap: 5px; }

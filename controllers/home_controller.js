@@ -1,8 +1,8 @@
 const Post = require("../models/post");
 const User = require("../models/user");
 const Comment = require("../models/comment");
-const newFriendRequest=require('../workers/friend_email_worker');
-const friendMailer=require('../mailers/friends_mailer');
+const newFriendRequest = require("../workers/friend_email_worker");
+const friendMailer = require("../mailers/friends_mailer");
 const async = require("async");
 const { query } = require("express");
 const Chat = require("../models/chat");
@@ -53,13 +53,11 @@ module.exports.home = async function (req, res) {
     console.log(err);
     return;
   }
-
-
 };
 
 module.exports.acceptFriend = function (req, res) {
   //console.log(req.user)
-  
+
   async.parallel(
     [
       function (callback) {
@@ -81,7 +79,7 @@ module.exports.acceptFriend = function (req, res) {
             },
             (err, count) => {
               // console.log('searching for user');
-             
+
               console.log(err);
               callback(err, count);
             }
@@ -103,17 +101,19 @@ module.exports.acceptFriend = function (req, res) {
               },
             },
             (err, count) => {
-              let user = User.findOne({username:req.body.receiverName},(err,user)=>{
-                
-                newFriendRequest.add({
-                email:user.email,
-                curruser:{
-                  name:req.user.name,
-                  email:req.user.email,
+              let user = User.findOne(
+                { username: req.body.receiverName },
+                (err, user) => {
+                  newFriendRequest.add({
+                    email: user.email,
+                    curruser: {
+                      name: req.user.name,
+                      email: req.user.email,
+                    },
+                  });
                 }
-              })
-              });
-              
+              );
+
               callback(err, count);
             }
           );
@@ -132,7 +132,7 @@ module.exports.acceptFriend = function (req, res) {
         if (req.body.senderId) {
           User.updateOne(
             {
-              '_id': req.user.id,
+              _id: req.user.id,
               "friendsList.friendId": { $ne: req.body.senderId },
             },
             {
@@ -151,7 +151,6 @@ module.exports.acceptFriend = function (req, res) {
               $inc: { totalRequest: -1 },
             },
             (err, count) => {
-              
               callback(err, count);
             }
           );
@@ -180,8 +179,7 @@ module.exports.acceptFriend = function (req, res) {
             },
             (err, count) => {
               //Send email to user when friend request is accepted
-             
-            
+
               callback(err, count);
             }
           );
@@ -191,7 +189,7 @@ module.exports.acceptFriend = function (req, res) {
         if (req.body.user_Id) {
           User.updateOne(
             {
-              '_id': req.user._id,
+              _id: req.user._id,
               "request.userId": { $eq: req.body.user_Id },
             },
             {
@@ -203,7 +201,6 @@ module.exports.acceptFriend = function (req, res) {
               $inc: { totalRequest: -1 },
             },
             (err, count) => {
-              
               callback(err, count);
             }
           );
@@ -224,14 +221,13 @@ module.exports.acceptFriend = function (req, res) {
               },
             },
             (err, count) => {
-              
               callback(err, count);
             }
           );
         }
       },
     ],
-    (err, results) => {    
+    (err, results) => {
       res.redirect("back");
     }
   );
@@ -240,7 +236,7 @@ module.exports.autoComplete = async function (req, res) {
   try {
     //Check if query is valid regex
     var regex = new RegExp(req.query["term"], "i");
-    if(!regex){
+    if (!regex) {
       return res.status(200).jsonp([]);
     }
     let user = await User.find({ name: regex }, { name: 1 })
@@ -252,11 +248,14 @@ module.exports.autoComplete = async function (req, res) {
     var users = [];
     if (user && user.length > 0) {
       user.forEach((data) => {
-        let obj = {
-          id: data._id,
-          label: data.name,
-        };
-        users.push(obj);
+        if (data.name !== req.user.name) {
+          let obj = {
+            id: data._id,
+            label: data.name,
+            avatar: data.avatar,
+          };
+          users.push(obj);
+        }
       });
     }
     //console.log(users);
@@ -272,30 +271,30 @@ module.exports.search = async function (req, res) {
   let sent = [];
   let friends = [];
   let received = [];
-  
-  if(req.user){
+
+  if (req.user) {
     received = req.user.request;
-    req.user.sentRequest.forEach((data)=>{
+    req.user.sentRequest.forEach((data) => {
       sent.push(data.username);
-    })
+    });
     //PUSH friend name and id to array
     req.user.friendsList.forEach((data) => {
       friends.push(data.friendName);
-    })
+    });
   }
   let user = await User.find({ name: new RegExp(query, "i") })
     .sort("-updatedAt")
     .sort("-createdAt")
     .select("-password")
     .limit(10);
-  
+
   return res.render("search", {
     query: query,
     users: user,
     sent: sent,
     recieved: received,
     friend: friends,
-    newfriend: received
+    newfriend: received,
   });
 };
 //Check if request is accepted or not
@@ -309,8 +308,7 @@ module.exports.checkRequest = async function (req, res) {
   } else {
     return res.status(200).jsonp(false);
   }
-}
-
+};
 
 module.exports.removeFriend = async function (req, res) {
   try {
@@ -328,8 +326,8 @@ module.exports.removeFriend = async function (req, res) {
         },
       }
     );
-    let temp=req.body.from_user;
-    let from_user=user.username;
+    let temp = req.body.from_user;
+    let from_user = user.username;
     let user1 = await User.findByIdAndUpdate(
       {
         _id: req.body.to_user,
@@ -343,29 +341,29 @@ module.exports.removeFriend = async function (req, res) {
         },
       }
     );
-    
+
     //Find All Chats between two users and delete them
     let chat = await Chat.deleteMany({
-      'user':req.body.from_user
+      user: req.body.from_user,
     });
-    let chat1= await Chat.deleteMany({
-      'user':req.body.to_user,
+    let chat1 = await Chat.deleteMany({
+      user: req.body.to_user,
     });
     //Delete chat room between two users
     let chatroom = await ChatRoom.deleteMany({
-      $or:[
+      $or: [
         {
-          'user1':req.body.from_user,
-          'user2':req.body.to_user
+          user1: req.body.from_user,
+          user2: req.body.to_user,
         },
         {
-          'user1':req.body.to_user,
-          'user2':req.body.from_user
-        }
-      ]
-    })
-    let to_user=user1.username;
-   
+          user1: req.body.to_user,
+          user2: req.body.from_user,
+        },
+      ],
+    });
+    let to_user = user1.username;
+
     //console.log(user.friendsList)
     //console.log(user1.friendsList)
     return res.status(200).json({
