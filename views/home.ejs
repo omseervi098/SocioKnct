@@ -1,6 +1,6 @@
 <link rel="stylesheet" href="<%=assetPath('css/home.css')%>">
 <link rel="stylesheet" href="<%=assetPath('css/chatbox.css')%>">
-<div id="home-containe" class="container-fluid mx-0 pt-5 ">
+<div id="home-containe" class="container-fluid mx-0 py-5 ">
   <div class="row mx-0 px-3">
     <div class="col-3">
       <% if (locals.user){ %>
@@ -30,25 +30,9 @@
           </div>
         </div>
       </section>
+      <%- include('_weather')%>
       <%}%>
-      <section id="weather-card">
-        <!-- maybe ads , or weather api -->
-          <div class="container mb-0 p-0 d-flex justify-content-center">
-            <div class=" card p-4 gap-3">
-                <div class="headline d-flex justify-content-between px-4 px-lg-0">
-                    <h5 class="text-dark m-0 p-0">Weather</h5>
-                    <i class="fa fa-cloud"></i>
-                </div>
-                <form id="weatherform">
-                  <input type="text" id="searchloc" placeholder="Search By Loaction" autocomplete="off">
-                </form>
-                <main id="weathermain">
-
-                </main>
-                </div>
-                </div>
-                
-      </section>
+      
     </div>
     <div class="col-6">
       <section id="feed-posts">
@@ -93,25 +77,7 @@
             </div>
           </div>
       </section>
-      <section id="news-card">
-        <!-- Showing News -->
-        <div class="container mb-2 p-0 d-flex justify-content-center">
-          <div class="card p-4 pt-2 gap-3">
-            <div class="headline d-flex">
-              <h5 class="text-dark m-0 p-0">News</h5>
-              <i class="fa fa-newspaper-o"></i>
-            </div>
-            <ul class="news-list" id="news-lists">
-              <li class="news">
-                <a href="">Twitter hacker and crypto scammer sentenced to five years in prison
-
-
-                </a>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </section>
+      <%- include('_news')%>
       <%}%>
     </div>
             <section id="chatbox">
@@ -120,7 +86,7 @@
     </div>
 </div>
 <script src="https://cdn.socket.io/4.6.0/socket.io.min.js" integrity="sha384-c79GN5VsunZvi+Q/WObgk2in0CbZsHnjEqvFxC5DxHn9lTfNce2WW6h2pH6u/kF+" crossorigin="anonymous"></script>
-<!-- <script src="http://localhost:8000/socket.io/socket.io.js"></script> -->
+
 <script src="<%=assetPath('js/home_post_comments.js')%>">
       </script>
       <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
@@ -130,95 +96,14 @@
       <script src="<%=assetPath('js/toggle_likes.js')%>"></script>
       <script src="<%=assetPath('js/chat_engine.js')%>"></script>
 
+
       <script>
-        function WeatherApi() {
-          const apiKey = "dc2b9624f8f4860d5ae5ddbc75cf4bc6";
-          const main = document.getElementById('mainweather');
-          const form = document.getElementById('weatherform');
-          const search = document.getElementById('searchloc');
-
-          const url = (city) => `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}`;
-
-          async function getWeatherByLocation(city) {
-            const resp = await fetch(url(city), {
-              origin: "cors"
-            });
-            const respData = await resp.json();
-
-            addWeatherToPage(respData);
-          }
-
-          function addWeatherToPage(data) {
-            const temp = Ktoc(data.main.temp);
-
-            const weather = document.createElement('div')
-            weather.classList.add('weather');
-
-            weather.innerHTML = `
-          <h2><img src="https://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png" /> ${temp}°C <img src="https://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png" /></h2>
-          <small>${data.weather[0].main}</small>
-
-          `;
-
-
-            // cleanup
-            main.innerHTML = "";
-            main.appendChild(weather);
-          };
-
-
-          function Ktoc(K) {
-            return Math.floor(K - 273.15);
-          }
-
-
-
-          form.addEventListener('submit', (e) => {
-            e.preventDefault();
-
-            const city = search.value;
-
-            if (city) {
-              getWeatherByLocation(city)
-            }
-
-          });
-          //   SET Mumbai when page loads
-          getWeatherByLocation('Mumbai');
-
-        }
-        WeatherApi();
-
-        function NewsApi() {
-          let url = "https://newsapi.org/v2/top-headlines?country=in&apiKey=510a27dd6ab14b5188faf8feb46981f5";
-          axios.get(url)
-            .then(function(response) {
-              let news = response.data.articles;
-              let newsList = document.getElementById('news-lists');
-              let str = "";
-              //   Take only 5 news
-              news = news.slice(0, 5);
-              for (let i = 0; i < news.length; i++) {
-                str += `<li class="news">
-                <a href="${news[i].url}">${news[i].title} <i class="fa fa-external-link"></i></a>
-              </li>`;
-              }
-              newsList.innerHTML = str;
-            })
-            .catch(function(error) {
-              console.log(error);
-            })
-        }
-
-
-        NewsApi();
         $('.toggle-like-button').each(function() {
           let self = this;
           let toggleLike = new ToggleLike(self);
         });
 
         function filePreview(input) {
-
           if (input.files && input.files[0]) {
             var reader = new FileReader();
             //check file type

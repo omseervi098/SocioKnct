@@ -533,6 +533,8 @@
 
             input {
                 padding: 1rem;
+                padding-top: 0.5rem;
+                padding-bottom: 0.5rem;
                 border-radius: 25px;
                 border: none;
                 background-color: #fff;
@@ -546,15 +548,47 @@
                 outline: none;
             }
 
-            .weather {
-                text-align: center;
-                font-size: 2rem;
-            }
-
-            .weather h2 {
-                margin-bottom: 0;
+            #weathermain {
+                width: 100%;
                 display: flex;
+                flex-direction: column;
                 align-items: center;
+
+
+                .weather {
+                    width: 100%;
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                    margin: 0 auto;
+
+                    h2 {
+                        margin: 0px;
+                        display: flex;
+                        align-items: center;
+
+                        img {
+                            width: 70px;
+                            height: 70px;
+                        }
+
+                        // Media Query
+                        @media (max-width: 991px) {
+                            img {
+                                width: 50px;
+                                height: 50px;
+                            }
+                        }
+                    }
+
+                    small {
+                        font-size: 1rem;
+                        font-weight: bold;
+                        color: #000;
+                    }
+                }
+
+
             }
         }
 
@@ -613,4 +647,6 @@
 
         }
     }
+
+
 }

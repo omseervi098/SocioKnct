@@ -1,0 +1,20 @@
+<section id="weather-card">
+  <!-- maybe ads , or weather api -->
+  <div class="container mb-0 p-0 d-flex justify-content-center">
+    <div class=" card py-4 px-lg-0 gap-3">
+      <div class="headline d-flex justify-content-between px-1 px-lg-3">
+        <h5 class="text-dark m-0 p-0">Weather</h5>
+        <i class="fa fa-cloud"></i>
+      </div>
+      <form id="weatherform" class="px-0 px-lg-3 m-0">
+
+        <input type="text" id="searchloc" placeholder="Search By Loaction" autocomplete="off">
+      </form>
+      <main id="weathermain">
+
+      </main>
+    </div>
+  </div>
+
+</section>
+<script src="<%=assetPath('js/weather_api.js')%>"></script>

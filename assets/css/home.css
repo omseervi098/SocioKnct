@@ -354,6 +354,8 @@
       width: 400px !important; }
       #home-containe #weather-card .card input {
         padding: 1rem;
+        padding-top: 0.5rem;
+        padding-bottom: 0.5rem;
         border-radius: 25px;
         border: none;
         background-color: #fff;
@@ -363,13 +365,32 @@
         width: 100%; }
       #home-containe #weather-card .card input:focus {
         outline: none; }
-      #home-containe #weather-card .card .weather {
-        text-align: center;
-        font-size: 2rem; }
-      #home-containe #weather-card .card .weather h2 {
-        margin-bottom: 0;
+      #home-containe #weather-card .card #weathermain {
+        width: 100%;
         display: flex;
+        flex-direction: column;
         align-items: center; }
+        #home-containe #weather-card .card #weathermain .weather {
+          width: 100%;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          margin: 0 auto; }
+          #home-containe #weather-card .card #weathermain .weather h2 {
+            margin: 0px;
+            display: flex;
+            align-items: center; }
+            #home-containe #weather-card .card #weathermain .weather h2 img {
+              width: 70px;
+              height: 70px; }
+            @media (max-width: 991px) {
+              #home-containe #weather-card .card #weathermain .weather h2 img {
+                width: 50px;
+                height: 50px; } }
+          #home-containe #weather-card .card #weathermain .weather small {
+            font-size: 1rem;
+            font-weight: bold;
+            color: #000; }
   #home-containe #user-friends {
     border: 2px solid #000;
     border-radius: 10px; }
