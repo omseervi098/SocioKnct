@@ -1,70 +1,208 @@
 <div id="post-<%= post._id %>" class="post">
-    <div class="ithpost">
-        
-        <div class="name">
-            <span>
-                <% if(post.user.avatar){ %>
-                    <img src="<%= post.user.avatar %>" alt="<%= post.user.name %>" />
-                <% } else { %>
-                    <img src="<%=assetPath('images/default-avatar.png')%>" alt="<%= post.user.name %>" />
-                <% } %>
-                <%= post.user.name %>
-            </span>
-            <% if(locals.user && locals.user.id==post.user.id){ %>
-                <div>
-                    <div class="dropdown">
-                        <button class="dropbtn"><i class="fa-solid fa-circle-chevron-down"></i></button>
-                        <div class="dropdown-content">
-                            <a class="delete-post-button" href="/posts/destroy/<%= post.id %>">Delete</a>
-                        </div>
-                    </div>
+  <div class="card">
+    <!-- Card header START -->
+    <div class="card-header border-0 pb-0">
+      <div class="d-flex align-items-center justify-content-between">
+        <div class="d-flex align-items-center">
+          <!-- Avatar -->
+          <div class="avatar avatar-story me-2">
+            <a href="#!"> <img class="avatar-img rounded-circle" src="<%= post.user.avatar?post.user.avatar:assetPath('images/default-avatar.png') %>" alt="avatar"> </a>
+          </div>
+          <!-- Info -->
+          <div>
+            <div class="nav nav-divider">
+              <h6 class="nav-item card-title mb-0"> <a href="#!"> <%= post.user.name %> </a> </h6>
+              <span class="nav-item small"> 2hr</span>
+            </div>
+            <p class="mb-0 small">Web Developer at Webestica</p>
+          </div>
+        </div>
+        <!-- Card feed action dropdown START -->
+        <div class="dropdown">
+          <a href="#" class="text-secondary btn btn-secondary-soft-hover py-1 px-2" id="cardFeedAction" data-bs-toggle="dropdown" aria-expanded="false">
+            <i class="fa fa-ellipsis-h text-muted "></i>
+          </a>
+          <!-- Card feed action dropdown menu -->
+          <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="cardFeedAction">
+            <li><a class="dropdown-item" href="#"> <i class="bi bi-bookmark fa-fw pe-2"></i>Save post</a></li>
+            <li><a class="dropdown-item" href="#"> <i class="bi bi-person-x fa-fw pe-2"></i>Unfollow lori ferguson </a></li>
+            <li><a class="dropdown-item" href="#"> <i class="bi bi-x-circle fa-fw pe-2"></i>Hide post</a></li>
+            <li><a class="dropdown-item" href="#"> <i class="bi bi-slash-circle fa-fw pe-2"></i>Block</a></li>
+            <li>
+              <hr class="dropdown-divider">
+            </li>
+            <li><a class="dropdown-item" href="#"> <i class="bi bi-flag fa-fw pe-2"></i>Report post</a></li>
+          </ul>
+        </div>
+        <!-- Card feed action dropdown END -->
+      </div>
+    </div>
+    <!-- Card header END -->
+    <!-- Card body START -->
+    <div class="card-body">
+      <p><%= post.content %></p>
+      <!-- Card img -->
+      <img class="card-img" src="<%= post.image %>" alt="post image">
+      <!-- Feed react START -->
+      <ul class="nav nav-stack py-3 small">
+        <li class="nav-item">
+          <a class="nav-link active" href="#!"> <i class="fa fa-thumbs-up pe-1"></i>Liked (1)</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#!"> <i class="fa fa-comment pe-1"></i>Comment (6)</a>
+        </li>
+        <!-- Card share action START 
+        <li class="nav-item dropdown ms-sm-auto">
+          <a class="nav-link mb-0" href="#" id="cardShareAction" data-bs-toggle="dropdown" aria-expanded="false">
+            <i class="bi bi-reply-fill flip-horizontal ps-1"></i>Share (3)
+          </a>
+        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="cardShareAction">
+          <li><a class="dropdown-item" href="#"> <i class="bi bi-envelope fa-fw pe-2"></i>Send via Direct Message</a></li>
+          <li><a class="dropdown-item" href="#"> <i class="bi bi-bookmark-check fa-fw pe-2"></i>Bookmark </a></li>
+          <li><a class="dropdown-item" href="#"> <i class="bi bi-link fa-fw pe-2"></i>Copy link to post</a></li>
+          <li><a class="dropdown-item" href="#"> <i class="bi bi-share fa-fw pe-2"></i>Share post via …</a></li>
+          <li>
+            <hr class="dropdown-divider">
+          </li>
+          <li><a class="dropdown-item" href="#"> <i class="fa fa-slack fa-fw pe-2"></i>Share to Slack</a></li>
+        </ul>
+        </li>
+        Card share action END -->
+      </ul>
+      <!-- Feed react END -->
+      <% if (locals.user){ %>
+      <!-- Add comment -->
+      <div class="d-flex mb-3">
+        <!-- Avatar -->
+        <div class="avatar avatar-xs me-2">
+          <a href="#!"> <img class="avatar-img rounded-circle" src="<%= locals.user.avatar %>" alt="avatar"> </a>
+        </div>
+        <!-- Comment box  -->
+        <form class="nav nav-item w-100 position-relative">
+          <textarea data-autoresize="" class="form-control pe-5 bg-light" rows="1" placeholder="Add a comment..."></textarea>
+          <button class="nav-link bg-transparent px-3 position-absolute top-50 end-0 translate-middle-y border-0" type="submit">
+            <i class="fa fa-paper-plane"></i>
+          </button>
+        </form>
+      </div>
+      <% } %>
+      <!-- Comment wrap START -->
+      <ul class="py-3">
+        <!-- Comment item START -->
+        <li class="comment-item">
+          <div class="d-flex">
+            <!-- Avatar -->
+            <div class="avatar avatar-xs">
+              <a href="#!"><img class="avatar-img rounded-circle" src="assets/images/avatar/05.jpg" alt=""></a>
+            </div>
+            <!-- Comment by -->
+            <div class="ms-2">
+              <div class="bg-light p-3 rounded">
+                <div class="d-flex justify-content-between">
+                  <h6 class="mb-1"> <a href="#!"> Frances Guerrero </a> </h6>
+                  <small class="ms-2">4min</small>
                 </div>
-                <%}%>
+                <p class="small mb-0">Removed demands expense account in outward tedious do. Particular way thoroughly unaffected projection.</p>
+              </div>
+              <!-- Comment react -->
+              <ul class="nav nav-divider pt-2 small">
+                <li class="nav-item">
+                  <a class="nav-link" href="#!"> Like (1)</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="#!"> Reply</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="#!"> View 6 replies</a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </li>
+        <!-- Comment item END -->
+      </ul>
+      <!-- Comment wrap END -->
+    </div>
+    <!-- Card body END -->
+    <!-- Card footer START -->
+    <div class="card-footer border-0 pt-0">
+      <!-- Load more comments -->
+      <a href="#!" role="button" class="btn btn-link btn-link-loader btn-sm text-secondary d-flex align-items-center" data-bs-toggle="button" aria-pressed="true">
+        <div class="spinner-dots me-2">
+          <span class="spinner-dot"></span>
+          <span class="spinner-dot"></span>
+          <span class="spinner-dot"></span>
+        </div>
+        Load more comments
+      </a>
+    </div>
+    <!-- Card footer END -->
+  </div>
+  <div class="ithpost">
+
+    <div class="name">
+      <span>
+        <% if(post.user.avatar){ %>
+        <img src="<%= post.user.avatar %>" alt="<%= post.user.name %>" />
+        <% } else { %>
+        <img src="<%=assetPath('images/default-avatar.png')%>" alt="<%= post.user.name %>" />
+        <% } %>
+        <%= post.user.name %>
+      </span>
+      <% if(locals.user && locals.user.id==post.user.id){ %>
+      <div>
+        <div class="dropdown">
+          <button class="dropbtn"><i class="fa-solid fa-circle-chevron-down"></i></button>
+          <div class="dropdown-content">
+            <a class="delete-post-button" href="/posts/destroy/<%= post.id %>">Delete</a>
+          </div>
+        </div>
+      </div>
+      <%}%>
         </div>
         <div class="content">
             <%= post.content %>
-            
-            <% if(post.image){ %>
-            <img src="<%= post.image %>" alt="">
-            <% } %>
-        </div>
-        <small>
-            <% if (locals.user){ %>
-                <a class="toggle-like-button " data-likes="<%= post.likes.length %>"
-                    href="/likes/toggle/?id=<%=post._id%>&type=Post">
-                    <button class="like__btn">
-                        
-                        <span id="icon"><i class="fas fa-thumbs-up"></i></span>
-                        <span id="count">
-                            <%= post.likes.length %>
-                        </span> Like
-                        
-                    </button>
-                </a>
-            <% }else{ %>
-                <button class="like__btn">
-                    <span id="icon"><i class="far fa-thumbs-up"></i></span>
-                    <span id="count">
-                        <%= post.likes.length %>
-                    </span> 
-                </button>
-            <% } %>
-        </small>
+
+      <% if(post.image){ %>
+      <img src="<%= post.image %>" alt="">
+      <% } %>
     </div>
-    <div class="post-comments">
-        <% if (locals.user){ %>
-            <form action="/comments/create" method="POST" id="post-<%= post._id %>-comments-form">
-                <input required type="text" id="comment-input" name="content" placeholder="Type Here to add comment">
-                <input type="hidden" name="post" value="<%= post._id %>">
-                <input type="submit" id="add-comment" value="Add Comment">
-            </form>
-            <% } %>
-                <div class="post-comments-list">
-                    <div class="post-comments-list-container" id="post-comments-<%= post._id %>">
-                        <% for(comment of post.comments) { %>
-                            <%- include('_comment')%>
-                        <% } %>
-                    </div>
-                </div>
+    <small>
+      <% if (locals.user){ %>
+      <a class="toggle-like-button " data-likes="<%= post.likes.length %>" href="/likes/toggle/?id=<%=post._id%>&type=Post">
+        <button class="like__btn">
+
+          <span id="icon"><i class="fas fa-thumbs-up"></i></span>
+          <span id="count">
+            <%= post.likes.length %>
+          </span> Like
+
+        </button>
+      </a>
+      <% }else{ %>
+      <button class="like__btn">
+        <span id="icon"><i class="far fa-thumbs-up"></i></span>
+        <span id="count">
+          <%= post.likes.length %>
+        </span>
+      </button>
+      <% } %>
+    </small>
+  </div>
+  <div class="post-comments">
+    <% if (locals.user){ %>
+    <form action="/comments/create" method="POST" id="post-<%= post._id %>-comments-form">
+      <input required type="text" id="comment-input" name="content" placeholder="Type Here to add comment">
+      <input type="hidden" name="post" value="<%= post._id %>">
+      <input type="submit" id="add-comment" value="Add Comment">
+    </form>
+    <% } %>
+    <div class="post-comments-list">
+      <div class="post-comments-list-container" id="post-comments-<%= post._id %>">
+        <% for(comment of post.comments) { %>
+        <%- include('_comment')%>
+        <% } %>
+      </div>
     </div>
+  </div>
 </div>

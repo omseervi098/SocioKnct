@@ -1,52 +1,78 @@
 <link rel="stylesheet" href="<%=assetPath('css/home.css')%>">
 <link rel="stylesheet" href="<%=assetPath('css/chatbox.css')%>">
+<link rel="stylesheet" href="<%=assetPath('css/dropzone.css')%>">
 <div id="home-containe" class="container-fluid mx-0 py-5 ">
+
   <div class="row mx-0 px-3">
     <div class="col-3">
       <% if (locals.user){ %>
-      <section id="info-card" class="mb-2">
-        <div class="container mb-4 p-0 d-flex justify-content-center">
-          <div class=" card p-4">
-            <div class=" image d-flex flex-column justify-content-center align-items-center"> <button class="btn btn-secondary">
-                <img src=<%= locals.user.avatar %> alt="avatar" height="100" class="img-fluid " width="100" />
-              </button>
-              <span class="name mt-3"><%= locals.user.name %></span>
-              <span class="idd">@<%= locals.user.username %></span>
-              <div class="d-flex flex-row justify-content-center align-items-center mt-3">
-                <span class="number">1069
-                  <span class="follow">Friends</span>
-                </span>
-              </div>
-              <div class=" d-flex mt-2">
-                <a class="btn1 btn-dark" href="/users/profile/<%= locals.user.id %>">
-                  Edit Profile</a>
-              </div>
-              <div class="text mt-3">
-                <span>Bio</span>
-              </div>
-              <div class="gap-3 mt-3 icons d-flex flex-row justify-content-center align-items-center"> <span><i class="fa fa-twitter"></i></span> <span><i class="fa fa-facebook-f"></i></span> <span><i class="fa fa-instagram"></i></span> <span><i class="fa fa-linkedin"></i></span> </div>
-              <div class=" px-2 rounded mt-4 date "> <span class="join">Joined May,2021</span> </div>
-            </div>
-          </div>
-        </div>
-      </section>
+      <%- include('_infocard')%>
       <%- include('_weather')%>
       <%}%>
-      
     </div>
     <div class="col-6">
       <section id="feed-posts">
-        <h4>Post</h4>
         <% if(locals.user){%>
-      <form action="/posts/create" enctype="multipart/form-data" id="new-post-form" class="form-for-post" method="post">
-        <textarea name="content" id="content" cols="25" rows="3" placeholder="Type Here.." required></textarea>
-        <div id="post-image-preview"></div>
-        <input type="file" name="image" id="image" accept="image/*">
-        <input type="submit" value="Post" id="post-submit">
-      </form>
+      <section id="post-form-container" class="mb-2 px-3">
+
+        <div class="card card-body">
+          <div class="d-flex mb-3 card-en align-items-center">
+            <!-- Avatar -->
+            <div class="avatar avatar-xs me-2">
+              <a href="/users/profile/<%= locals.user.id %>">
+                <img class="avatar-img " src="<%= locals.user.avatar %>" alt="avatar"> </a>
+            </div>
+            <!-- Post input -->
+
+            <form class="w-100 m-0 p-0">
+              <textarea class="form-control pe-4 border-0" rows="2" data-autoresize placeholder="Share your thoughts..."></textarea>
+            </form>
+          </div>
+          <!-- Share feed toolbar START -->
+          <ul class="nav nav-pills nav-stack small fw-normal gap-3">
+            <li class="nav-item">
+              <a class="nav-link bg-light py-1 px-2 mb-0" href="#!" data-bs-toggle="modal" data-bs-target="#feedActionPhoto">
+                <i class="fa fa-camera text-success pe-2"></i>
+                Photo</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link bg-light py-1 px-2 mb-0" href="#!" data-bs-toggle="modal" data-bs-target="#feedActionVideo">
+                <i class="fa fa-video-camera text-danger pe-2"></i>
+                Video</a>
+            </li>
+
+            <li class="nav-item">
+              <a class="nav-link bg-light py-1 px-2 mb-0" href="#!" data-bs-toggle="modal" data-bs-target="#modalCreateFeed">
+                <i class="fa-solid fa-newspaper"></i>&nbsp;
+                Article</a>
+            </li>
+            <li class="nav-item dropdown ms-lg-auto">
+              <a class="nav-link bg-light py-1 px-2 mb-0" href="#" id="feedActionShare" data-bs-toggle="dropdown" aria-expanded="false">
+                <i class="fa fa-ellipsis-h text-muted "></i>
+              </a>
+              <!-- Dropdown menu -->
+              <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="feedActionShare">
+                <li><a class="dropdown-item" href="#"> <i class="bi bi-envelope fa-fw pe-2"></i>Create a poll</a></li>
+                <li><a class="dropdown-item" href="#"> <i class="bi bi-bookmark-check fa-fw pe-2"></i>Ask a question </a></li>
+                <li>
+                  <hr class="dropdown-divider">
+                </li>
+                <li><a class="dropdown-item" href="#"> <i class="bi bi-pencil-square fa-fw pe-2"></i>Help</a></li>
+              </ul>
+            </li>
+          </ul>
+          <!-- Share feed toolbar END -->
+        </div>
+        <!-- <form action="/posts/create" enctype="multipart/form-data" id="new-post-form" class="form-for-post" method="post">
+          <textarea name="content" id="content" cols="25" rows="3" placeholder="Type Here.." required></textarea>
+          <div id="post-image-preview"></div>
+          <input type="file" name="image" id="image" accept="image/*">
+          <input type="submit" value="Post" id="post-submit">
+        </form> -->
+      </section>
       <%}%>
                 <!--Listing post-->
-                <div id="post-list-container">
+                <div id="post-list-container" class="px-3">
                     <div id="post-list-container-div">
                         <% for(post of posts) { %>
       <%- include('_post')%>
@@ -72,63 +98,72 @@
                 <%- include('_friend')%>
                 <%}%>
                 </div>
+                <%}else {%>
+                <div class="text-center">
+                  <h6 class="text-dark m-0 p-0"> No Friends. Search for users to add friends.</h6>
+                </div>
                 <%}%>
               </div>
             </div>
           </div>
       </section>
       <%- include('_news')%>
-      <%}%>
+                <%}%>
     </div>
             <section id="chatbox">
 
-            </section>
+      </section>
     </div>
-</div>
-<script src="https://cdn.socket.io/4.6.0/socket.io.min.js" integrity="sha384-c79GN5VsunZvi+Q/WObgk2in0CbZsHnjEqvFxC5DxHn9lTfNce2WW6h2pH6u/kF+" crossorigin="anonymous"></script>
+  </div>
+  <% if (locals.user){ %>
+                <%- include('_modals')%>
+                <%}%>
+                <script src="https://cdn.socket.io/4.6.0/socket.io.min.js" integrity="sha384-c79GN5VsunZvi+Q/WObgk2in0CbZsHnjEqvFxC5DxHn9lTfNce2WW6h2pH6u/kF+" crossorigin="anonymous"></script>
 
-<script src="<%=assetPath('js/home_post_comments.js')%>">
-      </script>
-      <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-      <script src="<%=assetPath('js/home_posts.js')%>">
-      </script>
-      <!-- CHANGE :: import the script file for toggle likes, also run it over for the already present posts and comments on the page -->
-      <script src="<%=assetPath('js/toggle_likes.js')%>"></script>
-      <script src="<%=assetPath('js/chat_engine.js')%>"></script>
+                <script src="<%=assetPath('js/home_post_comments.js')%>">
+                </script>
+                <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+                <script src="<%=assetPath('js/home_posts.js')%>">
+                </script>
+                <!-- CHANGE :: import the script file for toggle likes, also run it over for the already present posts and comments on the page -->
+                <script src="<%=assetPath('js/toggle_likes.js')%>"></script>
+                <script src="<%=assetPath('js/chat_engine.js')%>"></script>
+                <script src="<%=assetPath('js/dropzone.min.js')%>"></script>
 
+                <script src="<%=assetPath('js/dropzone.js')%>"></script>
 
-      <script>
-        $('.toggle-like-button').each(function() {
-          let self = this;
-          let toggleLike = new ToggleLike(self);
-        });
+                <script>
+                  $('.toggle-like-button').each(function() {
+                    let self = this;
+                    let toggleLike = new ToggleLike(self);
+                  });
 
-        function filePreview(input) {
-          if (input.files && input.files[0]) {
-            var reader = new FileReader();
-            //check file type
-            if (input.files[0].type != "image/jpeg" && input.files[0].type != "image/png" && input.files[0].type != "image/jpg") {
-              new Noty({
-                theme: 'relax',
-                text: "Invalid File Format",
-                type: 'error',
-                layout: 'topRight',
-                timeout: 1500
-              }).show();
-              //reset file input
-              $(input).val('');
+                  function filePreview(input) {
+                    if (input.files && input.files[0]) {
+                      var reader = new FileReader();
+                      //check file type
+                      if (input.files[0].type != "image/jpeg" && input.files[0].type != "image/png" && input.files[0].type != "image/jpg") {
+                        new Noty({
+                          theme: 'relax',
+                          text: "Invalid File Format",
+                          type: 'error',
+                          layout: 'topRight',
+                          timeout: 1500
+                        }).show();
+                        //reset file input
+                        $(input).val('');
 
-              return;
-            }
-            reader.onload = function(e) {
-              $('#post-image-preview >img').remove();
-              $('#post-image-preview').append('<img id="preview" src="' + e.target.result.toString() + '" width="100" height="100" />');
-            }
-            reader.readAsDataURL(input.files[0]);
-          }
-        }
-        $("#image").change(function() {
+                        return;
+                      }
+                      reader.onload = function(e) {
+                        $('#post-image-preview >img').remove();
+                        $('#post-image-preview').append('<img id="preview" src="' + e.target.result.toString() + '" width="100" height="100" />');
+                      }
+                      reader.readAsDataURL(input.files[0]);
+                    }
+                  }
+                  $("#image").change(function() {
 
-          filePreview(this);
-        })
-      </script>
+                    filePreview(this);
+                  })
+                </script>
