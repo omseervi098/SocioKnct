@@ -15,7 +15,7 @@
             <h6 class="mb-1 card-title d-flex flex-wrap gap-1 align-items-center justify-content-between flex-grow-1">
               <a href="#!"> <%= comment.user.name %> </a>
               <div class="text-muted  small ps-0  time-posted">
-                <%= new Date(reply.createdAt).toLocaleString() %>
+                <%= new Date(comment.createdAt).toLocaleString() %>
               </div>
             </h6>
             <div class="dropdown ms-1">

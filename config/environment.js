@@ -13,8 +13,8 @@ const development = {
   asset_path: "./assets",
   session_cookie_key: process.env.CODEIAL_SESSION_COOKIE_KEY,
   db: process.env.CODEIAL_DB_NAME,
-  port:process.env.PORT,
-  socketport:process.env.SOCKET_PORT,
+  port: process.env.PORT,
+  socketport: process.env.SOCKET_PORT,
   smtp: {
     pool: true,
     host: "us2.smtp.mailhostbox.com",
@@ -23,12 +23,10 @@ const development = {
     auth: {
       user: process.env.CODEIAL_MAILER_USERNAME,
       pass: process.env.CODEIAL_MAILER_PASSWORD,
-    }
-    ,
+    },
     tls: {
-      rejectUnauthorized: false
-    }
-  
+      rejectUnauthorized: false,
+    },
   },
   google_clientID: process.env.CODEIAL_GOOGLE_CLIENTID,
   google_clientSecret: process.env.CODEIAL_GOOGLE_CLIENTSECRET,
@@ -45,8 +43,8 @@ const production = {
   asset_path: process.env.CODEIAL_ASSET_PATH,
   session_cookie_key: process.env.CODEIAL_SESSION_COOKIE_KEY,
   db: process.env.CODEIAL_DB_NAME,
-  port:process.env.PORT,
-  socketport:process.env.SOCKET_PORT,
+  port: process.env.PORT,
+  socketport: process.env.SOCKET_PORT,
   smtp: {
     pool: true,
     host: "us2.smtp.mailhostbox.com",
@@ -55,12 +53,10 @@ const production = {
     auth: {
       user: process.env.CODEIAL_MAILER_USERNAME,
       pass: process.env.CODEIAL_MAILER_PASSWORD,
-    }
-    ,
+    },
     tls: {
-      rejectUnauthorized: false
-    }
-  
+      rejectUnauthorized: false,
+    },
   },
   google_clientID: process.env.CODEIAL_GOOGLE_CLIENTID,
   google_clientSecret: process.env.CODEIAL_GOOGLE_CLIENTSECRET,
@@ -73,4 +69,4 @@ const production = {
   },
 };
 
-module.exports = development;
+module.exports = production;
