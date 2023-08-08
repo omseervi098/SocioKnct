@@ -9,15 +9,30 @@ const Chat = require("../models/chat");
 const ChatRoom = require("../models/chatroom");
 module.exports.home = async function (req, res) {
   try {
+    const options = {
+      sort: [["comments.createdAt", "desc"]],
+    };
     let posts = await Post.find({})
       .sort("-createdAt")
-      .populate("user", "name avatar email")
+      .populate("user", "name avatar email ")
+      .populate("likes")
       .populate({
         path: "comments",
         populate: {
           path: "user likes",
         },
+      })
+
+      .populate({
+        path: "comments",
+        populate: {
+          path: "replies",
+          populate: {
+            path: "user likes",
+          },
+        },
       });
+
     //console.log(posts.comments);
     let users = await User.find({}).select("-password");
     //Find all friends of the current user

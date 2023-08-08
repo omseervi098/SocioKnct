@@ -17,21 +17,17 @@ class ToggleLike {
       })
         .done(function (data) {
           let likesCount = parseInt($(self).attr("data-likes"));
-          
+          let string = "";
           if (data.data.deleted == true) {
             likesCount -= 1;
+            string = `<span><i class="fa fa-thumbs-up pe-1"></i>Like (${likesCount})</span>`;
             $(self).attr("data-likes", likesCount);
-            
           } else {
             likesCount += 1;
+            string = `<span class="liked"><i class="fa fa-thumbs-up pe-1"></i>Liked (${likesCount})</span>`;
             $(self).attr("data-likes", likesCount);
           }
-          $(self).html(`<button class="like__btn">
-                <span id="icon"><i class="fas fa-thumbs-up"></i></span>
-                <span id="count">
-                    ${likesCount}
-                </span> Like
-            </button>`);
+          $(self).html(string);
         })
         .fail(function (errData) {
           console.log("error in completing the request");

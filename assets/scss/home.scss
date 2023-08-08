@@ -5,7 +5,7 @@
     }
 
     .button_outer1 {
-        background: #83ccd3;
+        background: #8a2be2;
         border-radius: 30px;
         text-align: center;
         height: 50px;
@@ -124,7 +124,7 @@
     }
 
     .button_outer {
-        background: #83ccd3;
+        background: #8a2be2;
         border-radius: 30px;
         text-align: center;
         height: 50px;
@@ -245,35 +245,25 @@
     border: 1px solid #000;
 }
 
+
 .modal {
 
     #feedActionVideo {}
 
     .modal-body {
-        .dropzone.dz-clickable {
-            cursor: pointer;
-        }
-
-
 
         .body1 {
-
-
-
-
             textarea {
                 background-color: #ebebeb;
+                border-radius: 10px;
+                border: 1px solid #000 !important;
             }
-
 
             .bg-light {
                 background-color: #ebebeb !important;
                 border-radius: 10px;
 
             }
-
-
-
 
         }
 
@@ -341,12 +331,13 @@
     background-color: #F3F2EF;
 
     #news-card {
-        border: 2px solid #000;
+        border: 1px solid #a0a0a0;
         border-radius: 10px;
+        overflow: hidden;
 
         .card {
-            width: 400px;
-            background-color: #efefef;
+            width: 100%;
+            background-color: #ffffff;
             border: none;
             cursor: pointer;
             transition: all 0.5s;
@@ -385,16 +376,16 @@
     }
 
     #info-card {
-        border: 2px solid #000;
+        border: 1px solid #a0a0a0;
         border-radius: 10px;
+        overflow: hidden;
 
         .card {
-            width: 400px;
-            background-color: #efefef;
+            background-color: #ffffff;
             border: none;
             cursor: pointer;
             transition: all 0.5s;
-
+            width: 100%;
         }
 
         .image img {
@@ -492,7 +483,8 @@
             width: 100%;
 
             .card {
-                border: 2px solid #000;
+                border: 1px solid #a0a0a0;
+
 
 
                 .avatar-img {
@@ -523,63 +515,6 @@
                     }
                 }
             }
-
-            // h4 {
-            //     margin: 0;
-            //     padding: 2;
-            //     font-size: 1.5rem;
-            //     font-weight: bold;
-            //     color: #000;
-            // }
-
-            // .form-for-post {
-            //     display: flex;
-            //     flex-direction: column;
-            //     gap: 5px;
-            //     align-items: center;
-            //     justify-content: center;
-
-            //     #post-image-preview {
-            //         img {
-            //             width: 200px;
-            //             height: 200px;
-            //         }
-            //     }
-
-            //     #content {
-            //         width: auto;
-            //         height: auto;
-            //         border: none;
-            //         border-radius: 3%;
-            //         padding: 0;
-            //         margin: 0;
-            //         font-size: 1.3rem;
-            //         font-weight: bold;
-            //         color: #000;
-            //         border-bottom: 2px solid black;
-            //     }
-
-            //     #content:focus {
-            //         outline: none;
-            //     }
-
-            //     #post-submit {
-            //         background-color: rgb(95, 42, 138);
-            //         border: none;
-            //         padding: 5px 10px;
-            //         width: auto;
-            //         font-size: 1.07rem;
-            //         color: white;
-            //         font-weight: bold;
-            //         border-radius: 5px;
-
-            //         &:hover {
-            //             background-color: #1cc7dd;
-            //             color: rgb(255, 255, 255);
-            //             cursor: pointer;
-            //         }
-            //     }
-            // }
         }
 
         #post-list-container {
@@ -607,292 +542,131 @@
                     gap: 2px;
 
                     .ithpost {
-                        margin-left: 5px;
                         display: flex;
                         flex-direction: column;
                         gap: 3px;
 
-                        .name {
-                            display: flex;
-                            width: 100%;
-                            justify-content: space-between;
-                            flex-wrap: nowrap;
-
-
-                            //align-items: center;
-                            span {
-                                font-size: 1.1rem;
-                                font-weight: bold;
-                                color: #000;
-                                display: flex;
-                                justify-content: center;
-                                align-items: center;
-                                gap: 5px;
-
-                                img {
-                                    width: 35px;
-                                    height: 35px;
-                                    border-radius: 50%;
+                        .card-body {
+                            .nav {
+                                .nav-item {
+                                    font-weight: bold;
                                 }
                             }
 
-                            div {
-                                .dropdown {
-
-                                    position: relative;
-                                    display: inline-block;
-
-                                    .dropbtn {
-                                        background-color: #712696;
-                                        color: white;
-                                        padding: 4px;
-                                        border-radius: 20%;
-                                        font-size: 16px;
-                                        border: none;
-                                        cursor: pointer;
-                                        margin-bottom: 2px;
-                                    }
-
-                                    .dropdown-content {
-                                        display: none;
-                                        position: absolute;
-                                        background-color: #b866c9;
-                                        color: white;
-                                        min-width: 80px;
-                                        box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
-                                        z-index: 1;
-
-                                        a {
-                                            color: white;
-                                            padding: 8px 8px;
-                                            text-decoration: none;
-                                            display: block;
-
-                                            &:hover {
-                                                background-color: #840ea1;
-                                                color: white;
-                                            }
-                                        }
-
-
-                                    }
-
-                                    &:hover {
-                                        .dropdown-content {
-                                            display: block;
-                                        }
-
-                                        .dropbtn {
-                                            background-color: #3e0074;
-                                            //color: white;
-                                        }
-                                    }
-                                }
-                            }
-
-                        }
-
-                        .content {
-                            height: auto;
-                            width: auto;
-                            background-color: white;
-                            border-radius: 3%;
-                            padding: 5px;
-                            font-size: 1.1rem;
-                            border: 1px dashed black;
-                            display: flex;
-                            flex-direction: column;
-
-                            img {
+                            .viewfullscreen {
+                                display: none;
+                                position: absolute;
+                                bottom: 0;
                                 width: 100%;
-                            }
-                        }
+                                background: #00000087;
+                                justify-content: flex-end;
 
-                        small {
-
-                            .like__btn {
-                                padding: 3px 6px;
-                                background: #ff3a3a;
-                                font-size: 13px;
-                                font-family: "Open Sans", sans-serif;
-                                border-radius: 5px;
-                                color: #e8efff;
-                                outline: none;
-                                border: none;
-                                cursor: pointer;
-
-                                &:hover {
-                                    background: #ca1919;
-                                    color: #e8efff;
+                                i {
+                                    color: #fff;
                                 }
                             }
 
-                        }
-                    }
-
-                    .post-comments {
-                        margin: 0px 20px;
-                        width: 80%;
-
-                        form {
-                            display: flex;
-                            gap: 5px;
-                            justify-content: space-between;
-
-                            #comment-input {
-                                width: 80%;
-                                height: auto;
-                                border: none;
-                                border-radius: 3%;
-                                padding: 0;
-                                margin: 0;
-                                padding: 4px 5px;
-                                font-weight: bold;
-                                color: #000;
-                                background-color: inherit;
-                                border-bottom: 2px solid black;
-
-                                &:focus {
-                                    outline: none;
-                                }
+                            .card-image-container {
+                                background-color: #00000076;
+                                border-radius: 10px;
+                                overflow: hidden;
                             }
 
-                            #add-comment {
-                                background-color: rgb(95, 42, 138);
-                                border: none;
-                                padding: 2px 5px;
-                                width: auto;
-                                color: white;
-                                font-weight: bold;
-                                border-radius: 5px;
-
-                                &:hover {
-                                    background-color: #1cc7dd;
-                                    color: rgb(255, 255, 255);
-                                    cursor: pointer;
-                                }
-                            }
-                        }
-
-                        .post-comments-list {
-                            .post-comments-list-container {
-                                margin-left: 20px;
+                            //show full screen btn when hover on card-image-container
+                            .card-image-container:hover .viewfullscreen {
                                 display: flex;
-                                flex-direction: column;
-                                justify-content: center;
-                                gap: 5px;
+                            }
 
-                                .comment {
-                                    display: flex;
-                                    flex-direction: column;
-                                    gap: 2px;
+                            .card-image-container:focus .viewfullscreen {
+                                display: flex;
+                            }
 
-                                    .name {
-                                        font-size: 1rem;
-                                        font-weight: bold;
-                                        color: #000;
-                                        display: flex;
-                                        justify-content: space-between;
+                            .card-img {
+                                max-height: 400px;
+                                object-fit: contain;
+                            }
 
-                                        span {
-                                            display: flex;
-                                            justify-content: center;
-                                            align-items: center;
-                                            gap: 5px;
-                                            font-size: 1rem;
-                                            font-weight: bold;
-                                            color: #000;
-
-                                            img {
-                                                width: 35px;
-                                                height: 35px;
-                                                border-radius: 50%;
-                                            }
-                                        }
-
-                                        div {
-                                            .dropdown {
-
-                                                position: relative;
-                                                display: inline-block;
-
-                                                .dropbtn {
-                                                    background-color: #712696;
-                                                    color: white;
-                                                    padding: 2px;
-                                                    border-radius: 20%;
-                                                    font-size: 16px;
-                                                    border: none;
-                                                    cursor: pointer;
-                                                    margin-bottom: 2px;
-                                                }
-
-                                                .dropdown-content {
-                                                    display: none;
-                                                    position: absolute;
-                                                    background-color: #b866c9;
-                                                    min-width: 80px;
-                                                    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
-                                                    z-index: 1;
-
-                                                    a {
-                                                        color: white;
-                                                        padding: 8px 8px;
-                                                        text-decoration: none;
-                                                        display: block;
-
-                                                        &:hover {
-                                                            background-color: #840ea1;
-                                                            color: white;
-                                                        }
-                                                    }
+                            //modal
+                            .modal-content {
+                                position: relative;
+                            }
 
 
-                                                }
+                            .btn-close {
+                                position: absolute;
+                                right: 0px;
+                                top: 0;
+                                font-weight: normal;
+                                opacity: 1;
+                                background-color: transparent;
+                                border: none;
+                            }
 
-                                                &:hover {
-                                                    .dropdown-content {
-                                                        display: block;
-                                                    }
-
-                                                    .dropbtn {
-                                                        background-color: #3e0074;
-                                                        //color: white;
-                                                    }
-                                                }
-                                            }
-                                        }
-                                    }
-
-                                    .content {
-                                        margin-left: 0px;
-                                        background-color: #eeeeeed6;
-                                        padding: 1px 3px;
-                                        border-radius: 4%;
-                                        font-family: sans-serif;
-
-                                    }
-
-                                    small {
-                                        .like__btn {
-                                            padding: 3px 6px;
-                                            background: #ff3a3a;
-                                            font-size: 13px;
-                                            font-family: "Open Sans", sans-serif;
-                                            border-radius: 5px;
-                                            color: #e8efff;
-                                            outline: none;
-                                            border: none;
-                                            cursor: pointer;
-
-                                            &:hover {
-                                                background: #ca1919;
-                                                color: #e8efff;
-                                            }
-                                        }
-                                    }
+                            @media (min-width: 600px) {
+                                .btn-close {
+                                    position: absolute;
+                                    right: -30px !important;
+                                    top: 0;
                                 }
                             }
+
+                            .small {
+                                font-size: 1rem;
+                                color: #000;
+                            }
+
+                            .avatar-img {
+                                height: 50px;
+                                width: 50px;
+                            }
+
+                            #comment-input,
+                            #reply-input {
+                                background-color: #ebebeb !important;
+                            }
+
+                            .liked {
+                                color: rgb(1, 143, 58);
+
+                            }
+
+                            .comment-wrap .comment-item-nested {
+                                padding-left: 2.75rem;
+                            }
+
+                            .comment-item {
+                                width: 100%;
+
+                                .share {
+                                    a {
+                                        text-decoration: none;
+                                        color: black;
+                                        font-weight: bold;
+                                        font-size: 1rem;
+                                        text-transform: capitalize;
+                                    }
+                                }
+
+
+                            }
+                        }
+
+                        #cardFeedAction,
+                        #commentAction,
+                        #replyAction {
+                            background-color: #ebebeb !important;
+                        }
+
+                        .card-title>a {
+                            text-decoration: none;
+                            color: black;
+                            font-weight: bold;
+                            font-size: 1.2rem;
+                            text-transform: capitalize;
+                        }
+
+                        .card-header {
+                            background-color: #f7f7f7 !important;
                         }
                     }
                 }
@@ -901,11 +675,12 @@
     }
 
     #weather-card {
-        border: 2px solid #000;
+        border: 1px solid #a0a0a0;
         border-radius: 10px;
+        overflow: hidden;
 
         .card {
-            width: 400px !important;
+            width: 100%;
 
             input {
                 padding: 1rem;
@@ -971,11 +746,12 @@
     }
 
     #user-friends {
-        border: 2px solid #000;
+        border: 1px solid #a0a0a0;
         border-radius: 10px;
+        overflow: hidden;
 
         .outercard {
-            width: 400px !important;
+            width: 100%;
 
             .ithcard {
                 width: 100%;
@@ -1024,5 +800,13 @@
         }
     }
 
+
+}
+
+@media screen and (max-width: 600px) {
+    .avatar-img {
+        width: 50px !important;
+        height: 50px !important;
+    }
 
 }

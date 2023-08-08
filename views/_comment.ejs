@@ -1,47 +1,128 @@
-<div class="comment" id="comment-<%= comment._id %>">
-    <div class="name">
-        <span>
-            <% if(comment.user.avatar){ %>
-                <img src="<%= comment.user.avatar %>" alt="<%= comment.user.name %>" />
-            <% } else { %>
-                <img src="<%=assetPath('images/default-avatar.png')%>" alt="<%= post.user.name %>" />
-            <% } %>
-            <%= comment.user.name %>
-        </span>
-        <% if(locals.user && (locals.user.id==comment.user.id )){ %>
-            <div>
-                <div class="dropdown">
-                    <button class="dropbtn"><i class="fa-solid fa-circle-chevron-down"></i></button>
-                    <div class="dropdown-content"><a class="delete-comment-button"
-                            href="/comments/destroy/<%= comment.id %>">Delete</a>
-                    </div>
-                </div>
+<!-- Comment item START -->
+<li class="comment-item mb-3" id="comment-<%= comment._id %>">
+  <div class="d-flex ithcomment">
+    <!-- Avatar -->
+    <div class="avatar avatar-xs">
+      <a href="#!">
+        <img class="avatar-img rounded-circle" src="<%= comment.user.avatar ? comment.user.avatar : assetPath('images/default-avatar.png') %>" alt="<%= comment.user.name %>" />
+      </a>
+    </div>
+    <!-- Comment by -->
+    <div class="ms-2 w-100">
+      <div class="bg-light p-3 rounded">
+        <div class="d-flex flex-column">
+          <div class="d-flex align-items-center w-100">
+            <h6 class="mb-1 card-title d-flex flex-wrap gap-1 align-items-center justify-content-between flex-grow-1">
+              <a href="#!"> <%= comment.user.name %> </a>
+              <div class="text-muted  small ps-0  time-posted">
+                <%= new Date(reply.createdAt).toLocaleString() %>
+              </div>
+            </h6>
+            <div class="dropdown ms-1">
+              <a href="#" class="text-secondary btn btn-secondary-soft-hover py-1 px-2" id="commentAction" data-bs-toggle="dropdown" aria-expanded="false">
+                <i class="fa fa-ellipsis-h text-muted"></i>
+              </a>
+              <!-- Card feed action dropdown menu -->
+              <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="commentAction">
+                <% if (locals.user && locals.user.id == comment.user.id) { %>
+                <li>
+                  <a class="dropdown-item" href="/post/destroy/<%= post.id %>">
+                    <i class="fa fa-edit fa-fw pe-2"></i>
+                    Edit Comment
+                  </a>
+                </li>
+                <li>
+                  <a class="dropdown-item" href="/comments/destroy/<%= comment.id %>">
+                    <i class="fa fa-trash fa-fw pe-2"></i>
+                    Delete Comment
+                  </a>
+                </li>
+                <% } else if (locals.user) { %>
+                <li>
+                  <a class="dropdown-item" href="#">
+                    <i class="fa fa-user fa-fw pe-2"></i>
+                    Unfollow
+                    <strong class="text-capitalize">
+                      <%= comment.user.name %>
+                    </strong>
+                  </a>
+                </li>
+                <li>
+                  <a class="dropdown-item" href="#">
+                    <i class="fa fa-flag fa-fw pe-2"></i>
+                    Report Comment</a>
+                </li>
+                <% } %>
+              </ul>
             </div>
-            <%}%>
-    </div>
-    <div class="content">
-        <%= comment.content %>
-    </div>
-    <!-- CHANGE :: display the likes of this comment, if the user is logged in, then show the link to toggle likes, else, just show the count -->
-    <!-- study about the data attribute -->
-    <small>
-        <% if (locals.user){ %>
-            <a class="toggle-like-button" data-likes="<%= comment.likes.length %>"
-                href="/likes/toggle/?id=<%=comment._id%>&type=Comment">
-                <button class="like__btn">
-                    <span id="icon"><i class="fas fa-thumbs-up"></i></span>
-                    <span id="count">
-                        <%= comment.likes.length %>
-                    </span> Like
-                </button>
-            </a>
+          </div>
+          <p class="small mb-0"><%= comment.content %></p>
+        </div>
+      </div>
+      <div class="d-flex align-items-center mt-1 share">
+        <% if (locals.user) { %>
+        <a href="/likes/toggle/?id=<%= comment._id %>&type=Comment" class="text-secondary small me-3 toggle-like-button" data-likes="<%= comment.likes.length %>">
+          <% if(comment.likes.find((like)=> { return like.user._id.toString() ==
+          locals.user._id.toString()})) { %>
+          <span class="liked">
+            <i class="fa fa-thumbs-up fa-fw me-1"></i> Liked (<%=
+            comment.likes.length %>)</span><% }else{ %>
+          <span>
+            <i class="fa fa-thumbs-up fa-fw me-1"></i> Like (<%=
+            comment.likes.length %>)</span><% } %>
+        </a>
+
+        <a class="text-secondary small me-2 d-flex align-items-center" data-bs-toggle="collapse" href="#<%= comment._id %>-reply" role=" button" aria-expanded="false" aria-controls="collapseExample">
+          <i class="fa fa-comment fa-fw me-1"></i>
+          Reply
+        </a>
+
+        <div>
+          <span class="ms-1 badge bg-secondary rounded-pill p-auto">
+            <span class="d-none d-lg-inline-block">Replies</span>
+            <%= comment.replies.length %>
+          </span>
+        </div>
         <% }else{ %>
-            <button class="like__btn">
-                <span id="icon"><i class="far fa-thumbs-up"></i></span>
-                <span id="count">
-                    <%= comment.likes.length %>
-                </span> 
-            </button>
+        <div class="text-secondary fw-bold small me-3">
+          <i class="fa fa-thumbs-up fa-fw me-1"></i>
+          Likes (<%= comment.likes.length %>)
+        </div>
+        <a class="text-secondary small me-3" href="/login">
+          Replies (<%= comment.replies.length %>)
+        </a>
+        <%}%>
+      </div>
+    </div>
+  </div>
+
+  <% if (locals.user) { %>
+        <!-- Add comment -->
+        <div id="<%= comment._id %>-reply" class="collapse ms-5">
+          <div class="d-flex mt-2 mb-2">
+            <!-- Avatar -->
+            <div class="avatar avatar-xs me-2">
+              <a href="#!">
+                <img class="avatar-img rounded-circle" src="<%= locals.user.avatar %>" alt="avatar" />
+              </a>
+            </div>
+            <!-- Comment box  -->
+            <form class="nav nav-item w-100 position-relative" action="/comments/create-reply" method="POST" id="comment-<%= comment._id %>-reply-form">
+              <input type="text" name="content" id="reply-input" class="form-control rounded-pill bg-transparent border-0" placeholder="Write a comment" />
+              <input type="hidden" name="post" value="<%= post._id %>" />
+              <input type="hidden" name="comment" value="<%= comment._id %>" />
+              <button class="nav-link bg-transparent px-3 position-absolute top-50 end-0 translate-middle-y border-0" type="submit" id="add-reply">
+                <i class="fa fa-paper-plane"></i>
+              </button>
+            </form>
+          </div>
+        </div>
         <% } %>
-    </small>
-</div>
+        <!-- Comment wrap START -->
+        <% if (comment.replies.length > 0) { %>
+        <ul class="pt-2 pb-0 list-unstyled ms-5">
+          <% for (reply of comment.replies) { %> <%- include('_reply') %> <% } %>
+        </ul>
+        <% } %>
+</li>
+<!-- Comment item END -->

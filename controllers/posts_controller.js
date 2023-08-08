@@ -4,6 +4,7 @@ const Like = require("../models/like");
 const fs = require("fs");
 const path = require("path");
 const { randomUUID } = require("crypto");
+const CommentReply = require("../models/commentreply");
 module.exports.create = async (req, res) => {
   if (req.xhr) {
     console.log(req.query);
@@ -85,11 +86,22 @@ module.exports.destroy = async (req, res) => {
     let post = await Post.findById(req.params.id);
     //.id means converting object into string
     if ((post.user = req.user.id)) {
-      //CHANGE :: delete likes associated with this post and comment
+      //delete likes on post
       await Like.deleteMany({ likeable: post, onModel: "Post" });
-      await Like.deleteMany({ _id: { $in: post.comments } });
-      post.remove();
+      //delete likes on comments
+      await Like.deleteMany({ likeable: { $in: post.comments } });
+      //likes on replies
+      await Like.deleteMany({ likeable: { $in: post.comments.replies } });
+      //get all replies of post
+      let replies = await CommentReply.find({ post: req.params.id });
+      //delete likes on replies
+      await Like.deleteMany({ likeable: { $in: replies } });
+      //delete replies
+      await CommentReply.deleteMany({ post: req.params.id });
+      //delete comments
       await Comment.deleteMany({ post: req.params.id });
+      //delete post itself
+      post.remove();
       if (post.image) {
         fs.unlinkSync(path.join(__dirname, "..", post.image));
       }

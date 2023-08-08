@@ -7,7 +7,7 @@ function NewsApi() {
     dataType: "json",
     success: function (data) {
       let news = data.articles;
-      let newsList = document.getElementById("news-lists");
+      let newsList = document.querySelectorAll(".news-list-container");
       let str = "";
       // Take only 5 news
       news = news.slice(0, 7);
@@ -16,7 +16,9 @@ function NewsApi() {
         <a href="${news[i].url}">${news[i].title} <i class="fa fa-external-link"></i></a>
         </li>`;
       }
-      newsList.innerHTML = str;
+      for (let i = 0; i < newsList.length; i++) {
+        newsList[i].innerHTML = str;
+      }
     },
     error: function (error) {
       console.log(error);
