@@ -55,7 +55,7 @@
           <button type="button" class="btn btn-danger-soft me-2" data-bs-dismiss="modal">
             Cancel
           </button>
-          <button type="button" class="btn btn-success-soft" id="postphotofeed">
+          <button type="button" class="btn btn-success-soft" id="postnormalfeed">
             Post
           </button>
         </div>
@@ -181,77 +181,6 @@
 </div>
 <!-- Create Feed Video Ends -->
 <script>
-  $(document).ready(function() {
-    var postnormalfeed = $("#postnormalfeed");
-    postnormalfeed.on("click", function(e) {
-      e.preventDefault();
-      var content = $("#normalfeedpost > textarea").val();
-      var data = new FormData();
-      data.append("content", content);
-      console.log(content);
-      $.ajax({
-        url: "/posts/create",
-        method: "POST",
-        data: {
-          content: content,
-        },
-        success: function(data) {
-          console.log(data);
-        },
-        error: function(error) {
-          console.log(error.responseText);
-        },
-      });
-    });
-    var postvideofeed = $("#postvideofeed");
-    postvideofeed.on("click", function(e) {
-      e.preventDefault();
-      var content = $("#videofeedpost > textarea").val();
-      var video = $("#upload_videofile")[0].files[0];
-      var data = new FormData();
-      data.append("video", video);
-      data.append("content", content);
-      console.log(video, content);
-      $.ajax({
-        url: "/posts/create/?video=true",
-        method: "POST",
-        cache: false,
-        contentType: false,
-        processData: false,
-        data: data,
-        success: function(data) {
-          console.log(data);
-        },
-        error: function(error) {
-          console.log(error.responseText);
-        },
-      });
-    });
-    var postphotofeed = $("#postphotofeed");
-    postphotofeed.on("click", function(e) {
-      e.preventDefault();
-      var content = $("#photofeedpost > textarea").val();
-      var image = $("#upload_file")[0].files[0];
-      var data = new FormData();
-      data.append("image", image);
-      data.append("content", content);
-      console.log(data);
-      $.ajax({
-        url: "/posts/create/?image=true",
-        method: "POST",
-        cache: false,
-        contentType: false,
-        processData: false,
-        data: data,
-        success: function(data) {
-          console.log(data);
-        },
-        error: function(error) {
-          console.log(error.responseText);
-        },
-      });
-    });
-  });
   var btnUpload = $("#upload_file"),
     btnOuter = $(".button_outer");
   btnUpload.on("change", function(e) {
@@ -300,12 +229,14 @@
   $(".file_remove").on("click", function(e) {
     $("#uploaded_view").removeClass("show");
     $("#uploaded_view").find("img").remove();
+    $("#upload_file").val("");
     btnOuter.removeClass("file_uploading");
     btnOuter.removeClass("file_uploaded");
   });
   $(".file_remove1").on("click", function(e) {
     $("#uploaded_videoview").removeClass("show");
     $("#uploaded_videoview").find("video").remove();
+    $("#upload_videofile").val("");
     btnOuter.removeClass("file_uploading1");
     btnOuter.removeClass("file_uploaded1");
   });

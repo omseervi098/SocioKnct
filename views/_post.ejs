@@ -37,7 +37,7 @@
             <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="cardFeedAction">
               <% if (locals.user.id == post.user.id) { %>
               <li>
-                <a class="dropdown-item" href="/posts/destroy/<%= post.id %>">
+                <a class="dropdown-item" href="/posts/destroy/<%= post.id %>" id="delete-<%= post.id %>-post">
                   <i class="fa fa-trash fa-fw pe-2"></i>
                   Delete post
                 </a>
