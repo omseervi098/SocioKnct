@@ -2047,3 +2047,9 @@
 [0mGET / [32m200[0m 208.102 ms - 29439[0m
 [0mPOST /posts/create/?image=true [32m200[0m 64.034 ms - 762[0m
 [0mGET /posts/destroy/64d3078ccc3b938ce90f08a8 [32m200[0m 99.151 ms - 76[0m
+[0mGET / [32m200[0m 122.388 ms - 29273[0m
+[0mPOST /posts/create/?image=true [32m200[0m 72.321 ms - 762[0m
+[0mPOST /posts/create/?image=true [32m200[0m 46.303 ms - 762[0m
+[0mGET /posts/destroy/64d307cc3ca719d337affa11 [32m200[0m 80.192 ms - 76[0m
+[0mGET /posts/destroy/64d307bf3ca719d337affa0d [32m200[0m 73.335 ms - 76[0m
+[0mGET / [36m304[0m 154.391 ms - -[0m
