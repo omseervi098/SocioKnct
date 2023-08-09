@@ -229,12 +229,14 @@
   $(".file_remove").on("click", function(e) {
     $("#uploaded_view").removeClass("show");
     $("#uploaded_view").find("img").remove();
+    $("#upload_file").val("");
     btnOuter.removeClass("file_uploading");
     btnOuter.removeClass("file_uploaded");
   });
   $(".file_remove1").on("click", function(e) {
     $("#uploaded_videoview").removeClass("show");
     $("#uploaded_videoview").find("video").remove();
+    $("#upload_videofile").val("");
     btnOuter.removeClass("file_uploading1");
     btnOuter.removeClass("file_uploaded1");
   });

@@ -55,6 +55,27 @@
         e.preventDefault();
         var content = $("#photofeedpost > textarea").val();
         var image = $("#upload_file")[0].files[0];
+        //CHECK IF IMAGE IS SELECTED
+        if (!image) {
+          new Noty({
+            theme: "relax",
+            type: "error",
+            layout: "topRight",
+            text: "Please select an image first !!!",
+            timeout: 1500,
+          }).show();
+          return;
+        }
+        if (!image && !content) {
+          new Noty({
+            theme: "relax",
+            type: "error",
+            layout: "topRight",
+            text: "Please write something or select an image first !!!",
+            timeout: 1500,
+          }).show();
+        }
+
         var data = new FormData();
         data.append("image", image);
         data.append("content", content);
@@ -72,9 +93,13 @@
             $("#post-list-container-div").prepend(newPost);
             //close modal
             feedActionPhotoModal.modal("hide");
-            // deletePost($(".delete-post-button", newPost));
+            //clear textarea
+            $("#photofeedpost > textarea").val("");
+            //clear file input
+            $(".file_remove").trigger("click");
+            deletePost($(`#delete-${data.data.post._id}-post`, newPost));
             // // CHANGE :: enable the functionality of the toggle like button on the new post
-            // new ToggleLike($(" .toggle-like-button", newPost));
+            new ToggleLike($(" .toggle-like-button", newPost));
             //Adding noty notification
             new Noty({
               theme: "relax",
@@ -128,7 +153,7 @@
     };
     let newPostDom = function (post, locals, image) {
       return $(`
-  <div id="post-${post._id}>" class="post">
+  <div id="post-${post._id}" class="post">
   <div class="ithpost">
     <div class="card">
       <!-- Card header START -->
@@ -172,13 +197,13 @@
               ${
                 locals.user.id == post.user.id
                   ? `<li>
-                <a class="dropdown-item" href="/posts/destroy/${post.id}>">
+                <a class="dropdown-item" href="/posts/destroy/${post._id}" id="delete-${post._id}-post">
                   <i class="fa fa-trash fa-fw pe-2"></i>
                   Delete post
                 </a>
               </li>
               <li>
-                <a class="dropdown-item" href="/posts/destroy/${post.id}>">
+                <a class="dropdown-item" href="/posts/destroy/${post._id}">
                   <i class="fa fa-edit fa-fw pe-2"></i>
                   Edit post
                 </a>
@@ -222,7 +247,7 @@
             post.image
               ? `<img class="card-img" src="${post.image}" alt="post image" />
             <div class="viewfullscreen py-1 px-2 pe-3">
-            <button class="btn btn-sm btn-secondary-soft" data-bs-toggle="modal" data-bs-target="#modal-fullscreen-${post._id}>">
+            <button class="btn btn-sm btn-secondary-soft" data-bs-toggle="modal" data-bs-target="#modal-fullscreen-${post._id}">
               <i class="fa-regular fa-eye fa-2x"></i>
             </button>
           </div>`
@@ -231,7 +256,7 @@
           ${
             post.video
               ? `<video class="card-img" controls disablePictureInPicture controlsList="nodownload">
-            <source src="${post.video}>" type="video/mp4" />
+            <source src="${post.video}" type="video/mp4" />
           </video>`
               : ``
           } 
@@ -239,7 +264,7 @@
           <!-- Modal to view fullscreen -->
           <div class="modal fade" id="modal-fullscreen-${
             post._id
-          }>" tabindex="-1" aria-labelledby="modal-fullscreenLabel" aria-hidden="true">
+          }" tabindex="-1" aria-labelledby="modal-fullscreenLabel" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered">
               <div class=" modal-content">
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
@@ -270,7 +295,7 @@
               ? `<li class="nav-item">
             <a class="nav-link toggle-like-button" data-likes="${
               post.likes.length
-            }" href="/likes/toggle/?id=${post._id}>&type=Post">
+            }" href="/likes/toggle/?id=${post._id}&type=Post">
               ${
                 post.likes.find((like) => {
                   return like.user._id.toString() == locals.user._id.toString();
@@ -343,7 +368,19 @@
         }
 
         <!-- Comment wrap START -->
-     
+        ${
+          post.comments.length > 0
+            ? `
+          <ul class="pt-1 pb-0 m-0 list-unstyled">
+          ${getCommentDom(post.comments[0], post, locals)}
+            <div class="collapse" id="${post._id}-comments-all">
+              ${forEach(post.comments.slice(1), function (comment) {
+                return getCommentDom(comment, post, locals);
+              })}
+            </div>
+          </ul>`
+            : ``
+        } 
        
         <!-- Comment wrap END -->
       </div>
@@ -365,14 +402,271 @@
   </div>
 </div>`);
     };
+    let getCommentDom = function (comment, post, locals) {
+      return `
+      <!-- Comment item START -->
+      <li class="comment-item mb-3" id="comment-${comment._id}">
+        <div class="d-flex ithcomment">
+          <!-- Avatar -->
+          <div class="avatar avatar-xs">
+            <a href="#!">
+              <img class="avatar-img rounded-circle" src="${
+                comment.user.avatar
+                  ? comment.user.avatar
+                  : assetPath("images/default-avatar.png")
+              }" alt="${comment.user.name}" />
+            </a>
+          </div>
+          <!-- Comment by -->
+          <div class="ms-2 w-100">
+            <div class="bg-light p-3 rounded">
+              <div class="d-flex flex-column">
+                <div class="d-flex align-items-center w-100">
+                  <h6 class="mb-1 card-title d-flex flex-wrap gap-1 align-items-center justify-content-between flex-grow-1">
+                    <a href="#!"> ${comment.user.name} </a>
+                    <div class="text-muted  small ps-0  time-posted">
+                      ${new Date(comment.createdAt).toLocaleString()}
+                    </div>
+                  </h6>
+                  <div class="dropdown ms-1">
+                    <a href="#" class="text-secondary btn btn-secondary-soft-hover py-1 px-2" id="commentAction" data-bs-toggle="dropdown" aria-expanded="false">
+                      <i class="fa fa-ellipsis-h text-muted"></i>
+                    </a>
+                    <!-- Card feed action dropdown menu -->
+                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="commentAction">
+                      ${
+                        locals.user && locals.user.id == comment.user.id
+                          ? `<li>
+                        <a class="dropdown-item" href="/post/destroy/${comment.id}">
+                          <i class="fa fa-edit fa-fw pe-2"></i>
+                          Edit Comment
+                        </a>
+                      </li>
+                      <li>
+                        <a class="dropdown-item" href="/comments/destroy/${comment.id}" id="delete-${comment.id}-comment">
+                          <i class="fa fa-trash fa-fw pe-2"></i>
+                          Delete Comment
+                        </a>
+                      </li>`
+                          : locals.user
+                          ? `<li>
+                        <a class="dropdown-item" href="#">
+                          <i class="fa fa-user fa-fw pe-2"></i>
+                          Unfollow
+                          <strong class="text-capitalize">
+                            ${comment.user.name}
+                          </strong>
+                        </a>
+                      </li>
+                      <li>
+                        <a class="dropdown-item" href="#">
+                          <i class="fa fa-flag fa-fw pe-2"></i>
+                          Report Comment</a>
+                      </li>`
+                          : ``
+                      }
+                    </ul>
+                  </div>
+                </div>
+                <p class="small mb-0"><%= comment.content %></p>
+              </div>
+            </div>
+            <div class="d-flex align-items-center mt-1 share">
+              ${
+                locals.user
+                  ? `<a href="/likes/toggle/?id=${
+                      comment._id
+                    }&type=Comment" class="text-secondary small me-3 toggle-like-button" data-likes="${
+                      comment.likes.length
+                    }">
+                ${
+                  comment.likes.find((like) => {
+                    return (
+                      like.user._id.toString() == locals.user._id.toString()
+                    );
+                  })
+                    ? `<span class="liked">
+                  <i class="fa fa-thumbs-up fa-fw me-1"></i> Liked (${comment.likes.length})</span>`
+                    : ` <span>
+                  <i class="fa fa-thumbs-up fa-fw me-1"></i> Like (${comment.likes.length})</span>`
+                }
+              </a>
+
+              <a class="text-secondary small me-2 d-flex align-items-center" data-bs-toggle="collapse" href="#${
+                comment._id
+              }-reply" role=" button" aria-expanded="false" aria-controls="collapseExample">
+                <i class="fa fa-comment fa-fw me-1"></i>
+                Reply
+              </a>
+
+              <div>
+                <span class="ms-1 badge bg-secondary rounded-pill p-auto">
+                  <span class="d-none d-lg-inline-block">Replies</span>
+                  ${comment.replies.length}
+                </span>
+              </div>`
+                  : `<div class="text-secondary fw-bold small me-3">
+                <i class="fa fa-thumbs-up fa-fw me-1"></i>
+                Likes (${comment.likes.length})
+              </div>
+              <a class="text-secondary small me-3" href="/login">
+                Replies (${comment.replies.length})
+              </a>`
+              }
+            </div>
+          </div>
+        </div>
+
+        ${
+          locals.user
+            ? `<!-- Add comment -->
+              <div id="${comment._id}-reply" class="collapse ms-5">
+                <div class="d-flex mt-2 mb-2">
+                  <!-- Avatar -->
+                  <div class="avatar avatar-xs me-2">
+                    <a href="#!">
+                      <img class="avatar-img rounded-circle" src="${locals.user.avatar}" alt="avatar" />
+                    </a>
+                  </div>
+                  <!-- Comment box  -->
+                  <form class="nav nav-item w-100 position-relative" action="/comments/create-reply" method="POST" id="comment-${comment._id}-reply-form">
+                    <input type="text" name="content" id="reply-input" class="form-control rounded-pill bg-transparent border-0" placeholder="Write a comment" />
+                    <input type="hidden" name="post" value="${post._id}" />
+                    <input type="hidden" name="comment" value="${comment._id}" />
+                    <button class="nav-link bg-transparent px-3 position-absolute top-50 end-0 translate-middle-y border-0" type="submit" id="add-reply">
+                      <i class="fa fa-paper-plane"></i>
+                    </button>
+                  </form>
+                </div>
+              </div>`
+            : ``
+        } 
+              <!-- Comment wrap START -->
+              ${
+                comment.replies.length > 0
+                  ? `<ul class="pt-2 pb-0 list-unstyled ms-5">
+                      ${forEach(comment.replies, function (reply) {
+                        return getReplyDom(reply, locals);
+                      })}
+                  </ul>`
+                  : ``
+              } 
+      </li>
+      <!-- Comment item END -->
+      `;
+    };
+    let getReplyDom = function (reply, locals) {
+      return `
+      <!-- Reply item START -->
+      <li class="comment-item mb-2" id="reply-${reply._id}">
+        <div class="d-flex ithreply">
+          <!-- Avatar -->
+          <div class="avatar avatar-xs">
+            <a href="#!">
+              <img class="avatar-img rounded-circle" src="${
+                reply.user.avatar
+                  ? reply.user.avatar
+                  : assetPath("images/default-avatar.png")
+              }" alt="${reply.user.name}" />
+            </a>
+          </div>
+          <!-- Reply by -->
+          <div class="ms-2 w-100">
+            <div class="bg-light pe-2 pe-sm-3 p-3 rounded">
+              <div class="d-flex flex-column">
+                <div class="d-flex align-items-center w-100 justify-content-between">
+
+                  <h6 class="mb-1 card-title d-flex flex-wrap gap-1 align-items-center justify-content-between flex-grow-1">
+                    <a href="#!"> ${reply.user.name} </a>
+                    <div class="text-muted  small ps-0  time-posted">
+                      ${new Date(reply.createdAt).toLocaleString()}
+                    </div>
+                  </h6>
+
+                  <div class="dropdown ms-1">
+                    <a href="#" class="text-secondary btn btn-secondary-soft-hover py-1 px-2" id="replyAction" data-bs-toggle="dropdown" aria-expanded="false">
+                      <i class="fa fa-ellipsis-h text-muted"></i>
+                    </a>
+                    <!-- Card feed action dropdown menu -->
+                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="replyAction">
+                      ${
+                        locals.user && locals.user.id == reply.user.id
+                          ? `<li>
+                        <a class="dropdown-item" href="/post/destroy-reply/${reply._id}">
+                          <i class="fa fa-edit fa-fw pe-2"></i>
+                          Edit Reply
+                        </a>
+                      </li>
+                      <li>
+                        <a class="dropdown-item" href="/comments/destroy-reply/${reply._id}" id="delete-${reply._id}-reply">
+                          <i class="fa fa-trash fa-fw pe-2"></i>
+                          Delete Reply
+                        </a>
+                      </li>`
+                          : locals.user
+                          ? `
+                      <li>
+                        <a class="dropdown-item" href="#">
+                          <i class="fa fa-user fa-fw pe-2"></i>
+                          Unfollow
+                          <strong class="text-capitalize">
+                            ${comment.user.name}
+                          </strong>
+                        </a>
+                      </li>
+                      <li>
+                        <a class="dropdown-item" href="#">
+                          <i class="fa fa-flag fa-fw pe-2"></i>
+                          Report Reply</a>
+                      </li> `
+                          : ``
+                      } 
+                    </ul>
+                  </div>
+                </div>
+                <p class="small mb-0">${reply.content}</p>
+                <!-- Like Button -->
+              </div>
+            </div>
+            <div class="share">
+              ${
+                locals.user
+                  ? `<a href="/likes/toggle/?id=${
+                      reply._id
+                    }&type=CommentReply" data-likes="${
+                      reply.likes.length
+                    }" class="text-muted small toggle-like-button">
+                ${
+                  reply.likes.find((like) => {
+                    return (
+                      like.user._id.toString() == locals.user._id.toString()
+                    );
+                  })
+                    ? `<span class="liked">
+                  <i class="fa fa-thumbs-up fa-fw pe-2"></i>Liked (${reply.likes.length})</span>`
+                    : `<span><i class="fa fa-thumbs-up fa-fw pe-2"></i>Like (${reply.likes.length})</span>`
+                } 
+              </a>`
+                  : `<div class="text-muted small fw-bold">
+                <i class="fa fa-thumbs-up fa-fw pe-2"></i> Likes (${reply.likes.length})
+              </div>`
+              }
+            </div>
+          </div>
+        </div>
+      </li>
+      `;
+    };
     //method to delete post from dom
-    let deletePost = function (deleteLink) {
+    let deletePost = function (deleteLink, post_id) {
+      console.log(deleteLink, "clicked on delete post");
       $(deleteLink).click(function (e) {
         e.preventDefault();
         $.ajax({
           type: "get",
           url: $(deleteLink).prop("href"),
           success: function (data) {
+            console.log(data.data);
             $(`#post-${data.data.post_id}`).remove();
             new Noty({
               theme: "relax",
