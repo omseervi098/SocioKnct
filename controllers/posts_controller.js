@@ -21,6 +21,9 @@ module.exports.create = async (req, res) => {
         return res.status(200).json({
           data: {
             post: post,
+            locals: {
+              user: req.user,
+            },
           },
           message: "Post created !!!",
         });
@@ -54,6 +57,9 @@ module.exports.create = async (req, res) => {
       return res.status(200).json({
         data: {
           post: post,
+          locals: {
+            user: req.user,
+          },
         },
         message: "Post created !!!",
       });

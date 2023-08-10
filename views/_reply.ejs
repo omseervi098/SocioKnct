@@ -21,11 +21,11 @@
             </h6>
 
             <div class="dropdown ms-1">
-              <a href="#" class="text-secondary btn btn-secondary-soft-hover py-1 px-2" id="replyAction" data-bs-toggle="dropdown" aria-expanded="false">
+              <a href="#" class="text-secondary btn btn-secondary-soft-hover py-1 px-2 replyAction" id="replyAction-<%=reply.id%>" data-bs-toggle="dropdown" aria-expanded="false">
                 <i class="fa fa-ellipsis-h text-muted"></i>
               </a>
               <!-- Card feed action dropdown menu -->
-              <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="replyAction">
+              <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="replyAction-<%=reply.id%>">
                 <% if (locals.user && locals.user.id == reply.user.id) { %>
                 <li>
                   <a class="dropdown-item" href="/post/destroy/<%= post.id %>">

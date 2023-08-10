@@ -19,11 +19,11 @@
               </div>
             </h6>
             <div class="dropdown ms-1">
-              <a href="#" class="text-secondary btn btn-secondary-soft-hover py-1 px-2" id="commentAction" data-bs-toggle="dropdown" aria-expanded="false">
+              <a href="#" class="text-secondary btn btn-secondary-soft-hover py-1 px-2 commentAction" id="commentAction-<%= comment.id %>" data-bs-toggle="dropdown" aria-expanded="false">
                 <i class="fa fa-ellipsis-h text-muted"></i>
               </a>
               <!-- Card feed action dropdown menu -->
-              <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="commentAction">
+              <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="commentAction-<%= comment.id %>">
                 <% if (locals.user && locals.user.id == comment.user.id) { %>
                 <li>
                   <a class="dropdown-item" href="/post/destroy/<%= post.id %>">
@@ -32,7 +32,7 @@
                   </a>
                 </li>
                 <li>
-                  <a class="dropdown-item" href="/comments/destroy/<%= comment.id %>" id="delete-<%= comment.id %>-comment">
+                  <a class="dropdown-item delete-comment-btn" href="/comments/destroy/<%= comment.id %>" id="delete-<%= comment.id %>-comment">
                     <i class="fa fa-trash fa-fw pe-2"></i>
                     Delete Comment
                   </a>
@@ -108,10 +108,10 @@
             </div>
             <!-- Comment box  -->
             <form class="nav nav-item w-100 position-relative" action="/comments/create-reply" method="POST" id="comment-<%= comment._id %>-reply-form">
-              <input type="text" name="content" id="reply-input" class="form-control rounded-pill bg-transparent border-0" placeholder="Write a comment" />
+              <input type="text" name="content" id="reply-input-<%=comment.id%>" class="form-control rounded-pill bg-transparent border-0 reply-input" placeholder="Write a comment" />
               <input type="hidden" name="post" value="<%= post._id %>" />
               <input type="hidden" name="comment" value="<%= comment._id %>" />
-              <button class="nav-link bg-transparent px-3 position-absolute top-50 end-0 translate-middle-y border-0" type="submit" id="add-reply">
+              <button class="nav-link bg-transparent px-3 position-absolute top-50 end-0 translate-middle-y border-0 add-reply" type="submit" id="add-reply-<%=comment.id%>">
                 <i class="fa fa-paper-plane"></i>
               </button>
             </form>

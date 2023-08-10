@@ -30,11 +30,11 @@
           <!-- Card feed action dropdown START -->
           <% if (locals.user) { %>
           <div class="dropdown">
-            <a href="#" class="text-secondary btn btn-secondary-soft-hover py-1 px-2" id="cardFeedAction" data-bs-toggle="dropdown" aria-expanded="false">
+            <a href="#" class="text-secondary btn btn-secondary-soft-hover py-1 px-2 cardFeedAction" id="cardFeedAction-<%=post.id%>" data-bs-toggle="dropdown" aria-expanded="false">
               <i class="fa fa-ellipsis-h text-muted"></i>
             </a>
             <!-- Card feed action dropdown menu -->
-            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="cardFeedAction">
+            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="cardFeedAction-<%=post.id%>">
               <% if (locals.user.id == post.user.id) { %>
               <li>
                 <a class="dropdown-item" href="/posts/destroy/<%= post.id %>" id="delete-<%= post.id %>-post">
@@ -142,10 +142,10 @@
           </li>
           <!-- Card share action START  -->
           <li class="nav-item dropdown ms-sm-auto fw-bold d-none d-sm-block">
-            <a class="nav-link mb-0" href="#" id="cardShareAction" data-bs-toggle="dropdown" aria-expanded="false">
+            <a class="nav-link mb-0 cardShareAction" href="#" id="cardShareAction1-<%=post.id%>" data-bs-toggle="dropdown" aria-expanded="false">
               <i class="fa fa-share pe-1"></i>Share
             </a>
-            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="cardShareAction">
+            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="cardShareAction1-<%= post.id %>">
               <li>
                 <a class="dropdown-item" href="#">
                   <i class="fa fa-bookmark fa-fw pe-2"></i>Save post</a>
@@ -186,10 +186,10 @@
             </a>
           </div>
           <!-- Comment box  -->
-          <form class="nav nav-item w-100 position-relative" action="/comments/create" method="POST">
-            <input type="text" name="content" id="comment-input" class="form-control rounded-pill bg-transparent border-0" placeholder="Write a comment" />
+          <form class="nav nav-item w-100 position-relative" action="/comments/create" method="POST" id="post-<%= post._id %>-comments-form">
+            <input type="text" name="content" id="comment-input-<%=post._id%>" class="form-control rounded-pill bg-transparent border-0 comment-input" placeholder="Write a comment" />
             <input type="hidden" name="post" value="<%= post._id %>" />
-            <button class="nav-link bg-transparent px-3 position-absolute top-50 end-0 translate-middle-y border-0" type="submit" id="add-comment">
+            <button class="nav-link bg-transparent px-3 position-absolute top-50 end-0 translate-middle-y border-0" type="submit" id="add-comment-<%=post.id%>">
               <i class="fa fa-paper-plane"></i>
             </button>
           </form>
@@ -197,26 +197,39 @@
 
         <% } %>
         <!-- Comment wrap START -->
-        <% if (post.comments.length > 0) { %>
+
         <ul class="pt-1 pb-0 m-0 list-unstyled">
-          <%- include('_comment', {comment: post.comments[0], post: post}) %>
+          <div id="<%=post._id%>-first-comment">
+            <% if (post.comments.length >=1) { %>
+            <%- include('_comment', {comment: post.comments[0], post: post}) %>
+            <% } %>
+          </div>
           <div class="collapse" id="<%= post._id %>-comments-all">
+            <% if (post.comments.length > 1) { %>
             <% for(let i=1; i<post.comments.length; i++) { %>
             <%- include('_comment', {comment: post.comments[i], post: post}) %>
             <% } %>
+            <% } %>
           </div>
         </ul>
-        <% } %>
+
         <!-- Comment wrap END -->
       </div>
       <!-- Card body END -->
       <% if(post.comments.length > 1){ %>
-      <div class="card-footer">
+      <div class="card-footer card-footer-<%= post._id %>">
         <p class="mb-0">
           <a class="text-secondary small me-3 fw-bold text-decoration-none" data-bs-toggle="collapse" href="#<%= post._id %>-comments-all" role="button" aria-expanded="false" aria-controls="collapseExample">Load More Comments (<%= post.comments.length-1 %>)</a>
         </p>
       </div>
-      <%}%>
+      <%}else {%>
+      <div class="card-footer d-none card-footer-<%= post._id %>">
+        <p class="mb-0">
+          <a class="text-secondary small me-3 fw-bold text-decoration-none" data-bs-toggle="collapse" href="#<%= post._id %>-comments-all" role="button" aria-expanded="false" aria-controls="collapseExample">Load More Comments (<%= post.comments.length-1 %>)</a>
+        </p>
+      </div>
+      <% }%>
+
     </div>
   </div>
 </div>

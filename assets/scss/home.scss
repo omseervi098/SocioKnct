@@ -620,8 +620,8 @@
                                 width: 50px;
                             }
 
-                            #comment-input,
-                            #reply-input {
+                            .comment-input,
+                            .reply-input {
                                 background-color: #ebebeb !important;
                             }
 
@@ -651,9 +651,9 @@
                             }
                         }
 
-                        #cardFeedAction,
-                        #commentAction,
-                        #replyAction {
+                        .cardFeedAction,
+                        .commentAction,
+                        .replyAction {
                             background-color: #ebebeb !important;
                         }
 
