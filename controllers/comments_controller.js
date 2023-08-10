@@ -13,23 +13,26 @@ module.exports.create = async function (req, res) {
         post: req.body.post,
         user: req.user._id,
       });
-      post.comments.push(comment);
+      //sort comment by latest first
+
+      post.comments.unshift(comment);
       post.save();
       comment = await comment.populate("user", "name email avatar");
       // comment = await comment.populate("replies", "content user comment post");
       //populate user of post
       post = await post.populate("user", "email");
-      let data = {
-        comment: comment,
-        post: post,
-      };
+
       // /emailQueue.add(data);
       //console.log(comment.user.name);
       if (req.xhr) {
-        console.log("xhr");
+        //console.log("xhr", post, comment);
         return res.status(200).json({
           data: {
             comment: comment,
+            post: post,
+            locals: {
+              user: req.user,
+            },
           },
           message: "Comment created !!!",
         });
@@ -115,11 +118,11 @@ module.exports.destroyReply = async function (req, res) {
 module.exports.destroy = async function (req, res) {
   try {
     let comment = await Comment.findById(req.params.id);
-    if (comment.user == req.user.id) {
+    if (comment.user._id == req.user.id) {
       //destroy comment and pull from post
       let postId = comment.post;
       //delete comment itself
-      comment.remove();
+      await comment.remove();
       //delete comment from post.comments
       let post = await Post.findByIdAndUpdate(postId, {
         $pull: { comments: req.params.id },
@@ -134,15 +137,20 @@ module.exports.destroy = async function (req, res) {
         return res.status(200).json({
           data: {
             comment_id: req.params.id,
+            commentlen: post.comments.length,
+            postId: post._id,
           },
           message: "Comment deleted !!!",
         });
+      } else {
+        req.flash("success", "Comment deleted !!!");
+        return res.redirect("/");
       }
-      req.flash("success", "Comment deleted !!!");
-      return res.redirect("/");
     } else {
       req.flash("error", "You are not authorized to delete this comment");
-      return res.redirect("/");
+      return res.status(401).json({
+        message: "You cannot delete this comment",
+      });
     }
   } catch (err) {
     req.flash("error", "Error in deleting comment");

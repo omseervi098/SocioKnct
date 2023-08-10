@@ -4,12 +4,22 @@
   $(document).ready(function () {
     let createPost = function () {
       let postnormalfeed = $("#postnormalfeed");
+      let feedNormalModal = $("#modalCreateFeed");
       postnormalfeed.on("click", function (e) {
         e.preventDefault();
         var content = $("#normalfeedpost > textarea").val();
+        if (!content) {
+          new Noty({
+            theme: "relax",
+            type: "error",
+            layout: "topRight",
+            text: "Please write something first !!!",
+            timeout: 1500,
+          }).show();
+          return;
+        }
         var data = new FormData();
         data.append("content", content);
-        console.log(content);
         $.ajax({
           url: "/posts/create",
           method: "POST",
@@ -18,6 +28,26 @@
           },
           success: function (data) {
             console.log(data);
+            let newPost = newPostDom(data.data.post, data.data.locals, null);
+            $("#post-list-container-div").prepend(newPost);
+            //close modal
+            feedNormalModal.modal("hide");
+            //clear textarea
+            $("#normalfeedpost > textarea").val("");
+            deletePost($(`#delete-${data.data.post._id}-post`, newPost));
+            // // CHANGE :: enable the functionality of the toggle like button on the new post
+            new ToggleLike($(" .toggle-like-button", newPost));
+            //create comment dom
+            new PostComments(data.data.post._id);
+
+            //Adding noty notification
+            new Noty({
+              theme: "relax",
+              type: "success",
+              layout: "topRight",
+              text: "Post Created !!!",
+              timeout: 1500,
+            }).show();
           },
           error: function (error) {
             console.log(error.responseText);
@@ -25,10 +55,31 @@
         });
       });
       let postvideofeed = $("#postvideofeed");
+      let feedActionVideoModal = $("#feedActionVideo");
       postvideofeed.on("click", function (e) {
         e.preventDefault();
         var content = $("#videofeedpost > textarea").val();
         var video = $("#upload_videofile")[0].files[0];
+        if (!video) {
+          new Noty({
+            theme: "relax",
+            type: "error",
+            layout: "topRight",
+            text: "Choose a video or write something first !!!",
+            timeout: 1500,
+          }).show();
+          return;
+        }
+        if (!video && !content) {
+          new Noty({
+            theme: "relax",
+            type: "error",
+            layout: "topRight",
+            text: "Please write something or select a video first !!!",
+            timeout: 1500,
+          }).show();
+          return;
+        }
         var data = new FormData();
         data.append("video", video);
         data.append("content", content);
@@ -42,6 +93,27 @@
           data: data,
           success: function (data) {
             console.log(data);
+            let newPost = newPostDom(data.data.post, data.data.locals, video);
+            $("#post-list-container-div").prepend(newPost);
+            //close modal
+            feedActionVideoModal.modal("hide");
+            //clear textarea
+            $("#videofeedpost > textarea").val("");
+            //clear file input
+            $(".file_remove1").trigger("click");
+            deletePost($(`#delete-${data.data.post._id}-post`, newPost));
+            // // CHANGE :: enable the functionality of the toggle like button on the new post
+            new ToggleLike($(" .toggle-like-button", newPost));
+            //comment dom
+            new PostComments(data.data.post._id);
+            //Adding noty notification
+            new Noty({
+              theme: "relax",
+              type: "success",
+              layout: "topRight",
+              text: "Post Created !!!",
+              timeout: 1500,
+            }).show();
           },
           error: function (error) {
             console.log(error.responseText);
@@ -74,6 +146,7 @@
             text: "Please write something or select an image first !!!",
             timeout: 1500,
           }).show();
+          return;
         }
 
         var data = new FormData();
@@ -98,8 +171,10 @@
             //clear file input
             $(".file_remove").trigger("click");
             deletePost($(`#delete-${data.data.post._id}-post`, newPost));
-            // // CHANGE :: enable the functionality of the toggle like button on the new post
+            // CHANGE :: enable the functionality of the toggle like button on the new post
             new ToggleLike($(" .toggle-like-button", newPost));
+            //comment dom
+            new PostComments(data.data.post._id);
             //Adding noty notification
             new Noty({
               theme: "relax",
@@ -114,42 +189,6 @@
           },
         });
       });
-
-      // newPostForm.submit((e) => {
-      //   if ($("#image").val() == "") {
-      //     e.preventDefault();
-      //     $.ajax({
-      //       url: "/posts/create",
-      //       type: "POST",
-      //       data: newPostForm.serialize(),
-      //       success: function (data) {
-      //         let newPost = newPostDom(data.data.post);
-      //         $("#post-list-container-div").prepend(newPost);
-      //         $("#new-post-form")[0].reset();
-      //         deletePost($(".delete-post-button", newPost));
-      //         // CHANGE :: enable the functionality of the toggle like button on the new post
-      //         new ToggleLike($(" .toggle-like-button", newPost));
-      //         //Adding noty notification
-      //         new Noty({
-      //           theme: "relax",
-      //           type: "success",
-      //           layout: "topRight",
-      //           text: "Post Created !!!",
-      //           timeout: 1500,
-      //         }).show();
-      //       },
-      //       error: function (err) {
-      //         console.log(err);
-      //       },
-      //     });
-      //   }
-      // });
-    };
-    //method create a post in DOM
-    let getImageFromURL = function (url) {
-      let img = new Image();
-      img.src = url;
-      return img;
     };
     let newPostDom = function (post, locals, image) {
       return $(`
@@ -177,11 +216,11 @@
                   <a href="#!"> ${post.user.name} </a>
                 </h6>
                 <span class="nav-item small ps-1 ps-sm-2 time-posted">
-                  ${new Date(post.createdAt).toLocaleString()}
+                  ${getTimePosted(post.createdAt)}
                 </span>
               </div>
               <p class="mb-0 small updated-time">
-                ${new Date(post.createdAt).toLocaleString()}
+                ${getTimeInString(post.createdAt)}
               </p>
             </div>
           </div>
@@ -189,11 +228,15 @@
           ${
             locals.user &&
             `<div class="dropdown">
-            <a href="#" class="text-secondary btn btn-secondary-soft-hover py-1 px-2" id="cardFeedAction" data-bs-toggle="dropdown" aria-expanded="false">
+            <a href="#" class="text-secondary btn btn-secondary-soft-hover py-1 px-2" id="cardFeedAction-${
+              post._id
+            }" data-bs-toggle="dropdown" aria-expanded="false">
               <i class="fa fa-ellipsis-h text-muted"></i>
             </a>
             <!-- Card feed action dropdown menu -->
-            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="cardFeedAction">
+            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="cardFeedAction-${
+              post._id
+            }">
               ${
                 locals.user.id == post.user.id
                   ? `<li>
@@ -314,10 +357,14 @@
           </li>
           <!-- Card share action START  -->
           <li class="nav-item dropdown ms-sm-auto fw-bold d-none d-sm-block">
-            <a class="nav-link mb-0" href="#" id="cardShareAction" data-bs-toggle="dropdown" aria-expanded="false">
+            <a class="nav-link mb-0" href="#" id="cardShareAction1-${
+              post._id
+            }" data-bs-toggle="dropdown" aria-expanded="false">
               <i class="fa fa-share pe-1"></i>Share
             </a>
-            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="cardShareAction">
+            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="cardShareAction1-${
+              post._id
+            }">
               <li>
                 <a class="dropdown-item" href="#">
                   <i class="fa fa-bookmark fa-fw pe-2"></i>Save post</a>
@@ -356,10 +403,10 @@
             </a>
           </div>
           <!-- Comment box  -->
-          <form class="nav nav-item w-100 position-relative" action="/comments/create" method="POST">
-            <input type="text" name="content" id="comment-input" class="form-control rounded-pill bg-transparent border-0" placeholder="Write a comment" />
+          <form class="nav nav-item w-100 position-relative" action="/comments/create" method="POST" id="post-${post._id}-comments-form">
+            <input type="text" name="content" id="comment-input-${post._id}" class="form-control rounded-pill bg-transparent border-0 comment-input" placeholder="Write a comment" />
             <input type="hidden" name="post" value="${post._id}" />
-            <button class="nav-link bg-transparent px-3 position-absolute top-50 end-0 translate-middle-y border-0" type="submit" id="add-comment">
+            <button class="nav-link bg-transparent px-3 position-absolute top-50 end-0 translate-middle-y border-0" type="submit" id="add-comment-${post._id}">
               <i class="fa fa-paper-plane"></i>
             </button>
           </form>
@@ -368,36 +415,54 @@
         }
 
         <!-- Comment wrap START -->
-        ${
-          post.comments.length > 0
-            ? `
+       
           <ul class="pt-1 pb-0 m-0 list-unstyled">
-          ${getCommentDom(post.comments[0], post, locals)}
-            <div class="collapse" id="${post._id}-comments-all">
-              ${forEach(post.comments.slice(1), function (comment) {
-                return getCommentDom(comment, post, locals);
-              })}
+            <div id="${post._id}-first-comment">
+            ${
+              post.comments.length == 1
+                ? getCommentDom(post.comments[0], post, locals)
+                : ``
+            }
             </div>
-          </ul>`
-            : ``
-        } 
+            <div class="collapse" id="${post._id}-comments-all">
+            
+              ${
+                post.comments.length > 1
+                  ? forEach(post.comments.slice(1), function (comment) {
+                      return getCommentDom(comment, post, locals);
+                    })
+                  : ``
+              }
+            </div>
+          </ul>
        
         <!-- Comment wrap END -->
       </div>
       <!-- Card body END -->
-      ${
-        post.comments.length > 1
-          ? `<div class="card-footer">
-        <p class="mb-0">
-          <a class="text-secondary small me-3 fw-bold text-decoration-none" data-bs-toggle="collapse" href="#${
-            post._id
-          }-comments-all" role="button" aria-expanded="false" aria-controls="collapseExample">Load More Comments (${
-              post.comments.length - 1
-            })</a>
-        </p>
-      </div>`
-          : ``
-      }
+        ${
+          post.comments.length > 1
+            ? `
+          <div class="card-footer card-footer-${post._id}">
+            <p class="mb-0">
+              <a class="text-secondary small me-3 fw-bold text-decoration-none" data-bs-toggle="collapse" href="#${
+                post._id
+              }-comments-all" role="button" aria-expanded="false" aria-controls="collapseExample">Load More Comments (${
+                post.comments.length - 1
+              })</a>
+            </p>
+          </div>
+      `
+            : ` 
+        <div class="card-footer d-none card-footer-${post._id}">
+          <p class="mb-0">
+            <a class="text-secondary small me-3 fw-bold text-decoration-none" data-bs-toggle="collapse" href="#${
+              post._id
+            }-comments-all" role="button" aria-expanded="false" aria-controls="collapseExample">Load More Comments (${
+                post.comments.length - 1
+              })</a>
+          </p>
+        </div>`
+        }
     </div>
   </div>
 </div>`);
@@ -425,7 +490,7 @@
                   <h6 class="mb-1 card-title d-flex flex-wrap gap-1 align-items-center justify-content-between flex-grow-1">
                     <a href="#!"> ${comment.user.name} </a>
                     <div class="text-muted  small ps-0  time-posted">
-                      ${new Date(comment.createdAt).toLocaleString()}
+                      ${getTimePosted(comment.createdAt)}
                     </div>
                   </h6>
                   <div class="dropdown ms-1">
@@ -579,7 +644,7 @@
                   <h6 class="mb-1 card-title d-flex flex-wrap gap-1 align-items-center justify-content-between flex-grow-1">
                     <a href="#!"> ${reply.user.name} </a>
                     <div class="text-muted  small ps-0  time-posted">
-                      ${new Date(reply.createdAt).toLocaleString()}
+                      ${getTimePosted(reply.createdAt)}
                     </div>
                   </h6>
 
@@ -659,7 +724,6 @@
     };
     //method to delete post from dom
     let deletePost = function (deleteLink, post_id) {
-      console.log(deleteLink, "clicked on delete post");
       $(deleteLink).click(function (e) {
         e.preventDefault();
         $.ajax({
@@ -686,10 +750,10 @@
     let convertPostsToAjax = function () {
       $("#post-list-container > div > .post").each(function () {
         let self = $(this);
-        let deleteButton = $(" .delete-post-button", self);
-        deletePost(deleteButton);
         // get the post's id by splitting the id attribute
         let postId = self.prop("id").split("-")[1];
+        let deleteButton = $(`#delete-${postId}-post`, self);
+        deletePost(deleteButton, postId);
         new PostComments(postId);
       });
     };
