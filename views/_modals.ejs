@@ -185,9 +185,13 @@
     btnOuter = $(".button_outer");
   btnUpload.on("change", function(e) {
     var ext = btnUpload.val().split(".").pop().toLowerCase();
+    var name = btnUpload.val().split("\\").pop();
+
     if ($.inArray(ext, ["gif", "png", "jpg", "jpeg"]) == -1) {
       $(".error_msg").text("Not an Image...");
     } else {
+      var size = Math.round(btnUpload[0].files[0].size / 1024) + "KB";
+
       $(".error_msg").text("");
       btnOuter.addClass("file_uploading");
       setTimeout(function() {
@@ -197,7 +201,9 @@
       setTimeout(function() {
         $("#uploaded_view")
           .append('<img src="' + uploadedFile + '" />')
-          .addClass("show");
+          .append('<div class="overlay">' + name + " (" + size + ")" +
+            "</div>")
+          .addClass("show")
       }, 0);
     }
   });
@@ -205,30 +211,40 @@
     btnOuter = $(".button_outer1");
   btnUploadvideo.on("change", function(e) {
     var ext = btnUploadvideo.val().split(".").pop().toLowerCase();
+    var name = btnUploadvideo.val().split("\\").pop();
     if ($.inArray(ext, ["mp4", "avi", "mov", "flv"]) == -1) {
       $(".error_msg1").text("Not a Video...");
     } else {
-      $(".error_msg1").text("");
-      btnOuter.addClass("file_uploading1");
-      setTimeout(function() {
-        btnOuter.addClass("file_uploaded1");
-      }, 200);
-      var uploadedFile = URL.createObjectURL(e.target.files[0]);
-      setTimeout(function() {
-        $("#uploaded_videoview")
-          .append(
-            '<video src="' +
-            uploadedFile +
-            '" class="video-fluid" autoplay loop muted></video>'
-          )
-          .addClass("show");
-      }, 300);
+      var size = btnUploadvideo[0].files[0].size / (1024 * 1024);
+      size = Math.round(size);
+      size = size + "MB";
+      if (parseInt(size) > 50) {
+        $(".error_msg1").text("Video size should be less than 50MB");
+      } else {
+        $(".error_msg1").text("");
+        btnOuter.addClass("file_uploading1");
+        setTimeout(function() {
+          btnOuter.addClass("file_uploaded1");
+        }, 200);
+        var uploadedFile = URL.createObjectURL(e.target.files[0]);
+        setTimeout(function() {
+          $("#uploaded_videoview")
+            .append(
+              '<video src="' +
+              uploadedFile +
+              '" class="video-fluid" autoplay loop muted></video>'
+            ).append('<div class="overlay">' + name + " (" + size + ")" +
+              "</div>")
+            .addClass("show");
+        }, 300);
+      }
     }
   });
 
   $(".file_remove").on("click", function(e) {
     $("#uploaded_view").removeClass("show");
     $("#uploaded_view").find("img").remove();
+    $("#uploaded_view").find("div").remove();
     $("#upload_file").val("");
     btnOuter.removeClass("file_uploading");
     btnOuter.removeClass("file_uploaded");
@@ -236,6 +252,7 @@
   $(".file_remove1").on("click", function(e) {
     $("#uploaded_videoview").removeClass("show");
     $("#uploaded_videoview").find("video").remove();
+    $("#uploaded_videoview").find("div").remove();
     $("#upload_videofile").val("");
     btnOuter.removeClass("file_uploading1");
     btnOuter.removeClass("file_uploaded1");

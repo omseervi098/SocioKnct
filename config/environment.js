@@ -33,6 +33,7 @@ const development = {
   google_callbackURL: process.env.CODEIAL_GOOGLE_CALLBACKURL,
   redis_password: process.env.CODEIAL_REDIS_PASSWORD,
   jwt_secret_key: process.env.CODEIAL_JWT_SECRET_KEY,
+  cloudinary_secret_key: process.env.CODEIAL_CLOUDINARY_SECRET_KEY,
   morgan: {
     mode: "dev",
     options: { stream: accessLogStream },
@@ -69,4 +70,4 @@ const production = {
   },
 };
 
-module.exports = production;
+module.exports = development;

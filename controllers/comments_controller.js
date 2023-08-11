@@ -70,7 +70,13 @@ module.exports.createReply = async function (req, res) {
       if (req.xhr) {
         console.log("xhr");
         return res.status(200).json({
-          data: data,
+          data: {
+            reply: reply,
+            comment: comment,
+            locals: {
+              user: req.user,
+            },
+          },
           message: "Reply created !!!",
         });
       }

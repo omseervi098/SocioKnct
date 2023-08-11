@@ -22,7 +22,7 @@ const customMware = require("./config/middleware");
 const passportJWT = require("./config/passport-jwt-strategy");
 const chatServer = require("http").Server(app);
 const chatSockets = require("./config/chat_sockets").chatSockets(chatServer);
-
+const cloudinary = require("./config/cloudinary");
 // chatServer.listen(env.socketport);
 // console.log(`chat server is running on port ${env.socketport}`);
 // // chatServer.prependListener("request", function (req, res) {

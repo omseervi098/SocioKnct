@@ -9,13 +9,7 @@
         e.preventDefault();
         var content = $("#normalfeedpost > textarea").val();
         if (!content) {
-          new Noty({
-            theme: "relax",
-            type: "error",
-            layout: "topRight",
-            text: "Please write something first !!!",
-            timeout: 1500,
-          }).show();
+          new Notification("Please write something first !!!", "warning");
           return;
         }
         var data = new FormData();
@@ -26,33 +20,21 @@
           data: {
             content: content,
           },
-          success: function (data) {
+        })
+          .done(function (data) {
             console.log(data);
             let newPost = newPostDom(data.data.post, data.data.locals, null);
-            $("#post-list-container-div").prepend(newPost);
-            //close modal
+            $("#post-list-container-div").prepend(newPost); //close modal
             feedNormalModal.modal("hide");
-            //clear textarea
-            $("#normalfeedpost > textarea").val("");
+            $("#normalfeedpost > textarea").val(""); //clear textarea
             deletePost($(`#delete-${data.data.post._id}-post`, newPost));
-            // // CHANGE :: enable the functionality of the toggle like button on the new post
-            new ToggleLike($(" .toggle-like-button", newPost));
-            //create comment dom
-            new PostComments(data.data.post._id);
-
-            //Adding noty notification
-            new Noty({
-              theme: "relax",
-              type: "success",
-              layout: "topRight",
-              text: "Post Created !!!",
-              timeout: 1500,
-            }).show();
-          },
-          error: function (error) {
+            new ToggleLike($(` .toggle-like-button`, newPost)); //toogle like btn on new post
+            PostComments(data.data.post._id); //comment dom
+            new Notification("Post Created !!!", "success");
+          })
+          .fail(function (error) {
             console.log(error.responseText);
-          },
-        });
+          });
       });
       let postvideofeed = $("#postvideofeed");
       let feedActionVideoModal = $("#feedActionVideo");
@@ -60,26 +42,18 @@
         e.preventDefault();
         var content = $("#videofeedpost > textarea").val();
         var video = $("#upload_videofile")[0].files[0];
-        if (!video) {
-          new Noty({
-            theme: "relax",
-            type: "error",
-            layout: "topRight",
-            text: "Choose a video or write something first !!!",
-            timeout: 1500,
-          }).show();
-          return;
-        }
         if (!video && !content) {
-          new Noty({
-            theme: "relax",
-            type: "error",
-            layout: "topRight",
-            text: "Please write something or select a video first !!!",
-            timeout: 1500,
-          }).show();
+          new Notification(
+            "Please write something or select a video first !!!",
+            "warning"
+          );
           return;
         }
+        if (!video) {
+          new Notification("Please select a video first !!!", "warning");
+          return;
+        }
+        console.log(video);
         var data = new FormData();
         data.append("video", video);
         data.append("content", content);
@@ -91,34 +65,22 @@
           contentType: false,
           processData: false,
           data: data,
-          success: function (data) {
+        })
+          .done(function (data) {
             console.log(data);
             let newPost = newPostDom(data.data.post, data.data.locals, video);
             $("#post-list-container-div").prepend(newPost);
-            //close modal
             feedActionVideoModal.modal("hide");
-            //clear textarea
             $("#videofeedpost > textarea").val("");
-            //clear file input
             $(".file_remove1").trigger("click");
             deletePost($(`#delete-${data.data.post._id}-post`, newPost));
-            // // CHANGE :: enable the functionality of the toggle like button on the new post
             new ToggleLike($(" .toggle-like-button", newPost));
-            //comment dom
-            new PostComments(data.data.post._id);
-            //Adding noty notification
-            new Noty({
-              theme: "relax",
-              type: "success",
-              layout: "topRight",
-              text: "Post Created !!!",
-              timeout: 1500,
-            }).show();
-          },
-          error: function (error) {
+            PostComments(data.data.post._id);
+            new Notification("Post Created !!!", "success");
+          })
+          .fail(function (error) {
             console.log(error.responseText);
-          },
-        });
+          });
       });
       let postphotofeed = $("#postphotofeed");
       let feedActionPhotoModal = $("#feedActionPhoto");
@@ -127,28 +89,17 @@
         e.preventDefault();
         var content = $("#photofeedpost > textarea").val();
         var image = $("#upload_file")[0].files[0];
-        //CHECK IF IMAGE IS SELECTED
-        if (!image) {
-          new Noty({
-            theme: "relax",
-            type: "error",
-            layout: "topRight",
-            text: "Please select an image first !!!",
-            timeout: 1500,
-          }).show();
-          return;
-        }
         if (!image && !content) {
-          new Noty({
-            theme: "relax",
-            type: "error",
-            layout: "topRight",
-            text: "Please write something or select an image first !!!",
-            timeout: 1500,
-          }).show();
+          new Notification(
+            "Please write something or select an image first !!!",
+            "warning"
+          );
           return;
         }
-
+        if (!image) {
+          new Notification("Please select an image first !!!", "warning");
+          return;
+        }
         var data = new FormData();
         data.append("image", image);
         data.append("content", content);
@@ -160,34 +111,23 @@
           contentType: false,
           processData: false,
           data: data,
-          success: function (data) {
+        })
+          .done(function (data) {
             console.log(data);
             let newPost = newPostDom(data.data.post, data.data.locals, image);
-            $("#post-list-container-div").prepend(newPost);
-            //close modal
-            feedActionPhotoModal.modal("hide");
-            //clear textarea
-            $("#photofeedpost > textarea").val("");
-            //clear file input
+            $("#post-list-container-div").prepend(newPost); //close modal
+            feedActionPhotoModal.modal("hide"); //clear textarea
+            $("#photofeedpost > textarea").val(""); //clear file input
             $(".file_remove").trigger("click");
             deletePost($(`#delete-${data.data.post._id}-post`, newPost));
-            // CHANGE :: enable the functionality of the toggle like button on the new post
-            new ToggleLike($(" .toggle-like-button", newPost));
-            //comment dom
-            new PostComments(data.data.post._id);
-            //Adding noty notification
-            new Noty({
-              theme: "relax",
-              type: "success",
-              layout: "topRight",
-              text: "Post Created !!!",
-              timeout: 1500,
-            }).show();
-          },
-          error: function (error) {
+            new ToggleLike($(" .toggle-like-button", newPost)); //toogle like btn on new post
+            PostComments(data.data.post._id); //comment dom
+            new Notification("Post Created !!!", "success"); //Adding noty notification
+          })
+          .fail(function (error) {
             console.log(error.responseText);
-          },
-        });
+            new Notification("Error in creating post !!!", "error");
+          });
       });
     };
     let newPostDom = function (post, locals, image) {
@@ -429,7 +369,7 @@
               ${
                 post.comments.length > 1
                   ? forEach(post.comments.slice(1), function (comment) {
-                      return getCommentDom(comment, post, locals);
+                      return getCommentDm(comment, post, locals);
                     })
                   : ``
               }
@@ -467,7 +407,7 @@
   </div>
 </div>`);
     };
-    let getCommentDom = function (comment, post, locals) {
+    let getCommentDm = function (comment, post, locals) {
       return `
       <!-- Comment item START -->
       <li class="comment-item mb-3" id="comment-${comment._id}">
@@ -754,7 +694,7 @@
         let postId = self.prop("id").split("-")[1];
         let deleteButton = $(`#delete-${postId}-post`, self);
         deletePost(deleteButton, postId);
-        new PostComments(postId);
+        PostComments(postId);
       });
     };
     createPost();
