@@ -11,6 +11,7 @@ function PostComments(postId) {
     newCommentForm: $(`#post-${postId}-comments-form`),
     firstCommentContainer: $(`#${postId}-first-comment`),
     remCommentContainer: $(`#${postId}-comments-all`),
+    commentcnt: $(`#commentcnt-${postId}`),
   };
 
   let convertCommentToAjax = function () {
@@ -44,7 +45,8 @@ function PostComments(postId) {
         type: "post",
         url: "/comments/create",
         data: $(self).serialize(),
-        success: function (data) {
+      })
+        .done(function (data) {
           let newComment = getCommentDom(
             data.data.comment,
             data.data.post,
@@ -66,6 +68,7 @@ function PostComments(postId) {
                 new ToggleLike($(this));
               }
             );
+            replyPostComment(pSelf.postId, data.data.comment._id);
             //loop throught remaining comment and make delete button work
             $(".delete-comment-btn", pSelf.postContainer).each(function () {
               deleteComment($(this));
@@ -75,15 +78,17 @@ function PostComments(postId) {
               `Load More Comments (${data.data.post.comments.length - 1})`
             );
           }
+          pSelf.commentcnt.html(
+            `<i class="fa fa-comment pe-1"></i> Comment (${data.data.post.comments.length})`
+          );
           pSelf.newCommentForm[0].reset();
           deleteComment($(`#delete-${data.data.comment._id}-comment`));
           new Notification("Comment published !!!", "success");
-        },
-        error: function (error) {
+        })
+        .fail(function (error) {
           console.log(error.responseText);
           new Notification("Error in publishing comment !!!", "danger");
-        },
-      });
+        });
     });
   };
 
@@ -192,7 +197,9 @@ function PostComments(postId) {
                   Reply
                 </a>
                 <div>
-                  <span class="ms-1 badge bg-secondary rounded-pill p-auto">
+                  <span class="ms-1 badge bg-secondary rounded-pill p-auto" id="replycnt-${
+                    comment._id
+                  }">
                     <span class="d-none d-lg-inline-block">Replies</span>
                     ${comment.replies.length}
                   </span>
@@ -266,6 +273,11 @@ function PostComments(postId) {
               //remove the first comment from the remaining comments container
               self.remCommentContainer.html("");
               self.firstCommentContainer.html(temp);
+              let commentId =
+                self.firstCommentContainer[0].firstElementChild.id.split(
+                  "-"
+                )[1];
+              replyPostComment(self.postId, commentId);
               $(".delete-comment-btn", self.postContainer).each(function () {
                 deleteComment($(this, self.postContainer));
               });
@@ -310,6 +322,11 @@ function PostComments(postId) {
               );
             }
           }
+          pSelf.commentcnt.html(
+            `<i class="fa fa-comment pe-1"></i> Comment (${
+              data.data.commentlen - 1
+            })`
+          );
           new Notification("Comment deleted !!!", "success");
         },
         error: function (error) {

@@ -547,6 +547,20 @@
                         gap: 3px;
 
                         .card-body {
+                            .post-content {
+                                .fa-quote-left {
+                                    font-size: 0.7rem;
+                                    color: #000;
+                                }
+
+                                .fa-quote-right {
+                                    font-size: 0.7rem;
+                                    color: #000;
+                                }
+
+                            }
+
+
                             .nav {
                                 .nav-item {
                                     font-weight: bold;

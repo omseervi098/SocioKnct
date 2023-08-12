@@ -223,7 +223,15 @@
       <!-- Card header END -->
       <!-- Card body START -->
       <div class="card-body pb-0  p-1 p-sm-3">
-        ${post.content && `<p class="text-mutednpm">${post.content}</p>`}
+        ${
+          post.content &&
+          `
+         <div class="post-content mb-3">
+          <i class="fa fa-quote-left  text-muted "></i>
+        <p class="text-mutednpm d-inline">${post.content}</p>
+            <i class="fa fa-quote-right text-muted "></i>
+        </div>`
+        }
         <!-- Card img -->
         <div class="card-image-container position-relative">
           ${
@@ -289,7 +297,7 @@
             </a>
           </li>
           <li class="nav-item fw-bold">
-            <a class="nav-link" href="#!">
+            <a class="nav-link" href="#!" id="commentcnt-${post._id}">
               <i class="fa fa-comment pe-1"></i> Comment (${
                 post.comments.length
               })

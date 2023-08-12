@@ -106,6 +106,7 @@ module.exports.destroyReply = async function (req, res) {
         return res.status(200).json({
           data: {
             reply_id: req.params.id,
+            replylen: comment.replies.length,
           },
           message: "Reply deleted !!!",
         });

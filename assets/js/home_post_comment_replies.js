@@ -5,6 +5,7 @@ function replyPostComment(PostId, CommentId) {
     newReplyForm: $(`#comment-${CommentId}-${PostId}-reply-form`),
     replyList: $(`#comment-${CommentId}-${PostId}-reply-list`),
     commentContainer: $(`#comment-${CommentId}`),
+    replycnt: $(`#replycnt-${CommentId}`),
   };
   let createReply = function () {
     pSelf.newReplyForm.submit(function (e) {
@@ -29,8 +30,14 @@ function replyPostComment(PostId, CommentId) {
             data.data.locals
           );
           pSelf.replyList.prepend(newReply);
-          new ToggleLike($(".toggle-like-button", newReply));
+          new ToggleLike(
+            $(`#reply-${data.data.reply._id} .toggle-like-button`)
+          );
+          console.log($(`#reply-${data.data.reply._id} .toggle-like-button`));
           deleteReply($(`#delete-${data.data.reply._id}-reply`));
+          pSelf
+            .replycnt.html(` <span class="d-none d-lg-inline-block">Replies</span>
+                    ${data.data.comment.replies.length}`);
           new Notification("Reply created", "success");
           self.reset();
         })
@@ -54,6 +61,9 @@ function replyPostComment(PostId, CommentId) {
       })
         .done(function (data) {
           $(`#reply-${data.data.reply_id}`).remove();
+          pSelf
+            .replycnt.html(` <span class="d-none d-lg-inline-block">Replies</span>
+                    ${data.data.replylen - 1}`);
           new Notification("Reply deleted", "success");
         })
         .fail(function (errData) {
@@ -65,7 +75,7 @@ function replyPostComment(PostId, CommentId) {
   let getReplyDom = function (reply, comment, locals) {
     return `
       <!-- Reply item START -->
-      <li class="comment-item mb-2" id="reply-${reply._id}">
+      <li class="reply-item mb-2" id="reply-${reply._id}">
         <div class="d-flex ithreply">
           <!-- Avatar -->
           <div class="avatar avatar-xs">
@@ -149,8 +159,11 @@ function replyPostComment(PostId, CommentId) {
                       like.user._id.toString() == locals.user._id.toString()
                     );
                   })
-                    ? `<span class="liked">
-                  <i class="fa fa-thumbs-up fa-fw pe-2"></i>Liked (${reply.likes.length})</span>`
+                    ? `
+                      <span class="liked">
+                        <i class="fa fa-thumbs-up fa-fw pe-2"></i>
+                        Liked (${reply.likes.length})
+                      </span>`
                     : `<span><i class="fa fa-thumbs-up fa-fw pe-2"></i>Like (${reply.likes.length})</span>`
                 } 
               </a>`

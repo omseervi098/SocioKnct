@@ -407,6 +407,12 @@
             display: flex;
             flex-direction: column;
             gap: 3px; }
+            #home-containe #feed-posts #post-list-container #post-list-container-div .post .ithpost .card-body .post-content .fa-quote-left {
+              font-size: 0.7rem;
+              color: #000; }
+            #home-containe #feed-posts #post-list-container #post-list-container-div .post .ithpost .card-body .post-content .fa-quote-right {
+              font-size: 0.7rem;
+              color: #000; }
             #home-containe #feed-posts #post-list-container #post-list-container-div .post .ithpost .card-body .nav .nav-item {
               font-weight: bold; }
             #home-containe #feed-posts #post-list-container #post-list-container-div .post .ithpost .card-body .viewfullscreen {

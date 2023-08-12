@@ -171,7 +171,11 @@
 <script>
   function getTimePosted(date) {
     var time = new Date(date);
-    var today = new Date();
+    //get today time but in same timezone as date
+    var today = new Date().toLocaleString("en-US", {
+      timeZone: "Asia/Kolkata",
+    });
+    today = new Date(today);
     var diff = today - time;
     var seconds = Math.floor(diff / 1000);
     var minutes = Math.floor(seconds / 60);
@@ -197,6 +201,7 @@
   }
 
   function getTimeInString(date) {
+    // get date and time
     var time = new Date(date);
     //Get Date and time in form DD/MMMM/YEAR, HH:MM AM/PM
     var strTime =
@@ -205,8 +210,7 @@
       time.toLocaleString("default", {
         month: "long"
       }) +
-      "-" +
-      time.getFullYear() +
+
       ", " +
       time.toLocaleString("en-US", {
         hour: "numeric",
