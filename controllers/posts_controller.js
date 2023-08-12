@@ -5,17 +5,36 @@ const fs = require("fs");
 const path = require("path");
 const { randomUUID } = require("crypto");
 const CommentReply = require("../models/commentreply");
+const cloudinary = require("../config/cloudinary");
+async function uploadToCloudinary(locaFilePath, fileName) {
+  return cloudinary.uploader
+    .upload(locaFilePath, { public_id: fileName, access_mode: "authenticated" })
+    .then((result) => {
+      fs.unlinkSync(locaFilePath);
+      return {
+        message: "Success",
+        url: result.secure_url,
+      };
+    })
+    .catch((error) => {
+      // Remove file from local uploads folder
+      fs.unlinkSync(locaFilePath);
+      return { message: "Fail", error: error };
+    });
+}
 module.exports.create = async (req, res) => {
   if (req.xhr) {
+    //multpart form data
     console.log(req.query);
     if (req.query.video == "true") {
       await Post.uploadedVideo(req, res, async (err) => {
-        let temp = Post.videoPath + "/" + req.file.filename;
+        let temp = path.join(Post.videoPath, req.file.filename);
         console.log(temp);
+        let url = temp;
         let post = await Post.create({
           content: req.body.content,
           user: req.user._id,
-          video: temp,
+          video: url,
         });
         post = await post.populate("user", "name avatar");
         return res.status(200).json({
@@ -30,14 +49,15 @@ module.exports.create = async (req, res) => {
       });
     } else if (req.query.image == "true") {
       await Post.uploadedImage(req, res, async (err) => {
-        let temp = Post.imagePath + "/" + req.file.filename;
-        console.log(temp);
+        let temp = path.join(Post.imagePath, req.file.filename);
+        let url = temp;
         let post = await Post.create({
           content: req.body.content,
           user: req.user._id,
-          image: temp,
+          image: url,
         });
         post = await post.populate("user", "name avatar");
+
         return res.status(200).json({
           data: {
             post: post,

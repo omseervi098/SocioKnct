@@ -3,86 +3,96 @@
 // this class would be initialized for every post on the page
 // 1. When the page loads
 // 2. Creation of every post dynamically via AJAX
-
-class PostComments {
+function PostComments(postId) {
   // constructor is used to initialize the instance of the class whenever a new instance is created
-  constructor(postId) {
-    this.postId = postId;
-    this.postContainer = $(`#post-${postId}`);
-    this.newCommentForm = $(`#post-${postId}-comments-form`);
-    this.firstCommentContainer = $(`#${postId}-first-comment`);
-    this.remCommentContainer = $(`#${postId}-comments-all`);
-    this.createComment(postId);
+  let pSelf = {
+    postId: postId,
+    postContainer: $(`#post-${postId}`),
+    newCommentForm: $(`#post-${postId}-comments-form`),
+    firstCommentContainer: $(`#${postId}-first-comment`),
+    remCommentContainer: $(`#${postId}-comments-all`),
+    commentcnt: $(`#commentcnt-${postId}`),
+  };
 
-    let self = this;
-    // call for all the existing comments
-    $(".delete-comment-btn", this.postContainer).each(function () {
-      self.deleteComment($(this));
+  let convertCommentToAjax = function () {
+    $(".delete-comment-btn", pSelf.postContainer).each(function () {
+      deleteComment($(this));
     });
-  }
 
-  createComment(postId) {
-    let pSelf = this;
-    this.newCommentForm.submit(function (e) {
+    $(`#${postId}-first-comment > .comment-item`).each(function () {
+      let commentId = $(this).attr("id").split("-")[1];
+      console.log(commentId);
+      replyPostComment(postId, commentId);
+    });
+    $(`#${postId}-comments-all > .comment-item`).each(function () {
+      let commentId = $(this).attr("id").split("-")[1];
+      replyPostComment(postId, commentId);
+    });
+  };
+
+  let createComment = function () {
+    pSelf.newCommentForm.submit(function (e) {
       e.preventDefault();
       let self = this;
       if (
         pSelf.newCommentForm[0][0].value == "" ||
         !pSelf.newCommentForm[0][0].value.trim()
       ) {
-        new Noty({
-          theme: "relax",
-          text: "Comment cannot be empty",
-          type: "error",
-          layout: "topRight",
-          timeout: 1500,
-        }).show();
+        new Notification("Comment cannot be empty !!", "warning");
         return;
       }
       $.ajax({
         type: "post",
         url: "/comments/create",
         data: $(self).serialize(),
-        success: function (data) {
-          let newComment = pSelf.getCommentDom(
+      })
+        .done(function (data) {
+          let newComment = getCommentDom(
             data.data.comment,
             data.data.post,
             data.data.locals
           );
           if (data.data.post.comments.length == 1) {
             pSelf.firstCommentContainer.prepend(newComment);
+            new ToggleLike(
+              $(".toggle-like-button", pSelf.firstCommentContainer)
+            );
+            replyPostComment(pSelf.postId, data.data.comment._id);
           } else if (data.data.post.comments.length > 1) {
             let temp = pSelf.firstCommentContainer[0].firstElementChild;
             pSelf.remCommentContainer.prepend(temp);
             pSelf.firstCommentContainer.html(newComment);
+            // CHANGE :: enable the functionality of the toggle like button on the new comment
+            $(".toggle-like-button", pSelf.firstCommentContainer).each(
+              function () {
+                new ToggleLike($(this));
+              }
+            );
+            replyPostComment(pSelf.postId, data.data.comment._id);
             //loop throught remaining comment and make delete button work
             $(".delete-comment-btn", pSelf.postContainer).each(function () {
-              pSelf.deleteComment($(this));
+              deleteComment($(this));
             });
             $(`.card-footer-${postId}`).removeClass("d-none");
             $(`.card-footer-${postId} > p > a`).html(
               `Load More Comments (${data.data.post.comments.length - 1})`
             );
           }
+          pSelf.commentcnt.html(
+            `<i class="fa fa-comment pe-1"></i> Comment (${data.data.post.comments.length})`
+          );
           pSelf.newCommentForm[0].reset();
-          pSelf.deleteComment($(`#delete-${data.data.comment._id}-comment`));
-          // CHANGE :: enable the functionality of the toggle like button on the new comment
-
-          new Noty({
-            theme: "relax",
-            text: "Comment published!",
-            type: "success",
-            layout: "topRight",
-            timeout: 1500,
-          }).show();
-        },
-        error: function (error) {
+          deleteComment($(`#delete-${data.data.comment._id}-comment`));
+          new Notification("Comment published !!!", "success");
+        })
+        .fail(function (error) {
           console.log(error.responseText);
-        },
-      });
+          new Notification("Error in publishing comment !!!", "danger");
+        });
     });
-  }
-  getCommentDom(comment, post, locals) {
+  };
+
+  let getCommentDom = function (comment, post, locals) {
     return `
       <!-- Comment item START -->
       <li class="comment-item mb-3" id="comment-${comment._id}">
@@ -187,7 +197,9 @@ class PostComments {
                   Reply
                 </a>
                 <div>
-                  <span class="ms-1 badge bg-secondary rounded-pill p-auto">
+                  <span class="ms-1 badge bg-secondary rounded-pill p-auto" id="replycnt-${
+                    comment._id
+                  }">
                     <span class="d-none d-lg-inline-block">Replies</span>
                     ${comment.replies.length}
                   </span>
@@ -216,7 +228,7 @@ class PostComments {
                     </a>
                   </div>
                   <!-- Comment box  -->
-                  <form class="nav nav-item w-100 position-relative" action="/comments/create-reply" method="POST" id="comment-${comment._id}-reply-form">
+                  <form class="nav nav-item w-100 position-relative" action="/comments/create-reply" method="POST" id="comment-${comment._id}-${post._id}-reply-form">
                     <input type="text" name="content" id="reply-input-${comment._id}"
                     class="form-control rounded-pill bg-transparent border-0 reply-input" placeholder="Write a comment " />
                     <input type="hidden" name="post" value="${post._id}" />
@@ -229,19 +241,23 @@ class PostComments {
               </div>`
             : ``
         } 
-           
+        <ul class="pt-2 pb-0 list-unstyled ms-5" id="comment-${comment._id}-${
+      post._id
+    }-reply-list">
+          
+        </ul>
       </li>
       <!-- Comment item END -->
       `;
-  }
+  };
 
-  deleteComment(deleteLink) {
-    let self = this;
+  let deleteComment = function (deleteLink) {
+    let self = pSelf;
     $(deleteLink).click(function (e) {
       e.preventDefault();
 
       $.ajax({
-        type: "get",
+        type: "GET",
         url: $(deleteLink).prop("href"),
         success: function (data) {
           if (data.data.commentlen == 1) {
@@ -257,9 +273,19 @@ class PostComments {
               //remove the first comment from the remaining comments container
               self.remCommentContainer.html("");
               self.firstCommentContainer.html(temp);
+              let commentId =
+                self.firstCommentContainer[0].firstElementChild.id.split(
+                  "-"
+                )[1];
+              replyPostComment(self.postId, commentId);
               $(".delete-comment-btn", self.postContainer).each(function () {
-                self.deleteComment($(this));
+                deleteComment($(this, self.postContainer));
               });
+              $(".toggle-like-button", self.firstCommentContainer).each(
+                function () {
+                  new ToggleLike($(this));
+                }
+              );
               $(`.card-footer-${data.data.postId} > p > a`).html(
                 `Load More Comments (${data.data.commentlen - 2})`
               );
@@ -277,7 +303,7 @@ class PostComments {
               $(`#comment-${data.data.comment_id}`).remove();
               //pick first comment from remaining comments container
               $(".delete-comment-btn", self.postContainer).each(function () {
-                self.deleteComment($(this));
+                deleteComment($(this, self.postContainer));
               });
               let temp = self.remCommentContainer[0].firstElementChild;
               //remove the first comment from the remaining comments container
@@ -296,18 +322,20 @@ class PostComments {
               );
             }
           }
-          new Noty({
-            theme: "relax",
-            text: "Comment Deleted !!",
-            type: "success",
-            layout: "topRight",
-            timeout: 1500,
-          }).show();
+          pSelf.commentcnt.html(
+            `<i class="fa fa-comment pe-1"></i> Comment (${
+              data.data.commentlen - 1
+            })`
+          );
+          new Notification("Comment deleted !!!", "success");
         },
         error: function (error) {
           console.log(error.responseText);
+          new Notification("Error in deleting comment !!!", "danger");
         },
       });
     });
-  }
+  };
+  createComment(postId);
+  convertCommentToAjax();
 }

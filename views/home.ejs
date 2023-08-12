@@ -1,6 +1,5 @@
 <link rel="stylesheet" href="<%= assetPath('css/home.css') %>" />
 <link rel="stylesheet" href="<%= assetPath('css/chatbox.css') %>" />
-<link rel="stylesheet" href="<%= assetPath('css/dropzone.css') %>" />
 <div id="home-containe" class="container-fluid mx-0 px-0 py-4 py-lg-5">
   <div class="row mx-0 px-sm-4 justify-content-center">
     <div class="col-12  col-md-4 col-lg-3 px-1">
@@ -158,18 +157,25 @@
   </div>
 </div>
 <% if (locals.user) { %> <%- include('_modals') %> <% } %>
+<script src="<%=assetPath('js/news_api.js')%>"></script>
 <script src="https://cdn.socket.io/4.6.0/socket.io.min.js" integrity="sha384-c79GN5VsunZvi+Q/WObgk2in0CbZsHnjEqvFxC5DxHn9lTfNce2WW6h2pH6u/kF+" crossorigin="anonymous"></script>
-
-<script src="<%= assetPath('js/home_post_comments.js') %>"></script>
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@mojs/core"></script>
+<script src="<%= assetPath('js/notification.js') %>"></script>
+<script src="<%= assetPath('js/toggle_likes.js') %>"></script>
+<script src="<%= assetPath('js/home_post_comment_replies.js') %>"></script>
+<script src="<%= assetPath('js/home_post_comments.js') %>"></script>
 <script src="<%= assetPath('js/home_posts.js') %>"></script>
 <!-- CHANGE :: import the script file for toggle likes, also run it over for the already present posts and comments on the page -->
-<script src="<%= assetPath('js/toggle_likes.js') %>"></script>
 <script src="<%= assetPath('js/chat_engine.js') %>"></script>
 <script>
   function getTimePosted(date) {
     var time = new Date(date);
-    var today = new Date();
+    //get today time but in same timezone as date
+    var today = new Date().toLocaleString("en-US", {
+      timeZone: "Asia/Kolkata",
+    });
+    today = new Date(today);
     var diff = today - time;
     var seconds = Math.floor(diff / 1000);
     var minutes = Math.floor(seconds / 60);
@@ -195,6 +201,7 @@
   }
 
   function getTimeInString(date) {
+    // get date and time
     var time = new Date(date);
     //Get Date and time in form DD/MMMM/YEAR, HH:MM AM/PM
     var strTime =
@@ -203,8 +210,7 @@
       time.toLocaleString("default", {
         month: "long"
       }) +
-      "-" +
-      time.getFullYear() +
+
       ", " +
       time.toLocaleString("en-US", {
         hour: "numeric",

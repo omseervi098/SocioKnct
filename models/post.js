@@ -66,7 +66,7 @@ postSchema.statics.uploadedImage = multer({
   storage: storage,
   fileFilter: function (req, file, callback) {
     var ext = path.extname(file.originalname);
-
+    console.log("file filter", file.destination);
     callback(null, true);
   },
   limits: {

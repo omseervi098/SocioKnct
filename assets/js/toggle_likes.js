@@ -7,6 +7,7 @@ class ToggleLike {
 
   toggleLike() {
     $(this.toggler).click(function (e) {
+      console.log("toggle like" + $(this).attr("href"));
       e.preventDefault();
       let self = this;
 

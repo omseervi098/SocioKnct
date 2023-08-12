@@ -78,7 +78,7 @@
         </a>
 
         <div>
-          <span class="ms-1 badge bg-secondary rounded-pill p-auto">
+          <span class="ms-1 badge bg-secondary rounded-pill p-auto" id="replycnt-<%= comment._id %>">
             <span class="d-none d-lg-inline-block">Replies</span>
             <%= comment.replies.length %>
           </span>
@@ -107,7 +107,7 @@
               </a>
             </div>
             <!-- Comment box  -->
-            <form class="nav nav-item w-100 position-relative" action="/comments/create-reply" method="POST" id="comment-<%= comment._id %>-reply-form">
+            <form class="nav nav-item w-100 position-relative" action="/comments/create-reply" method="POST" id="comment-<%= comment._id %>-<%=post._id%>-reply-form">
               <input type="text" name="content" id="reply-input-<%=comment.id%>" class="form-control rounded-pill bg-transparent border-0 reply-input" placeholder="Write a comment" />
               <input type="hidden" name="post" value="<%= post._id %>" />
               <input type="hidden" name="comment" value="<%= comment._id %>" />
@@ -119,10 +119,12 @@
         </div>
         <% } %>
         <!-- Comment wrap START -->
-        <% if (comment.replies.length > 0) { %>
-        <ul class="pt-2 pb-0 list-unstyled ms-5">
+
+        <ul class="pt-2 pb-0 list-unstyled ms-5" id="comment-<%= comment._id %>-<%=post._id%>-reply-list">
+          <% if (comment.replies.length > 0) { %>
           <% for (reply of comment.replies) { %> <%- include('_reply') %> <% } %>
+          <% } %>
         </ul>
-        <% } %>
+
 </li>
 <!-- Comment item END -->
