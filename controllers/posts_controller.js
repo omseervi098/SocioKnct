@@ -134,6 +134,9 @@ module.exports.destroy = async (req, res) => {
       if (post.image) {
         fs.unlinkSync(path.join(__dirname, "..", post.image));
       }
+      if (post.video) {
+        fs.unlinkSync(path.join(__dirname, "..", post.video));
+      }
       if (req.xhr) {
         return res.status(200).json({
           data: {
