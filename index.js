@@ -6,6 +6,8 @@ const router = require("./routes/index");
 const expressLayouts = require("express-ejs-layouts");
 const cookieParser = require("cookie-parser");
 const app = express();
+const cors = require("cors");
+app.use(cors());
 require("./config/view-helpers")(app);
 const port = env.port;
 const db = require("./config/mongoose");
