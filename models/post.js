@@ -3,6 +3,7 @@ const multer = require("multer");
 const path = require("path");
 const IMAGE_PATH = path.join("/uploads/posts/images");
 const VIDEO_PATH = path.join("/uploads/posts/videos");
+const AUDIO_PATH = path.join("/uploads/posts/audios");
 const postSchema = new mongoose.Schema(
   {
     content: {
@@ -13,6 +14,13 @@ const postSchema = new mongoose.Schema(
     },
     video: {
       type: String,
+    },
+    audio: {
+      type: String,
+    },
+    poll: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Poll",
     },
     user: {
       type: mongoose.Schema.Types.ObjectId,
@@ -41,12 +49,28 @@ var storage = multer.diskStorage({
   destination: function (req, file, cb) {
     if (file.fieldname == "video") {
       cb(null, path.join(__dirname, "..", VIDEO_PATH));
-    } else cb(null, path.join(__dirname, "..", IMAGE_PATH));
+    } else if (file.fieldname == "audio") {
+      cb(null, path.join(__dirname, "..", AUDIO_PATH));
+    } else {
+      cb(null, path.join(__dirname, "..", IMAGE_PATH));
+    }
   },
   filename: function (req, file, cb) {
     cb(null, file.fieldname + "-" + Date.now());
   },
 });
+postSchema.statics.uploadedAudio = multer({
+  //multer settings
+  storage: storage,
+  fileFilter: function (req, file, callback) {
+    console.log("file filter");
+    var ext = path.extname(file.originalname);
+    callback(null, true);
+  },
+  limits: {
+    fileSize: "10MB",
+  },
+}).single("audio");
 
 postSchema.statics.uploadedVideo = multer({
   //multer settings
@@ -57,7 +81,7 @@ postSchema.statics.uploadedVideo = multer({
     callback(null, true);
   },
   limits: {
-    fileSize: "50MB",
+    fileSize: "10MB",
   },
 }).single("video");
 
@@ -76,5 +100,6 @@ postSchema.statics.uploadedImage = multer({
 
 postSchema.statics.imagePath = IMAGE_PATH;
 postSchema.statics.videoPath = VIDEO_PATH;
+postSchema.statics.audioPath = AUDIO_PATH;
 const Post = mongoose.model("Post", postSchema);
 module.exports = Post;

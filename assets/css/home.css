@@ -199,6 +199,116 @@
   text-align: center;
   color: #f00; }
 
+#feedActionAudio .panel2 {
+  text-align: center; }
+
+#feedActionAudio .audio-container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center; }
+  #feedActionAudio .audio-container audio {
+    width: 90% !important; }
+
+#feedActionAudio .button_outer2 {
+  background: #8a2be2;
+  border-radius: 30px;
+  text-align: center;
+  height: 50px;
+  width: auto;
+  display: inline-block;
+  transition: .2s;
+  position: relative;
+  overflow: hidden; }
+
+#feedActionAudio .btn_upload2 {
+  padding: 12px 30px;
+  color: #fff;
+  text-align: center;
+  position: relative;
+  display: inline-block;
+  overflow: hidden;
+  z-index: 3;
+  white-space: nowrap; }
+
+#feedActionAudio .btn_upload2 input {
+  position: absolute;
+  width: 100%;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+  opacity: 0; }
+
+#feedActionAudio .file_uploading2 {
+  width: 100%;
+  height: 10px;
+  margin-top: 20px;
+  background: #ccc; }
+
+#feedActionAudio .file_uploading2 .btn_upload2 {
+  display: none; }
+
+#feedActionAudio .processing_bar2 {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 0;
+  height: 100%;
+  border-radius: 30px;
+  background: #83ccd3;
+  transition: 3s; }
+
+#feedActionAudio .file_uploading2 .processing_bar2 {
+  width: 100%; }
+
+#feedActionAudio .file_uploaded2 {
+  margin-top: 0;
+  width: 50px;
+  background: #83ccd3;
+  height: 50px;
+  display: none; }
+
+#feedActionAudio .uploaded_file_view2 {
+  max-width: 300px;
+  margin: 0px auto;
+  text-align: center;
+  position: relative;
+  transition: .2s;
+  opacity: 0;
+  border: 2px solid #ddd;
+  padding-top: 10px; }
+
+#feedActionAudio .file_remove2 {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  display: block;
+  position: absolute;
+  background: #aaa;
+  line-height: 30px;
+  color: #fff;
+  font-size: 12px;
+  cursor: pointer;
+  right: -15px;
+  top: -15px; }
+
+#feedActionAudio .file_remove2:hover {
+  background: #222;
+  transition: .2s; }
+
+#feedActionAudio .uploaded_file_view2 video {
+  max-width: 100%; }
+
+#feedActionAudio .uploaded_file_view2.show {
+  opacity: 1; }
+
+#feedActionAudio .error_msg2 {
+  text-align: center;
+  color: #f00; }
+
 .avatar-img {
   width: 60px;
   height: 60px;
@@ -265,8 +375,35 @@
     background-color: #00c078;
     border-color: #00b56a; }
 
+::-webkit-scrollbar {
+  width: 0px; }
+
 #home-containe {
-  background-color: #F3F2EF; }
+  background-color: #F3F2EF;
+  position: relative;
+  width: 100%; }
+  #home-containe .position-fixed {
+    position: fixed;
+    top: 20px; }
+  #home-containe #refresh-post {
+    display: flex;
+    justify-content: center;
+    align-items: center; }
+    #home-containe #refresh-post button {
+      background-color: #000;
+      color: #fff;
+      border: none;
+      border-radius: 10px;
+      padding: 10px;
+      font-size: 15px;
+      font-weight: bold;
+      cursor: pointer; }
+  #home-containe .user-friends-container-fixed {
+    width: 22.5% !important; }
+  #home-containe .news-card-container-fixed {
+    width: 30.5% !important; }
+  #home-containe .weather-card-container-fixed {
+    width: 23.5% !important; }
   #home-containe #news-card {
     border: 1px solid #a0a0a0;
     border-radius: 10px;
@@ -328,7 +465,7 @@
       font-size: 22px;
       font-weight: bold; }
     #home-containe #info-card .follow {
-      font-size: 12px;
+      font-size: 15px;
       font-weight: 500;
       color: #444444; }
     #home-containe #info-card .btn1 {

@@ -12,7 +12,7 @@
         let newsList = document.querySelectorAll(".news-list-container");
         let str = "";
         // Take only 5 news
-        news = news.slice(0, 7);
+        news = news.slice(0, 6);
         for (let i = 0; i < news.length; i++) {
           str += `<li class="news mb-1">
         <a href="${news[i].url}" target="_blank">${news[i].title} <i class="fa fa-external-link"></i></a>

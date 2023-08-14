@@ -2,6 +2,15 @@
   //method to submit form data for new post using AJAX
 
   $(document).ready(function () {
+    socket.on("reloadbtn", function (data) {
+      console.log("new post received", data);
+      let refreshPost = document.getElementById("refresh-post");
+      refreshPost.innerHTML = `<button class="btn btn-primary" id="refresh-post-button">Refresh</button>`;
+      let refreshPostButton = document.getElementById("refresh-post-button");
+      refreshPostButton.addEventListener("click", function () {
+        location.reload();
+      });
+    });
     let createPost = function () {
       let postnormalfeed = $("#postnormalfeed");
       let feedNormalModal = $("#modalCreateFeed");
@@ -31,6 +40,7 @@
             new ToggleLike($(` .toggle-like-button`, newPost)); //toogle like btn on new post
             PostComments(data.data.post._id); //comment dom
             new Notification("Post Created !!!", "success");
+            socket.emit("reloadbtn", {}); //emit post to all users
           })
           .fail(function (error) {
             console.log(error.responseText);
@@ -77,6 +87,7 @@
             new ToggleLike($(" .toggle-like-button", newPost));
             PostComments(data.data.post._id);
             new Notification("Post Created !!!", "success");
+            socket.emit("reloadbtn", {});
           })
           .fail(function (error) {
             console.log(error.responseText);
@@ -123,6 +134,81 @@
             new ToggleLike($(" .toggle-like-button", newPost)); //toogle like btn on new post
             PostComments(data.data.post._id); //comment dom
             new Notification("Post Created !!!", "success"); //Adding noty notification
+            socket.emit("reloadbtn", {}); //emit post to all users
+          })
+          .fail(function (error) {
+            console.log(error.responseText);
+            new Notification("Error in creating post !!!", "error");
+          });
+      });
+      let postaudiofeed = $("#postaudiofeed");
+      let feedActionAudioModal = $("#feedActionAudio");
+      postaudiofeed.on("click", function (e) {
+        e.preventDefault();
+        var content = $("#audiofeedpost > textarea").val();
+        var audio = $("#upload_audiofile")[0].files[0];
+        if (!audio && !content) {
+          new Notification(
+            "Please write something or select a audio first !!!",
+            "warning"
+          );
+          return;
+        }
+        if (!audio) {
+          new Notification("Please select a audio first !!!", "warning");
+          return;
+        }
+        var data = new FormData();
+        data.append("audio", audio);
+        data.append("content", content);
+        console.log(audio, content);
+        $.ajax({
+          url: "/posts/create/?audio=true",
+          method: "POST",
+          cache: false,
+          contentType: false,
+          processData: false,
+          data: data,
+        })
+          .done(function (data) {
+            console.log(data);
+            let newPost = newPostDom(data.data.post, data.data.locals, audio);
+            $("#post-list-container-div").prepend(newPost);
+            feedActionAudioModal.modal("hide");
+            $("#audiofeedpost > textarea").val("");
+            $(".file_remove2").trigger("click");
+            deletePost($(`#delete-${data.data.post._id}-post`, newPost));
+            new ToggleLike($(" .toggle-like-button", newPost));
+            PostComments(data.data.post._id);
+            new Notification("Post Created !!!", "success");
+            socket.emit("reloadbtn", {});
+          })
+          .fail(function (error) {
+            console.log(error.responseText);
+          });
+      });
+      let postpollfeed = $("#postpollfeed");
+      let feedActionPollModal = $("#feedActionPoll");
+      postpollfeed.on("click", function (e) {
+        console.log("clicked");
+        e.preventDefault();
+        var formData = $("#pollfeedpost").serialize();
+        console.log(formData);
+        $.ajax({
+          url: "/posts/create/?poll=true",
+          method: "POST",
+          data: formData,
+        })
+          .done(function (data) {
+            let newPost = newPostDom(data.data.post, data.data.locals, null);
+            $("#post-list-container-div").prepend(newPost);
+            feedActionPollModal.modal("hide");
+            deletePost($(`#delete-${data.data.post._id}-post`, newPost));
+            new ToggleLike($(" .toggle-like-button", newPost));
+            PostComments(data.data.post._id);
+            new Notification("Post Created !!!", "success");
+            //emit post to all users
+            socket.emit("reloadbtn", {});
           })
           .fail(function (error) {
             console.log(error.responseText);
@@ -130,290 +216,369 @@
           });
       });
     };
+
     let newPostDom = function (post, locals, image) {
       return $(`
-  <div id="post-${post._id}" class="post">
-  <div class="ithpost">
-    <div class="card">
-      <!-- Card header START -->
-      <div class="card-header border-0 py-2 px-2">
-        <div class="d-flex align-items-center justify-content-between">
-          <div class="d-flex align-items-center">
-            <!-- Avatar -->
-            <div class="avatar avatar-story me-2">
-              <a href="#!">
-                <img class="avatar-img rounded-circle" src="${
-                  post.user.avatar
-                    ? post.user.avatar
-                    : assetPath("images/default-avatar.png")
-                }" alt="avatar" />
-              </a>
-            </div>
-            <!-- Info -->
-            <div>
-              <div class="nav nav-divider">
-                <h6 class="nav-item card-title mb-0">
-                  <a href="#!"> ${post.user.name} </a>
-                </h6>
-                <span class="nav-item small ps-1 ps-sm-2 time-posted">
-                  ${getTimePosted(post.createdAt)}
-                </span>
-              </div>
-              <p class="mb-0 small updated-time">
-                ${getTimeInString(post.createdAt)}
-              </p>
-            </div>
-          </div>
-          <!-- Card feed action dropdown START -->
-          ${
-            locals.user &&
-            `<div class="dropdown">
-            <a href="#" class="text-secondary btn btn-secondary-soft-hover py-1 px-2" id="cardFeedAction-${
-              post._id
-            }" data-bs-toggle="dropdown" aria-expanded="false">
-              <i class="fa fa-ellipsis-h text-muted"></i>
-            </a>
-            <!-- Card feed action dropdown menu -->
-            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="cardFeedAction-${
-              post._id
-            }">
-              ${
-                locals.user.id == post.user.id
-                  ? `<li>
-                <a class="dropdown-item" href="/posts/destroy/${post._id}" id="delete-${post._id}-post">
-                  <i class="fa fa-trash fa-fw pe-2"></i>
-                  Delete post
-                </a>
-              </li>
-              <li>
-                <a class="dropdown-item" href="/posts/destroy/${post._id}">
-                  <i class="fa fa-edit fa-fw pe-2"></i>
-                  Edit post
-                </a>
-              </li>
-              <li class="d-sm-none">
-                <a class="dropdown-item" href="#">
-                  <i class="fa fa-bookmark fa-fw pe-2"></i>Save post</a>
-              </li>
-              <li class="d-sm-none">
-                <a class="dropdown-item" href="#">
-                  <i class="fa fa-copy fa-fw pe-2"></i>Copy link</a>
-              </li>`
-                  : `<li>
-                <a class="dropdown-item" href="#">
-                  <i class="fa fa-user fa-fw pe-2"></i>
-                  Unfollow
-                  <strong class="text-capitalize">
-                    ${post.user.name}
-                  </strong>
-                </a>
-              </li>
-              <li>
-                <a class="dropdown-item" href="#">
-                  <i class="fa fa-flag fa-fw pe-2"></i>
-                  Report post</a>
-              </li>`
-              }
-            </ul>
-          </div>`
-          } 
-          <!-- Card feed action dropdown END -->
-        </div>
-      </div>
-      <!-- Card header END -->
-      <!-- Card body START -->
-      <div class="card-body pb-0  p-1 p-sm-3">
-        ${
-          post.content &&
-          `
-         <div class="post-content mb-3">
-          <i class="fa fa-quote-left  text-muted "></i>
-        <p class="text-mutednpm d-inline">${post.content}</p>
-            <i class="fa fa-quote-right text-muted "></i>
-        </div>`
-        }
-        <!-- Card img -->
-        <div class="card-image-container position-relative">
-          ${
-            post.image
-              ? `<img class="card-img" src="${post.image}" alt="post image" />
-            <div class="viewfullscreen py-1 px-2 pe-3">
-            <button class="btn btn-sm btn-secondary-soft" data-bs-toggle="modal" data-bs-target="#modal-fullscreen-${post._id}">
-              <i class="fa-regular fa-eye fa-2x"></i>
-            </button>
-          </div>`
-              : ``
-          }
-          ${
-            post.video
-              ? `<video class="card-img" controls disablePictureInPicture controlsList="nodownload">
-            <source src="${post.video}" type="video/mp4" />
-          </video>`
-              : ``
-          } 
-
-          <!-- Modal to view fullscreen -->
-          <div class="modal fade" id="modal-fullscreen-${
-            post._id
-          }" tabindex="-1" aria-labelledby="modal-fullscreenLabel" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered">
-              <div class=" modal-content">
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
-
-                </button>
-
-                 ${
-                   post.image
-                     ? `<img class="img-fluid rounded" src="${post.image}" alt="post image" />`
-                     : ``
-                 }
-                  ${
-                    post.video
-                      ? `<video class="card-img" controls disablePictureInPicture controlsList="nodownload">
-                        <source src="${post.video}" type="video/mp4" />
-                    </video>`
-                      : ``
-                  }
+        <div id="post-${post._id}" class="post">
+        <div class="ithpost">
+          <div class="card">
+            <!-- Card header START -->
+            <div class="card-header border-0 py-2 px-2">
+              <div class="d-flex align-items-center justify-content-between">
+                <div class="d-flex align-items-center">
+                  <!-- Avatar -->
+                  <div class="avatar avatar-story me-2">
+                    <a href="#!">
+                      <img class="avatar-img rounded-circle" src="${
+                        post.user.avatar
+                          ? post.user.avatar
+                          : assetPath("images/default-avatar.png")
+                      }" alt="avatar" />
+                    </a>
+                  </div>
+                  <!-- Info -->
+                  <div>
+                    <div class="nav nav-divider">
+                      <h6 class="nav-item card-title mb-0">
+                        <a href="#!"> ${post.user.name} </a>
+                      </h6>
+                      <span class="nav-item small ps-1 ps-sm-2 time-posted">
+                        ${getTimePosted(post.createdAt)}
+                      </span>
+                    </div>
+                    <p class="mb-0 small updated-time">
+                      ${getTimeInString(post.createdAt)}
+                    </p>
+                  </div>
+                </div>
+                <!-- Card feed action dropdown START -->
+                ${
+                  locals.user &&
+                  `<div class="dropdown">
+                  <a href="#" class="text-secondary btn btn-secondary-soft-hover py-1 px-2" id="cardFeedAction-${
+                    post._id
+                  }" data-bs-toggle="dropdown" aria-expanded="false">
+                    <i class="fa fa-ellipsis-h text-muted"></i>
+                  </a>
+                  <!-- Card feed action dropdown menu -->
+                  <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="cardFeedAction-${
+                    post._id
+                  }">
+                    ${
+                      locals.user.id == post.user.id
+                        ? `<li>
+                      <a class="dropdown-item" href="/posts/destroy/${post._id}" id="delete-${post._id}-post">
+                        <i class="fa fa-trash fa-fw pe-2"></i>
+                        Delete post
+                      </a>
+                    </li>
+                    <li>
+                      <a class="dropdown-item" href="/posts/destroy/${post._id}">
+                        <i class="fa fa-edit fa-fw pe-2"></i>
+                        Edit post
+                      </a>
+                    </li>
+                    <li class="d-sm-none">
+                      <a class="dropdown-item" href="#">
+                        <i class="fa fa-bookmark fa-fw pe-2"></i>Save post</a>
+                    </li>
+                    <li class="d-sm-none">
+                      <a class="dropdown-item" href="#">
+                        <i class="fa fa-copy fa-fw pe-2"></i>Copy link</a>
+                    </li>`
+                        : `<li>
+                      <a class="dropdown-item" href="#">
+                        <i class="fa fa-user fa-fw pe-2"></i>
+                        Unfollow
+                        <strong class="text-capitalize">
+                          ${post.user.name}
+                        </strong>
+                      </a>
+                    </li>
+                    <li>
+                      <a class="dropdown-item" href="#">
+                        <i class="fa fa-flag fa-fw pe-2"></i>
+                        Report post</a>
+                    </li>`
+                    }
+                  </ul>
+                </div>`
+                } 
+                <!-- Card feed action dropdown END -->
               </div>
             </div>
-          </div>
-
-        </div>
-        <!-- Feed react START -->
-        <ul class="nav nav-stack pt-2 pb-0 small">
-          ${
-            locals.user
-              ? `<li class="nav-item">
-            <a class="nav-link toggle-like-button" data-likes="${
-              post.likes.length
-            }" href="/likes/toggle/?id=${post._id}&type=Post">
-              ${
-                post.likes.find((like) => {
-                  return like.user._id.toString() == locals.user._id.toString();
-                })
-                  ? `<span class="liked"><i class="fa fa-thumbs-up pe-1"></i>Liked (${post.likes.length})</span>`
-                  : `<span><i class="fa fa-thumbs-up pe-1"></i>Like (${post.likes.length})</span>`
-              } 
-            </a>
-          </li>
-          <li class="nav-item fw-bold">
-            <a class="nav-link" href="#!" id="commentcnt-${post._id}">
-              <i class="fa fa-comment pe-1"></i> Comment (${
-                post.comments.length
-              })
-            </a>
-          </li>
-          <!-- Card share action START  -->
-          <li class="nav-item dropdown ms-sm-auto fw-bold d-none d-sm-block">
-            <a class="nav-link mb-0" href="#" id="cardShareAction1-${
-              post._id
-            }" data-bs-toggle="dropdown" aria-expanded="false">
-              <i class="fa fa-share pe-1"></i>Share
-            </a>
-            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="cardShareAction1-${
-              post._id
-            }">
-              <li>
-                <a class="dropdown-item" href="#">
-                  <i class="fa fa-bookmark fa-fw pe-2"></i>Save post</a>
-              </li>
-              <li>
-                <a class="dropdown-item" href="#">
-                  <i class="fa fa-copy fa-fw pe-2"></i>Copy link</a>
-              </li>
-            </ul>
-          </li>`
-              : `<li class="nav-item">
-            <div class="nav-link" href="/">
-              <i class="fa fa-thumbs-up pe-1"></i> Likes (${post.likes.length}
-              )
-            </div>
-          </li>
-          <li class="nav-item">
-            <div class="nav-link">
-              <i class="fa fa-comment pe-1"></i> Comment (${post.comments.length})
-            </div>
-          </li>`
-          }
-
-        </ul>
-        <hr>
-
-        <!-- Feed react END -->
-        ${
-          locals.user
-            ? `<div class="d-flex mb-3">
-          <!-- Add comment -->
-          <!-- Avatar -->
-          <div class="avatar avatar-xs me-2">
-            <a href="#!">
-              <img class="avatar-img rounded-circle" src="${locals.user.avatar}" alt="avatar" />
-            </a>
-          </div>
-          <!-- Comment box  -->
-          <form class="nav nav-item w-100 position-relative" action="/comments/create" method="POST" id="post-${post._id}-comments-form">
-            <input type="text" name="content" id="comment-input-${post._id}" class="form-control rounded-pill bg-transparent border-0 comment-input" placeholder="Write a comment" />
-            <input type="hidden" name="post" value="${post._id}" />
-            <button class="nav-link bg-transparent px-3 position-absolute top-50 end-0 translate-middle-y border-0" type="submit" id="add-comment-${post._id}">
-              <i class="fa fa-paper-plane"></i>
-            </button>
-          </form>
-        </div>`
-            : ``
-        }
-
-        <!-- Comment wrap START -->
-       
-          <ul class="pt-1 pb-0 m-0 list-unstyled">
-            <div id="${post._id}-first-comment">
+            <!-- Card header END -->
+            <!-- Card body START -->
+            <div class="card-body pb-0  p-1 p-sm-3">
             ${
-              post.comments.length == 1
-                ? getCommentDom(post.comments[0], post, locals)
+              post.poll
+                ? `
+            <div class="wrapperforpoll" id="wrapperforpoll-${post._id}">
+                <h5>${post.poll.question}</h5>
+                <div class="poll-area" id="poll-area-${post._id}">
+                ${
+                  locals.user
+                    ? `<div>
+                      ${post.poll.options
+                        .map((option, i) => {
+                          return getPollInputDom(post, locals, option, i);
+                        })
+                        .join("")}${
+                        post.poll.votedBy.includes(locals.user._id)
+                          ? post.poll.options
+                              .map((option, i) => {
+                                return getPollLabelDom(locals, post, true, i);
+                              })
+                              .join("")
+                          : post.poll.options
+                              .map((option, i) => {
+                                return getPollLabelDom(locals, post, false, i);
+                              })
+                              .join("")
+                      }
+                        </div>`
+                    : ``
+                }
+                </div>
+              </div>
+            `
                 : ``
             }
-            </div>
-            <div class="collapse" id="${post._id}-comments-all">
-            
               ${
-                post.comments.length > 1
-                  ? forEach(post.comments.slice(1), function (comment) {
-                      return getCommentDm(comment, post, locals);
-                    })
+                post.content
+                  ? `
+              <div class="post-content mb-3">
+                <i class="fa fa-quote-left  text-muted "></i>
+              <p class="text-mutednpm d-inline">${post.content}</p>
+                  <i class="fa fa-quote-right text-muted "></i>
+              </div>`
                   : ``
               }
+              <!-- Card img -->
+              <div class="${
+                post.audio ? `card-audio-container` : `card-image-container`
+              } position-relative">
+                ${
+                  post.image
+                    ? `<img class="card-img" src="${post.image}" alt="post image" />
+                  <div class="viewfullscreen py-1 px-2 pe-3">
+                  <button class="btn btn-sm btn-secondary-soft" data-bs-toggle="modal" data-bs-target="#modal-fullscreen-${post._id}">
+                    <i class="fa-regular fa-eye fa-2x"></i>
+                  </button>
+                </div>`
+                    : ``
+                }
+                ${
+                  post.video
+                    ? `<video class="card-img" controls disablePictureInPicture controlsList="nodownload">
+                  <source src="${post.video}" />
+                </video>`
+                    : ``
+                } 
+                ${
+                  post.audio
+                    ? `<audio class="card-img" controls disablePictureInPicture controlsList="nodownload" src="${post.audio}">
+                </audio>`
+                    : ``
+                }
+
+                <!-- Modal to view fullscreen -->
+                <div class="modal fade" id="modal-fullscreen-${
+                  post._id
+                }" tabindex="-1" aria-labelledby="modal-fullscreenLabel" aria-hidden="true">
+                  <div class="modal-dialog modal-dialog-centered">
+                    <div class=" modal-content">
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+
+                      </button>
+
+                      ${
+                        post.image
+                          ? `<img class="img-fluid rounded" src="${post.image}" alt="post image" />`
+                          : ``
+                      }
+                        ${
+                          post.video
+                            ? `<video class="card-img" controls disablePictureInPicture controlsList="nodownload">
+                              <source src="${post.video}" type="video/mp4" />
+                          </video>`
+                            : ``
+                        }
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+              <!-- Feed react START -->
+              <ul class="nav nav-stack pt-2 pb-0 small">
+                ${
+                  locals.user != null
+                    ? `<li class="nav-item">
+                  <a class="nav-link toggle-like-button" data-likes="${
+                    post.likes.length
+                  }" href="/likes/toggle/?id=${post._id}&type=Post">
+                    ${
+                      post.likes.find((like) => {
+                        return (
+                          like.user._id.toString() == locals.user._id.toString()
+                        );
+                      })
+                        ? `<span class="liked"><i class="fa fa-thumbs-up pe-1"></i>Liked (${post.likes.length})</span>`
+                        : `<span><i class="fa fa-thumbs-up pe-1"></i>Like (${post.likes.length})</span>`
+                    } 
+                  </a>
+                </li>
+                <li class="nav-item fw-bold">
+                  <a class="nav-link" href="#!" id="commentcnt-${post._id}">
+                    <i class="fa fa-comment pe-1"></i> Comment (${
+                      post.comments.length
+                    })
+                  </a>
+                </li>
+                <!-- Card share action START  -->
+                <li class="nav-item dropdown ms-sm-auto fw-bold d-none d-sm-block">
+                  <a class="nav-link mb-0" href="#" id="cardShareAction1-${
+                    post._id
+                  }" data-bs-toggle="dropdown" aria-expanded="false">
+                    <i class="fa fa-share pe-1"></i>Share
+                  </a>
+                  <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="cardShareAction1-${
+                    post._id
+                  }">
+                    <li>
+                      <a class="dropdown-item" href="#">
+                        <i class="fa fa-bookmark fa-fw pe-2"></i>Save post</a>
+                    </li>
+                    <li>
+                      <a class="dropdown-item" href="#">
+                        <i class="fa fa-copy fa-fw pe-2"></i>Copy link</a>
+                    </li>
+                  </ul>
+                </li>`
+                    : `<li class="nav-item">
+                  <div class="nav-link" href="/">
+                    <i class="fa fa-thumbs-up pe-1"></i> Likes (${post.likes.length}
+                    )
+                  </div>
+                </li>
+                <li class="nav-item">
+                  <div class="nav-link">
+                    <i class="fa fa-comment pe-1"></i> Comment (${post.comments.length})
+                  </div>
+                </li>`
+                }
+
+              </ul>
+              <hr>
+
+              <!-- Feed react END -->
+              ${
+                locals.user
+                  ? `<div class="d-flex mb-3">
+                <!-- Add comment -->
+                <!-- Avatar -->
+                <div class="avatar avatar-xs me-2">
+                  <a href="#!">
+                    <img class="avatar-img rounded-circle" src="${locals.user.avatar}" alt="avatar" />
+                  </a>
+                </div>
+                <!-- Comment box  -->
+                <form class="nav nav-item w-100 position-relative" action="/comments/create" method="POST" id="post-${post._id}-comments-form">
+                  <input type="text" name="content" id="comment-input-${post._id}" class="form-control rounded-pill bg-transparent border-0 comment-input" placeholder="Write a comment" />
+                  <input type="hidden" name="post" value="${post._id}" />
+                  <button class="nav-link bg-transparent px-3 position-absolute top-50 end-0 translate-middle-y border-0" type="submit" id="add-comment-${post._id}">
+                    <i class="fa fa-paper-plane"></i>
+                  </button>
+                </form>
+              </div>`
+                  : ``
+              }
+
+              <!-- Comment wrap START -->
+            
+                <ul class="pt-1 pb-0 m-0 list-unstyled">
+                  <div id="${post._id}-first-comment">
+                  ${
+                    post.comments.length == 1
+                      ? getCommentDom(post.comments[0], post, locals)
+                      : ``
+                  }
+                  </div>
+                  <div class="collapse" id="${post._id}-comments-all">
+                  
+                    ${
+                      post.comments.length > 1
+                        ? forEach(post.comments.slice(1), function (comment) {
+                            return getCommentDm(comment, post, locals);
+                          })
+                        : ``
+                    }
+                  </div>
+                </ul>
+            
+              <!-- Comment wrap END -->
             </div>
-          </ul>
-       
-        <!-- Comment wrap END -->
-      </div>
-      <!-- Card body END -->
-        ${
-          post.comments.length > 1
-            ? `
-          <div class="card-footer card-footer-${post._id}">
-            <p class="mb-0">
-              <a class="text-secondary small me-3 fw-bold text-decoration-none" data-bs-toggle="collapse" href="#${
-                post._id
-              }-comments-all" role="button" aria-expanded="false" aria-controls="collapseExample">Load More Comments (${
-                post.comments.length - 1
-              })</a>
-            </p>
+            <!-- Card body END -->
+              ${
+                post.comments.length > 1
+                  ? `
+                <div class="card-footer card-footer-${post._id}">
+                  <p class="mb-0">
+                    <a class="text-secondary small me-3 fw-bold text-decoration-none" data-bs-toggle="collapse" href="#${
+                      post._id
+                    }-comments-all" role="button" aria-expanded="false" aria-controls="collapseExample">Load More Comments (${
+                      post.comments.length - 1
+                    })</a>
+                  </p>
+                </div>
+            `
+                  : ` 
+              <div class="card-footer d-none card-footer-${post._id}">
+                <p class="mb-0">
+                  <a class="text-secondary small me-3 fw-bold text-decoration-none" data-bs-toggle="collapse" href="#${
+                    post._id
+                  }-comments-all" role="button" aria-expanded="false" aria-controls="collapseExample">Load More Comments (${
+                      post.comments.length - 1
+                    })</a>
+                </p>
+              </div>`
+              }
           </div>
-      `
-            : ` 
-        <div class="card-footer d-none card-footer-${post._id}">
-          <p class="mb-0">
-            <a class="text-secondary small me-3 fw-bold text-decoration-none" data-bs-toggle="collapse" href="#${
-              post._id
-            }-comments-all" role="button" aria-expanded="false" aria-controls="collapseExample">Load More Comments (${
-                post.comments.length - 1
-              })</a>
-          </p>
-        </div>`
-        }
-    </div>
-  </div>
-</div>`);
+        </div>
+      </div>`);
+    };
+
+    let getPollInputDom = function (post, locals, option, i) {
+      return `<input type="checkbox" name="poll" id="opt-${
+        i + 1
+      }" onclick="pollclick('${i + 1}','${post._id}','${option._id}','${
+        post.poll._id
+      }','${locals.user._id}')" 
+        />`;
+    };
+    let getPollLabelDom = function (locals, post, flag, i) {
+      return `<label for="opt-${i + 1}" class="opt-${i + 1} ${
+        flag === true
+          ? `selectall ${
+              post.poll.options[i].votes.includes(locals.user._id)
+                ? ` selected`
+                : ``
+            }`
+          : ``
+      } ">
+          <div class="row1">
+            <div class="column">
+              <span class="circle"></span>
+              <span class="text">${post.poll.options[i].text}</span>
+            </div>
+            <span class="percent" id="percent-${post.poll.options[i]._id}">${
+        post.poll.options[i].percentage
+      }%</span>
+          </div>
+          <div class="progress" id="progress-${
+            post.poll.options[i]._id
+          }" style='--w:${post.poll.options[i].percentage}'></div>
+        </label>`;
     };
     let getCommentDm = function (comment, post, locals) {
       return `
@@ -680,13 +845,8 @@
           success: function (data) {
             console.log(data.data);
             $(`#post-${data.data.post_id}`).remove();
-            new Noty({
-              theme: "relax",
-              type: "success",
-              layout: "topRight",
-              text: "Post deleted !!",
-              timeout: 1500,
-            }).show();
+            new Notification("Post Deleted !!!", "success");
+            socket.emit("reloadbtn", {});
           },
           error: function (err) {
             console.log(err.responseText);
