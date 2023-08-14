@@ -1,6 +1,13 @@
 <link rel="stylesheet" href="<%= assetPath('css/home.css') %>" />
 <link rel="stylesheet" href="<%= assetPath('css/chatbox.css') %>" />
 <div id="home-containe" class="container-fluid mx-0 px-0 py-4 py-lg-5">
+  <% if (locals.user) { %>
+  <div class="d-none d-md-block" id="local-user-data" data-user='<%= JSON.stringify(locals.user) %>'>
+
+  </div>
+  <% } %>
+
+
   <div class="row mx-0 px-sm-4 justify-content-center">
     <div class="col-12  col-md-4 col-lg-3 px-1">
 
@@ -8,11 +15,12 @@
       <div class="d-none d-md-block">
         <%- include('_infocard') %>
       </div>
-      <div class="px-1 px-sm-3 px-md-0 mb-2 mb-md-0">
+      <div class="px-1 px-sm-3 px-md-0 mb-2 mb-md-0" id="weather-containers">
         <%- include('_weather') %>
       </div>
+
       <% } %>
-      <div class="d-none d-md-block d-lg-none">
+      <div class="d-none d-md-block d-lg-none" id="freiends-news-tab">
         <% if (locals.users) { %>
         <section id="user-friends" class="mb-2 mt-2">
           <div class="container-fluid p-0 m-0 d-flex justify-content-center">
@@ -44,7 +52,7 @@
     <div class="d-md-none pb-2 pb-md-0">
       <hr>
     </div>
-    <div class="mx-0 px-0 col-12 col-md-8 col-lg-6">
+    <div class="mx-0 px-0 col-12 col-md-8 col-lg-6 feed">
       <section id="feed-posts">
         <% if (locals.user) { %>
         <section id="post-form-container" class="mb-2 px-2 px-sm-3">
@@ -74,6 +82,11 @@
                   <i class="fa fa-video-camera text-danger pe-2"></i>
                   Video</a>
               </li>
+              <li class="nav-item">
+                <a class="nav-link bg-light py-1 px-2 mb-0" href="#!" data-bs-toggle="modal" data-bs-target="#feedActionAudio">
+                  <i class="fa fa-music text-warning pe-2"></i>
+                  Audio</a>
+              </li>
 
               <li class="nav-item">
                 <a class="nav-link bg-light py-1 px-2 mb-0" href="#!" data-bs-toggle="modal" data-bs-target="#modalCreateFeed">
@@ -86,7 +99,7 @@
                 <!-- Dropdown menu -->
                 <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="feedActionShare">
                   <li>
-                    <a class="dropdown-item" href="#">
+                    <a class="dropdown-item" href="#!" data-bs-toggle="modal" data-bs-target="#feedActionPoll">
                       <i class="bi bi-envelope fa-fw pe-2"></i>Create a poll</a>
                   </li>
                   <li>
@@ -117,6 +130,9 @@
 
         <% } %>
         <!--Listing post-->
+        <div id="refresh-post">
+          <button id="refresh-post-button" class="btn btn-primary btn-sm d-none">Refresh</button>
+        </div>
         <div id="post-list-container" class="px-2 px-sm-3">
           <div id="post-list-container-div">
             <% for (post of posts) { %> <%- include('_post') %> <% } %>
@@ -126,34 +142,40 @@
     </div>
     <div class="d-none d-lg-block col-lg-3" id="right-sidebar">
       <% if (locals.users) { %>
-      <section id="user-friends" class="mb-2">
-        <div class="container p-0 m-0 d-flex justify-content-center">
-          <div class="outercard card m-0 p-0 p-lg-3 pt-3 gap-3">
-            <div class="headline d-flex justify-content-between px-4 px-lg-0">
-              <h5 class="text-dark m-0 p-0">Friends</h5>
-              <i class="fa fa-users"></i>
-            </div>
-            <div id="friends-reload" class="px-1 px-lg-1">
-              <% if (locals.user && friends.length > 0) { %>
-              <div id="friend-list">
-                <% for (u of friends) { %> <%- include('_friend') %> <% } %>
-              </div>
-              <% } else { %>
-              <div class="text-center">
-                <h6 class="text-dark m-0 p-0">
-                  No Friends. Search for users to add friends.
-                </h6>
-              </div>
 
-              <% } %>
+      <section id="chatbox"></section>
+
+      <div class="" id="news-card-container">
+        <%- include('_news') %>
+      </div>
+      <div class="" id="user-friends-container">
+        <section id="user-friends" class="mt-2">
+          <div class="container p-0 m-0 d-flex justify-content-center">
+            <div class="outercard card m-0 p-0 p-lg-3 pt-3 gap-3">
+              <div class="headline d-flex justify-content-between px-4 px-lg-0">
+                <h5 class="text-dark m-0 p-0">Friends</h5>
+                <i class="fa fa-users"></i>
+              </div>
+              <div id="friends-reload" class="px-1 px-lg-1">
+                <% if (locals.user && friends.length > 0) { %>
+                <div id="friend-list">
+                  <% for (u of friends) { %> <%- include('_friend') %> <% } %>
+                </div>
+                <% } else { %>
+                <div class="text-center">
+                  <h6 class="text-dark m-0 p-0">
+                    No Friends. Search for users to add friends.
+                  </h6>
+                </div>
+
+                <% } %>
+              </div>
             </div>
           </div>
-        </div>
-      </section>
-      <%- include('_news') %>
+        </section>
+      </div>
       <% } %>
     </div>
-    <section id="chatbox"></section>
   </div>
 </div>
 <% if (locals.user) { %> <%- include('_modals') %> <% } %>
@@ -163,11 +185,13 @@
 <script src="https://cdn.jsdelivr.net/npm/@mojs/core"></script>
 <script src="<%= assetPath('js/notification.js') %>"></script>
 <script src="<%= assetPath('js/toggle_likes.js') %>"></script>
+<script src="<%= assetPath('js/chat_engine.js') %>"></script>
+<script src="<%= assetPath('js/voting_poll.js') %>"></script>
 <script src="<%= assetPath('js/home_post_comment_replies.js') %>"></script>
 <script src="<%= assetPath('js/home_post_comments.js') %>"></script>
 <script src="<%= assetPath('js/home_posts.js') %>"></script>
 <!-- CHANGE :: import the script file for toggle likes, also run it over for the already present posts and comments on the page -->
-<script src="<%= assetPath('js/chat_engine.js') %>"></script>
+
 <script>
   function getTimePosted(date) {
     var time = new Date(date);
@@ -269,5 +293,33 @@
   }
   $("#image").change(function() {
     filePreview(this);
+  });
+</script>
+<script>
+  window.addEventListener("scroll", (e) => {
+    const profileGroup = document.getElementById("weather-containers");
+    const linkedinSection = document.getElementById("news-card-container");
+    const rightAside = document.getElementById("right-sidebar");
+    const userFriends = document.getElementById("user-friends-container");
+    const newsfriendcombined = document.getElementById("freiends-news-tab");
+    //check if width is less than 992px
+    if (window.innerWidth < 768) {
+      return;
+    }
+    if (window.innerWidth < 992) {
+      if (window.scrollY > 780) {
+        newsfriendcombined.classList.add("position-fixed", "news-card-container-fixed");
+      } else {
+        newsfriendcombined.classList.remove("position-fixed", "news-card-container-fixed");
+      }
+    } else {
+      if (window.scrollY > 590) {
+        profileGroup.classList.add("position-fixed", "weather-card-container-fixed");
+        userFriends.classList.add("position-fixed", "user-friends-container-fixed");
+      } else {
+        profileGroup.classList.remove("position-fixed", "weather-card-container-fixed");
+        userFriends.classList.remove("position-fixed", "user-friends-container-fixed");
+      }
+    }
   });
 </script>

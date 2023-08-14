@@ -82,6 +82,49 @@
       <!-- Card header END -->
       <!-- Card body START -->
       <div class="card-body pb-0  p-1 p-sm-3">
+        <% if (post.poll) { %>
+        <div class="wrapperforpoll" id="wrapperforpoll-<%= post._id %>">
+          <h5><%= post.poll.question %></h5>
+          <div class="poll-area" id="poll-area-<%= post._id %>">
+            <% if (locals.user) { %>
+            <div>
+              <% for ( var i=0; i<post.poll.options.length; i++) { %>
+              <input type="checkbox" name="poll" id="opt-<%= i+1%>" onclick="pollclick( '<%=i+1%>','<%= post._id %>', '<%= post.poll.options[i]._id %>','<%= post.poll._id %>', '<%= locals.user._id %>')" />
+              <% } %>
+
+              <% if (post.poll.votedBy.includes(locals.user._id)) { %>
+              <% for ( i=0; i<post.poll.options.length; i++) { %>
+              <label for="opt-<%=i+1%>" class="opt-<%=i+1%> selectall <% if (post.poll.options[i].votes.includes(locals.user._id)) { %> selected <% } %>">
+                <div class="row1">
+                  <div class="column">
+                    <span class="circle"></span>
+                    <span class="text"><%= post.poll.options[i].text %></span>
+                  </div>
+                  <span class="percent" id="percent-<%= post.poll.options[i]._id %>"><%= post.poll.options[i].percentage %>%</span>
+                </div>
+                <div class="progress" id="progress-<%= post.poll.options[i]._id %>" style='--w:<%= post.poll.options[i].percentage %>'></div>
+              </label>
+              <% } %>
+              <% } else { %>
+              <% for ( i=0; i<post.poll.options.length; i++) { %>
+              <label for="opt-<%=i+1%>" class="opt-<%=i+1%> ">
+                <div class="row1">
+                  <div class="column">
+                    <span class="circle"></span>
+                    <span class="text"><%= post.poll.options[i].text %></span>
+                  </div>
+                  <span class="percent" id="percent-<%= post.poll.options[i]._id %>"><%= post.poll.options[i].percentage %>%</span>
+                </div>
+                <div class="progress" id="progress-<%= post.poll.options[i]._id %>" style='--w:<%= post.poll.options[i].percentage %>'></div>
+              </label>
+              <% } %>
+              <% } %>
+            </div>
+            <% } %>
+
+          </div>
+        </div>
+        <% } %>
         <% if (post.content) { %>
         <div class="post-content mb-3">
           <i class="fa fa-quote-left  text-muted "></i>
@@ -90,7 +133,7 @@
         </div>
         <% } %>
         <!-- Card img -->
-        <div class="card-image-container position-relative">
+        <div class="<%if(post.audio){ %>card-audio-container<% } else { %> card-image-container<% } %> position-relative">
           <% if (post.image) { %>
           <img class="card-img" src="<%= post.image %>" alt="post image" />
           <div class="viewfullscreen py-1 px-2 pe-3">
@@ -101,7 +144,9 @@
           <% } else if (post.video) { %><video class="card-img" controls disablePictureInPicture controlsList="nodownload">
             <source src="<%= post.video %>" type="video/mp4" />
           </video>
-
+          <% } else if (post.audio) { %>
+          <audio class="card-img" controls disablePictureInPicture controlsList="nodownload" src="<%= post.audio %>">
+          </audio>
           <% } %>
 
           <!-- Modal to view fullscreen -->
@@ -117,8 +162,7 @@
                 <% } else if (post.video) { %><video class="card-img" controls disablePictureInPicture controlsList="nodownload">
                   <source src="<%= post.video %>" type="video/mp4" />
                 </video>
-
-                <% } %>
+                <% }%>
               </div>
             </div>
           </div>

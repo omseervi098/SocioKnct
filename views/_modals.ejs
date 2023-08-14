@@ -180,6 +180,109 @@
   </div>
 </div>
 <!-- Create Feed Video Ends -->
+<!-- Create Feed Audio Start-->
+<div class="modal fade" id="feedActionAudio" tabindex="-1" aria-labelledby="feedActionAudioLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <!-- Modal feed header START -->
+      <div class="modal-header">
+        <h5 class="modal-title" id="feedActionAudioLabel">Add Post Audio</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <!-- Modal feed header END -->
+
+      <!-- Modal feed body START -->
+      <div class="modal-body">
+        <!-- Add Feed -->
+        <div class="d-flex body1 mb-1">
+          <!-- Avatar -->
+          <div class="avatar avatar-xs me-2 d-none d-sm-block">
+            <img class="avatar-img rounded-circle" src="<%= locals.user.avatar %>" alt="" />
+          </div>
+          <!-- Feed box  -->
+          <form class="w-100" id="audiofeedpost">
+            <textarea class="form-control pe-4  lh-1 border-0 fw-bold" rows="3" placeholder="Share your thoughts..."></textarea>
+          </form>
+        </div>
+
+        <div class="panel2">
+          <div class="button_outer2 ">
+            <div class="btn_upload2 fw-bold">
+              <input type="file" id="upload_audiofile" name="" accept="audio/*" />
+              Upload Audio
+            </div>
+            <div class="processing_bar2"></div>
+            <div class="success_box2"></div>
+          </div>
+        </div>
+        <!-- File Preview -->
+        <div class="error_msg2"></div>
+        <div class="uploaded_file_view2 mt-2" id="uploaded_audioview">
+          <span class="file_remove2">X</span>
+        </div>
+      </div>
+      <!-- Modal feed body END -->
+
+      <!-- Modal feed footer -->
+      <div class="modal-footer">
+        <!-- Button -->
+        <button type="button" class="btn btn-danger-soft me-2">
+          Cancel
+        </button>
+        <button type="button" class="btn btn-success-soft" id="postaudiofeed">
+          Post
+        </button>
+      </div>
+      <!-- Modal feed footer -->
+    </div>
+  </div>
+</div>
+<!--Create Feed Audio Ends -->
+<!-- Create feed Poll Start-->
+<div class="modal fade" id="feedActionPoll" tabindex="-1" aria-labelledby="feedActionPollLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <!-- Modal feed header START -->
+      <div class="modal-header">
+        <div class="avatar avatar-xs me-2 d-none d-sm-block">
+          <img class="avatar-img rounded-circle" src="<%= locals.user.avatar %>" alt="" style="width: 40px !important; height: 40px !important;" />
+        </div>
+        <h5 class="modal-title" id="feedActionAudioLabel">Create a poll</h5>
+
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="d-flex flex-column body1 mb-1">
+          <!-- Avatar -->
+          <!-- Feed box  -->
+          <form class="w-100" id="pollfeedpost">
+            <label for="pollquestion" class="form-label">Ask a question</label>
+            <textarea type="text" class="form-control" id="pollquestion" name="question" placeholder="E.g. What is your favourite color?" rows="2"></textarea>
+            <label for="pollanswer1" class="form-label mt-1 mb-0 pb-0">Option 1</label>
+            <input type="text" class="form-control " id="pollanswer1" name="answer1" placeholder="E.g. Red">
+            <label for="pollanswer2" class="form-label mt-1 mb-0 pb-0">Option 2</label>
+            <input type="text" class="form-control" id="pollanswer2" name="answer2" placeholder="E.g. Blue">
+          </form>
+          <div class="btn-container">
+            <button type="button" class="btn btn-outline-primary btn-sm" id="addpollanswer">
+              Add Options
+            </button>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <!-- Button -->
+        <button type="button" class="btn btn-danger-soft me-2">
+          Cancel
+        </button>
+        <button type="button" class="btn btn-success-soft" id="postpollfeed">
+          Post
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Create Feed Poll Ends-->
 <script>
   var btnUpload = $("#upload_file"),
     btnOuter = $(".button_outer");
@@ -207,6 +310,41 @@
       }, 0);
     }
   });
+
+  var btnUploadaudio = $("#upload_audiofile"),
+    btnOuter = $(".button_outer2");
+  btnUploadaudio.on("change", function(e) {
+    var ext = btnUploadaudio.val().split(".").pop().toLowerCase();
+    var name = btnUploadaudio.val().split("\\").pop();
+    if ($.inArray(ext, ["mp3", "wav", "ogg"]) == -1) {
+      $(".error_msg2").text("Not an Audio...");
+    } else {
+      var size = btnUploadaudio[0].files[0].size / (1024 * 1024);
+      //upto 2 decimal places 
+      size = Math.round(size * 100) / 100;
+      size = size + "MB";
+      if (parseInt(size) > 10) {
+        $(".error_msg2").text("Audio size should be less than 10MB");
+      } else {
+        $(".error_msg2").text("");
+        btnOuter.addClass("file_uploading2");
+        setTimeout(function() {
+          btnOuter.addClass("file_uploaded2");
+        }, 200);
+        var uploadedFile = URL.createObjectURL(e.target.files[0]);
+        console.log(uploadedFile);
+        setTimeout(function() {
+          $("#uploaded_audioview")
+            .append(
+              `<div class="audio-container"><audio controls controlsList="nodownload" src="${uploadedFile}" class="audio-fluid"  muted></audio></div>`
+            ).append('<div class="overlay">' + name + " (" + size + ")" +
+              "</div>")
+            .addClass("show");
+        }, 300);
+      }
+    }
+  });
+
   var btnUploadvideo = $("#upload_videofile"),
     btnOuter = $(".button_outer1");
   btnUploadvideo.on("change", function(e) {
@@ -241,6 +379,40 @@
     }
   });
 
+  var btnAddOptions = $("#addpollanswer");
+  var formforpoll = $("#pollfeedpost");
+  btnAddOptions.on("click", function(e) {
+    e.preventDefault();
+    var count = formforpoll.find("input").length;
+    if (count < 3) {
+      var newoption = $('<div class="label-delete d-flex justify-content-between" id="pollanswer1labelcont"> <label for="pollanswer' + (count + 1) + '" class="form-label mt-1 mb-0 pb-0">Option ' + (count + 1) + '</label> <a class="text-decoration-none mt-1 mb-0 pb-0" id="deletepollanswer1">Remove</a></div> <input type="text" class="form-control" id="pollanswer' + (count + 1) + '" name="answer3" placeholder="E.g. Yellow"> ');
+      formforpoll.append(newoption);
+      var deletepollanswer1 = $("#deletepollanswer1");
+      deletepollanswer1.on("click", function(e) {
+        e.preventDefault();
+        var count = formforpoll.find("input").length;
+        $(`#pollanswer3`).remove();
+        $('#pollanswer1labelcont').remove();
+        if (count == 4) {
+          $(`#pollanswer2labelcont label`).text("Option 3");
+          $(`#pollanswer4`).attr("name", "answer3");
+          btnAddOptions.show()
+        }
+      })
+    } else {
+      var newoption = $('<div class="label-delete d-flex justify-content-between" id="pollanswer2labelcont"> <label for="pollanswer' + (count + 1) + '" class="form-label mt-1 mb-0 pb-0">Option ' + (count + 1) + '</label> <a class="text-decoration-none mt-1 mb-0 pb-0" id="deletepollanswer2">Remove</a></div> <input type="text" class="form-control" id="pollanswer' + (count + 1) + '" name="answer4" placeholder="E.g. Others"> ');
+      formforpoll.append(newoption);
+      btnAddOptions.hide();
+      var deletepollanswer2 = $("#deletepollanswer2");
+      deletepollanswer2.on("click", function(e) {
+        e.preventDefault();
+        $(`#pollanswer4`).remove();
+        $('#pollanswer2labelcont').remove();
+        btnAddOptions.show();
+      })
+    }
+  })
+
   $(".file_remove").on("click", function(e) {
     $("#uploaded_view").removeClass("show");
     $("#uploaded_view").find("img").remove();
@@ -256,5 +428,13 @@
     $("#upload_videofile").val("");
     btnOuter.removeClass("file_uploading1");
     btnOuter.removeClass("file_uploaded1");
+  });
+  $(".file_remove2").on("click", function(e) {
+    $("#uploaded_audioview").removeClass("show");
+    $("#uploaded_audioview").find("audio").remove();
+    $("#uploaded_audioview").find("div").remove();
+    $("#upload_audiofile").val("");
+    btnOuter.removeClass("file_uploading2");
+    btnOuter.removeClass("file_uploaded2");
   });
 </script>

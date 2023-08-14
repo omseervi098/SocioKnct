@@ -16,6 +16,7 @@ module.exports.home = async function (req, res) {
       .sort("-createdAt")
       .populate("user", "name avatar email ")
       .populate("likes")
+      .populate("poll", "question options totalVotes percentage votedBy votes")
       .populate({
         path: "comments",
         populate: {

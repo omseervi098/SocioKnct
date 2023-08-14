@@ -6,27 +6,83 @@ const path = require("path");
 const { randomUUID } = require("crypto");
 const CommentReply = require("../models/commentreply");
 const cloudinary = require("../config/cloudinary");
-async function uploadToCloudinary(locaFilePath, fileName) {
-  return cloudinary.uploader
-    .upload(locaFilePath, { public_id: fileName, access_mode: "authenticated" })
-    .then((result) => {
-      fs.unlinkSync(locaFilePath);
-      return {
-        message: "Success",
-        url: result.secure_url,
-      };
-    })
-    .catch((error) => {
-      // Remove file from local uploads folder
-      fs.unlinkSync(locaFilePath);
-      return { message: "Fail", error: error };
-    });
-}
+const Poll = require("../models/poll");
+module.exports.vote = async (req, res) => {
+  try {
+    //find poll using poll id
+    let poll = await Poll.findById(req.body.pollId);
+    //check if user has already voted
+    if (poll.votedBy.includes(req.body.userId)) {
+      return res.status(200).json({
+        message: "You have already voted",
+      });
+    } else {
+      //push user id in votedBy array
+      poll.votedBy.push(req.body.userId);
+      //find option id using option id
+      let option = poll.options.id(req.body.optionId);
+      //push vote id in votes array
+      option.votes.push(req.body.userId);
+      //increase total votes
+      poll.totalVotes += 1;
+      //update percentage of each option
+      poll.options.forEach((option) => {
+        option.percentage = (
+          (option.votes.length / poll.totalVotes) *
+          100
+        ).toFixed(2);
+      });
+      //save poll
+      poll.save();
+      return res.status(200).json({
+        data: {
+          poll: poll,
+        },
+        message: "Vote added",
+      });
+    }
+  } catch (err) {
+    console.log(err);
+  }
+};
 module.exports.create = async (req, res) => {
   if (req.xhr) {
     //multpart form data
     console.log(req.query);
-    if (req.query.video == "true") {
+    if (req.query.poll == "true") {
+      let options = [];
+      for (let i = 1; i <= 4; i++) {
+        if (req.body[`answer${i}`]) {
+          options.push({
+            text: req.body[`answer${i}`],
+            votes: [],
+          });
+        }
+      }
+      let poll = await Poll.create({
+        question: req.body.question,
+        options: options,
+      });
+      let post = await Post.create({
+        content: req.body.content,
+        user: req.user._id,
+        poll: poll._id,
+      });
+      post = await post.populate("user", "name avatar");
+      post = await post.populate(
+        "poll",
+        "question options totalVotes percentage votes votedBy"
+      );
+      return res.status(200).json({
+        data: {
+          post: post,
+          locals: {
+            user: req.user,
+          },
+        },
+        message: "Post created !!!",
+      });
+    } else if (req.query.video == "true") {
       await Post.uploadedVideo(req, res, async (err) => {
         let temp = path.join(Post.videoPath, req.file.filename);
         console.log(temp);
@@ -35,6 +91,27 @@ module.exports.create = async (req, res) => {
           content: req.body.content,
           user: req.user._id,
           video: url,
+        });
+        post = await post.populate("user", "name avatar");
+        return res.status(200).json({
+          data: {
+            post: post,
+            locals: {
+              user: req.user,
+            },
+          },
+          message: "Post created !!!",
+        });
+      });
+    } else if (req.query.audio == "true") {
+      await Post.uploadedAudio(req, res, async (err) => {
+        let temp = path.join(Post.audioPath, req.file.filename);
+        console.log(temp);
+        let url = temp;
+        let post = await Post.create({
+          content: req.body.content,
+          user: req.user._id,
+          audio: url,
         });
         post = await post.populate("user", "name avatar");
         return res.status(200).json({
@@ -136,6 +213,12 @@ module.exports.destroy = async (req, res) => {
       }
       if (post.video) {
         fs.unlinkSync(path.join(__dirname, "..", post.video));
+      }
+      if (post.audio) {
+        fs.unlinkSync(path.join(__dirname, "..", post.audio));
+      }
+      if (post.poll) {
+        await Poll.findByIdAndDelete(post.poll);
       }
       if (req.xhr) {
         return res.status(200).json({
