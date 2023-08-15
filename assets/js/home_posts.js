@@ -11,6 +11,7 @@
         location.reload();
       });
     });
+
     let createPost = function () {
       let postnormalfeed = $("#postnormalfeed");
       let feedNormalModal = $("#modalCreateFeed");
@@ -23,6 +24,12 @@
         }
         var data = new FormData();
         data.append("content", content);
+        // unbind click event'
+        console.log("clicked");
+        postnormalfeed.attr("disabled", true);
+        //remove d-none class from loader-container
+        $(".loader-container").removeClass("d-none");
+        $(".loader-contanier #msg").html("Creating Post");
         $.ajax({
           url: "/posts/create",
           method: "POST",
@@ -41,9 +48,12 @@
             PostComments(data.data.post._id); //comment dom
             new Notification("Post Created !!!", "success");
             socket.emit("reloadbtn", {}); //emit post to all users
+            postnormalfeed.attr("disabled", false);
+            $(".loader-container").addClass("d-none");
           })
           .fail(function (error) {
             console.log(error.responseText);
+            new Notification("Error in creating post !!!", "error");
           });
       });
       let postvideofeed = $("#postvideofeed");
@@ -63,6 +73,9 @@
           new Notification("Please select a video first !!!", "warning");
           return;
         }
+        postvideofeed.attr("disabled", true);
+        $(".loader-container").removeClass("d-none");
+        $(".loader-contanier #msg").html("Creating Post");
         console.log(video);
         var data = new FormData();
         data.append("video", video);
@@ -88,6 +101,8 @@
             PostComments(data.data.post._id);
             new Notification("Post Created !!!", "success");
             socket.emit("reloadbtn", {});
+            $(".loader-container").addClass("d-none");
+            postvideofeed.attr("disabled", false);
           })
           .fail(function (error) {
             console.log(error.responseText);
@@ -111,6 +126,9 @@
           new Notification("Please select an image first !!!", "warning");
           return;
         }
+        postphotofeed.attr("disabled", true);
+        $(".loader-container").removeClass("d-none");
+        $(".loader-contanier #msg").html("Creating Post");
         var data = new FormData();
         data.append("image", image);
         data.append("content", content);
@@ -135,6 +153,8 @@
             PostComments(data.data.post._id); //comment dom
             new Notification("Post Created !!!", "success"); //Adding noty notification
             socket.emit("reloadbtn", {}); //emit post to all users
+            postphotofeed.attr("disabled", false);
+            $(".loader-container").addClass("d-none");
           })
           .fail(function (error) {
             console.log(error.responseText);
@@ -158,6 +178,9 @@
           new Notification("Please select a audio first !!!", "warning");
           return;
         }
+        postaudiofeed.attr("disabled", true);
+        $(".loader-container").removeClass("d-none");
+        $(".loader-contanier #msg").html("Creating Post");
         var data = new FormData();
         data.append("audio", audio);
         data.append("content", content);
@@ -182,6 +205,8 @@
             PostComments(data.data.post._id);
             new Notification("Post Created !!!", "success");
             socket.emit("reloadbtn", {});
+            postaudiofeed.attr("disabled", false);
+            $(".loader-container").addClass("d-none");
           })
           .fail(function (error) {
             console.log(error.responseText);
@@ -193,7 +218,9 @@
         console.log("clicked");
         e.preventDefault();
         var formData = $("#pollfeedpost").serialize();
-        console.log(formData);
+        postpollfeed.attr("disabled", true);
+        $(".loader-container").removeClass("d-none");
+        $(".loader-contanier #msg").html("Creating Post");
         $.ajax({
           url: "/posts/create/?poll=true",
           method: "POST",
@@ -209,6 +236,8 @@
             new Notification("Post Created !!!", "success");
             //emit post to all users
             socket.emit("reloadbtn", {});
+            postpollfeed.attr("disabled", false);
+            $(".loader-container").addClass("d-none");
           })
           .fail(function (error) {
             console.log(error.responseText);

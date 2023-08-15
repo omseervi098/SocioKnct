@@ -41,6 +41,8 @@ function PostComments(postId) {
         new Notification("Comment cannot be empty !!", "warning");
         return;
       }
+      // disable the submit or enter button
+      pSelf.newCommentForm.attr("disabled", true);
       $.ajax({
         type: "post",
         url: "/comments/create",
@@ -84,6 +86,7 @@ function PostComments(postId) {
           pSelf.newCommentForm[0].reset();
           deleteComment($(`#delete-${data.data.comment._id}-comment`));
           new Notification("Comment published !!!", "success");
+          pSelf.newCommentForm.attr("disabled", false);
         })
         .fail(function (error) {
           console.log(error.responseText);
