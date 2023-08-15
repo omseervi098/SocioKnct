@@ -18,6 +18,7 @@ function replyPostComment(PostId, CommentId) {
         new Notification("Reply cannot be empty", "warning");
         return;
       }
+      pSelf.newReplyForm.attr("disabled", true);
       $.ajax({
         type: "POST",
         url: "/comments/create-reply",
@@ -40,6 +41,7 @@ function replyPostComment(PostId, CommentId) {
                     ${data.data.comment.replies.length}`);
           new Notification("Reply created", "success");
           self.reset();
+          pSelf.newReplyForm.attr("disabled", false);
         })
         .fail(function (errData) {
           new Notification("Error in creating reply", "danger");
