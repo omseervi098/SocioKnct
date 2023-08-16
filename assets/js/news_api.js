@@ -1,23 +1,27 @@
 {
   async function NewsApi() {
-    let url =
-      "https://newsapi.org/v2/top-headlines?country=in&apiKey=510a27dd6ab14b5188faf8feb46981f5";
-    const resp = await fetch(url, { origin: "cors" });
-    const data = await resp.json();
-    console.log(data);
-    let news = data.articles;
-    let newsList = document.querySelectorAll(".news-list-container");
-    let str = "";
-    // Take only 5 news
-    news = news.slice(0, 5);
-    for (let i = 0; i < news.length; i++) {
-      str += `<li class="news mb-1">
+    $.ajax({
+      url: "/get-news",
+      type: "GET",
+    })
+      .done(function (data) {
+        let news = data.data.articles;
+        let newsList = document.querySelectorAll(".news-list-container");
+        let str = "";
+        // Take only 5 news
+        news = news.slice(0, 5);
+        for (let i = 0; i < news.length; i++) {
+          str += `<li class="news mb-1">
         <a href="${news[i].url}" target="_blank">${news[i].title} <i class="fa fa-external-link"></i></a>
         </li>`;
-    }
-    for (let i = 0; i < newsList.length; i++) {
-      newsList[i].innerHTML = str;
-    }
+        }
+        for (let i = 0; i < newsList.length; i++) {
+          newsList[i].innerHTML = str;
+        }
+      })
+      .fail(function (err) {
+        console.log(err);
+      });
   }
 
   NewsApi();

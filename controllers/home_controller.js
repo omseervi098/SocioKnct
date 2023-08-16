@@ -7,6 +7,8 @@ const async = require("async");
 const { query } = require("express");
 const Chat = require("../models/chat");
 const ChatRoom = require("../models/chatroom");
+const NewsAPI = require("newsapi");
+const newsapi = new NewsAPI("510a27dd6ab14b5188faf8feb46981f5");
 module.exports.home = async function (req, res) {
   try {
     const options = {
@@ -70,7 +72,28 @@ module.exports.home = async function (req, res) {
     return;
   }
 };
-
+module.exports.getNews = async function (req, res) {
+  try {
+    newsapi.v2
+      .topHeadlines({
+        language: "en",
+        country: "in",
+      })
+      .then((response) => {
+        return res.status(200).json({
+          message: "success",
+          data: {
+            articles: response.articles,
+          },
+        });
+      });
+  } catch (err) {
+    console.log(err);
+    return res.status(500).json({
+      message: "Internal Server Error",
+    });
+  }
+};
 module.exports.acceptFriend = function (req, res) {
   //console.log(req.user)
 

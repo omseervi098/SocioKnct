@@ -12,6 +12,7 @@ router.use("/likes", require("./likes"));
 router.use("/messages", require("./messages"));
 router.use("/friends", require("./friends"));
 router.use("/polls", require("./polls"));
+router.get("/get-news", homeController.getNews);
 router.get(
   "/autocomplete",
   passportLocal.checkAuthenication,
