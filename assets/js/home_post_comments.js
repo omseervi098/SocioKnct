@@ -21,7 +21,6 @@ function PostComments(postId) {
 
     $(`#${postId}-first-comment > .comment-item`).each(function () {
       let commentId = $(this).attr("id").split("-")[1];
-      console.log(commentId);
       replyPostComment(postId, commentId);
     });
     $(`#${postId}-comments-all > .comment-item`).each(function () {

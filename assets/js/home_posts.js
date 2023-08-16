@@ -3,11 +3,9 @@
 
   $(document).ready(function () {
     socket.on("new_post", function (data) {
-      console.log("new post received", data);
       //add event listener to refresh button
       let user = $("#local-user-data").attr("data-user");
       user = JSON.parse(user);
-      console.log(user);
       let locals = {
         user: user,
       };
@@ -19,11 +17,9 @@
       //remove refresh button
     });
     socket.on("delete_post", function (data) {
-      console.log("delete post received", data);
       $(`#post-${data}`).remove();
     });
     socket.on("toggle_like", function (data) {
-      console.log("toggle like received", data);
       let likesCount = data.likes_count;
       let url = data.url;
       //get elemnt by matching url
@@ -35,10 +31,8 @@
       self.attr("data-likes", likesCount);
     });
     socket.on("new_comment", function (data) {
-      console.log("create comment received", data);
       let user = $("#local-user-data").attr("data-user");
       user = JSON.parse(user);
-      console.log(user);
       let locals = {
         user: user,
       };
@@ -71,7 +65,6 @@
       );
     });
     socket.on("delete_comment", function (data) {
-      console.log("delete comment received", data);
       let self = {
         firstCommentContainer: $(`#${data.data.postId}-first-comment`),
         remCommentContainer: $(`#${data.data.postId}-comments-all`),
@@ -144,10 +137,8 @@
       );
     });
     socket.on("new_reply", function (data) {
-      console.log("create reply received", data);
       let user = $("#local-user-data").attr("data-user");
       user = JSON.parse(user);
-      console.log(user);
       let locals = {
         user: user,
       };
@@ -158,7 +149,6 @@
       let newReply = getReplyDm(data.data.reply, data.data.comment, locals);
       replyList.prepend(newReply);
       new ToggleLike($(`#reply-${data.data.reply._id} .toggle-like-button`));
-      console.log($(`#reply-${data.data.reply._id} .toggle-like-button`));
       deleteReplyhome(
         $(`#delete-${data.data.reply._id}-reply`),
         { replycnt: replycnt, replylen: data.data.replylen },
@@ -168,7 +158,6 @@
                     ${data.data.comment.replies.length}`);
     });
     socket.on("delete_reply", function (data) {
-      console.log("delete reply received", data);
       let replycnt = $(`#replycnt-${data.data.commentId}`);
       $(`#reply-${data.data.reply_id}`).remove();
       replycnt.html(` <span class="d-none d-lg-inline-block">Replies</span>
@@ -187,8 +176,6 @@
         }
         var data = new FormData();
         data.append("content", content);
-        // unbind click event'
-        console.log("clicked");
         postnormalfeed.attr("disabled", true);
         //remove d-none class from loader-container
         $(".lds-ellipsis").removeClass("d-none");
@@ -200,7 +187,6 @@
           },
         })
           .done(function (data) {
-            console.log(data);
             let newPost = newPostDom(data.data.post, data.data.locals, null);
             $("#post-list-container-div").prepend(newPost); //close modal
             feedNormalModal.modal("hide");
@@ -242,11 +228,9 @@
         }
         postvideofeed.attr("disabled", true);
         $(".lds-ellipsis").removeClass("d-none");
-        console.log(video);
         var data = new FormData();
         data.append("video", video);
         data.append("content", content);
-        console.log(video, content);
         $.ajax({
           url: "/posts/create/?video=true",
           method: "POST",
@@ -256,7 +240,6 @@
           data: data,
         })
           .done(function (data) {
-            console.log(data);
             let newPost = newPostDom(data.data.post, data.data.locals, video);
             $("#post-list-container-div").prepend(newPost);
             feedActionVideoModal.modal("hide");
@@ -283,7 +266,6 @@
       let postphotofeed = $("#postphotofeed");
       let feedActionPhotoModal = $("#feedActionPhoto");
       postphotofeed.on("click", function (e) {
-        console.log("clicked");
         e.preventDefault();
         var content = $("#photofeedpost > textarea").val();
         var image = $("#upload_file")[0].files[0];
@@ -303,7 +285,6 @@
         var data = new FormData();
         data.append("image", image);
         data.append("content", content);
-        console.log(data);
         $.ajax({
           url: "/posts/create/?image=true",
           method: "POST",
@@ -313,7 +294,6 @@
           data: data,
         })
           .done(function (data) {
-            console.log(data);
             let newPost = newPostDom(data.data.post, data.data.locals, image);
             $("#post-list-container-div").prepend(newPost); //close modal
             feedActionPhotoModal.modal("hide"); //clear textarea
@@ -359,7 +339,6 @@
         var data = new FormData();
         data.append("audio", audio);
         data.append("content", content);
-        console.log(audio, content);
         $.ajax({
           url: "/posts/create/?audio=true",
           method: "POST",
@@ -369,7 +348,6 @@
           data: data,
         })
           .done(function (data) {
-            console.log(data);
             let newPost = newPostDom(data.data.post, data.data.locals, audio);
             $("#post-list-container-div").prepend(newPost);
             feedActionAudioModal.modal("hide");
@@ -396,7 +374,6 @@
       let postpollfeed = $("#postpollfeed");
       let feedActionPollModal = $("#feedActionPoll");
       postpollfeed.on("click", function (e) {
-        console.log("clicked");
         e.preventDefault();
         var formData = $("#pollfeedpost").serialize();
         postpollfeed.attr("disabled", true);
@@ -432,7 +409,6 @@
     };
 
     let newPostDom = function (post, locals, image) {
-      console.log(post, locals, image);
       return $(`
         <div id="post-${post._id}" class="post">
         <div class="ithpost">
@@ -1182,7 +1158,6 @@
           type: "get",
           url: $(deleteLink).prop("href"),
           success: function (data) {
-            console.log(data.data);
             $(`#post-${data.data.post_id}`).remove();
             new Notification("Post Deleted !!!", "success");
             socket.emit("delete_post", data.data.post_id);

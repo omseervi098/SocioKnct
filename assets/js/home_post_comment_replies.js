@@ -34,7 +34,6 @@ function replyPostComment(PostId, CommentId) {
           new ToggleLike(
             $(`#reply-${data.data.reply._id} .toggle-like-button`)
           );
-          console.log($(`#reply-${data.data.reply._id} .toggle-like-button`));
           deleteReply($(`#delete-${data.data.reply._id}-reply`));
           pSelf
             .replycnt.html(` <span class="d-none d-lg-inline-block">Replies</span>

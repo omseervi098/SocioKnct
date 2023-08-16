@@ -27,17 +27,71 @@
           <li class="nav-item">
             <input type="hidden" id="currentuser" value="<%=locals.user.username%>">
           </li>
-          <li class="nav-item align-self-center">
-            <button class="nav-btn p-2">
-              <i class="fa fa-bell"></i>
-            </button>
+          <li class="nav-item align-self-center custom-dropdown-containers me-2">
+            <div class="dropdown custom-dropdown">
+              <a href="#" data-bs-toggle="dropdown" class="dropdown-link" aria-haspopup="true" aria-expanded="false" id="dropdownNotification">
+                <span class="wrap-icon icon-notifications"><i class="fa-solid fa-bell"></i></span>
+                <span class="number">5</span>
+              </a>
+              <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownNotification" x-placement="bottom-start" style="position: absolute; will-change: transform; top: 0px; right: 0px; transform: translate3d(-120px, 34px, 0px);">
+                <div class="title-wrap d-flex align-items-center">
+                  <h3 class="title mb-0">Notifications</h3>
+                </div>
+                <ul class="custom-notifications">
+                  <li class="unread">
+                    <a href="#" class="d-flex">
+                      <div class="img mr-3">
+                        <img src="images/person_1.jpg" alt="Image" class="img-fluid">
+                      </div>
+                      <div class="text">
+                        <strong>Claudia Gideon</strong> marked the task done a day ago
+                      </div>
+                    </a>
+                  </li>
+
+                  <li>
+                    <a href="#" class="d-flex">
+                      <div class="img mr-3">
+                        <img src="images/person_3.jpg" alt="Image" class="img-fluid">
+                      </div>
+                      <div class="text">
+                        <strong>Devin Richards</strong> mentioned you in her comment on Invoices 2 days ago
+                      </div>
+                    </a>
+                  </li>
+                  <li class="">
+                    <a href="#" class="d-flex">
+                      <div class="img mr-3">
+                        <img src="images/person_2.jpg" alt="Image" class="img-fluid">
+                      </div>
+                      <div class="text">
+                        <strong>Alex Stafford</strong> marked the task done a day ago
+                      </div>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="#" class="d-flex">
+                      <div class="img mr-3">
+                        <img src="images/person_3.jpg" alt="Image" class="img-fluid">
+                      </div>
+                      <div class="text">
+                        <strong>Devin Richards</strong> mentioned you in her comment on Invoices 2 days ago
+                      </div>
+                    </a>
+                  </li>
+                </ul>
+                <p class="text-center m-0 p-0"><a href="#" class="small">View All</a></p>
+              </div>
+            </div>
           </li>
+
           <li class="nav-item align-self-center">
             <button class="nav-btn p-2">
               <i class="fa-brands fa-rocketchat"></i>
             </button>
           </li>
           <li class="profile-li nav-item">
+
             <a href="/users/profile/<%= user._id %>">
               <button class="nav-btn prof-btn py-0 px-0 pe-lg-2 ps-0"><% if (user.avatar) { %> <img src="<%= user.avatar %>" alt="profile" class=" prof-icon rounded-circle">
                 <% } else { %>
@@ -74,9 +128,10 @@
     </nav>
 </header>
 <script>
-    
-    $(function () {
 
+
+    $(function () {
+    
         $('#search-name').autocomplete({
             source: function (req, res) {
                 $.ajax({
@@ -95,7 +150,10 @@
                 }
             }
         });    
+        
+
     }) 
+    
     function openDropdown(){
         document.getElementById("myDropdown").classList.toggle("show");
     }
@@ -120,4 +178,23 @@
          x.className = "topnav";
       }
     } 
+</script>
+<script>
+  $(function() {
+
+  $('.custom-dropdown').on('show.bs.dropdown', function() {
+  // $(this).find('.dropdown-menu').first().stop(false, false).slideDown();
+  // $(this).find('.dropdown-menu').addClass('active');
+  var that = $(this);
+  setTimeout(function(){
+  that.find('.dropdown-menu').addClass('active');
+  }, 100);
+
+
+  });
+  $('.custom-dropdown').on('hide.bs.dropdown', function() {
+  $(this).find('.dropdown-menu').removeClass('active');
+  });
+
+  });
 </script>
