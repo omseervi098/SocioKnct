@@ -219,6 +219,8 @@
           .fail(function (error) {
             console.log(error.responseText);
             new Notification("Error in creating post !!!", "error");
+            postnormalfeed.attr("disabled", false);
+            $(".lds-ellipsis").addClass("d-none");
           });
       });
       let postvideofeed = $("#postvideofeed");
@@ -273,6 +275,9 @@
           })
           .fail(function (error) {
             console.log(error.responseText);
+            new Notification("Error in creating post !!!", "error");
+            postvideofeed.attr("disabled", false);
+            $(".lds-ellipsis").addClass("d-none");
           });
       });
       let postphotofeed = $("#postphotofeed");
@@ -328,6 +333,8 @@
           .fail(function (error) {
             console.log(error.responseText);
             new Notification("Error in creating post !!!", "error");
+            postphotofeed.attr("disabled", false);
+            $(".lds-ellipsis").addClass("d-none");
           });
       });
       let postaudiofeed = $("#postaudiofeed");
@@ -381,6 +388,9 @@
           })
           .fail(function (error) {
             console.log(error.responseText);
+            new Notification("Error in creating post !!!", "error");
+            postaudiofeed.attr("disabled", false);
+            $(".lds-ellipsis").addClass("d-none");
           });
       });
       let postpollfeed = $("#postpollfeed");
@@ -415,6 +425,8 @@
           .fail(function (error) {
             console.log(error.responseText);
             new Notification("Error in creating post !!!", "error");
+            postpollfeed.attr("disabled", false);
+            $(".lds-ellipsis").addClass("d-none");
           });
       });
     };
