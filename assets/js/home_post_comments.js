@@ -54,6 +54,7 @@ function PostComments(postId) {
             data.data.post,
             data.data.locals
           );
+
           if (data.data.post.comments.length == 1) {
             pSelf.firstCommentContainer.prepend(newComment);
             new ToggleLike(
@@ -87,6 +88,10 @@ function PostComments(postId) {
           deleteComment($(`#delete-${data.data.comment._id}-comment`));
           new Notification("Comment published !!!", "success");
           pSelf.newCommentForm.attr("disabled", false);
+          socket.emit("new_comment", {
+            comment: data.data.comment,
+            post: data.data.post,
+          });
         })
         .fail(function (error) {
           console.log(error.responseText);
@@ -184,12 +189,10 @@ function PostComments(postId) {
                         );
                       })
                         ? `<span class="liked">
-                            <i class="fa fa-thumbs-up fa-fw me-1"></i>
-                            Liked (${comment.likes.length})
+                            <i class="fa fa-thumbs-up fa-fw me-1"></i>Liked (${comment.likes.length})
                           </span>`
                         : ` <span>
-                              <i class="fa fa-thumbs-up fa-fw me-1"></i>
-                              Like (${comment.likes.length})
+                              <i class="fa fa-thumbs-up fa-fw me-1"></i>Like (${comment.likes.length})
                             </span>`
                     }
                 </a>
@@ -208,11 +211,9 @@ function PostComments(postId) {
                   </span>
                 </div>`
                   : `<div class="text-secondary fw-bold small me-3">
-                      <i class="fa fa-thumbs-up fa-fw me-1"></i>
-                      Likes (${comment.likes.length})
+                      <i class="fa fa-thumbs-up fa-fw me-1"></i>Likes (${comment.likes.length})
                     </div>
-                    <a class="text-secondary small me-3" href="/login">
-                      Replies (${comment.replies.length})
+                    <a class="text-secondary small me-3" href="/login">Replies (${comment.replies.length})
                     </a>`
               }
             </div>
@@ -331,6 +332,15 @@ function PostComments(postId) {
             })`
           );
           new Notification("Comment deleted !!!", "success");
+          socket.emit("delete_comment", {
+            data: {
+              comment_id: data.data.comment_id,
+              comment: data.data.comment,
+              post: data.data.post,
+              commentlen: data.data.commentlen,
+              postId: data.data.postId,
+            },
+          });
         },
         error: function (error) {
           console.log(error.responseText);

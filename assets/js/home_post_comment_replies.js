@@ -42,6 +42,14 @@ function replyPostComment(PostId, CommentId) {
           new Notification("Reply created", "success");
           self.reset();
           pSelf.newReplyForm.attr("disabled", false);
+          socket.emit("new_reply", {
+            data: {
+              reply: data.data.reply,
+              comment: data.data.comment,
+              postId: PostId,
+              commentId: CommentId,
+            },
+          });
         })
         .fail(function (errData) {
           new Notification("Error in creating reply", "danger");
@@ -67,6 +75,13 @@ function replyPostComment(PostId, CommentId) {
             .replycnt.html(` <span class="d-none d-lg-inline-block">Replies</span>
                     ${data.data.replylen - 1}`);
           new Notification("Reply deleted", "success");
+          socket.emit("delete_reply", {
+            data: {
+              reply_id: data.data.reply_id,
+              replylen: data.data.replylen,
+              commentId: CommentId,
+            },
+          });
         })
         .fail(function (errData) {
           new Notification("Error in deleting reply", "danger");
@@ -129,7 +144,7 @@ function replyPostComment(PostId, CommentId) {
                           <i class="fa fa-user fa-fw pe-2"></i>
                           Unfollow
                           <strong class="text-capitalize">
-                            ${comment.user.name}
+                            ${reply.user.name}
                           </strong>
                         </a>
                       </li>
@@ -163,14 +178,13 @@ function replyPostComment(PostId, CommentId) {
                   })
                     ? `
                       <span class="liked">
-                        <i class="fa fa-thumbs-up fa-fw pe-2"></i>
-                        Liked (${reply.likes.length})
+                        <i class="fa fa-thumbs-up fa-fw pe-2"></i>Liked (${reply.likes.length})
                       </span>`
                     : `<span><i class="fa fa-thumbs-up fa-fw pe-2"></i>Like (${reply.likes.length})</span>`
                 } 
               </a>`
                   : `<div class="text-muted small fw-bold">
-                <i class="fa fa-thumbs-up fa-fw pe-2"></i> Likes (${reply.likes.length})
+                <i class="fa fa-thumbs-up fa-fw pe-2"></i>Likes (${reply.likes.length})
               </div>`
               }
             </div>

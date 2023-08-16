@@ -5,7 +5,7 @@ let otherUser;
 let currentChatRoom;
 let roomList = [];
 // For development use http://localhost:3001
-// For production use https://socioknct.tech
+// For production use https://www.socioknct.tech
 var socket = io.connect("https://www.socioknct.tech", {
   transports: ["websocket"],
 });
