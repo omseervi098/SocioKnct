@@ -45,7 +45,7 @@
                     <i class="fa fa-user fa-fw pe-2"></i>
                     Unfollow
                     <strong class="text-capitalize">
-                      <%= comment.user.name %>
+                      <%= reply.user.name %>
                     </strong>
                   </a>
                 </li>
@@ -79,7 +79,7 @@
         </a>
         <% }else{ %>
         <div class="text-muted small fw-bold">
-          <i class="fa fa-thumbs-up fa-fw pe-2"></i> Likes (<%=
+          <i class="fa fa-thumbs-up fa-fw pe-2"></i>Likes (<%=
           reply.likes.length%>)
         </div>
         <%}%>

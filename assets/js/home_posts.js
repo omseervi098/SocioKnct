@@ -2,14 +2,177 @@
   //method to submit form data for new post using AJAX
 
   $(document).ready(function () {
-    socket.on("reloadbtn", function (data) {
+    socket.on("new_post", function (data) {
       console.log("new post received", data);
-      let refreshPost = document.getElementById("refresh-post");
-      refreshPost.innerHTML = `<button class="btn btn-primary" id="refresh-post-button">Refresh</button>`;
-      let refreshPostButton = document.getElementById("refresh-post-button");
-      refreshPostButton.addEventListener("click", function () {
-        location.reload();
-      });
+      //add event listener to refresh button
+      let user = $("#local-user-data").attr("data-user");
+      user = JSON.parse(user);
+      console.log(user);
+      let locals = {
+        user: user,
+      };
+      let newPost = newPostDom(data.post, locals, null);
+      $("#post-list-container-div").prepend(newPost);
+      deletePost($(`#delete-${data.post._id}-post`, newPost));
+      new ToggleLike($(" .toggle-like-button", newPost));
+      PostComments(data.post._id);
+      //remove refresh button
+    });
+    socket.on("delete_post", function (data) {
+      console.log("delete post received", data);
+      $(`#post-${data}`).remove();
+    });
+    socket.on("toggle_like", function (data) {
+      console.log("toggle like received", data);
+      let likesCount = data.likes_count;
+      let url = data.url;
+      //get elemnt by matching url
+      let self = $(`a[href="${url}"]`);
+      let span = self.children("span");
+      let txt = span.text().trim().split(" ")[0];
+      span.html(`<i class="fa fa-thumbs-up pe-1"></i>${txt} (${likesCount})`);
+
+      self.attr("data-likes", likesCount);
+    });
+    socket.on("new_comment", function (data) {
+      console.log("create comment received", data);
+      let user = $("#local-user-data").attr("data-user");
+      user = JSON.parse(user);
+      console.log(user);
+      let locals = {
+        user: user,
+      };
+      let newComment = getCommentDm(data.comment, data.post, locals);
+      let firstCommentContainer = $(`#${data.post._id}-first-comment`);
+      let remCommentContainer = $(`#${data.post._id}-comments-all`);
+      let postContainer = $(`#post-${data.post._id}`);
+      let commentcnt = $(`#commentcnt-${data.post._id}`);
+      let postId = data.post._id;
+      if (data.post.comments.length == 1) {
+        firstCommentContainer.prepend(newComment);
+        new ToggleLike($(".toggle-like-button", firstCommentContainer));
+        replyPostComment(postId, data.comment._id);
+      } else if (data.post.comments.length > 1) {
+        let temp = firstCommentContainer[0].firstElementChild;
+        remCommentContainer.prepend(temp);
+        firstCommentContainer.html(newComment);
+        // CHANGE :: enable the functionality of the toggle like button on the new comment
+        $(".toggle-like-button", firstCommentContainer).each(function () {
+          new ToggleLike($(this));
+        });
+        replyPostComment(postId, data.comment._id);
+        $(`.card-footer-${postId}`).removeClass("d-none");
+        $(`.card-footer-${postId} > p > a`).html(
+          `Load More Comments (${data.post.comments.length - 1})`
+        );
+      }
+      commentcnt.html(
+        `<i class="fa fa-comment pe-1"></i> Comment (${data.post.comments.length})`
+      );
+    });
+    socket.on("delete_comment", function (data) {
+      console.log("delete comment received", data);
+      let self = {
+        firstCommentContainer: $(`#${data.data.postId}-first-comment`),
+        remCommentContainer: $(`#${data.data.postId}-comments-all`),
+        postContainer: $(`#post-${data.data.postId}`),
+        commentcnt: $(`#commentcnt-${data.data.postId}`),
+        postId: data.data.postId,
+      };
+      if (data.data.commentlen == 1) {
+        $(`#comment-${data.data.comment_id}`).remove();
+      } else if (data.data.commentlen == 2) {
+        if (
+          self.firstCommentContainer.find(`#comment-${data.data.comment_id}`)
+            .length > 0
+        ) {
+          $(`#comment-${data.data.comment_id}`).remove();
+          let temp = self.remCommentContainer.html();
+          //remove the first comment from the remaining comments container
+          self.remCommentContainer.html("");
+          self.firstCommentContainer.html(temp);
+          let commentId =
+            self.firstCommentContainer[0].firstElementChild.id.split("-")[1];
+          replyPostComment(self.postId, commentId);
+          $(".delete-comment-btn", self.postContainer).each(function () {
+            deleteCommenthome($(this, self.postContainer), self);
+          });
+          $(".toggle-like-button", self.firstCommentContainer).each(
+            function () {
+              new ToggleLike($(this));
+            }
+          );
+          $(`.card-footer-${data.data.postId} > p > a`).html(
+            `Load More Comments (${data.data.commentlen - 2})`
+          );
+          $(`.card-footer-${data.data.postId}`).addClass("d-none");
+        } else {
+          self.remCommentContainer.html("");
+          $(`.card-footer-${data.data.postId}`).addClass("d-none");
+        }
+      } else if (data.data.commentlen > 2) {
+        if (
+          self.firstCommentContainer.find(`#comment-${data.data.comment_id}`)
+            .length > 0
+        ) {
+          $(`#comment-${data.data.comment_id}`).remove();
+          //pick first comment from remaining comments container
+          $(".delete-comment-btn", self.postContainer).each(function () {
+            deleteCommenthome($(this, self.postContainer), self);
+          });
+          let temp = self.remCommentContainer[0].firstElementChild;
+          //remove the first comment from the remaining comments container
+          self.remCommentContainer[0].firstElementChild.remove();
+          //add the first comment to the first comment container
+          self.firstCommentContainer.html(temp);
+
+          //update the load more comments button
+          $(`.card-footer-${data.data.postId} > p > a`).html(
+            `Load More Comments (${data.data.commentlen - 2})`
+          );
+        } else {
+          $(`#comment-${data.data.comment_id}`).remove();
+          $(`.card-footer-${data.data.postId} > p > a`).html(
+            `Load More Comments (${data.data.commentlen - 2})`
+          );
+        }
+      }
+      self.commentcnt.html(
+        `<i class="fa fa-comment pe-1"></i> Comment (${
+          data.data.commentlen - 1
+        })`
+      );
+    });
+    socket.on("new_reply", function (data) {
+      console.log("create reply received", data);
+      let user = $("#local-user-data").attr("data-user");
+      user = JSON.parse(user);
+      console.log(user);
+      let locals = {
+        user: user,
+      };
+      let replyList = $(
+        `#comment-${data.data.commentId}-${data.data.postId}-reply-list`
+      );
+      let replycnt = $(`#replycnt-${data.data.commentId}`);
+      let newReply = getReplyDm(data.data.reply, data.data.comment, locals);
+      replyList.prepend(newReply);
+      new ToggleLike($(`#reply-${data.data.reply._id} .toggle-like-button`));
+      console.log($(`#reply-${data.data.reply._id} .toggle-like-button`));
+      deleteReplyhome(
+        $(`#delete-${data.data.reply._id}-reply`),
+        { replycnt: replycnt, replylen: data.data.replylen },
+        data.data.commentId
+      );
+      replycnt.html(` <span class="d-none d-lg-inline-block">Replies</span>
+                    ${data.data.comment.replies.length}`);
+    });
+    socket.on("delete_reply", function (data) {
+      console.log("delete reply received", data);
+      let replycnt = $(`#replycnt-${data.data.commentId}`);
+      $(`#reply-${data.data.reply_id}`).remove();
+      replycnt.html(` <span class="d-none d-lg-inline-block">Replies</span>
+                    ${data.data.replylen - 1}`);
     });
 
     let createPost = function () {
@@ -28,8 +191,7 @@
         console.log("clicked");
         postnormalfeed.attr("disabled", true);
         //remove d-none class from loader-container
-        $(".loader-container").removeClass("d-none");
-        $(".loader-contanier #msg").html("Creating Post");
+        $(".lds-ellipsis").removeClass("d-none");
         $.ajax({
           url: "/posts/create",
           method: "POST",
@@ -47,9 +209,12 @@
             new ToggleLike($(` .toggle-like-button`, newPost)); //toogle like btn on new post
             PostComments(data.data.post._id); //comment dom
             new Notification("Post Created !!!", "success");
-            socket.emit("reloadbtn", {}); //emit post to all users
+            socket.emit("new_post", {
+              post: data.data.post,
+              type: "normal",
+            }); //emit post to all users
             postnormalfeed.attr("disabled", false);
-            $(".loader-container").addClass("d-none");
+            $(".lds-ellipsis").addClass("d-none");
           })
           .fail(function (error) {
             console.log(error.responseText);
@@ -74,8 +239,7 @@
           return;
         }
         postvideofeed.attr("disabled", true);
-        $(".loader-container").removeClass("d-none");
-        $(".loader-contanier #msg").html("Creating Post");
+        $(".lds-ellipsis").removeClass("d-none");
         console.log(video);
         var data = new FormData();
         data.append("video", video);
@@ -100,9 +264,12 @@
             new ToggleLike($(" .toggle-like-button", newPost));
             PostComments(data.data.post._id);
             new Notification("Post Created !!!", "success");
-            socket.emit("reloadbtn", {});
-            $(".loader-container").addClass("d-none");
+            socket.emit("new_post", {
+              post: data.data.post,
+              type: "video",
+            });
             postvideofeed.attr("disabled", false);
+            $(".lds-ellipsis").addClass("d-none");
           })
           .fail(function (error) {
             console.log(error.responseText);
@@ -127,8 +294,7 @@
           return;
         }
         postphotofeed.attr("disabled", true);
-        $(".loader-container").removeClass("d-none");
-        $(".loader-contanier #msg").html("Creating Post");
+        $(".lds-ellipsis").removeClass("d-none");
         var data = new FormData();
         data.append("image", image);
         data.append("content", content);
@@ -152,9 +318,12 @@
             new ToggleLike($(" .toggle-like-button", newPost)); //toogle like btn on new post
             PostComments(data.data.post._id); //comment dom
             new Notification("Post Created !!!", "success"); //Adding noty notification
-            socket.emit("reloadbtn", {}); //emit post to all users
+            socket.emit("new_post", {
+              post: data.data.post,
+              type: "image",
+            }); //emit post to all users
             postphotofeed.attr("disabled", false);
-            $(".loader-container").addClass("d-none");
+            $(".lds-ellipsis").addClass("d-none");
           })
           .fail(function (error) {
             console.log(error.responseText);
@@ -179,8 +348,7 @@
           return;
         }
         postaudiofeed.attr("disabled", true);
-        $(".loader-container").removeClass("d-none");
-        $(".loader-contanier #msg").html("Creating Post");
+        $(".lds-ellipsis").removeClass("d-none");
         var data = new FormData();
         data.append("audio", audio);
         data.append("content", content);
@@ -204,9 +372,12 @@
             new ToggleLike($(" .toggle-like-button", newPost));
             PostComments(data.data.post._id);
             new Notification("Post Created !!!", "success");
-            socket.emit("reloadbtn", {});
+            socket.emit("new_post", {
+              post: data.data.post,
+              type: "audio",
+            });
             postaudiofeed.attr("disabled", false);
-            $(".loader-container").addClass("d-none");
+            $(".lds-ellipsis").addClass("d-none");
           })
           .fail(function (error) {
             console.log(error.responseText);
@@ -219,8 +390,7 @@
         e.preventDefault();
         var formData = $("#pollfeedpost").serialize();
         postpollfeed.attr("disabled", true);
-        $(".loader-container").removeClass("d-none");
-        $(".loader-contanier #msg").html("Creating Post");
+        $(".lds-ellipsis").removeClass("d-none");
         $.ajax({
           url: "/posts/create/?poll=true",
           method: "POST",
@@ -235,9 +405,12 @@
             PostComments(data.data.post._id);
             new Notification("Post Created !!!", "success");
             //emit post to all users
-            socket.emit("reloadbtn", {});
+            socket.emit("new_post", {
+              post: data.data.post,
+              type: "poll",
+            });
             postpollfeed.attr("disabled", false);
-            $(".loader-container").addClass("d-none");
+            $(".lds-ellipsis").addClass("d-none");
           })
           .fail(function (error) {
             console.log(error.responseText);
@@ -247,6 +420,7 @@
     };
 
     let newPostDom = function (post, locals, image) {
+      console.log(post, locals, image);
       return $(`
         <div id="post-${post._id}" class="post">
         <div class="ithpost">
@@ -294,7 +468,7 @@
                     post._id
                   }">
                     ${
-                      locals.user.id == post.user.id
+                      locals.user._id == post.user._id
                         ? `<li>
                       <a class="dropdown-item" href="/posts/destroy/${post._id}" id="delete-${post._id}-post">
                         <i class="fa fa-trash fa-fw pe-2"></i>
@@ -609,6 +783,127 @@
           }" style='--w:${post.poll.options[i].percentage}'></div>
         </label>`;
     };
+    let deleteCommenthome = function (deleteLink, pSelf) {
+      let self = pSelf;
+      $(deleteLink).click(function (e) {
+        e.preventDefault();
+
+        $.ajax({
+          type: "GET",
+          url: $(deleteLink).prop("href"),
+          success: function (data) {
+            if (data.data.commentlen == 1) {
+              $(`#comment-${data.data.comment_id}`).remove();
+            } else if (data.data.commentlen == 2) {
+              if (
+                self.firstCommentContainer.find(
+                  `#comment-${data.data.comment_id}`
+                ).length > 0
+              ) {
+                $(`#comment-${data.data.comment_id}`).remove();
+                let temp = self.remCommentContainer.html();
+                //remove the first comment from the remaining comments container
+                self.remCommentContainer.html("");
+                self.firstCommentContainer.html(temp);
+                let commentId =
+                  self.firstCommentContainer[0].firstElementChild.id.split(
+                    "-"
+                  )[1];
+                replyPostComment(self.postId, commentId);
+                $(".delete-comment-btn", self.postContainer).each(function () {
+                  deleteComment($(this, self.postContainer));
+                });
+                $(".toggle-like-button", self.firstCommentContainer).each(
+                  function () {
+                    new ToggleLike($(this));
+                  }
+                );
+                $(`.card-footer-${data.data.postId} > p > a`).html(
+                  `Load More Comments (${data.data.commentlen - 2})`
+                );
+                $(`.card-footer-${data.data.postId}`).addClass("d-none");
+              } else {
+                self.remCommentContainer.html("");
+                $(`.card-footer-${data.data.postId}`).addClass("d-none");
+              }
+            } else if (data.data.commentlen > 2) {
+              if (
+                self.firstCommentContainer.find(
+                  `#comment-${data.data.comment_id}`
+                ).length > 0
+              ) {
+                $(`#comment-${data.data.comment_id}`).remove();
+                //pick first comment from remaining comments container
+                $(".delete-comment-btn", self.postContainer).each(function () {
+                  deleteComment($(this, self.postContainer));
+                });
+                let temp = self.remCommentContainer[0].firstElementChild;
+                //remove the first comment from the remaining comments container
+                self.remCommentContainer[0].firstElementChild.remove();
+                //add the first comment to the first comment container
+                self.firstCommentContainer.html(temp);
+
+                //update the load more comments button
+                $(`.card-footer-${data.data.postId} > p > a`).html(
+                  `Load More Comments (${data.data.commentlen - 2})`
+                );
+              } else {
+                $(`#comment-${data.data.comment_id}`).remove();
+                $(`.card-footer-${data.data.postId} > p > a`).html(
+                  `Load More Comments (${data.data.commentlen - 2})`
+                );
+              }
+            }
+            pSelf.commentcnt.html(
+              `<i class="fa fa-comment pe-1"></i> Comment (${
+                data.data.commentlen - 1
+              })`
+            );
+            new Notification("Comment deleted !!!", "success");
+            socket.emit("delete_comment", {
+              data: {
+                comment_id: data.data.comment_id,
+                comment: data.data.comment,
+                post: data.data.post,
+                commentlen: data.data.commentlen,
+                postId: data.data.postId,
+              },
+            });
+          },
+          error: function (error) {
+            console.log(error.responseText);
+            new Notification("Error in deleting comment !!!", "danger");
+          },
+        });
+      });
+    };
+    let deleteReplyhome = function (deleteLink, pSelf, CommentId) {
+      $(deleteLink).click(function (e) {
+        e.preventDefault();
+        $.ajax({
+          type: "GET",
+          url: $(deleteLink).prop("href"),
+        })
+          .done(function (data) {
+            $(`#reply-${data.data.reply_id}`).remove();
+            pSelf
+              .replycnt.html(` <span class="d-none d-lg-inline-block">Replies</span>
+                    ${data.data.replylen - 1}`);
+            new Notification("Reply deleted", "success");
+            socket.emit("delete_reply", {
+              data: {
+                reply_id: data.data.reply_id,
+                replylen: data.data.replylen,
+                commentId: CommentId,
+              },
+            });
+          })
+          .fail(function (errData) {
+            new Notification("Error in deleting reply", "danger");
+            console.log("error in completing the request", errData);
+          });
+      });
+    };
     let getCommentDm = function (comment, post, locals) {
       return `
       <!-- Comment item START -->
@@ -636,21 +931,25 @@
                     </div>
                   </h6>
                   <div class="dropdown ms-1">
-                    <a href="#" class="text-secondary btn btn-secondary-soft-hover py-1 px-2" id="commentAction" data-bs-toggle="dropdown" aria-expanded="false">
+                    <a href="#" class="text-secondary btn btn-secondary-soft-hover py-1 px-2 commentAction" id="commentAction-${
+                      comment._id
+                    }" data-bs-toggle="dropdown" aria-expanded="false">
                       <i class="fa fa-ellipsis-h text-muted"></i>
                     </a>
                     <!-- Card feed action dropdown menu -->
-                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="commentAction">
+                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="commentAction-${
+                      comment._id
+                    }">
                       ${
-                        locals.user && locals.user.id == comment.user.id
+                        locals.user && locals.user._id == comment.user._id
                           ? `<li>
-                        <a class="dropdown-item" href="/post/destroy/${comment.id}">
+                        <a class="dropdown-item" href="/comments/destroy/${comment._id}">
                           <i class="fa fa-edit fa-fw pe-2"></i>
                           Edit Comment
                         </a>
                       </li>
                       <li>
-                        <a class="dropdown-item" href="/comments/destroy/${comment.id}" id="delete-${comment.id}-comment">
+                        <a class="dropdown-item delete-comment-btn" href="/comments/destroy/${comment._id}" id="delete-${comment._id}-comment">
                           <i class="fa fa-trash fa-fw pe-2"></i>
                           Delete Comment
                         </a>
@@ -675,50 +974,51 @@
                     </ul>
                   </div>
                 </div>
-                <p class="small mb-0"><%= comment.content %></p>
+                <p class="small mb-0">${comment.content}</p>
               </div>
             </div>
             <div class="d-flex align-items-center mt-1 share">
               ${
                 locals.user
-                  ? `<a href="/likes/toggle/?id=${
-                      comment._id
-                    }&type=Comment" class="text-secondary small me-3 toggle-like-button" data-likes="${
+                  ? `
+                <a href="/likes/toggle/?id=${
+                  comment._id
+                }&type=Comment" class="text-secondary small me-3 toggle-like-button" data-likes="${
                       comment.likes.length
                     }">
-                ${
-                  comment.likes.find((like) => {
-                    return (
-                      like.user._id.toString() == locals.user._id.toString()
-                    );
-                  })
-                    ? `<span class="liked">
-                  <i class="fa fa-thumbs-up fa-fw me-1"></i> Liked (${comment.likes.length})</span>`
-                    : ` <span>
-                  <i class="fa fa-thumbs-up fa-fw me-1"></i> Like (${comment.likes.length})</span>`
-                }
-              </a>
-
-              <a class="text-secondary small me-2 d-flex align-items-center" data-bs-toggle="collapse" href="#${
-                comment._id
-              }-reply" role=" button" aria-expanded="false" aria-controls="collapseExample">
-                <i class="fa fa-comment fa-fw me-1"></i>
-                Reply
-              </a>
-
-              <div>
-                <span class="ms-1 badge bg-secondary rounded-pill p-auto">
-                  <span class="d-none d-lg-inline-block">Replies</span>
-                  ${comment.replies.length}
-                </span>
-              </div>`
+                    ${
+                      comment.likes.find((like) => {
+                        return (
+                          like.user._id.toString() == locals.user._id.toString()
+                        );
+                      })
+                        ? `<span class="liked">
+                            <i class="fa fa-thumbs-up fa-fw me-1"></i>Liked (${comment.likes.length})
+                          </span>`
+                        : ` <span>
+                              <i class="fa fa-thumbs-up fa-fw me-1"></i>Like (${comment.likes.length})
+                            </span>`
+                    }
+                </a>
+                <a class="text-secondary small me-2 d-flex align-items-center" data-bs-toggle="collapse" href="#${
+                  comment._id
+                }-reply" role=" button" aria-expanded="false" aria-controls="collapseExample">
+                  <i class="fa fa-comment fa-fw me-1"></i>
+                  Reply
+                </a>
+                <div>
+                  <span class="ms-1 badge bg-secondary rounded-pill p-auto" id="replycnt-${
+                    comment._id
+                  }">
+                    <span class="d-none d-lg-inline-block">Replies</span>
+                    ${comment.replies.length}
+                  </span>
+                </div>`
                   : `<div class="text-secondary fw-bold small me-3">
-                <i class="fa fa-thumbs-up fa-fw me-1"></i>
-                Likes (${comment.likes.length})
-              </div>
-              <a class="text-secondary small me-3" href="/login">
-                Replies (${comment.replies.length})
-              </a>`
+                      <i class="fa fa-thumbs-up fa-fw me-1"></i>Likes (${comment.likes.length})
+                    </div>
+                    <a class="text-secondary small me-3" href="/login">Replies (${comment.replies.length})
+                    </a>`
               }
             </div>
           </div>
@@ -736,11 +1036,12 @@
                     </a>
                   </div>
                   <!-- Comment box  -->
-                  <form class="nav nav-item w-100 position-relative" action="/comments/create-reply" method="POST" id="comment-${comment._id}-reply-form">
-                    <input type="text" name="content" id="reply-input" class="form-control rounded-pill bg-transparent border-0" placeholder="Write a comment" />
+                  <form class="nav nav-item w-100 position-relative" action="/comments/create-reply" method="POST" id="comment-${comment._id}-${post._id}-reply-form">
+                    <input type="text" name="content" id="reply-input-${comment._id}"
+                    class="form-control rounded-pill bg-transparent border-0 reply-input" placeholder="Write a comment " />
                     <input type="hidden" name="post" value="${post._id}" />
                     <input type="hidden" name="comment" value="${comment._id}" />
-                    <button class="nav-link bg-transparent px-3 position-absolute top-50 end-0 translate-middle-y border-0" type="submit" id="add-reply">
+                    <button class="nav-link bg-transparent px-3 position-absolute top-50 end-0 translate-middle-y border-0 add-reply" type="submit" id="add-reply-${comment._id}">
                       <i class="fa fa-paper-plane"></i>
                     </button>
                   </form>
@@ -748,24 +1049,19 @@
               </div>`
             : ``
         } 
-              <!-- Comment wrap START -->
-              ${
-                comment.replies.length > 0
-                  ? `<ul class="pt-2 pb-0 list-unstyled ms-5">
-                      ${forEach(comment.replies, function (reply) {
-                        return getReplyDom(reply, locals);
-                      })}
-                  </ul>`
-                  : ``
-              } 
+        <ul class="pt-2 pb-0 list-unstyled ms-5" id="comment-${comment._id}-${
+        post._id
+      }-reply-list">
+          
+        </ul>
       </li>
       <!-- Comment item END -->
       `;
     };
-    let getReplyDom = function (reply, locals) {
+    let getReplyDm = function (reply, comment, locals) {
       return `
       <!-- Reply item START -->
-      <li class="comment-item mb-2" id="reply-${reply._id}">
+      <li class="reply-item mb-2" id="reply-${reply._id}">
         <div class="d-flex ithreply">
           <!-- Avatar -->
           <div class="avatar avatar-xs">
@@ -797,7 +1093,7 @@
                     <!-- Card feed action dropdown menu -->
                     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="replyAction">
                       ${
-                        locals.user && locals.user.id == reply.user.id
+                        locals.user && locals.user._id == reply.user._id
                           ? `<li>
                         <a class="dropdown-item" href="/post/destroy-reply/${reply._id}">
                           <i class="fa fa-edit fa-fw pe-2"></i>
@@ -805,7 +1101,7 @@
                         </a>
                       </li>
                       <li>
-                        <a class="dropdown-item" href="/comments/destroy-reply/${reply._id}" id="delete-${reply._id}-reply">
+                        <a class="dropdown-item delete-reply-btn" href="/comments/destroy-reply/${reply._id}" id="delete-${reply._id}-reply">
                           <i class="fa fa-trash fa-fw pe-2"></i>
                           Delete Reply
                         </a>
@@ -817,7 +1113,7 @@
                           <i class="fa fa-user fa-fw pe-2"></i>
                           Unfollow
                           <strong class="text-capitalize">
-                            ${comment.user.name}
+                            ${reply.user.name}
                           </strong>
                         </a>
                       </li>
@@ -849,13 +1145,15 @@
                       like.user._id.toString() == locals.user._id.toString()
                     );
                   })
-                    ? `<span class="liked">
-                  <i class="fa fa-thumbs-up fa-fw pe-2"></i>Liked (${reply.likes.length})</span>`
+                    ? `
+                      <span class="liked">
+                        <i class="fa fa-thumbs-up fa-fw pe-2"></i>Liked (${reply.likes.length})
+                      </span>`
                     : `<span><i class="fa fa-thumbs-up fa-fw pe-2"></i>Like (${reply.likes.length})</span>`
                 } 
               </a>`
                   : `<div class="text-muted small fw-bold">
-                <i class="fa fa-thumbs-up fa-fw pe-2"></i> Likes (${reply.likes.length})
+                <i class="fa fa-thumbs-up fa-fw pe-2"></i>Likes (${reply.likes.length})
               </div>`
               }
             </div>
@@ -875,7 +1173,7 @@
             console.log(data.data);
             $(`#post-${data.data.post_id}`).remove();
             new Notification("Post Deleted !!!", "success");
-            socket.emit("reloadbtn", {});
+            socket.emit("delete_post", data.data.post_id);
           },
           error: function (err) {
             console.log(err.responseText);

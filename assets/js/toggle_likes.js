@@ -29,6 +29,11 @@ class ToggleLike {
             $(self).attr("data-likes", likesCount);
           }
           $(self).html(string);
+          socket.emit("toggle_like", {
+            data: data.data.deleted,
+            url: $(self).attr("href"),
+            likes_count: likesCount,
+          });
         })
         .fail(function (errData) {
           console.log("error in completing the request");

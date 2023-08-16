@@ -65,10 +65,10 @@
           <% if(comment.likes.find((like)=> { return like.user._id.toString() ==
           locals.user._id.toString()})) { %>
           <span class="liked">
-            <i class="fa fa-thumbs-up fa-fw me-1"></i> Liked (<%=
+            <i class="fa fa-thumbs-up fa-fw me-1"></i>Liked (<%=
             comment.likes.length %>)</span><% }else{ %>
           <span>
-            <i class="fa fa-thumbs-up fa-fw me-1"></i> Like (<%=
+            <i class="fa fa-thumbs-up fa-fw me-1"></i>Like (<%=
             comment.likes.length %>)</span><% } %>
         </a>
 
@@ -85,11 +85,9 @@
         </div>
         <% }else{ %>
         <div class="text-secondary fw-bold small me-3">
-          <i class="fa fa-thumbs-up fa-fw me-1"></i>
-          Likes (<%= comment.likes.length %>)
+          <i class="fa fa-thumbs-up fa-fw me-1"></i>Likes (<%= comment.likes.length %>)
         </div>
-        <a class="text-secondary small me-3" href="/login">
-          Replies (<%= comment.replies.length %>)
+        <a class="text-secondary small me-3" href="/login">Replies (<%= comment.replies.length %>)
         </a>
         <%}%>
       </div>

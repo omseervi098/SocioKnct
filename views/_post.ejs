@@ -120,164 +120,177 @@
               <% } %>
               <% } %>
             </div>
-            <% } %>
-
-          </div>
-        </div>
-        <% } %>
-        <% if (post.content) { %>
-        <div class="post-content mb-3">
-          <i class="fa fa-quote-left  text-muted "></i>
-          <p class="text-mutednpm  d-inline"><%= post.content %></p>
-          <i class="fa fa-quote-right text-muted "></i>
-        </div>
-        <% } %>
-        <!-- Card img -->
-        <div class="<%if(post.audio){ %>card-audio-container<% } else { %> card-image-container<% } %> position-relative">
-          <% if (post.image) { %>
-          <img class="card-img" src="<%= post.image %>" alt="post image" />
-          <div class="viewfullscreen py-1 px-2 pe-3">
-            <button class="btn btn-sm btn-secondary-soft" data-bs-toggle="modal" data-bs-target="#modal-fullscreen-<%= post._id%>">
-              <i class="fa-regular fa-eye fa-2x"></i>
-            </button>
-          </div>
-          <% } else if (post.video) { %><video class="card-img" controls disablePictureInPicture controlsList="nodownload">
-            <source src="<%= post.video %>" type="video/mp4" />
-          </video>
-          <% } else if (post.audio) { %>
-          <audio class="card-img" controls disablePictureInPicture controlsList="nodownload" src="<%= post.audio %>">
-          </audio>
-          <% } %>
-
-          <!-- Modal to view fullscreen -->
-          <div class="modal fade" id="modal-fullscreen-<%= post._id%>" tabindex="-1" aria-labelledby="modal-fullscreenLabel" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered">
-              <div class=" modal-content">
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
-
-                </button>
-
-                <% if (post.image) { %>
-                <img class="img-fluid rounded" src="<%= post.image %>" alt="post image" />
-                <% } else if (post.video) { %><video class="card-img" controls disablePictureInPicture controlsList="nodownload">
-                  <source src="<%= post.video %>" type="video/mp4" />
-                </video>
-                <% }%>
+            <% }else{%>
+            <% for ( i=0; i<post.poll.options.length; i++) { %>
+            <label for="opt-<%=i+1%>" class="opt-<%=i+1%> selectall ">
+              <div class="row1">
+                <div class="column">
+                  <span class="circle"></span>
+                  <span class="text"><%= post.poll.options[i].text %></span>
+                </div>
+                <span class="percent" id="percent-<%= post.poll.options[i]._id %>"><%= post.poll.options[i].percentage %>%</span>
               </div>
-            </div>
+              <div class="progress" id="progress-<%= post.poll.options[i]._id %>" style='--w:<%= post.poll.options[i].percentage %>'></div>
+            </label>
+            <% } %>
+            <%}%>
+
           </div>
-
         </div>
-        <!-- Feed react START -->
-        <ul class="nav nav-stack pt-2 pb-0 small">
-          <% if (locals.user) { %>
-          <li class="nav-item">
-            <a class="nav-link toggle-like-button" data-likes="<%= post.likes.length %>" href="/likes/toggle/?id=<%= post._id %>&type=Post">
-              <% if(post.likes.find((like)=> { return like.user._id.toString()
-              == locals.user._id.toString()})) { %>
-              <span class="liked"><i class="fa fa-thumbs-up pe-1"></i>Liked (<%=
-                post.likes.length %>)</span><% }else{ %>
-              <span><i class="fa fa-thumbs-up pe-1"></i>Like (<%= post.likes.length
-                %>)</span>
-              <% } %>
-            </a>
-          </li>
-          <li class="nav-item fw-bold">
-            <a class="nav-link" href="#!" id="commentcnt-<%=post.id%>">
-              <i class="fa fa-comment pe-1"></i> Comment (<%=
-              post.comments.length %>)
-            </a>
-          </li>
-          <!-- Card share action START  -->
-          <li class="nav-item dropdown ms-sm-auto fw-bold d-none d-sm-block">
-            <a class="nav-link mb-0 cardShareAction" href="#" id="cardShareAction1-<%=post.id%>" data-bs-toggle="dropdown" aria-expanded="false">
-              <i class="fa fa-share pe-1"></i>Share
-            </a>
-            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="cardShareAction1-<%= post.id %>">
-              <li>
-                <a class="dropdown-item" href="#">
-                  <i class="fa fa-bookmark fa-fw pe-2"></i>Save post</a>
-              </li>
-              <li>
-                <a class="dropdown-item" href="#">
-                  <i class="fa fa-copy fa-fw pe-2"></i>Copy link</a>
-              </li>
-            </ul>
-          </li>
-          <!-- Card share action END -->
-          <% }else{ %>
-          <li class="nav-item">
-            <div class="nav-link" href="/">
-              <i class="fa fa-thumbs-up pe-1"></i> Likes (<%= post.likes.length
-              %>)
-            </div>
-          </li>
-          <li class="nav-item">
-            <div class="nav-link">
-              <i class="fa fa-comment pe-1"></i> Comment (<%=
-              post.comments.length %>)
-            </div>
-          </li>
-          <% } %>
-
-        </ul>
-        <hr>
-
-        <!-- Feed react END -->
-        <% if (locals.user) { %>
-        <!-- Add comment -->
-        <div class="d-flex mb-3">
-          <!-- Avatar -->
-          <div class="avatar avatar-xs me-2">
-            <a href="#!">
-              <img class="avatar-img rounded-circle" src="<%= locals.user.avatar %>" alt="avatar" />
-            </a>
-          </div>
-          <!-- Comment box  -->
-          <form class="nav nav-item w-100 position-relative" action="/comments/create" method="POST" id="post-<%= post._id %>-comments-form">
-            <input type="text" name="content" id="comment-input-<%=post._id%>" class="form-control rounded-pill bg-transparent border-0 comment-input" placeholder="Write a comment" />
-            <input type="hidden" name="post" value="<%= post._id %>" />
-            <button class="nav-link bg-transparent px-3 position-absolute top-50 end-0 translate-middle-y border-0" type="submit" id="add-comment-<%=post.id%>">
-              <i class="fa fa-paper-plane"></i>
-            </button>
-          </form>
-        </div>
-
         <% } %>
-        <!-- Comment wrap START -->
-
-        <ul class="pt-1 pb-0 m-0 list-unstyled">
-          <div id="<%=post._id%>-first-comment">
-            <% if (post.comments.length >=1) { %>
-            <%- include('_comment', {comment: post.comments[0], post: post}) %>
+            <% if (post.content) { %>
+            <div class="post-content mb-3">
+              <i class="fa fa-quote-left  text-muted "></i>
+              <p class="text-mutednpm  d-inline"><%= post.content %></p>
+              <i class="fa fa-quote-right text-muted "></i>
+            </div>
             <% } %>
+            <!-- Card img -->
+            <div class="<%if(post.audio){ %>card-audio-container<% } else { %> card-image-container<% } %> position-relative">
+              <% if (post.image) { %>
+              <img class="card-img" src="<%= post.image %>" alt="post image" />
+              <div class="viewfullscreen py-1 px-2 pe-3">
+                <button class="btn btn-sm btn-secondary-soft" data-bs-toggle="modal" data-bs-target="#modal-fullscreen-<%= post._id%>">
+                  <i class="fa-regular fa-eye fa-2x"></i>
+                </button>
+              </div>
+              <% } else if (post.video) { %><video class="card-img" controls disablePictureInPicture controlsList="nodownload">
+                <source src="<%= post.video %>" type="video/mp4" />
+              </video>
+              <% } else if (post.audio) { %>
+              <audio class="card-img" controls disablePictureInPicture controlsList="nodownload" src="<%= post.audio %>">
+              </audio>
+              <% } %>
+
+              <!-- Modal to view fullscreen -->
+              <div class="modal fade" id="modal-fullscreen-<%= post._id%>" tabindex="-1" aria-labelledby="modal-fullscreenLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered">
+                  <div class=" modal-content">
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+
+                    </button>
+
+                    <% if (post.image) { %>
+                    <img class="img-fluid rounded" src="<%= post.image %>" alt="post image" />
+                    <% } else if (post.video) { %><video class="card-img" controls disablePictureInPicture controlsList="nodownload">
+                      <source src="<%= post.video %>" type="video/mp4" />
+                    </video>
+                    <% }%>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+            <!-- Feed react START -->
+            <ul class="nav nav-stack pt-2 pb-0 small">
+              <% if (locals.user) { %>
+              <li class="nav-item">
+                <a class="nav-link toggle-like-button" data-likes="<%= post.likes.length %>" href="/likes/toggle/?id=<%= post._id %>&type=Post">
+                  <% if(post.likes.find((like)=> { return like.user._id.toString()
+              == locals.user._id.toString()})) { %>
+                  <span class="liked"><i class="fa fa-thumbs-up pe-1"></i>Liked (<%=
+                post.likes.length %>)</span><% }else{ %>
+                  <span><i class="fa fa-thumbs-up pe-1"></i>Like (<%= post.likes.length
+                %>)</span>
+                  <% } %>
+                </a>
+              </li>
+              <li class="nav-item fw-bold">
+                <a class="nav-link" href="#!" id="commentcnt-<%=post.id%>">
+                  <i class="fa fa-comment pe-1"></i> Comment (<%=
+              post.comments.length %>)
+                </a>
+              </li>
+              <!-- Card share action START  -->
+              <li class="nav-item dropdown ms-sm-auto fw-bold d-none d-sm-block">
+                <a class="nav-link mb-0 cardShareAction" href="#" id="cardShareAction1-<%=post.id%>" data-bs-toggle="dropdown" aria-expanded="false">
+                  <i class="fa fa-share pe-1"></i>Share
+                </a>
+                <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="cardShareAction1-<%= post.id %>">
+                  <li>
+                    <a class="dropdown-item" href="#">
+                      <i class="fa fa-bookmark fa-fw pe-2"></i>Save post</a>
+                  </li>
+                  <li>
+                    <a class="dropdown-item" href="#">
+                      <i class="fa fa-copy fa-fw pe-2"></i>Copy link</a>
+                  </li>
+                </ul>
+              </li>
+              <!-- Card share action END -->
+              <% }else{ %>
+              <li class="nav-item">
+                <div class="nav-link" href="/">
+                  <i class="fa fa-thumbs-up pe-1"></i>Likes (<%= post.likes.length
+              %>)
+                </div>
+              </li>
+              <li class="nav-item">
+                <div class="nav-link">
+                  <i class="fa fa-comment pe-1"></i>Comment (<%=
+              post.comments.length %>)
+                </div>
+              </li>
+              <% } %>
+
+            </ul>
+            <hr>
+
+            <!-- Feed react END -->
+            <% if (locals.user) { %>
+            <!-- Add comment -->
+            <div class="d-flex mb-3">
+              <!-- Avatar -->
+              <div class="avatar avatar-xs me-2">
+                <a href="#!">
+                  <img class="avatar-img rounded-circle" src="<%= locals.user.avatar %>" alt="avatar" />
+                </a>
+              </div>
+              <!-- Comment box  -->
+              <form class="nav nav-item w-100 position-relative" action="/comments/create" method="POST" id="post-<%= post._id %>-comments-form">
+                <input type="text" name="content" id="comment-input-<%=post._id%>" class="form-control rounded-pill bg-transparent border-0 comment-input" placeholder="Write a comment" />
+                <input type="hidden" name="post" value="<%= post._id %>" />
+                <button class="nav-link bg-transparent px-3 position-absolute top-50 end-0 translate-middle-y border-0" type="submit" id="add-comment-<%=post.id%>">
+                  <i class="fa fa-paper-plane"></i>
+                </button>
+              </form>
+            </div>
+
+            <% } %>
+            <!-- Comment wrap START -->
+
+            <ul class="pt-1 pb-0 m-0 list-unstyled">
+              <div id="<%=post._id%>-first-comment">
+                <% if (post.comments.length >=1) { %>
+                <%- include('_comment', {comment: post.comments[0], post: post}) %>
+                <% } %>
+              </div>
+              <div class="collapse" id="<%= post._id %>-comments-all">
+                <% if (post.comments.length > 1) { %>
+                <% for(let i=1; i<post.comments.length; i++) { %>
+                <%- include('_comment', {comment: post.comments[i], post: post}) %>
+                <% } %>
+                <% } %>
+              </div>
+            </ul>
+
+            <!-- Comment wrap END -->
           </div>
-          <div class="collapse" id="<%= post._id %>-comments-all">
-            <% if (post.comments.length > 1) { %>
-            <% for(let i=1; i<post.comments.length; i++) { %>
-            <%- include('_comment', {comment: post.comments[i], post: post}) %>
-            <% } %>
-            <% } %>
+          <!-- Card body END -->
+          <% if(post.comments.length > 1){ %>
+          <div class="card-footer card-footer-<%= post._id %>">
+            <p class="mb-0">
+              <a class="text-secondary small me-3 fw-bold text-decoration-none" data-bs-toggle="collapse" href="#<%= post._id %>-comments-all" role="button" aria-expanded="false" aria-controls="collapseExample">Load More Comments (<%= post.comments.length-1 %>)</a>
+            </p>
           </div>
-        </ul>
+          <%}else {%>
+          <div class="card-footer d-none card-footer-<%= post._id %>">
+            <p class="mb-0">
+              <a class="text-secondary small me-3 fw-bold text-decoration-none" data-bs-toggle="collapse" href="#<%= post._id %>-comments-all" role="button" aria-expanded="false" aria-controls="collapseExample">Load More Comments (<%= post.comments.length-1 %>)</a>
+            </p>
+          </div>
+          <% }%>
 
-        <!-- Comment wrap END -->
+        </div>
       </div>
-      <!-- Card body END -->
-      <% if(post.comments.length > 1){ %>
-      <div class="card-footer card-footer-<%= post._id %>">
-        <p class="mb-0">
-          <a class="text-secondary small me-3 fw-bold text-decoration-none" data-bs-toggle="collapse" href="#<%= post._id %>-comments-all" role="button" aria-expanded="false" aria-controls="collapseExample">Load More Comments (<%= post.comments.length-1 %>)</a>
-        </p>
-      </div>
-      <%}else {%>
-      <div class="card-footer d-none card-footer-<%= post._id %>">
-        <p class="mb-0">
-          <a class="text-secondary small me-3 fw-bold text-decoration-none" data-bs-toggle="collapse" href="#<%= post._id %>-comments-all" role="button" aria-expanded="false" aria-controls="collapseExample">Load More Comments (<%= post.comments.length-1 %>)</a>
-        </p>
-      </div>
-      <% }%>
-
     </div>
-  </div>
-</div>

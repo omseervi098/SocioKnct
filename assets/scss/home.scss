@@ -484,7 +484,13 @@
         justify-content: center;
         align-items: center;
 
+        position: sticky;
+        top: 20px;
+        right: 40%;
+        z-index: 9999;
+
         button {
+
             background-color: #000;
             color: #fff;
             border: none;

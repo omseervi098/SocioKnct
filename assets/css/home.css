@@ -388,7 +388,11 @@
   #home-containe #refresh-post {
     display: flex;
     justify-content: center;
-    align-items: center; }
+    align-items: center;
+    position: sticky;
+    top: 20px;
+    right: 40%;
+    z-index: 9999; }
     #home-containe #refresh-post button {
       background-color: #000;
       color: #fff;

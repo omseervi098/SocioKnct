@@ -18,9 +18,27 @@ module.exports.chatSockets = function (socketServer) {
 
     // listen if new_post is emitted and add user then emit it to all users
     //emit to all user with id
-    socket.on("reloadbtn", async function (data) {
+    socket.on("new_post", async function (data) {
       // emit to all users except sender
-      socket.broadcast.emit("reloadbtn", data);
+      socket.broadcast.emit("new_post", data);
+    });
+    socket.on("delete_post", async function (data) {
+      socket.broadcast.emit("delete_post", data);
+    });
+    socket.on("toggle_like", async function (data) {
+      socket.broadcast.emit("toggle_like", data);
+    });
+    socket.on("new_comment", async function (data) {
+      socket.broadcast.emit("new_comment", data);
+    });
+    socket.on("delete_comment", async function (data) {
+      socket.broadcast.emit("delete_comment", data);
+    });
+    socket.on("new_reply", async function (data) {
+      socket.broadcast.emit("new_reply", data);
+    });
+    socket.on("delete_reply", async function (data) {
+      socket.broadcast.emit("delete_reply", data);
     });
     socket.on("join_room", async function (data) {
       room = await Chatroom.findById(data.chatroom);
