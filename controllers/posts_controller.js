@@ -84,6 +84,9 @@ module.exports.create = async (req, res) => {
       });
     } else if (req.query.video == "true") {
       await Post.uploadedVideo(req, res, async (err) => {
+        if (req.file == undefined) {
+          return res.status(400).send({ message: "Please upload a file!" });
+        }
         let temp = path.join(Post.videoPath, req.file.filename);
         console.log(temp);
         let url = temp;
