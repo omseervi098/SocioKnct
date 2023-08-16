@@ -10242,3 +10242,13 @@
 [0mGET / [36m304[0m 418.433 ms - -[0m
 [0mGET /uploads/users/avatars/avatar-1692170501785-676038860 [33m404[0m 16.884 ms - 191[0m
 [0mPOST /posts/create/?video=true [32m200[0m 146.790 ms - 944[0m
+[0mGET / [32m200[0m 1169.257 ms - 60137[0m
+[0mGET /uploads/users/avatars/avatar-1692170501785-676038860 [33m404[0m 17.030 ms - 191[0m
+[0mGET /posts/destroy/64dc7c15027ef088330ae1ca [32m200[0m 74.622 ms - 76[0m
+[0mGET / [32m200[0m 175.921 ms - 52349[0m
+[0mGET /uploads/users/avatars/avatar-1692170501785-676038860 [33m404[0m 20.323 ms - 191[0m
+[0mGET / [36m304[0m 408.074 ms - -[0m
+[0mGET /uploads/users/avatars/avatar-1692170501785-676038860 [33m404[0m 16.886 ms - 191[0m
+[0mGET / [36m304[0m 404.787 ms - -[0m
+[0mGET /uploads/users/avatars/avatar-1692170501785-676038860 [33m404[0m 26.147 ms - 191[0m
+[0mPOST /posts/create/?video=true [32m200[0m 195.523 ms - 944[0m

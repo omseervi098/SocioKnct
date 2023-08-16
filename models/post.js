@@ -1,6 +1,7 @@
 const mongoose = require("mongoose");
 const multer = require("multer");
 const path = require("path");
+const fs = require("fs");
 const IMAGE_PATH = path.join("/uploads/posts/images");
 const VIDEO_PATH = path.join("/uploads/posts/videos");
 const AUDIO_PATH = path.join("/uploads/posts/audios");
@@ -48,10 +49,22 @@ const postSchema = new mongoose.Schema(
 var storage = multer.diskStorage({
   destination: function (req, file, cb) {
     if (file.fieldname == "video") {
+      //check if videos folder exists
+      if (!fs.existsSync(path.join(__dirname, "..", VIDEO_PATH))) {
+        fs.mkdirSync(path.join(__dirname, "..", VIDEO_PATH));
+      }
       cb(null, path.join(__dirname, "..", VIDEO_PATH));
     } else if (file.fieldname == "audio") {
+      //check if audios folder exists
+      if (!fs.existsSync(path.join(__dirname, "..", AUDIO_PATH))) {
+        fs.mkdirSync(path.join(__dirname, "..", AUDIO_PATH));
+      }
       cb(null, path.join(__dirname, "..", AUDIO_PATH));
     } else {
+      //check if images folder exists
+      if (!fs.existsSync(path.join(__dirname, "..", IMAGE_PATH))) {
+        fs.mkdirSync(path.join(__dirname, "..", IMAGE_PATH));
+      }
       cb(null, path.join(__dirname, "..", IMAGE_PATH));
     }
   },
