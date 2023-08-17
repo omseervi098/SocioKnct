@@ -125,7 +125,12 @@ function createArea(chatRoom, friend, user) {
             <!-- Top avatar and status END -->
 
           </div>
-          <div class="toast-body collapse show" id="collapseChat">
+          <div class="toast-body collapse show position-relative" id="collapseChat">
+          <div class="spinner-container d-none">
+            <div class="spinner-border text-primary" role="status">
+              <span class="sr-only">Loading...</span>
+            </div>
+          </div>
             <!-- Chat conversation START -->
             <div class="chat-conversation-content custom-scrollbar mb-2 pe-2">
               <div class="os-content" style="padding: 0px; height: 100%; width: 100%;"  id="chat-messages-list-${
@@ -302,7 +307,10 @@ $(".toast-btn").each(function () {
           tinymce.remove();
           let room = createArea(chatRoom, friend, user);
           $(".toast-container").append(room);
-
+          $(".spinner-container").removeClass("d-none");
+          setTimeout(() => {
+            $(".spinner-container").addClass("d-none");
+          }, 1000);
           var toastTarget = document.getElementById(self.dataset.target);
           var toast = new bootstrap.Toast(toastTarget);
           toast.show();

@@ -61,6 +61,16 @@ body {
       box-shadow: 0px 0px 10px 0px #00000040; }
       body #chatbox .toast-chat .toast .toast-body {
         background-color: #f3f3f3; }
+        body #chatbox .toast-chat .toast .toast-body .spinner-container {
+          position: absolute;
+          width: 93%;
+          height: 93%;
+          background-color: #f3f3f3;
+          z-index: 2000; }
+          body #chatbox .toast-chat .toast .toast-body .spinner-container .spinner-border {
+            position: absolute;
+            top: 45%;
+            left: 45%; }
       body #chatbox .toast-chat .toast .tox-tinymce {
         height: 100px !important; }
       body #chatbox .toast-chat .toast .tox-tbtn[aria-label="Send Message"] {
