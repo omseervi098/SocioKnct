@@ -375,9 +375,6 @@
     background-color: #00c078;
     border-color: #00b56a; }
 
-::-webkit-scrollbar {
-  width: 0px; }
-
 #home-containe {
   background-color: #F3F2EF;
   position: relative;
@@ -392,7 +389,7 @@
     position: sticky;
     top: 20px;
     right: 40%;
-    z-index: 9999; }
+    z-index: 10; }
     #home-containe #refresh-post button {
       background-color: #000;
       color: #fff;

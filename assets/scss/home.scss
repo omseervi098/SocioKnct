@@ -458,11 +458,6 @@
 
 }
 
-// scroll bar width for chrome, safari and opera
-::-webkit-scrollbar {
-    width: 0px;
-}
-
 
 
 // scroll bar width for firefox
@@ -487,7 +482,7 @@
         position: sticky;
         top: 20px;
         right: 40%;
-        z-index: 9999;
+        z-index: 10;
 
         button {
 
@@ -559,6 +554,8 @@
 
 
     }
+
+
 
     #info-card {
         border: 1px solid #a0a0a0;
@@ -652,6 +649,7 @@
             background-color: #ccc
         }
     }
+
 
     //justify-content: flex-end;
     #feed-posts {

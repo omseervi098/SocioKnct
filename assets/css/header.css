@@ -126,6 +126,8 @@ header {
         margin: 0px;
         color: white;
         font-weight: bold; }
+  header nav li {
+    margin: auto 0; }
   header nav .nav-btn {
     background-color: #d3d3d4;
     border: none;

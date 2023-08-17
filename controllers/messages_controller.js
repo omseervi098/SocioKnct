@@ -7,7 +7,7 @@ module.exports.chatRoom = async function (req, res) {
       let user = await User.findById(req.user._id).select("name email avatar");
 
       let friend = await User.findById(req.query.friend).select(
-        "name email avatar"
+        "name email avatar "
       );
 
       let chatRoom;

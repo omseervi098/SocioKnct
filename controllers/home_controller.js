@@ -95,8 +95,6 @@ module.exports.getNews = async function (req, res) {
   }
 };
 module.exports.acceptFriend = function (req, res) {
-  //console.log(req.user)
-
   async.parallel(
     [
       function (callback) {

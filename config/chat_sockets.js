@@ -12,7 +12,6 @@ module.exports.chatSockets = function (socketServer) {
     socket.on("disconnect", function () {});
     // listen to vote and emit it to all users
     socket.on("vote", async function (data) {
-      console.log(data);
       io.emit("vote", data);
     });
 
@@ -47,9 +46,13 @@ module.exports.chatSockets = function (socketServer) {
     });
     socket.on("send_message", async function (data) {
       let newMessage = await Chat.create({
-        user: data.user_id,
+        user: data.user._id,
         message: data.message,
       });
+      //get timestamp of message
+      let timestamp = newMessage.createdAt;
+      // add this to data
+      data.timestamp = timestamp;
       if (room) {
         room.messages.push(newMessage);
         room.save();
