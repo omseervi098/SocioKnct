@@ -306,13 +306,11 @@ $(".toast-btn").each(function () {
           var toastTarget = document.getElementById(self.dataset.target);
           var toast = new bootstrap.Toast(toastTarget);
           toast.show();
-          scrollBottom();
+
           selfUser = user;
           otherUser = friend;
           currentChatRoom = chatRoom._id;
           userMail = user.email;
-
-          connectRoom();
           tinymce.init({
             selector: `#chat-input-${currentChatRoom}`,
             menubar: false,
@@ -344,6 +342,9 @@ $(".toast-btn").each(function () {
               });
             },
           });
+
+          connectRoom();
+          scrollBottom();
           //changeScreen();
           //arrow();
           //tempClass(friendId);
