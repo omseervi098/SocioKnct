@@ -6,6 +6,10 @@
 
 }
 
+.bg-purple {
+    background-color: #8a2be2;
+}
+
 /* Track */
 ::-webkit-scrollbar-track {
     background: #f1f1f1;
@@ -75,7 +79,7 @@ body {
             position: fixed;
             right: calc(400px + 1rem);
             bottom: 0;
-            z-index: 2000;
+            z-index: 15;
             box-shadow: 0px 0px 10px 0px #00000040;
 
             .toast {
