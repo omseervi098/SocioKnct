@@ -1,10 +1,104 @@
-@import url('https://fonts.googleapis.com/css?family=Lato:100,100i,300,300i,400,400i,700,700i,900,900i');
+.message-page-content {
+  background-color: #eff2f6;
+
+  .tox-tinymce {
+    width: 100%;
+
+    .tox-statusbar {
+      display: none !important;
+    }
+
+    .tox-tbtn[aria-label="Send Message"] {
+      background-color: rgb(182, 20, 182);
+      padding: 0 10px;
+      font-size: 1rem;
+      color: #fff;
+      cursor: pointer;
+
+      span {
+        cursor: pointer;
+      }
+    }
+  }
+
+
+  .card-chat {
+    border-radius: 0px;
+
+    .card-body {
+      overflow-y: scroll;
+    }
+  }
+
+  .card-right {
+    height: calc(100vh - 5.4025rem - 1.5rem) !important;
+    background-image: url(https://img.rawpixel.com/s3fs-private/rawpixel_images/website_content/rm422-073.jpg?w=800&dpr=1&fit=default&crop=default&q=65&vib=3&con=3&usm=15&bg=F4F4F3&ixlib=js-2.2.1&s=ef48caa87980815f77343e682d6324ee);
+    object-fit: cover;
+    object-position: center;
+    border: 1px solid #ffffffcf;
+    overflow: hidden;
+  }
+
+  .nav-link.active {
+    background-color: #def1f4 !important;
+    color: #000 !important;
+  }
+
+  .card-chat-list {
+    height: calc(100vh - 10.112rem - 1.5rem);
+  }
+
+  .chat-conversation-content {
+    height: calc(100% - 5.25rem);
+  }
+
+  @media (min-width: 992px) {
+    .activechat {
+      border-top-right-radius: 0;
+    }
+
+    .chat-tab-list {
+      height: calc(100% - 0.75rem);
+    }
+
+    .card-right {
+      border-top-left-radius: 0;
+      border-bottom-left-radius: 0;
+    }
+
+    .card-chat-list {
+      border-bottom-right-radius: 0;
+      border-top-right-radius: 0;
+    }
+  }
+
+  @media (max-width: 992px) {
+    .card-right {
+      height: calc(90vh - 5.5425rem - 1.5rem) !important;
+    }
+
+    .card-chat {
+      border-radius: 0px;
+      border-bottom-left-radius: 5px;
+      border-bottom-right-radius: 5px;
 
 
 
-body {
-  font-family: 'Lato', sans-serif;
-  /* font-size: 14px; */
-  /* color: #999999; */
-  word-wrap: break-word;
+
+    }
+
+    .activechat {
+      border-bottom-right-radius: 0;
+    }
+
+    .card-right {
+      border-top-left-radius: 0;
+      border-top-right-radius: 0;
+    }
+
+    .card-chat-list {
+      border-bottom-right-radius: 0;
+      border-top-right-radius: 0;
+    }
+  }
 }

@@ -1,0 +1,16 @@
+{
+  "name": "SocioKnct",
+  "short_name": "SocioKnct",
+  "description": "Realtime Social Media Platform for connecting people with similar interests",
+  "icons": [
+    {
+      "src": "/../images/logo.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ],
+  "start_url": "/",
+  "display": "fullscreen",
+  "theme_color": "#764ABC",
+  "background_color": "#764ABC"
+}

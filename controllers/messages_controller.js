@@ -46,3 +46,8 @@ module.exports.chatRoom = async function (req, res) {
     return;
   }
 };
+module.exports.getMessenging = async function (req, res) {
+  return res.render("messenging", {
+    title: "Messenging",
+  });
+};
