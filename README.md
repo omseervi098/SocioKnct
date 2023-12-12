@@ -5,6 +5,7 @@ A Social Medial Application where user can post,comment and like other post.
 
 ## Deployed URL
 - <a href="https://socioknct.tech">https://www.socioknct.tech</a>
+- <a href="https://socioknct.onrender.com">https://www.socioknct.onrender.com</a>
 
 ## Features
 - Realtime Posting Images, Audio , Video, Text and Creating Poll
