@@ -41,7 +41,7 @@
     "multer": "^1.4.5-lts.1",
     "newsapi": "^2.4.1",
     "node-sass-middleware": "^1.0.1",
-    "nodemailer": "^6.7.8",
+    "nodemailer": "^6.9.9",
     "nodemon": "^2.0.22",
     "noty": "^3.2.0-beta-deprecated",
     "passport": "^0.6.0",
